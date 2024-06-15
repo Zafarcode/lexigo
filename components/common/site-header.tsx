@@ -19,6 +19,7 @@ import {
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import React from 'react'
 
 const navList: INavList[] = [
 	{
@@ -87,6 +88,7 @@ const skillList: ISkillList[] = [
 
 const SiteHeader = () => {
 	const pathname = usePathname()
+	const [active, setActive] = React.useState('reading')
 
 	const icons: Record<string, React.ReactNode> = {
 		reading: <ReadingIcon />,
@@ -104,7 +106,7 @@ const SiteHeader = () => {
 						<span className='sr-only'>WordWonders icon</span>
 					</Link>
 
-					<div className='flex items-center gap-10'>
+					<div className='flex items-center gap-14'>
 						<NavigationMenu>
 							<NavigationMenuList className='gap-5'>
 								{navList.map(item =>
@@ -113,19 +115,15 @@ const SiteHeader = () => {
 											<NavigationMenuTrigger className='lg:text-lg font-normal px-0'>
 												{item.label}
 											</NavigationMenuTrigger>
-											<NavigationMenuContent className='mx-auto'>
-												<ul className='flex group gap-2 py-3 px-5'>
-													<div className='group-hover:hidden'>
-														{icons['reading']}
-													</div>
+											<NavigationMenuContent className='flex px-5'>
+												<div>{icons[active]}</div>
+												<ul className='flex flex-col justify-center gap-2 py-3 px-5'>
 													{skillList.map(item => (
-														<li className='flex group' key={item.id}>
-															<div className='group-hover:block hidden'>
-																{icons[item.icon]}
-															</div>
+														<li key={item.id}>
 															<Link
 																className='text-lg hover:text-primary'
 																href={item.href}
+																onMouseOver={() => setActive(item.icon)}
 															>
 																{item.label}
 															</Link>
