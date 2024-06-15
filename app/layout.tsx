@@ -1,3 +1,4 @@
+import SiteHeader from '@/components/common/site-header'
 import { ThemeProvider } from '@/components/theme/theme-provider'
 import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
@@ -36,6 +37,7 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
+					<SiteHeader />
 					{children}
 				</ThemeProvider>
 			</body>

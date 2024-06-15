@@ -1,0 +1,175 @@
+'use client'
+import { INavList, ISkillList } from '@/components/common/site-header.types'
+import { ModeToggle } from '@/components/theme/mode-toggle'
+import { buttonVariants } from '@/components/ui/button'
+import {
+	NavigationMenu,
+	NavigationMenuContent,
+	NavigationMenuItem,
+	NavigationMenuList,
+	NavigationMenuTrigger,
+} from '@/components/ui/navigation-menu'
+import {
+	ListeningIcon,
+	LogoIcon,
+	ReadingIcon,
+	SpeakingIcon,
+	WritingIcon,
+} from '@/components/utils/icons'
+import { cn } from '@/lib/utils'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+
+const navList: INavList[] = [
+	{
+		id: 1,
+		label: 'Home',
+		href: '/',
+	},
+	{
+		id: 2,
+		label: 'About Us',
+		href: '/about',
+	},
+	{
+		id: 3,
+		label: 'Grammar',
+		href: '/grammar',
+	},
+	{
+		id: 4,
+		label: 'Vocabulary',
+		href: '/vocabulary',
+	},
+	{
+		id: 5,
+		label: 'Skills',
+		href: '/skills',
+	},
+	{
+		id: 6,
+		label: 'Contact Us',
+		href: '/contact',
+	},
+	{
+		id: 7,
+		label: "FAQ's",
+		href: '#faq',
+	},
+]
+
+const skillList: ISkillList[] = [
+	{
+		id: 1,
+		label: 'Reading',
+		href: '/reading',
+		icon: 'reading',
+	},
+	{
+		id: 2,
+		label: 'Listening',
+		href: '/listening',
+		icon: 'listening',
+	},
+	{
+		id: 3,
+		label: 'Speaking',
+		href: '/speaking',
+		icon: 'speaking',
+	},
+	{
+		id: 4,
+		label: 'Writing',
+		href: '/writing',
+		icon: 'writing',
+	},
+]
+
+const SiteHeader = () => {
+	const pathname = usePathname()
+
+	const icons: Record<string, React.ReactNode> = {
+		reading: <ReadingIcon />,
+		listening: <ListeningIcon />,
+		speaking: <SpeakingIcon />,
+		writing: <WritingIcon />,
+	}
+
+	return (
+		<header className='py-7 shadow-sm'>
+			<div className='container'>
+				<div className='flex items-center justify-between'>
+					<Link href='/'>
+						<LogoIcon width={100} height={50} />
+						<span className='sr-only'>WordWonders icon</span>
+					</Link>
+
+					<div className='flex items-center gap-10'>
+						<NavigationMenu>
+							<NavigationMenuList className='gap-5'>
+								{navList.map(item =>
+									item.href === '/skills' ? (
+										<NavigationMenuItem key={item.id}>
+											<NavigationMenuTrigger className='lg:text-lg font-normal px-0'>
+												{item.label}
+											</NavigationMenuTrigger>
+											<NavigationMenuContent className='mx-auto'>
+												<ul className='flex group gap-2 py-3 px-5'>
+													<div className='group-hover:hidden'>
+														{icons['reading']}
+													</div>
+													{skillList.map(item => (
+														<li className='flex group' key={item.id}>
+															<div className='group-hover:block hidden'>
+																{icons[item.icon]}
+															</div>
+															<Link
+																className='text-lg hover:text-primary'
+																href={item.href}
+															>
+																{item.label}
+															</Link>
+														</li>
+													))}
+												</ul>
+											</NavigationMenuContent>
+										</NavigationMenuItem>
+									) : (
+										<NavigationMenuItem key={item.id}>
+											<Link
+												className={cn(
+													"relative hover:text-primary before:content-[''] before:w-0 before:h-[2px] before:mx-auto before:bg-primary before:transition-all before:duration-300 hover:before:w-full before:absolute  before:left-0 before:right-0 before:bottom-0 lg:text-lg",
+													pathname === item.href && 'text-primary'
+												)}
+												href={item.href}
+											>
+												{item.label}
+											</Link>
+										</NavigationMenuItem>
+									)
+								)}
+							</NavigationMenuList>
+						</NavigationMenu>
+
+						<div className='flex items-center gap-3'>
+							<Link
+								className={cn(
+									buttonVariants({
+										variant: 'outline',
+									})
+								)}
+								href='/login'
+							>
+								Kirish
+							</Link>
+
+							<ModeToggle />
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+	)
+}
+
+export default SiteHeader
