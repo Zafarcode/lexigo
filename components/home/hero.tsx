@@ -1,0 +1,54 @@
+'use client'
+import Image from "next/image"
+import HeroImage from '../../public/assets/images/hero-image.png'
+import { BriefcaseBusiness, Lightbulb, Speech } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { useTheme } from "next-themes"
+
+const HeroSection = () => {
+    const { theme } = useTheme()
+
+    return (
+        <div className="flex justify-center items-center gap-[97px] h-full">
+            <div className="min-h-[420px] max-w-[573px] mt-[5%]">
+                <h2 className="text-[64px] font-bold leading-[82px] capitalize">up your <span className="text-red-500">skills </span> <br /> to <span className="text-red-500">advance</span> your <span className="text-red-500">career</span> path</h2>
+                <p className="leading-[180%] text-base text-[rgb(100,100,100)] mt-5 mb-9">Learn UI-UX Design skills with weekend UX . The latest online learning system and material that help your knowledge growing.</p>
+                <div className="flex gap-[28px]">
+                    <button className="bg-red-500 text-white px-8 py-3 rounded-[8px]">Get Started</button>
+                    <button className="border border-red-500 text-red-500 px-8 py-3 rounded-[8px] ml-4">Get free trial</button>
+                </div>
+                <ul className="mt-[50px] gap-[34px] flex">
+                    <li className="flex items-center gap-[10px]">
+                        <Speech className="w-[30px] h-[30px]" color="rgb(241, 191, 90)" />
+                        <p>Public Speaking</p>
+                    </li>
+                    <li className="flex items-center gap-[10px]">
+                        <BriefcaseBusiness className="w-[30px] h-[30px]" color="rgb(244, 135, 107)" />
+                        <p>Career Oriented</p>
+                    </li>
+                    <li className="flex items-center gap-[10px]">
+                        <Lightbulb color="rgb(180, 112, 141)" className="border border-dashed w-[30px] h-[30px]" />
+                        <p>Creative Thinking</p>
+                    </li>
+                </ul>
+
+            </div>
+            <div className="relative">
+                <div className="absolute w-[495px] h-[495px] border border-red-500 rounded-full top-[-21px] left-[-22px]"></div>
+                <div className="overflow-hidden rounded-full bg-red-500 w-[495px] h-[495px] flex items-end justify-center">
+                    <Image src={HeroImage} className="w-[366px] h-[432px]" alt="hero" width={500} height={500} />
+                </div>
+                <div className={cn("absolute", "bg-red-500", "w-[144px]", "h-[189px]", "top-[-19px]", "right-[-36px]", "border", "border-red-500", "rounded-[18px]", "flex", "items-center", "flex-col", "justify-center", theme == "white" ? "bg-white" : "bg-[#09090B]")}>
+                    <svg width="81" height="81" viewBox="0 0 81 81" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M40.36 4.36011C45.0876 4.36011 49.7689 5.29128 54.1366 7.10044C58.5043 8.90961 62.4729 11.5614 65.8158 14.9043C69.1587 18.2472 71.8105 22.2158 73.6197 26.5835C75.4288 30.9512 76.36 35.6325 76.36 40.3601C76.36 45.0877 75.4288 49.769 73.6196 54.1367C71.8105 58.5044 69.1587 62.473 65.8158 65.816C62.4729 69.1589 58.5043 71.8106 54.1366 73.6198C49.7689 75.4289 45.0876 76.3601 40.36 76.3601C35.6324 76.3601 30.9511 75.4289 26.5834 73.6198C22.2156 71.8106 18.247 69.1589 14.9041 65.8159C11.5612 62.473 8.90948 58.5044 7.10032 54.1367C5.29115 49.769 4.35998 45.0877 4.35999 40.3601C4.35999 35.6325 5.29116 30.9512 7.10033 26.5835C8.9095 22.2158 11.5612 18.2472 14.9042 14.9042C18.2471 11.5613 22.2157 8.9096 26.5834 7.10044C30.9511 5.29127 35.6324 4.3601 40.36 4.36011L40.36 4.36011Z" stroke="#EAECF0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M40.36 4.36011C47.9624 4.36011 55.3697 6.76689 61.5203 11.2355C67.6708 15.7041 72.2487 22.0051 74.598 29.2355C76.9473 36.4659 76.9473 44.2544 74.598 51.4847C72.2487 58.7151 67.6708 65.0161 61.5203 69.4847" stroke="#EF4444" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <h3 className="text-[26px]">20K</h3>
+                    <p>english words</p>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default HeroSection
