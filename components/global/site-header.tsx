@@ -1,5 +1,6 @@
 'use client'
-import { INavList, ISkillList } from '@/components/common/site-header.types'
+import MobileHeader from '@/components/global/mobile-header'
+import { icons, navList, skillList } from '@/components/global/site-header.mock'
 import { ModeToggle } from '@/components/theme/mode-toggle'
 import { buttonVariants } from '@/components/ui/button'
 import {
@@ -9,93 +10,15 @@ import {
 	NavigationMenuList,
 	NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu'
-import {
-	ListeningIcon,
-	LogoIcon,
-	ReadingIcon,
-	SpeakingIcon,
-	WritingIcon,
-} from '@/components/utils/icons'
+import { LogoIcon } from '@/components/utils/icons'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 
-const navList: INavList[] = [
-	{
-		id: 1,
-		label: 'Home',
-		href: '/',
-	},
-	{
-		id: 2,
-		label: 'About Us',
-		href: '/about',
-	},
-	{
-		id: 3,
-		label: 'Grammar',
-		href: '/grammar',
-	},
-	{
-		id: 4,
-		label: 'Vocabulary',
-		href: '/vocabulary',
-	},
-	{
-		id: 5,
-		label: 'Skills',
-		href: '/skills',
-	},
-	{
-		id: 6,
-		label: 'Contact Us',
-		href: '/contact',
-	},
-	{
-		id: 7,
-		label: "FAQ's",
-		href: '#faq',
-	},
-]
-
-const skillList: ISkillList[] = [
-	{
-		id: 1,
-		label: 'Reading',
-		href: '/reading',
-		icon: 'reading',
-	},
-	{
-		id: 2,
-		label: 'Listening',
-		href: '/listening',
-		icon: 'listening',
-	},
-	{
-		id: 3,
-		label: 'Speaking',
-		href: '/speaking',
-		icon: 'speaking',
-	},
-	{
-		id: 4,
-		label: 'Writing',
-		href: '/writing',
-		icon: 'writing',
-	},
-]
-
 const SiteHeader = () => {
 	const pathname = usePathname()
 	const [active, setActive] = React.useState('reading')
-
-	const icons: Record<string, React.ReactNode> = {
-		reading: <ReadingIcon />,
-		listening: <ListeningIcon />,
-		speaking: <SpeakingIcon />,
-		writing: <WritingIcon />,
-	}
 
 	return (
 		<header className='py-7 shadow-sm'>
@@ -107,7 +30,7 @@ const SiteHeader = () => {
 					</Link>
 
 					<div className='flex items-center gap-14'>
-						<NavigationMenu>
+						<NavigationMenu className='hidden lg:flex'>
 							<NavigationMenuList className='gap-5'>
 								{navList.map(item =>
 									item.href === '/skills' ? (
@@ -116,7 +39,10 @@ const SiteHeader = () => {
 												{item.label}
 											</NavigationMenuTrigger>
 											<NavigationMenuContent className='flex px-5'>
-												<div>{icons[active]}</div>
+												<div>
+													{icons[active]}
+													<span className='sr-only'>{active}</span>
+												</div>
 												<ul className='flex flex-col justify-center gap-2 py-3 px-5'>
 													{skillList.map(item => (
 														<li key={item.id}>
@@ -161,7 +87,11 @@ const SiteHeader = () => {
 								Kirish
 							</Link>
 
-							<ModeToggle />
+							<span className='hidden lg:block'>
+								<ModeToggle />
+							</span>
+
+							<MobileHeader />
 						</div>
 					</div>
 				</div>

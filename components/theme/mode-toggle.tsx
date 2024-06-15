@@ -1,5 +1,5 @@
 'use client'
-import { Moon, Sun } from 'lucide-react'
+import { CheckIcon, Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
 import { Button } from '@/components/ui/button'
@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 
 export function ModeToggle() {
-	const { setTheme } = useTheme()
+	const { setTheme, theme } = useTheme()
 
 	return (
 		<DropdownMenu>
@@ -23,14 +23,23 @@ export function ModeToggle() {
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align='end'>
-				<DropdownMenuItem onClick={() => setTheme('light')}>
-					Light
+				<DropdownMenuItem
+					className='flex justify-between items-center'
+					onClick={() => setTheme('light')}
+				>
+					Light {theme === 'light' && <CheckIcon className='h-4 w-4' />}
 				</DropdownMenuItem>
-				<DropdownMenuItem onClick={() => setTheme('dark')}>
-					Dark
+				<DropdownMenuItem
+					className='flex justify-between items-center'
+					onClick={() => setTheme('dark')}
+				>
+					Dark {theme === 'dark' && <CheckIcon className='h-4 w-4' />}
 				</DropdownMenuItem>
-				<DropdownMenuItem onClick={() => setTheme('system')}>
-					System
+				<DropdownMenuItem
+					className='flex justify-between items-center'
+					onClick={() => setTheme('system')}
+				>
+					System {theme === 'system' && <CheckIcon className='h-4 w-4' />}
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
