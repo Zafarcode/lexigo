@@ -21,7 +21,7 @@ const SiteHeader = () => {
 	const [active, setActive] = React.useState('reading')
 
 	return (
-		<header className='py-7 shadow-sm'>
+		<header className='py-7 shadow-sm dark:border-b'>
 			<div className='container'>
 				<div className='flex items-center justify-between'>
 					<Link href='/'>
@@ -50,6 +50,7 @@ const SiteHeader = () => {
 																className='text-lg hover:text-primary'
 																href={item.href}
 																onMouseOver={() => setActive(item.icon)}
+																onMouseLeave={() => setActive('reading')}
 															>
 																{item.label}
 															</Link>
