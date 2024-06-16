@@ -1,7 +1,7 @@
 'use client';
-import GrammarList from '@/components/grammer/grammer-list';
+import GrammarList from '@/components/grammar/grammer-list';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import GrammarT from '@/components/grammer/grammar-item.types';
+import GrammarT from '@/components/grammar/grammar-item.types';
 
 
 const grammar: GrammarT[] = [
