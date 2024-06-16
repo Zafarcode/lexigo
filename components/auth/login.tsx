@@ -13,9 +13,9 @@ const Login = () => {
 						Kodni kiriting
 					</h1>
 
-					<p className='text-base lg:text-lg text-gray-500 mb-5'>
+					<p className='text-base lg:text-lg text-gray-500 dark:text-white mb-5'>
 						<Link
-							className='underline text-black'
+							className='underline text-black dark:text-gray-300'
 							href='https://t.me/wordwondersbot'
 						>
 							@wordwondersbot

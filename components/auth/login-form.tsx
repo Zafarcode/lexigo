@@ -15,25 +15,25 @@ const LoginForm = () => {
 				maxLength={6}
 				value={value}
 				onChange={value => setValue(value)}
-				disabled={value !== ''}
+				disabled={value.length === 6}
 			>
 				<InputOTPGroup>
-					<InputOTPSlot index={0} />
+					<InputOTPSlot className='dark:border-white' index={0} />
 				</InputOTPGroup>
 				<InputOTPGroup>
-					<InputOTPSlot index={1} />
+					<InputOTPSlot className='dark:border-white' index={1} />
 				</InputOTPGroup>
 				<InputOTPGroup>
-					<InputOTPSlot index={2} />
+					<InputOTPSlot className='dark:border-white' index={2} />
 				</InputOTPGroup>
 				<InputOTPGroup>
-					<InputOTPSlot index={3} />
+					<InputOTPSlot className='dark:border-white' index={3} />
 				</InputOTPGroup>
 				<InputOTPGroup>
-					<InputOTPSlot index={4} />
+					<InputOTPSlot className='dark:border-white' index={4} />
 				</InputOTPGroup>
 				<InputOTPGroup>
-					<InputOTPSlot index={5} />
+					<InputOTPSlot className='dark:border-white' index={5} />
 				</InputOTPGroup>
 			</InputOTP>
 		</div>

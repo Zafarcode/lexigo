@@ -96,7 +96,7 @@ const Contacts = () => {
 										<FormItem>
 											<FormLabel>Name</FormLabel>
 											<FormControl>
-												<Input {...field} />
+												<Input className='dark:border-white' {...field} />
 											</FormControl>
 											<FormMessage />
 										</FormItem>
@@ -111,7 +111,11 @@ const Contacts = () => {
 										<FormItem>
 											<FormLabel>Email</FormLabel>
 											<FormControl>
-												<Input type='email' {...field} />
+												<Input
+													className='dark:border-white'
+													type='email'
+													{...field}
+												/>
 											</FormControl>
 											<FormMessage />
 										</FormItem>
@@ -126,7 +130,7 @@ const Contacts = () => {
 										<FormItem>
 											<FormLabel>Message</FormLabel>
 											<FormControl>
-												<Textarea {...field} />
+												<Textarea className='dark:border-white' {...field} />
 											</FormControl>
 											<FormMessage />
 										</FormItem>
