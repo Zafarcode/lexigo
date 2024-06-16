@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { toast } from '@/components/ui/use-toast'
 import Socials from '@/components/utils/socials'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -37,9 +38,39 @@ const Contacts = () => {
 		},
 	})
 
-	// 2. Define a submit handler.
-	function onSubmit(values: z.infer<typeof formSchema>) {
-		console.log(values)
+	async function onSubmit(values: z.infer<typeof formSchema>) {
+		const formattedMessage = `
+**Name:** ${values.name}
+**Email:** ${values.email}
+**Message:** ${values.message}
+`
+
+		const encodedMessage = encodeURIComponent(formattedMessage)
+		const botToken = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN
+		const chatId = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID
+		const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodedMessage}`
+
+		try {
+			await fetch(url)
+				.then(res => res.json())
+				.then(data => {
+					toast({
+						title: 'Your message has been sent!',
+						description: 'Your message has been sent to our team. Thank you!',
+					})
+
+					if (data.ok) {
+						form.reset()
+					}
+				})
+		} catch (error) {
+			toast({
+				variant: 'destructive',
+				title: 'Error',
+				description:
+					'There was an error sending your message. Please try again.',
+			})
+		}
 	}
 
 	return (
@@ -90,7 +121,7 @@ const Contacts = () => {
 							<div className='w-full mb-3 lg:my-3'>
 								<FormField
 									control={form.control}
-									name='name'
+									name='message'
 									render={({ field }) => (
 										<FormItem>
 											<FormLabel>Message</FormLabel>
