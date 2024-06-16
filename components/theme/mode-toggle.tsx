@@ -9,6 +9,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { MoonIcon, SunIcon, SystemIcon } from '@/components/utils/icons'
 
 export function ModeToggle() {
 	const { setTheme, theme } = useTheme()
@@ -27,19 +28,28 @@ export function ModeToggle() {
 					className='flex justify-between items-center'
 					onClick={() => setTheme('light')}
 				>
-					Light {theme === 'light' && <CheckIcon className='h-4 w-4' />}
+					<span className='flex gap-2'>
+						<SunIcon width={20} height={20} /> Light
+					</span>
+					{theme === 'light' && <CheckIcon className='h-4 w-4' />}
 				</DropdownMenuItem>
 				<DropdownMenuItem
 					className='flex justify-between items-center'
 					onClick={() => setTheme('dark')}
 				>
-					Dark {theme === 'dark' && <CheckIcon className='h-4 w-4' />}
+					<span className='flex gap-2'>
+						<MoonIcon width={20} height={20} /> Dark
+					</span>
+					{theme === 'dark' && <CheckIcon className='h-4 w-4' />}
 				</DropdownMenuItem>
 				<DropdownMenuItem
 					className='flex justify-between items-center'
 					onClick={() => setTheme('system')}
 				>
-					System {theme === 'system' && <CheckIcon className='h-4 w-4' />}
+					<span className='flex gap-2'>
+						<SystemIcon width={20} height={20} /> System
+					</span>
+					{theme === 'system' && <CheckIcon className='h-4 w-4' />}
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>

@@ -49,25 +49,25 @@ const skillList: ISkillList[] = [
 	{
 		id: 1,
 		label: 'Reading',
-		href: '/reading',
+		href: '/skills/reading',
 		icon: 'reading',
 	},
 	{
 		id: 2,
 		label: 'Listening',
-		href: '/listening',
+		href: '/skills/listening',
 		icon: 'listening',
 	},
 	{
 		id: 3,
 		label: 'Speaking',
-		href: '/speaking',
+		href: '/skills/speaking',
 		icon: 'speaking',
 	},
 	{
 		id: 4,
 		label: 'Writing',
-		href: '/writing',
+		href: '/skills/writing',
 		icon: 'writing',
 	},
 ]

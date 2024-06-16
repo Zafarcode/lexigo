@@ -1,5 +1,7 @@
+import SiteFooter from '@/components/global/site-footer'
 import SiteHeader from '@/components/global/site-header'
 import { ThemeProvider } from '@/components/theme/theme-provider'
+import { Toaster } from '@/components/ui/toaster'
 import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
 import { Rubik } from 'next/font/google'
@@ -39,7 +41,9 @@ export default function RootLayout({
 				>
 					<SiteHeader />
 					{children}
+					<SiteFooter />
 				</ThemeProvider>
+				<Toaster />
 			</body>
 		</html>
 	)
