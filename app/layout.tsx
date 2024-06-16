@@ -1,4 +1,4 @@
-import SiteHeader from '@/components/common/site-header'
+import SiteHeader from '@/components/global/site-header'
 import { ThemeProvider } from '@/components/theme/theme-provider'
 import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
