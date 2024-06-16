@@ -1,3 +1,4 @@
+import SiteFooter from '@/components/global/site-footer'
 import SiteHeader from '@/components/global/site-header'
 import { ThemeProvider } from '@/components/theme/theme-provider'
 import { cn } from '@/lib/utils'
@@ -39,6 +40,7 @@ export default function RootLayout({
 				>
 					<SiteHeader />
 					{children}
+					<SiteFooter />
 				</ThemeProvider>
 			</body>
 		</html>
