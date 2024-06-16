@@ -24,13 +24,28 @@ const SiteFooter = () => {
 							<h3 className='text-lg lg:text-xl font-semibold'>Skills</h3>
 							<ul className='flex flex-col space-y-3'>
 								<li>
-									<Link href='/skills'>Skills</Link>
+									<Link
+										className='hover:text-primary hover:underline'
+										href='/skills'
+									>
+										Skills
+									</Link>
 								</li>
 								<li>
-									<Link href='/grammar'>Grammar</Link>
+									<Link
+										className='hover:text-primary hover:underline'
+										href='/grammar'
+									>
+										Grammar
+									</Link>
 								</li>
 								<li>
-									<Link href='/vocabulary'>Vocabulary</Link>
+									<Link
+										className='hover:text-primary hover:underline'
+										href='/vocabulary'
+									>
+										Vocabulary
+									</Link>
 								</li>
 							</ul>
 						</div>
@@ -38,13 +53,28 @@ const SiteFooter = () => {
 							<h3 className='text-lg lg:text-xl font-semibold'>Company</h3>
 							<ul className='flex flex-col space-y-3'>
 								<li>
-									<Link href='/about'>About Us</Link>
+									<Link
+										className='hover:text-primary hover:underline'
+										href='/about'
+									>
+										About Us
+									</Link>
 								</li>
 								<li>
-									<Link href='/career'>Career</Link>
+									<Link
+										className='hover:text-primary hover:underline'
+										href='/career'
+									>
+										Career
+									</Link>
 								</li>
 								<li>
-									<Link href='/news'>News</Link>
+									<Link
+										className='hover:text-primary hover:underline'
+										href='/news'
+									>
+										News
+									</Link>
 								</li>
 							</ul>
 						</div>
@@ -52,12 +82,17 @@ const SiteFooter = () => {
 							<h3 className='text-lg lg:text-xl font-semibold'>Social</h3>
 							<ul className='flex flex-col space-y-3'>
 								<li>
-									<Link href='https://x.com/wordwonders_uz' target='blank'>
+									<Link
+										className='hover:text-primary hover:underline'
+										href='https://x.com/wordwonders_uz'
+										target='blank'
+									>
 										X
 									</Link>
 								</li>
 								<li>
 									<Link
+										className='hover:text-primary hover:underline'
 										href='https://www.instagram.com/wordwonders.uz/'
 										target='blank'
 									>
@@ -65,12 +100,17 @@ const SiteFooter = () => {
 									</Link>
 								</li>
 								<li>
-									<Link href='https://t.me/wordwonders_uz' target='blank'>
+									<Link
+										className='hover:text-primary hover:underline'
+										href='https://t.me/wordwonders_uz'
+										target='blank'
+									>
 										Telegram
 									</Link>
 								</li>
 								<li>
 									<Link
+										className='hover:text-primary hover:underline'
 										href='https://www.youtube.com/@wordwonders'
 										target='blank'
 									>
@@ -83,16 +123,36 @@ const SiteFooter = () => {
 							<h3 className='text-lg lg:text-xl font-semibold'>Legal</h3>
 							<ul className='flex flex-col space-y-3'>
 								<li>
-									<Link href='/about'>Terms</Link>
+									<Link
+										className='hover:text-primary hover:underline'
+										href='/about'
+									>
+										Terms
+									</Link>
 								</li>
 								<li>
-									<Link href='/contacts'>Privacy</Link>
+									<Link
+										className='hover:text-primary hover:underline'
+										href='/contacts'
+									>
+										Privacy
+									</Link>
 								</li>
 								<li>
-									<Link href='/career'>Cookies</Link>
+									<Link
+										className='hover:text-primary hover:underline'
+										href='/career'
+									>
+										Cookies
+									</Link>
 								</li>
 								<li>
-									<Link href='/news'>Contact</Link>
+									<Link
+										className='hover:text-primary hover:underline'
+										href='/news'
+									>
+										Contact
+									</Link>
 								</li>
 							</ul>
 						</div>
