@@ -1,21 +1,34 @@
-const page = ({ params: { topic } }: { params: { topic: string } }) => {
-  return (
-    <div className='max-w-7xl mx-auto min-h-[80vh] relative h-full'>
-      <a
-        href='/grammer'
-        className='absolute border max-[1140px]:top-0 hover:bg-gray-700 hover:text-white font-medium rounded py-2 px-3 top-2'
-      >
-        Back to Grammar
-      </a>
-      <div className='mx-auto max-w-[800px] mt-6  max-[1140px]:pt-[50px] px-5'>
-        <h2 className='text-2xl border-b-2 border-gray-400'>{topic}</h2>
-        <p>
-          {topic} {topic} {topic} {topic} {topic} {topic} {topic} {topic} {topic} {topic} {topic}{' '}
-          {topic} {topic}{' '}
-        </p>
-      </div>
-    </div>
-  );
-};
+'use client'
+import { Button } from '@/components/ui/button'
+import { useRouter } from 'next/navigation'
 
-export default page;
+const GrammarDetailPage = ({
+	params: { topic },
+}: {
+	params: { topic: string }
+}) => {
+	const router = useRouter()
+
+	return (
+		<main className='py-10'>
+			<div className='container'>
+				<section className='flex flex-col lg:flex-row items-start justify-center gap-5 lg:gap-10'>
+					<Button onClick={() => router.back()}>Back to Grammar</Button>
+
+					<div className='flex flex-col space-y-3'>
+						<h1 className='text-2xl'>{topic}</h1>
+
+						<hr />
+
+						<p>
+							{topic} {topic} {topic} {topic} {topic} {topic} {topic} {topic}{' '}
+							{topic} {topic} {topic} {topic} {topic}{' '}
+						</p>
+					</div>
+				</section>
+			</div>
+		</main>
+	)
+}
+
+export default GrammarDetailPage
