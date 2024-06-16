@@ -1,3 +1,9 @@
+import HeroSection from "@/components/home/hero";
+
 export default function Home() {
-	return <main></main>
+	return (
+		<main className='w-full overflow-x-hidden'>
+			<HeroSection />
+		</main>
+	)
 }
