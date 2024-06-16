@@ -804,12 +804,153 @@ const NotFoundIcon = ({ className }: { className: string }) => {
 	)
 }
 
+const MoonIcon = ({ width, height }: IconProps) => {
+	return (
+		<svg
+			xmlns='http://www.w3.org/2000/svg'
+			width={width || 24}
+			height={height || 24}
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='2'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		>
+			<path d='M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z' />
+		</svg>
+	)
+}
+
+const SunIcon = ({ width, height }: IconProps) => {
+	return (
+		<svg
+			xmlns='http://www.w3.org/2000/svg'
+			width={width || 24}
+			height={height || 24}
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='2'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		>
+			<circle cx='12' cy='12' r='4' />
+			<path d='M12 2v2' />
+			<path d='M12 20v2' />
+			<path d='m4.93 4.93 1.41 1.41' />
+			<path d='m17.66 17.66 1.41 1.41' />
+			<path d='M2 12h2' />
+			<path d='M20 12h2' />
+			<path d='m6.34 17.66-1.41 1.41' />
+			<path d='m19.07 4.93-1.41 1.41' />
+		</svg>
+	)
+}
+
+const SystemIcon = ({ width, height }: IconProps) => {
+	return (
+		<svg
+			xmlns='http://www.w3.org/2000/svg'
+			width={width || 24}
+			height={height || 24}
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='2'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		>
+			<path d='M18 8V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h8' />
+			<path d='M10 19v-3.96 3.15' />
+			<path d='M7 19h5' />
+			<rect width='6' height='10' x='16' y='12' rx='2' />
+		</svg>
+	)
+}
+
+const XIcon = ({ width, height }: IconProps) => {
+	return (
+		<svg
+			xmlns='http://www.w3.org/2000/svg'
+			x='0px'
+			y='0px'
+			width={width || 50}
+			height={height || 50}
+			viewBox='0 0 50 50'
+		>
+			<path d='M 11 4 C 7.134 4 4 7.134 4 11 L 4 39 C 4 42.866 7.134 46 11 46 L 39 46 C 42.866 46 46 42.866 46 39 L 46 11 C 46 7.134 42.866 4 39 4 L 11 4 z M 13.085938 13 L 21.023438 13 L 26.660156 21.009766 L 33.5 13 L 36 13 L 27.789062 22.613281 L 37.914062 37 L 29.978516 37 L 23.4375 27.707031 L 15.5 37 L 13 37 L 22.308594 26.103516 L 13.085938 13 z M 16.914062 15 L 31.021484 35 L 34.085938 35 L 19.978516 15 L 16.914062 15 z'></path>
+		</svg>
+	)
+}
+
+const InstagramIcon = ({ width, height }: IconProps) => {
+	return (
+		<svg
+			xmlns='http://www.w3.org/2000/svg'
+			width={width || 24}
+			height={height || 24}
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='2'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		>
+			<rect width='20' height='20' x='2' y='2' rx='5' ry='5' />
+			<path d='M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z' />
+			<line x1='17.5' x2='17.51' y1='6.5' y2='6.5' />
+		</svg>
+	)
+}
+
+const TelegramIcon = ({ width, height }: IconProps) => {
+	return (
+		<svg
+			xmlns='http://www.w3.org/2000/svg'
+			x='0px'
+			y='0px'
+			width={width || 50}
+			height={height || 50}
+			viewBox='0 0 50 50'
+		>
+			<path d='M46.137,6.552c-0.75-0.636-1.928-0.727-3.146-0.238l-0.002,0C41.708,6.828,6.728,21.832,5.304,22.445	c-0.259,0.09-2.521,0.934-2.288,2.814c0.208,1.695,2.026,2.397,2.248,2.478l8.893,3.045c0.59,1.964,2.765,9.21,3.246,10.758	c0.3,0.965,0.789,2.233,1.646,2.494c0.752,0.29,1.5,0.025,1.984-0.355l5.437-5.043l8.777,6.845l0.209,0.125	c0.596,0.264,1.167,0.396,1.712,0.396c0.421,0,0.825-0.079,1.211-0.237c1.315-0.54,1.841-1.793,1.896-1.935l6.556-34.077	C47.231,7.933,46.675,7.007,46.137,6.552z M22,32l-3,8l-3-10l23-17L22,32z'></path>
+		</svg>
+	)
+}
+
+const YouTubeIcon = ({ width, height }: IconProps) => {
+	return (
+		<svg
+			xmlns='http://www.w3.org/2000/svg'
+			width={width || 24}
+			height={height || 24}
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='2'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		>
+			<path d='M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17' />
+			<path d='m10 15 5-3-5-3z' />
+		</svg>
+	)
+}
+
 export {
+	InstagramIcon,
 	ListeningIcon,
 	LogoIcon,
 	MenuIcon,
+	MoonIcon,
 	NotFoundIcon,
 	ReadingIcon,
 	SpeakingIcon,
+	SunIcon,
+	SystemIcon,
+	TelegramIcon,
 	WritingIcon,
+	XIcon,
+	YouTubeIcon,
 }

@@ -10,6 +10,7 @@ import {
 	SheetTrigger,
 } from '@/components/ui/sheet'
 import { MenuIcon } from '@/components/utils/icons'
+import Socials from '@/components/utils/socials'
 import Link from 'next/link'
 import React from 'react'
 
@@ -44,8 +45,10 @@ const MobileHeader = () => {
 					))}
 				</ul>
 
-				<SheetFooter>
+				<SheetFooter className='w-full flex flex-row sm:justify-between justify-between items-center'>
 					<ModeToggle />
+
+					<Socials />
 				</SheetFooter>
 			</SheetContent>
 		</Sheet>
