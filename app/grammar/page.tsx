@@ -2,15 +2,27 @@
 import GrammarList from '@/components/grammar/grammar-list'
 import { grammar } from '@/components/grammar/grammar.mock'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import Image from 'next/image'
 
 const GrammarPage = () => {
 	return (
-		<main className='w-full min-h-[85vh] pt-[250px] bg-[url("/assets/images/grammar-bg.jpeg")] bg-cover bg-[-150px_-350px] lg:bg-[center_-400px] xl:bg-[center_-600px] bg-no-repeat'>
-			<section className='mx-auto flex items-center justify-center'>
+		<main className='w-full py-10 lg:py-20'>
+			<section>
 				<div className='container'>
-					<ScrollArea className='w-full h-[400px] rounded-lg border p-4 bg-white dark:bg-black'>
-						<GrammarList grammar={grammar} />
-					</ScrollArea>
+					<div className='flex flex-col-reverse lg:flex-row gap-5 lg:gap-28'>
+						<ScrollArea className='w-full lg:w-1/2 h-[400px] rounded-lg border p-4 bg-white dark:bg-black'>
+							<GrammarList grammar={grammar} />
+						</ScrollArea>
+
+						<Image
+							className='w-full lg:w-[450px] h-auto'
+							src='/assets/images/grammar.svg'
+							width={450}
+							height={200}
+							alt='grammar'
+							priority
+						/>
+					</div>
 				</div>
 			</section>
 		</main>

@@ -1,9 +1,9 @@
 'use client'
+import { buttonVariants } from '@/components/ui/button'
+import { LampIcon, PortfelIcon, SpeechIcon } from '@/components/utils/icons'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
-import { buttonVariants } from '../ui/button'
-import { LampIcon, PortfelIcon, SpeechIcon } from '../utils/icons'
 
 const Hero = () => {
 	return (
@@ -70,6 +70,7 @@ const Hero = () => {
 								width={366}
 								height={432}
 								alt='Hero image'
+								priority
 							/>
 						</div>
 					</div>
