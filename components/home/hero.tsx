@@ -15,7 +15,7 @@ import HeroCarousel from './hero-carousel'
 
 const Hero = () => {
 	return (
-		<section className='w-full lg:min-h-[87vh] py-10 lg:py-20 bg-[url("/assets/images/hero-left-bg.png"),url("/assets/images/hero-right-bg.png")] bg-no-repeat bg-[position:calc(50%-550px)_50px,calc(50%+550px)_400px] overflow-x-hidden'>
+		<section className='w-full h-full lg:min-h-[87vh] py-10 lg:py-20 bg-[url("/assets/images/hero-left-bg.png"),url("/assets/images/hero-right-bg.png")] bg-no-repeat bg-[position:calc(50%-550px)_50px,calc(50%+550px)_400px] overflow-x-hidden'>
 			<div className='container'>
 				<div className='flex flex-col-reverse md:flex-row justify-between gap-10 mb-16'>
 					{/* hero content */}

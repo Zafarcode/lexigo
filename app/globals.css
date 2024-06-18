@@ -75,15 +75,8 @@
 	}
 }
 
-html {
-	height: 100%;
-	overflow-x: hidden;
-}
-
+html,
 body {
-	height: 100%;
-	display: flex;
-	flex-direction: column;
 	overflow-x: hidden;
 }
 
