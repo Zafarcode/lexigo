@@ -1145,14 +1145,178 @@ const TutorIcon = ({ className }: { className?: string }) => {
 	)
 }
 
+const WordIcon = ({ width, height }: IconProps) => {
+	return (
+		<svg
+			xmlns='http://www.w3.org/2000/svg'
+			width={width || 24}
+			height={height || 24}
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='2'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		>
+			<polyline points='14.5 17.5 3 6 3 3 6 3 17.5 14.5' />
+			<line x1='13' x2='19' y1='19' y2='13' />
+			<line x1='16' x2='20' y1='16' y2='20' />
+			<line x1='19' x2='21' y1='21' y2='19' />
+			<polyline points='14.5 6.5 18 3 21 3 21 6 17.5 9.5' />
+			<line x1='5' x2='9' y1='14' y2='18' />
+			<line x1='7' x2='4' y1='17' y2='20' />
+			<line x1='3' x2='5' y1='19' y2='21' />
+		</svg>
+	)
+}
+
+const LanguageIcon = ({ width, height }: IconProps) => {
+	return (
+		<svg
+			xmlns='http://www.w3.org/2000/svg'
+			width={width || 24}
+			height={height || 24}
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='2'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		>
+			<path d='m5 8 6 6' />
+			<path d='m4 14 6-6 2-3' />
+			<path d='M2 5h12' />
+			<path d='M7 2h1' />
+			<path d='m22 22-5-10-5 10' />
+			<path d='M14 18h6' />
+		</svg>
+	)
+}
+
+const LibraryIcon = ({ width, height }: IconProps) => {
+	return (
+		<svg
+			xmlns='http://www.w3.org/2000/svg'
+			width={width || 24}
+			height={height || 24}
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='2'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		>
+			<path d='m16 6 4 14' />
+			<path d='M12 6v14' />
+			<path d='M8 8v12' />
+			<path d='M4 4v16' />
+		</svg>
+	)
+}
+
+const BookHeadPhoneIcon = ({ width, height }: IconProps) => {
+	return (
+		<svg
+			xmlns='http://www.w3.org/2000/svg'
+			width={width || 24}
+			height={height || 24}
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='2'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		>
+			<path d='M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20' />
+			<circle cx='9' cy='12' r='1' />
+			<path d='M8 12v-2a4 4 0 0 1 8 0v2' />
+			<circle cx='15' cy='12' r='1' />
+		</svg>
+	)
+}
+
+const AudioLinesIcon = ({ width, height }: IconProps) => {
+	return (
+		<svg
+			xmlns='http://www.w3.org/2000/svg'
+			width={width || 24}
+			height={height || 24}
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='2'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		>
+			<path d='M2 10v3' />
+			<path d='M6 6v11' />
+			<path d='M10 3v18' />
+			<path d='M14 8v7' />
+			<path d='M18 5v13' />
+			<path d='M22 10v3' />
+		</svg>
+	)
+}
+
+const NotePadIcon = ({ width, height }: IconProps) => {
+	return (
+		<svg
+			xmlns='http://www.w3.org/2000/svg'
+			width={width || 24}
+			height={height || 24}
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='2'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		>
+			<path d='M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4' />
+			<path d='M2 6h4' />
+			<path d='M2 10h4' />
+			<path d='M2 14h4' />
+			<path d='M2 18h4' />
+			<path d='M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z' />
+		</svg>
+	)
+}
+
+const GamePadIcon = ({ width, height }: IconProps) => {
+	return (
+		<svg
+			xmlns='http://www.w3.org/2000/svg'
+			width={width || 24}
+			height={height || 24}
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			strokeWidth='2'
+			strokeLinecap='round'
+			strokeLinejoin='round'
+		>
+			<line x1='6' x2='10' y1='11' y2='11' />
+			<line x1='8' x2='8' y1='9' y2='13' />
+			<line x1='15' x2='15.01' y1='12' y2='12' />
+			<line x1='18' x2='18.01' y1='10' y2='10' />
+			<path d='M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z' />
+		</svg>
+	)
+}
+
 export {
+	AudioLinesIcon,
+	BookHeadPhoneIcon,
+	GamePadIcon,
 	InstagramIcon,
 	LampIcon,
+	LanguageIcon,
 	LaptopIcon,
+	LibraryIcon,
 	ListeningIcon,
 	LogoIcon,
 	MenuIcon,
 	MoonIcon,
+	NotePadIcon,
 	NotFoundIcon,
 	PortfelIcon,
 	ProgressIcon,
@@ -1163,7 +1327,9 @@ export {
 	SystemIcon,
 	TelegramIcon,
 	TutorIcon,
+	WordIcon,
 	WritingIcon,
 	XIcon,
-	YouTubeIcon,
+	YouTubeIcon
 }
+
