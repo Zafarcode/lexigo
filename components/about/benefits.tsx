@@ -76,7 +76,7 @@ const Benefits = () => {
 										</span>
 									</span>
 
-									<CardTitle className='text-xl bg-gradient-to-r from-primary from-30% to-black lg:to-secondary to-50% bg-clip-text text-transparent group-hover:to-primary'>
+									<CardTitle className='text-xl bg-gradient-to-r from-primary from-30% dark:to-white to-black lg:to-secondary to-50% bg-clip-text text-transparent group-hover:to-primary'>
 										{title}
 									</CardTitle>
 								</CardHeader>
