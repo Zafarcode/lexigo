@@ -1,12 +1,4 @@
 'use client'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import {
-	Carousel,
-	CarouselContent,
-	CarouselItem,
-	CarouselNext,
-	CarouselPrevious,
-} from '@/components/ui/carousel'
 import {
 	AudioLinesIcon,
 	BookHeadPhoneIcon,
@@ -17,7 +9,7 @@ import {
 	OnlineTestsIcon,
 	WordIcon,
 } from '@/components/utils/icons'
-import Autoplay from 'embla-carousel-autoplay'
+import { cn } from '@/lib/utils'
 import Image from 'next/image'
 
 const courses: {
@@ -110,23 +102,32 @@ const Courses = () => {
 	return (
 		<section className='pb-10 md:py-10'>
 			<div className='container'>
-				<h2 className='text-2xl lg:text-5xl font-bold text-center mb-10'>
+				<h2 className='text-2xl lg:text-[40px] lg:leading-[48px] font-bold mb-10 text-center'>
 					Our Courses
 				</h2>
 
 				<ul className='flex flex-col gap-20'>
 					{courses.map(({ id, title, description, icon }) => (
 						<li
-							className='flex flex-col md:flex-row justify-center items-center odd:flex-col md:odd:flex-row-reverse gap-5 md:gap-40'
+							className='flex flex-col md:flex-row justify-center items-center odd:flex-col md:odd:flex-row-reverse gap-5 md:gap-20'
 							key={id}
 						>
 							<div className='w-full md:w-1/3'>
 								<Image
-									className='h-auto mx-auto'
+									className={cn(
+										'h-auto mx-auto object-cover',
+										{
+											'md:rotate-6': id % 2 === 1,
+										},
+										{
+											'md:-rotate-12': id % 2 === 0,
+										},
+										(id === 2 || id === 1 || id === 7) && 'w-[250px]'
+									)}
 									src={images[icon]}
 									alt={icon}
-									width={250}
-									height={300}
+									width={350}
+									height={250}
 								/>
 							</div>
 
@@ -142,42 +143,6 @@ const Courses = () => {
 						</li>
 					))}
 				</ul>
-
-				<Carousel
-					opts={{
-						align: 'start',
-						loop: true,
-					}}
-					plugins={[
-						Autoplay({
-							delay: 2000,
-							stopOnInteraction: false,
-							stopOnMouseEnter: true,
-						}),
-					]}
-					className='mt-10'
-				>
-					<CarouselContent>
-						{courses.map(({ id, title, description, icon }) => (
-							<CarouselItem key={id} className='md:basis-1/2 lg:basis-1/3'>
-								<div className='p-1'>
-									<Card className='hover:shadow-md'>
-										<CardHeader>
-											<div className='mb-1'>{icons[icon]}</div>
-
-											<CardTitle className='text-primary'>{title}</CardTitle>
-										</CardHeader>
-										<CardContent>
-											<span className='text-gray-500'>{description}</span>
-										</CardContent>
-									</Card>
-								</div>
-							</CarouselItem>
-						))}
-					</CarouselContent>
-					<CarouselPrevious />
-					<CarouselNext />
-				</Carousel>
 			</div>
 		</section>
 	)

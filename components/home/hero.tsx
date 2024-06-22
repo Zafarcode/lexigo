@@ -20,12 +20,12 @@ const Hero = () => {
 				<div className='flex flex-col-reverse md:flex-row justify-between gap-10 mb-16'>
 					{/* hero content */}
 					<div className='flex flex-col gap-5 w-full lg:w-[700px] min-h-[450px]'>
-						<h2 className='text-2xl lg:text-[40px] lg:leading-[48px] font-bold'>
+						<h1 className='text-2xl lg:text-[40px] lg:leading-[48px] font-bold'>
 							Unlock Your <span className='text-primary'>Language</span>{' '}
 							Potential with <span className='text-primary'>WordWonders:</span>{' '}
 							Where English <span className='text-primary'>Learning</span>{' '}
 							Becomes an Adventure!
-						</h2>
+						</h1>
 						<p className='leading-[180%] text-base text-gray-500'>
 							Learn English with WordWonders: The latest online learning system
 							and materials that help your knowledge grow.
