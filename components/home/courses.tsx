@@ -114,6 +114,10 @@ const Courses = () => {
 						>
 							<div className='w-full md:w-1/3'>
 								<Image
+									data-aos={cn({
+										'fade-left': id % 2 === 1,
+										'fade-right': id % 2 === 0,
+									})}
 									className={cn(
 										'h-auto mx-auto object-cover',
 										{
@@ -132,13 +136,20 @@ const Courses = () => {
 							</div>
 
 							<div className='w-full md:w-1/3'>
-								<div className='mb-1'>{icons[icon]}</div>
+								<div data-aos='fade-up' className='mb-1'>
+									{icons[icon]}
+								</div>
 
-								<h3 className='text-2xl text-primary font-semibold'>
+								<h3
+									data-aos='fade-up'
+									className='text-2xl text-primary font-semibold'
+								>
 									{id}. {title}
 								</h3>
 
-								<p className='text-gray-500'>{description}</p>
+								<p data-aos='fade-up' className='text-gray-500'>
+									{description}
+								</p>
 							</div>
 						</li>
 					))}

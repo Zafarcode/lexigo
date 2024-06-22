@@ -10,7 +10,7 @@ const GrammarDetailPage = ({
 	const router = useRouter()
 
 	return (
-		<main className='py-10'>
+		<main className='pt-28 md:pt-36 pb-10 lg:pb-10'>
 			<div className='container'>
 				<section className='flex flex-col lg:flex-row items-start justify-center gap-5 lg:gap-10'>
 					<Button onClick={() => router.back()}>Back to Grammar</Button>

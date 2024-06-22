@@ -10,7 +10,7 @@ const Testimonials = () => {
 				</h2>
 
 				<div className='flex flex-wrap -m-4'>
-					<div className='p-4 md:w-1/2 w-full'>
+					<div data-aos='fade-right' className='p-4 md:w-1/2 w-full'>
 						<div className='h-full p-8 rounded border flex flex-col justify-between'>
 							<div>
 								<QuoteIcon />
@@ -38,7 +38,7 @@ const Testimonials = () => {
 							</div>
 						</div>
 					</div>
-					<div className='p-4 md:w-1/2 w-full'>
+					<div data-aos='fade-left' className='p-4 md:w-1/2 w-full'>
 						<div className='h-full p-8 rounded border flex flex-col justify-between'>
 							<div>
 								<QuoteIcon />
