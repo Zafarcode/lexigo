@@ -14,9 +14,11 @@ import {
 	LanguageIcon,
 	LibraryIcon,
 	NotePadIcon,
+	OnlineTestsIcon,
 	WordIcon,
 } from '@/components/utils/icons'
 import Autoplay from 'embla-carousel-autoplay'
+import Image from 'next/image'
 
 const courses: {
 	id: number
@@ -73,6 +75,13 @@ const courses: {
 			'Refine your writing skills with our comprehensive writing lessons. From basic sentence structure to advanced essay writing, we provide the guidance and practice you need to become a proficient writer in English.',
 		icon: 'writing',
 	},
+	{
+		id: 8,
+		title: 'Online Tests',
+		description:
+			'Evaluate your progress with our online tests available after each topic. These tests are designed to assess your understanding and retention of the material, providing you with immediate feedback and personalized recommendations for further improvement.',
+		icon: 'test',
+	},
 ]
 
 const Courses = () => {
@@ -84,14 +93,55 @@ const Courses = () => {
 		listening: <BookHeadPhoneIcon width={34} height={34} />,
 		speaking: <AudioLinesIcon width={34} height={34} />,
 		writing: <NotePadIcon width={34} height={34} />,
+		test: <OnlineTestsIcon width={34} height={34} />,
+	}
+
+	const images: Record<string, string> = {
+		vocabulary: '/assets/images/words.svg',
+		game: '/assets/images/game.svg',
+		grammar: '/assets/images/grammar.svg',
+		reading: '/assets/icons/reading.svg',
+		listening: '/assets/icons/listening.svg',
+		speaking: '/assets/icons/speaking.svg',
+		writing: '/assets/icons/writing.svg',
+		test: '/assets/images/online-test.svg',
 	}
 
 	return (
-		<section className='md:py-10'>
+		<section className='pb-10 md:py-10'>
 			<div className='container'>
 				<h2 className='text-2xl lg:text-5xl font-bold text-center mb-10'>
 					Our Courses
 				</h2>
+
+				<ul className='flex flex-col gap-20'>
+					{courses.map(({ id, title, description, icon }) => (
+						<li
+							className='flex flex-col md:flex-row justify-center items-center odd:flex-col md:odd:flex-row-reverse gap-5 md:gap-40'
+							key={id}
+						>
+							<div className='w-full md:w-1/3'>
+								<Image
+									className='h-auto mx-auto'
+									src={images[icon]}
+									alt={icon}
+									width={250}
+									height={300}
+								/>
+							</div>
+
+							<div className='w-full md:w-1/3'>
+								<div className='mb-1'>{icons[icon]}</div>
+
+								<h3 className='text-2xl text-primary font-semibold'>
+									{id}. {title}
+								</h3>
+
+								<p className='text-gray-500'>{description}</p>
+							</div>
+						</li>
+					))}
+				</ul>
 
 				<Carousel
 					opts={{
@@ -105,6 +155,7 @@ const Courses = () => {
 							stopOnMouseEnter: true,
 						}),
 					]}
+					className='mt-10'
 				>
 					<CarouselContent>
 						{courses.map(({ id, title, description, icon }) => (
