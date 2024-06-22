@@ -3,7 +3,7 @@ import { useParams } from 'next/navigation'
 
 const SkillsDetailPage = () => {
 	const params = useParams()
-	return <main>SkillsDetailPage {params.slug}</main>
+	return <main className='pt-24 md:pt-20'>SkillsDetailPage {params.slug}</main>
 }
 
 export default SkillsDetailPage

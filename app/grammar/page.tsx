@@ -6,7 +6,7 @@ import Image from 'next/image'
 
 const GrammarPage = () => {
 	return (
-		<main className='w-full py-10 lg:py-20'>
+		<main className='w-full pt-28 md:pt-20 pb-10 lg:pb-20'>
 			<section>
 				<div className='container'>
 					<div className='flex flex-col-reverse lg:flex-row gap-5 lg:gap-28'>
