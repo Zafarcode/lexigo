@@ -125,7 +125,7 @@ const SiteFooter = () => {
 								<li>
 									<Link
 										className='hover:text-primary hover:underline'
-										href='/about'
+										href='/terms'
 									>
 										Terms
 									</Link>
@@ -133,7 +133,7 @@ const SiteFooter = () => {
 								<li>
 									<Link
 										className='hover:text-primary hover:underline'
-										href='/contacts'
+										href='/privacy'
 									>
 										Privacy
 									</Link>
@@ -141,7 +141,7 @@ const SiteFooter = () => {
 								<li>
 									<Link
 										className='hover:text-primary hover:underline'
-										href='/career'
+										href='/cookies'
 									>
 										Cookies
 									</Link>
@@ -149,7 +149,7 @@ const SiteFooter = () => {
 								<li>
 									<Link
 										className='hover:text-primary hover:underline'
-										href='/news'
+										href='/contacts'
 									>
 										Contact
 									</Link>

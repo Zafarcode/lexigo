@@ -2,7 +2,7 @@ import Contacts from '@/components/contacts/contacts'
 
 const ContactsPage = () => {
 	return (
-		<main>
+		<main className='w-full pt-24 md:pt-20'>
 			<Contacts />
 		</main>
 	)
