@@ -21,7 +21,7 @@ const SiteHeader = () => {
 	const [active, setActive] = React.useState('reading')
 
 	return (
-		<header className='py-7 shadow-sm dark:border-b'>
+		<header className='py-5 md:py-7 shadow-sm dark:border-b fixed top-0 left-0 right-0 dark:bg-black bg-white z-10'>
 			<div className='container'>
 				<div className='flex items-center justify-between'>
 					<Link href='/'>
