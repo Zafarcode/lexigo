@@ -1,3 +1,6 @@
+'use client'
+import Nexus from "@/components/games/nexus"
+import WordGame from "@/components/games/nexusWords"
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 
@@ -8,6 +11,8 @@ const VocabularyPage = () => {
 				<h1 className='text-2xl lg:text-[40px] lg:leading-[48px] font-bold mb-10 text-center my-5'>
 					Vocabulary
 				</h1>
+        
+        		<Nexus />
 
 				<ol className='flex flex-col gap-5 w-full max-w-2xl mx-auto'>
 					<li>
