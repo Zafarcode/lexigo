@@ -112,12 +112,14 @@ const Courses = () => {
 							className='flex flex-col md:flex-row justify-center items-center odd:flex-col md:odd:flex-row-reverse gap-5 md:gap-20'
 							key={id}
 						>
-							<div className='w-full md:w-1/3'>
+							<div
+								className='w-full md:w-1/3'
+								data-aos={cn({
+									'fade-left': id % 2 === 1,
+									'fade-right': id % 2 === 0,
+								})}
+							>
 								<Image
-									data-aos={cn({
-										'fade-left': id % 2 === 1,
-										'fade-right': id % 2 === 0,
-									})}
 									className={cn(
 										'h-auto mx-auto object-cover',
 										{
@@ -126,7 +128,7 @@ const Courses = () => {
 										{
 											'md:-rotate-12': id % 2 === 0,
 										},
-										(id === 2 || id === 1 || id === 7) && 'w-[250px]'
+										(id === 2 || id === 1 || id === 8) && 'w-[250px]'
 									)}
 									src={images[icon]}
 									alt={icon}
