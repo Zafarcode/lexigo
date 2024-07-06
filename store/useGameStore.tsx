@@ -42,7 +42,7 @@ interface GameState {
   setSelectedImageId: (id: number | null) => void;
   setMusicIconVisible: (visible: boolean) => void;
   setIsDisabled: (disabled: boolean) => void;
-  setCurrent: (current: { id: number; isCorrect: boolean } | null) => void;
+  setCurrent: (current: { id: number; isCorrect: boolean }) => void;
   setIsCardSelected: (selected: boolean) => void;
   setIsDialogOpen: (open: boolean) => void;
   setTimerRunning: (running: boolean) => void;
