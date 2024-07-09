@@ -1,5 +1,3 @@
-import React from 'react'
-
 interface INavList {
 	id: number
 	label: string
