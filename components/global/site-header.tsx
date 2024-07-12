@@ -38,7 +38,10 @@ const SiteHeader = () => {
 											<NavigationMenuTrigger className='lg:text-lg font-normal px-0'>
 												{item.label}
 											</NavigationMenuTrigger>
-											<NavigationMenuContent className='flex px-5'>
+											<NavigationMenuContent
+												className='flex px-5'
+												onMouseLeave={() => setActive('reading')}
+											>
 												<div>
 													{icons[active]}
 													<span className='sr-only'>{active}</span>
@@ -50,7 +53,6 @@ const SiteHeader = () => {
 																className='text-lg hover:text-primary'
 																href={item.href}
 																onMouseOver={() => setActive(item.icon)}
-																onMouseLeave={() => setActive('reading')}
 															>
 																{item.label}
 															</Link>

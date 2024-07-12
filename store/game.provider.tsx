@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+
 type rendomElementType = {
 	id: number
 	isCorrect: boolean
