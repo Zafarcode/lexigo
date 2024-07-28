@@ -4,7 +4,7 @@ import useGameStore from '@/store/game.provider';
 import Timer  from "./game-timer"
 
 const GameHeader = () => {
-  const { startGame, text, musicIconVisible } = useGameStore();
+  const { startGame, text, musicIconVisible, progressVisible } = useGameStore();
   const { toast } = useToast();
 
   const handleSpeak = () => {
@@ -24,7 +24,7 @@ const GameHeader = () => {
     <div className='relative'>
       <h1 className='text-[27px] md:text-4xl text-center font-sans font-medium'>{startGame}</h1>
       <div className='absolute top-[0] right-[0] flex gap-2 items-center'>
-        <Timer />
+        {progressVisible && <Timer />}        
       </div>
       <div className='flex justify-center items-center gap-3'>
         {musicIconVisible && (
