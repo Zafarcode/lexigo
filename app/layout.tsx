@@ -33,15 +33,24 @@ export default function RootLayout({
 					rubik.variable
 				)}
 			>
+				{/* Theme Provider */}
 				<ThemeProvider
 					attribute='class'
 					defaultTheme='system'
 					enableSystem
 					disableTransitionOnChange
 				>
-					<SiteHeader />
-					{children}
-					<SiteFooter />
+					<div className='flex flex-col relative min-h-dvh'>
+						{/* Site Header */}
+						<SiteHeader />
+						<main className='flex-1 pt-20 md:pt-24 pb-3 lg:pb-20'>
+							{children}
+						</main>
+						{/* Background Pattern */}
+						<div className='fixed inset-0 w-full h-full -z-10 bg-pattern' />
+						{/* Site Footer */}
+						<SiteFooter />
+					</div>
 				</ThemeProvider>
 				<Toaster />
 			</body>

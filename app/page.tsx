@@ -13,11 +13,11 @@ export default function Home() {
 	}, [])
 
 	return (
-		<main className='pt-24 md:pt-20'>
+		<>
 			<Hero />
 			<Courses />
 			<Testimonials />
 			<CTA />
-		</main>
+		</>
 	)
 }
