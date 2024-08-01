@@ -3,7 +3,7 @@ import IGrammar from './grammar.types'
 
 const GrammarList = ({ grammar }: { grammar: IGrammar[] }) => {
 	return (
-		<ul className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+		<ul className='grid grid-cols-1 md:grid-cols-2 gap-3'>
 			{grammar.map((item: IGrammar) => (
 				<GrammarItem key={item.id} {...item} />
 			))}

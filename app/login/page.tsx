@@ -1,11 +1,11 @@
-import Login from '@/components/auth/login'
+import LoginComponent from '@/components/auth/login'
 
-const LoginPage = () => {
+const Login = () => {
 	return (
 		<main className='pt-24 md:pt-20'>
-			<Login />
+			<LoginComponent />
 		</main>
 	)
 }
 
-export default LoginPage
+export default Login

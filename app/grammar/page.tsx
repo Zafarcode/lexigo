@@ -4,7 +4,7 @@ import { grammar } from '@/components/grammar/grammar.mock'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import Image from 'next/image'
 
-const GrammarPage = () => {
+const Grammar = () => {
 	return (
 		<main className='w-full pt-28 md:pt-36 pb-10 lg:pb-20'>
 			<section>
@@ -32,4 +32,4 @@ const GrammarPage = () => {
 	)
 }
 
-export default GrammarPage
+export default Grammar

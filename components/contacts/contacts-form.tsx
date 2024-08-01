@@ -28,7 +28,7 @@ const formSchema = z.object({
 	}),
 })
 
-const Contacts = () => {
+const ContactsForm = () => {
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -157,4 +157,4 @@ const Contacts = () => {
 	)
 }
 
-export default Contacts
+export default ContactsForm
