@@ -1,8 +1,8 @@
 const Skills = () => {
 	return (
-		<main className='pt-24 md:pt-28'>
+		<section>
 			<h1>Skills</h1>
-		</main>
+		</section>
 	)
 }
 

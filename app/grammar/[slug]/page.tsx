@@ -7,9 +7,9 @@ const GrammarDetail = ({ params: { slug } }: { params: { slug: string } }) => {
 	const router = useRouter()
 
 	return (
-		<main className='pt-28 md:pt-36 pb-10 lg:pb-10'>
+		<section>
 			<div className='container'>
-				<section className='flex flex-col lg:flex-row items-start justify-center gap-5 lg:gap-10'>
+				<div className='flex flex-col lg:flex-row items-start justify-center gap-5 lg:gap-10'>
 					<Button className='gap-2' onClick={() => router.back()}>
 						<ArrowLeft /> <span>Back</span>
 					</Button>
@@ -25,9 +25,9 @@ const GrammarDetail = ({ params: { slug } }: { params: { slug: string } }) => {
 							{slug} {slug} {slug} {slug}
 						</p>
 					</div>
-				</section>
+				</div>
 			</div>
-		</main>
+		</section>
 	)
 }
 

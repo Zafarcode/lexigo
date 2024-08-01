@@ -29,7 +29,7 @@ const SkillsDetail = () => {
 	}, [setShuffledIndices])
 
 	return (
-		<main className='pt-24 md:pt-28'>
+		<section>
 			<div className='container'>
 				<GameHeader />
 				<GameBody />
@@ -42,7 +42,7 @@ const SkillsDetail = () => {
 				isOpen={isTimeUpDialogOpen}
 				onClose={() => setIsTimeUpDialogOpen(false)}
 			/>
-		</main>
+		</section>
 	)
 }
 

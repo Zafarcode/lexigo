@@ -3,10 +3,10 @@ import AboutHero from '@/components/about/hero'
 
 const About = () => {
 	return (
-		<main className='pt-24 md:pt-20'>
+		<section>
 			<AboutHero />
 			<Benefits />
-		</main>
+		</section>
 	)
 }
 

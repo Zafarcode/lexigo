@@ -73,6 +73,54 @@
 	body {
 		@apply bg-background text-foreground;
 	}
+
+	.custom-transition {
+		@apply transition-all duration-300 ease-in-out;
+	}
+}
+
+/* Flashcard Animation Start */
+.flip-card {
+	perspective: 1000px;
+}
+
+.flip-card-inner {
+	transition: transform 0.1s;
+	transform-style: preserve-3d;
+}
+
+.flip-card-front,
+.flip-card-back {
+	position: absolute;
+	backface-visibility: hidden;
+}
+
+.flip-card-back {
+	transform: rotateX(180deg);
+}
+/* Flashcard Animation End */
+
+.bg-pattern {
+	background-image: url('/assets/images/bg-diamond-pattern-white.svg');
+	background-size: 14px;
+	opacity: 6%;
+}
+
+.bg-diamond-pattern {
+	background-image: url('/assets/images/bg-diamond-pattern-white-02.svg');
+	background-size: 14px;
+	-webkit-mask-image: linear-gradient(
+		to bottom,
+		transparent,
+		transparent,
+		rgba(255, 255, 255, 0.04)
+	);
+	mask-image: linear-gradient(
+		to bottom,
+		transparent,
+		transparent,
+		rgba(255, 255, 255, 0.04)
+	);
 }
 
 html,
