@@ -1,9 +1,9 @@
 'use client'
-
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
+import useTTS from '@/hooks/useTTS'
 import { motion } from 'framer-motion'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Snail, Volume2 } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 
 type FlashcardProps = {
@@ -14,6 +14,7 @@ type FlashcardProps = {
 }
 
 const Flashcard = ({ cardData }: FlashcardProps) => {
+	const { handleNormalSpeech, handleSlowSpeech } = useTTS()
 	const [isFlipped, setIsFlipped] = useState(false)
 	const [isAnimating, setIsAnimating] = useState(false)
 	const [currentIndex, setCurrentIndex] = useState(0)
@@ -107,7 +108,23 @@ const Flashcard = ({ cardData }: FlashcardProps) => {
 					onAnimationComplete={() => setIsAnimating(false)}
 				>
 					<div className='flip-card-front w-[100%] h-[100%] bg-zinc-800 rounded-lg p-4 flex justify-center items-center'>
-						<div className='text-3xl sm:text-4xl text-white'>{currentCard.front_side}</div>
+						<div className='absolute top-4 right-4 flex gap-4'>
+							<Button
+								size='icon'
+								onClick={evt => handleNormalSpeech(evt, currentCard.front_side)}
+							>
+								<Volume2 />
+							</Button>
+							<Button
+								size='icon'
+								onClick={evt => handleSlowSpeech(evt, currentCard.front_side)}
+							>
+								<Snail />
+							</Button>
+						</div>
+						<div className='text-3xl sm:text-4xl text-white'>
+							{currentCard.front_side}
+						</div>
 					</div>
 					<div className='flip-card-back w-[100%] h-[100%] bg-zinc-800 rounded-lg p-4 flex justify-center items-center'>
 						<div className='text-3xl sm:text-4xl text-white'>{cardBack}</div>

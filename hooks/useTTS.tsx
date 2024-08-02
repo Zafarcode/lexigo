@@ -1,60 +1,35 @@
-import { MouseEvent, useCallback, useEffect, useMemo } from 'react'
+import { MouseEvent, useCallback, useEffect } from 'react'
 
-const useTTS = (text: string, lang: 'en-US' | 'en-GB' = 'en-US') => {
-	const normalSpeech = useMemo(() => {
-		if (typeof window !== 'undefined' && window.speechSynthesis) {
-			const utterance = new SpeechSynthesisUtterance()
-			utterance.volume = 1
-			utterance.rate = 1 // Normal rate
-			utterance.pitch = 1
-			utterance.text = text
-			utterance.lang = lang
-			return utterance
-		}
-		return null
-	}, [text, lang])
-
-	const slowSpeech = useMemo(() => {
-		if (typeof window !== 'undefined' && window.speechSynthesis) {
-			const utterance = new SpeechSynthesisUtterance()
-			utterance.volume = 1
-			utterance.rate = 0.1 // Slow rate
-			utterance.pitch = 1
-			utterance.text = text
-			utterance.lang = lang
-			return utterance
-		}
-		return null
-	}, [text, lang])
-
-	const handleNormalSpeech = useCallback(
-		(evt: MouseEvent<HTMLButtonElement>) => {
-			if (
-				typeof window !== 'undefined' &&
-				window.speechSynthesis &&
-				normalSpeech
-			) {
+const useTTS = (lang: 'en-US' | 'en-GB' = 'en-US') => {
+	const handleSpeech = useCallback(
+		(text: string, rate: number, evt: MouseEvent<HTMLButtonElement>) => {
+			if (typeof window !== 'undefined' && window.speechSynthesis) {
+				const utterance = new SpeechSynthesisUtterance()
+				utterance.volume = 1
+				utterance.rate = rate
+				utterance.pitch = 1
+				utterance.text = text
+				utterance.lang = lang
 				window.speechSynthesis.cancel() // Ensure no previous speeches are queued
-				window.speechSynthesis.speak(normalSpeech)
+				window.speechSynthesis.speak(utterance)
 				evt.stopPropagation()
 			}
 		},
-		[normalSpeech]
+		[lang]
+	)
+
+	const handleNormalSpeech = useCallback(
+		(evt: MouseEvent<HTMLButtonElement>, text: string) => {
+			handleSpeech(text, 1, evt) // Normal rate
+		},
+		[handleSpeech]
 	)
 
 	const handleSlowSpeech = useCallback(
-		(evt: MouseEvent<HTMLButtonElement>) => {
-			if (
-				typeof window !== 'undefined' &&
-				window.speechSynthesis &&
-				slowSpeech
-			) {
-				window.speechSynthesis.cancel() // Ensure no previous speeches are queued
-				window.speechSynthesis.speak(slowSpeech)
-				evt.stopPropagation()
-			}
+		(evt: MouseEvent<HTMLButtonElement>, text: string) => {
+			handleSpeech(text, 0.1, evt) // Slow rate
 		},
-		[slowSpeech]
+		[handleSpeech]
 	)
 
 	useEffect(() => {

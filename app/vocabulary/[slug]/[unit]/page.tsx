@@ -1,8 +1,7 @@
-import { ArrowLeft } from 'lucide-react'
-import Link from 'next/link'
-
 import Flashcard from '@/components/vocabulary/flash-card'
 import { lessons } from '@/constants/lessons'
+import { ArrowLeft } from 'lucide-react'
+import Link from 'next/link'
 
 interface FlashcardPageProps {
 	params: {
@@ -39,7 +38,7 @@ export default function FlashcardPage({ params }: FlashcardPageProps) {
 								<ArrowLeft /> Back
 							</Link>
 							<h1 className='text-2xl sm:text-4xl font-bold'>
-								{lesson.lesson_title}
+								{lesson.unit[0].title}
 							</h1>
 						</div>
 
