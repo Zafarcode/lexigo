@@ -1,26 +1,26 @@
 'use client'
+import React from 'react'
 
-import * as React from 'react'
-
-import NexusCard from '@/components/games/nexusCard'
-import NexusWords from '@/components/games/nexusWords'
+import NexusCard from '@/components/vocabulary/game-words/nexusCard'
+import NexusWords from '@/components/vocabulary/game-words/nexusWords'
 import { Card } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { Layers, Shapes, SquarePi } from 'lucide-react'
+import useWordGameStore from '@/store/word.game.provider'
 
 const Nexus = () => {
-	const [name, setName] = React.useState('Guest')
-	const [level, setLevel] = React.useState('')
-	const [time, setTime] = React.useState(0)
+	const { level, setLevel, time, setTime, name } = useWordGameStore()
+
 
 	React.useEffect(() => {
 		if (time > 0) {
-			const timerId = setInterval(() => {
-				setTime(prevTime => (prevTime > 0 ? prevTime - 1 : 0))
-			}, 1000)
-			return () => clearInterval(timerId)
+		  const timerId = setInterval(() => {
+			setTime((time > 0 ? time - 1 : 0))
+		  }, 1000);
+	
+		  return () => clearInterval(timerId);
 		}
-	}, [time])
+	  }, [setTime, time]);
 	const handleMinutes = (timee: number) => {
 		const seconds: string = String(timee % 60)
 		return timee / 60 > 0
@@ -30,7 +30,7 @@ const Nexus = () => {
 
 	return (
 		<>
-			{level.length > 0 ? (
+			{level !== ""  ? (
 				<div className='container mx-auto h-[80vh] max-[727px]:h-[140vh]'>
 					<div className='flex items-center gap-5 mb-7'>
 						<p>Qolgan vaqt</p>
@@ -81,12 +81,12 @@ const Nexus = () => {
 					</div>
 				</div>
 			) : (
-				<div className='container mx-auto pt-10 h-[80vh]'>
+				<div className='container mx-auto pt-5 h-[80vh]'>
 					<h2 className='text-lg text-center'>Assalomu aleykum, {name}</h2>
 					<p className='text-[28px] font-bold text-center'>
 						O&apos;zingiz uchun qulay darajani tanlang!
 					</p>
-					<div className='flex justify-center items-center gap-[21px] mt-10'>
+					<div className='flex justify-center items-center gap-[21px] mt-10 flex-wrap' >
 						<NexusCard
 							level={'Easy'}
 							handleTime={() => setTime(120)}

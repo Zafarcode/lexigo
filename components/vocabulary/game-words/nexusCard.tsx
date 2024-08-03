@@ -20,8 +20,8 @@ const NexusCard = ({
 			className={`${level === 'Easy' ? 'bg-[#FFC107]' : ''} ${
 				level === 'Medium' ? 'bg-[#00BCD4]' : ''
 			} ${
-				level === 'Hard' ? 'bg-[#f73644]' : ''
-			} p-[15px] w-[275px] h-[270px] rounded-[30px] flex flex-col justify-between`}
+				level === 'Hard' ? 'bg-primary' : ''
+			} p-[15px] w-full md:w-[275px] h-[270px] rounded-[15px] flex flex-col justify-between`}
 		>
 			{level == 'Easy' ? (
 				<Layers className='w-[70px] h-[70px] text-white border rounded-[15px] dark:border-white ' />
@@ -49,7 +49,7 @@ const NexusCard = ({
 			<Button
 				variant={'outline'}
 				onClick={() => handleClick()}
-				className='text-[18px] font-medium text-black dark:text-black p-[15px] bg-white rounded-[15px]'
+				className='text-[18px] font-medium text-black dark:text-black p-[15px] bg-white rounded-[7px]'
 			>
 				Boshlash
 			</Button>

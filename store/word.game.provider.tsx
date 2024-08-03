@@ -11,6 +11,9 @@ interface Result {
 	isCorrect: boolean
 }
 interface GameState {
+	name: string
+	level: string
+	time: number,
 	shuffledWords: Word[]
 	shuffledTranslations: Word[]
 	selectedWord: Word | null
@@ -25,9 +28,15 @@ interface GameState {
 		results: Result[] | ((prevResults: Result[]) => Result[])
 	) => void
 	setIsOver: (isOver: boolean) => void
+	setTime: (time: number) => void
+	setLevel: (level: string) => void
+	setName: (name: string) => void
 }
 
 const useWordGameStore = create<GameState>(set => ({
+	name: 'Guest',
+	time: 0,
+	level: '',
 	shuffledWords: [],
 	shuffledTranslations: [],
 	selectedWord: null,
@@ -45,6 +54,9 @@ const useWordGameStore = create<GameState>(set => ({
 			results: typeof results === 'function' ? results(state.results) : results,
 		})),
 	setIsOver: isOver => set(state => ({ ...state, isOver: isOver })),
+	setTime: time => set(state => ({ ...state, time: time })),
+	setLevel: level => set(state => ({ ...state, level: level })),
+	setName: name => set(state => ({ ...state, name: name })),
 }))
 
 export default useWordGameStore
