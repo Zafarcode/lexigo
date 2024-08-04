@@ -1,11 +1,11 @@
-import Contacts from '@/components/contacts/contacts'
+import ContactsForm from '@/components/contacts/contacts-form'
 
-const ContactsPage = () => {
+const Contacts = () => {
 	return (
-		<main className='w-full pt-24 md:pt-20'>
-			<Contacts />
-		</main>
+		<section>
+			<ContactsForm />
+		</section>
 	)
 }
 
-export default ContactsPage
+export default Contacts

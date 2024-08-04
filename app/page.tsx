@@ -1,5 +1,4 @@
 'use client'
-import ExampleComponent from '@/components/ExampleComponent'
 import Courses from '@/components/home/courses'
 import CTA from '@/components/home/cta'
 import Hero from '@/components/home/hero'
@@ -14,12 +13,11 @@ export default function Home() {
 	}, [])
 
 	return (
-		<main className='pt-24 md:pt-20'>
+		<>
 			<Hero />
-			<ExampleComponent />
 			<Courses />
 			<Testimonials />
 			<CTA />
-		</main>
+		</>
 	)
 }

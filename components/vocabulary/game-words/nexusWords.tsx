@@ -1,4 +1,3 @@
-'use client'
 import { Button } from '@/components/ui/button'
 import {
 	Dialog,
@@ -10,7 +9,7 @@ import {
 } from '@/components/ui/dialog'
 import useWordGameStore from '@/store/word.game.provider'
 import Link from 'next/link'
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import words from './nexus.words'
 
 interface Word {
@@ -42,66 +41,146 @@ const NexusWords: React.FC = () => {
 	const correctSoundRef = useRef<HTMLAudioElement>(null)
 	const wrongSoundRef = useRef<HTMLAudioElement>(null)
 
+	// Shuffle and set words and translations
 	useEffect(() => {
-		// Get a random selection of 5 words
 		const selectedWords = shuffleArray([...words]).slice(0, 5)
 
-		// Separate words and translations
-		const wordsArray = selectedWords.map(wordObj => ({
-			word: wordObj.word,
-			translation: wordObj.translation,
+		const wordsArray = selectedWords.map(({ word, translation }) => ({
+			word,
+			translation,
 		}))
-		const translationsArray = selectedWords.map(wordObj => ({
-			word: wordObj.word,
-			translation: wordObj.translation,
-		}))
+		const translationsArray = wordsArray
 
-		// Shuffle words and translations independently
-		const shuffledWordsArray = shuffleArray([...wordsArray])
-		const shuffledTranslationsArray = shuffleArray([...translationsArray])
-
-		// Update the state
-		setShuffledWords(shuffledWordsArray)
-		setShuffledTranslations(shuffledTranslationsArray)
+		setShuffledWords(shuffleArray([...wordsArray]))
+		setShuffledTranslations(shuffleArray([...translationsArray]))
 	}, [setShuffledWords, setShuffledTranslations])
 
+	// Check if game is over
 	useEffect(() => {
 		if (results.length === 5) {
 			setIsOver(true)
 		}
 	}, [results, setIsOver])
 
-	const handleWordClick = (word: Word) => {
-		setSelectedWord(word)
-		if (selectedTranslation) {
-			checkMatch(word, selectedTranslation)
-		}
-	}
-
-	const handleTranslationClick = (translation: Word) => {
-		setSelectedTranslation(translation)
-		if (selectedWord) {
-			checkMatch(selectedWord, translation)
-		}
-	}
-
-	const checkMatch = (word: Word, translation: Word) => {
-		const isCorrect = word.translation === translation.translation
-		playSound(isCorrect)
-		setResults(prevResults => [
-			...prevResults,
-			{ word, translation, isCorrect },
-		])
-		setSelectedWord(null)
-		setSelectedTranslation(null)
-	}
-
-	const playSound = (isCorrect: boolean) => {
+	const playSound = useCallback((isCorrect: boolean) => {
 		const sound = isCorrect ? correctSoundRef.current : wrongSoundRef.current
 		if (sound) {
 			sound.play()
 		}
-	}
+	}, [])
+
+	const checkMatch = useCallback(
+		(word: Word, translation: Word) => {
+			const isCorrect = word.translation === translation.translation
+			playSound(isCorrect)
+			setResults(prevResults => [
+				...prevResults,
+				{ word, translation, isCorrect },
+			])
+			setSelectedWord(null)
+			setSelectedTranslation(null)
+		},
+		[setResults, setSelectedWord, setSelectedTranslation, playSound]
+	)
+
+	const handleWordClick = useCallback(
+		(word: Word) => {
+			setSelectedWord(word)
+			if (selectedTranslation) {
+				checkMatch(word, selectedTranslation)
+			}
+		},
+		[selectedTranslation, setSelectedWord, checkMatch]
+	)
+
+	const handleTranslationClick = useCallback(
+		(translation: Word) => {
+			setSelectedTranslation(translation)
+			if (selectedWord) {
+				checkMatch(selectedWord, translation)
+			}
+		},
+		[selectedWord, setSelectedTranslation, checkMatch]
+	)
+
+	const renderWordButtons = useMemo(
+		() =>
+			shuffledWords.slice(0, 5).map((word, index) => {
+				const isSelected = selectedWord && selectedWord.word === word.word
+				const isCorrect = results.some(
+					result => result.word.word === word.word && result.isCorrect
+				)
+				const isWrong = results.some(
+					result => result.word.word === word.word && !result.isCorrect
+				)
+
+				return (
+					<Button
+						variant={'outline'}
+						key={index}
+						onClick={() => handleWordClick(word)}
+						disabled={results.some(result => result.word.word === word.word)}
+						className={`p-2 mb-2 border w-full flex px-[15px] dark:text-white dark:bg-[#141414] items-center h-[55px] rounded-[15px] disabled:opacity-100
+						${isSelected ? 'border-2 border-black dark:border-white' : ''}
+						${
+							isCorrect
+								? 'bg-[#58cc02] dark:bg-[#58cc02] text-white'
+								: isWrong
+								? 'bg-red-700 dark:bg-red-700 text-white'
+								: 'bg-white dark:bg-gray-800 hover:bg-gray-400 dark:hover:bg-[#1F1F1F]'
+						}
+					`}
+					>
+						<p>{word.word}</p>
+					</Button>
+				)
+			}),
+		[shuffledWords, results, selectedWord, handleWordClick]
+	)
+
+	const renderTranslationButtons = useMemo(
+		() =>
+			shuffledTranslations.slice(0, 5).map((translation, index) => {
+				const isSelected =
+					selectedTranslation &&
+					selectedTranslation.translation === translation.translation
+				const isCorrect = results.some(
+					result =>
+						result.translation.translation === translation.translation &&
+						result.isCorrect
+				)
+				const isWrong = results.some(
+					result =>
+						result.translation.translation === translation.translation &&
+						!result.isCorrect
+				)
+
+				return (
+					<Button
+						variant={'outline'}
+						key={index}
+						onClick={() => handleTranslationClick(translation)}
+						disabled={results.some(
+							result =>
+								result.translation.translation === translation.translation
+						)}
+						className={`p-2 mb-2 border w-full flex px-[15px] dark:text-white dark:bg-[#141414] items-center h-[55px] rounded-[15px] disabled:opacity-100
+						${isSelected ? 'border-2 border-black dark:border-white' : ''}
+						${
+							isCorrect
+								? 'bg-[#58cc02] dark:bg-[#58cc02] text-white'
+								: isWrong
+								? 'bg-red-700 dark:bg-red-700 text-white'
+								: 'bg-white dark:bg-gray-800 hover:bg-gray-400 dark:hover:bg-[#1F1F1F]'
+						}
+					`}
+					>
+						<p>{translation.translation}</p>
+					</Button>
+				)
+			}),
+		[shuffledTranslations, results, selectedTranslation, handleTranslationClick]
+	)
 
 	return (
 		<div className='w-full flex flex-col items-center'>
@@ -114,85 +193,8 @@ const NexusWords: React.FC = () => {
 					So’zning inglizcha hamda o’zbekcha holatini birdaniga bosing
 				</p>
 				<div className='w-full flex gap-2'>
-					<div className='w-full'>
-						{shuffledWords.slice(0, 5).map((word, index) => {
-							const isSelected = selectedWord && selectedWord.word === word.word
-							const isCorrect = results.some(
-								result => result.word.word === word.word && result.isCorrect
-							)
-							const isWrong = results.some(
-								result => result.word.word === word.word && !result.isCorrect
-							)
-							return (
-								<Button
-									variant={'outline'}
-									key={index}
-									onClick={() => handleWordClick(word)}
-									disabled={results.some(
-										result => result.word.word === word.word
-									)}
-									className={`p-2 mb-2 border w-full flex px-[15px] dark:text-white dark:bg-[#141414] items-center h-[55px] rounded-[15px] disabled:opacity-100
-                                        ${
-																					isSelected
-																						? 'border-2 border-black dark:border-white'
-																						: ''
-																				}
-                                        ${
-																					isCorrect
-																						? 'bg-[#58cc02] dark:bg-[#58cc02] text-white'
-																						: isWrong
-																						? 'bg-red-700 dark:bg-red-700 text-white'
-																						: 'bg-white dark:bg-gray-800 hover:bg-gray-400 dark:hover:bg-[#1F1F1F]'
-																				}`}
-								>
-									<p>{word.word}</p>
-								</Button>
-							)
-						})}
-					</div>
-					<div className='w-full'>
-						{shuffledTranslations.slice(0, 5).map((translation, index) => {
-							const isSelected =
-								selectedTranslation &&
-								selectedTranslation.translation === translation.translation
-							const isCorrect = results.some(
-								result =>
-									result.translation.translation === translation.translation &&
-									result.isCorrect
-							)
-							const isWrong = results.some(
-								result =>
-									result.translation.translation === translation.translation &&
-									!result.isCorrect
-							)
-							return (
-								<Button
-									variant={'outline'}
-									key={index}
-									onClick={() => handleTranslationClick(translation)}
-									disabled={results.some(
-										result =>
-											result.translation.translation === translation.translation
-									)}
-									className={`p-2 mb-2 border w-full flex px-[15px] dark:text-white dark:bg-[#141414] items-center h-[55px] rounded-[15px] disabled:opacity-100
-                                        ${
-																					isSelected
-																						? 'border-2 border-black dark:border-white'
-																						: ''
-																				}
-                                        ${
-																					isCorrect
-																						? 'bg-[#58cc02] dark:bg-[#58cc02] text-white'
-																						: isWrong
-																						? 'bg-red-700 dark:bg-red-700 text-white'
-																						: 'bg-white dark:bg-gray-800 hover:bg-gray-400 dark:hover:bg-[#1F1F1F]'
-																				}`}
-								>
-									<p>{translation.translation}</p>
-								</Button>
-							)
-						})}
-					</div>
+					<div className='w-full'>{renderWordButtons}</div>
+					<div className='w-full'>{renderTranslationButtons}</div>
 				</div>
 			</div>
 			<Dialog open={isOver} onOpenChange={() => setIsOver(false)}>
@@ -214,7 +216,7 @@ const NexusWords: React.FC = () => {
 						</DialogDescription>
 					</DialogHeader>
 					<DialogFooter className=''>
-						<Link href={'/vocabulary'} onClick={() => setIsOver(false)}>
+						<Link href='/vocabulary' onClick={() => setIsOver(false)}>
 							Try Again
 						</Link>
 					</DialogFooter>

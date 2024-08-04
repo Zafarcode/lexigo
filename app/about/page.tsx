@@ -1,13 +1,13 @@
 import Benefits from '@/components/about/benefits'
 import AboutHero from '@/components/about/hero'
 
-const AboutPage = () => {
+const About = () => {
 	return (
-		<main className='pt-24 md:pt-20'>
+		<section>
 			<AboutHero />
 			<Benefits />
-		</main>
+		</section>
 	)
 }
 
-export default AboutPage
+export default About

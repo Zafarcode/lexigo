@@ -2,7 +2,7 @@ import LoginForm from '@/components/auth/login-form'
 import { LogoIcon } from '@/components/utils/icons'
 import Link from 'next/link'
 
-const Login = () => {
+const LoginComponent = () => {
 	return (
 		<section className='min-h-[calc(100vh-164px)] flex flex-col justify-center'>
 			<div className='container'>
@@ -30,4 +30,4 @@ const Login = () => {
 	)
 }
 
-export default Login
+export default LoginComponent
