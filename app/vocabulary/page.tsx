@@ -10,6 +10,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { lessons } from '@/constants/lessons'
 import { Power } from 'lucide-react'
+import Module from '@/components/vocabulary/game-words/module'
 
 const Vocabulary = () => {
 	return (
@@ -64,6 +65,9 @@ const Vocabulary = () => {
 						</li>
 					))}
 				</ul>
+
+				<Nexus/>
+				<Module/>
 			</div>
 		</section>
 	)
