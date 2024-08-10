@@ -1,20 +1,21 @@
+'use client'
+import Nexus from '@/components/vocabulary/game-words/nexus'
+import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
 import { buttonVariants } from '@/components/ui/button'
-import {
-	Card,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from '@/components/ui/card'
-import { lessons } from '@/constants/lessons'
+import { CardTitle } from '@/components/ui/card'
+import { Progress } from '@/components/ui/progress'
+import { SparklesIcon } from '@/components/utils/icons'
 import { cn } from '@/lib/utils'
-import { Power } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
+import { lessons } from '@/constants/lessons'
+import { Power } from 'lucide-react'
 
 const Vocabulary = () => {
 	return (
 		<section>
 			<div className='container'>
-				<h1 className='text-2xl lg:text-[40px] lg:leading-[48px] font-bold mb-10 text-center my-5'>
+				<h1 className='text-2xl lg:text-[40px] lg:leading-[48px] font-bold text-center'>
 					Vocabulary
 				</h1>
 

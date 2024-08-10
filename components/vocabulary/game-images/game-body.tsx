@@ -9,7 +9,7 @@ const GameBody = () => {
   const handleClick = () => {
     if (btnText !== 'Start') {
         if (current?.isCorrect) {
-            setScore(score + 1)
+          setScore(score + 1)
         }
     }
 

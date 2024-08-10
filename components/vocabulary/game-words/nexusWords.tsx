@@ -10,7 +10,7 @@ import {
 import useWordGameStore from '@/store/word.game.provider'
 import Link from 'next/link'
 import { useCallback, useEffect, useMemo, useRef } from 'react'
-import words from '../vocabulary/game-words/nexus.words'
+import words from './nexus.words'
 
 interface Word {
 	word: string
