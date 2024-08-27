@@ -1,8 +1,8 @@
 import SiteFooter from '@/components/global/site-footer'
 import SiteHeader from '@/components/global/site-header'
-import { ThemeProvider } from '@/components/theme/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
 import { cn } from '@/lib/utils'
+import Provider from '@/providers/Provider'
 import '@/styles/globals.css'
 import { baseURL, createMetadata } from '@/utils/metadata'
 import type { Viewport } from 'next'
@@ -45,26 +45,17 @@ export default function RootLayout({
 					rubik.variable
 				)}
 			>
-				{/* Theme Provider */}
-				<ThemeProvider
-					attribute='class'
-					defaultTheme='system'
-					enableSystem
-					disableTransitionOnChange
-				>
+				<Provider>
 					<div className='flex flex-col relative min-h-dvh'>
-						{/* Site Header */}
 						<SiteHeader />
 						<main className='flex-1 pt-20 md:pt-24 pb-3 lg:pb-20'>
 							{children}
 						</main>
-						{/* Background Pattern */}
 						<div className='fixed inset-0 w-full h-full -z-10 bg-pattern' />
-						{/* Site Footer */}
 						<SiteFooter />
 					</div>
-				</ThemeProvider>
-				<Toaster />
+					<Toaster />
+				</Provider>
 			</body>
 		</html>
 	)
