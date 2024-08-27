@@ -3,6 +3,10 @@ import NextAuth from 'next-auth'
 export const authOptions = {
 	providers: [],
 
+	pages: {
+		signIn: '/login',
+	},
+
 	secret: process.env.NEXTAUTH_SECRET,
 }
 
