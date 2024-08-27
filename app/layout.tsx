@@ -3,9 +3,10 @@ import SiteHeader from '@/components/global/site-header'
 import { ThemeProvider } from '@/components/theme/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
 import { cn } from '@/lib/utils'
-import type { Metadata } from 'next'
+import '@/styles/globals.css'
+import { baseURL, createMetadata } from '@/utils/metadata'
+import type { Viewport } from 'next'
 import { Rubik } from 'next/font/google'
-import './globals.css'
 
 const rubik = Rubik({
 	subsets: ['latin'],
@@ -13,11 +14,22 @@ const rubik = Rubik({
 	variable: '--font-sans',
 })
 
-export const metadata: Metadata = {
-	title:
-		'WordWonders - Unlock Your Language Potential with WordWonders: Where English Learning Becomes an Adventure!',
+export const metadata = createMetadata({
+	title: {
+		template: '%s | WordWonders',
+		default:
+			'WordWonders - Unlock Your Language Potential with WordWonders: Where English Learning Becomes an Adventure.',
+	},
 	description:
-		'Unlock Your Language Potential with WordWonders: Where English Learning Becomes an Adventure!',
+		'WordWonders - Unlock Your Language Potential with WordWonders: Where English Learning Becomes an Adventure.',
+	metadataBase: baseURL,
+})
+
+export const viewport: Viewport = {
+	themeColor: [
+		{ media: '(prefers-color-scheme: dark)', color: '#0A0A0A' },
+		{ media: '(prefers-color-scheme: light)', color: '#fff' },
+	],
 }
 
 export default function RootLayout({
