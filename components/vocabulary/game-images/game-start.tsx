@@ -1,31 +1,22 @@
 import Image from 'next/image';
-import { useToast } from '@/components/ui/use-toast';
 import useGameStore from '@/store/game.provider';
 import Timer  from "./game-timer"
 
 const GameHeader = () => {
   const { startGame, text, musicIconVisible, progressVisible } = useGameStore();
-  const { toast } = useToast();
 
   const handleSpeak = () => {
 	if ('speechSynthesis' in window) {
 		const speech = new SpeechSynthesisUtterance(text)
 		speech.lang = 'en-US'
 		window.speechSynthesis.speak(speech)
-	} else {
-		toast({
-			title: 'Scheduled: Catch up',
-			description: 'Friday, February 10, 2023 at 5:57 PM',
-		})
-	}
+	} 
 }
 
   return (
     <div className='relative'>
       <h1 className='text-[27px] md:text-4xl text-center font-sans font-medium'>{startGame}</h1>
-      <div className='absolute top-[0] right-[0] flex gap-2 items-center'>
-        {progressVisible && <Timer />}        
-      </div>
+
       <div className='flex justify-center items-center gap-3'>
         {musicIconVisible && (
           <Image

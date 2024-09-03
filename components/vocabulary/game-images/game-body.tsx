@@ -35,7 +35,7 @@ const GameBody = () => {
         setBtnText('Next')
         setMusicIconVisible(true)
         setProgressVisible(true)
-        setStartGame('Select the correct image')
+        setStartGame('')
         setProgress(progress + 1)
     }
 
