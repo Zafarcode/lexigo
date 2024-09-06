@@ -50,6 +50,7 @@ const GameBody = () => {
           <ImageCard key={element.id} element={element} index={index} />
         ))}
       </div>
+      
       <div className='flex justify-center md:w-[70%] w-full mx-auto mb-6'>
         <Button className='w-full md:w-1/2 mt-5 font-sans' onClick={handleClick} disabled={btnText === 'Start' ? false : isDisabled}>
           {btnText}

@@ -42,6 +42,7 @@ const SkillsDetail = () => {
 				isOpen={isTimeUpDialogOpen}
 				onClose={() => setIsTimeUpDialogOpen(false)}
 			/>
+
 		</section>
 	)
 }
