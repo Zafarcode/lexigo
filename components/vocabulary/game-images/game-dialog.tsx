@@ -6,14 +6,13 @@ import CardElement from "@/app/skills/[slug]/rendomElemen.json"
 import { useParams } from 'next/navigation';
 
 const GameDialog = ({ isOpen, onClose }: { isOpen: any, onClose: any}) => {
-  const { score } = useGameStore();
   const params = useParams();
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className='sm:max-w-[425px]'>
         <DialogHeader>
           <DialogTitle>Game Over</DialogTitle>
-          <DialogDescription>{`You scored ${score} out of ${CardElement.length} correct answers.`}</DialogDescription>
+          <DialogDescription>{`You scored 2 out of ${CardElement.length} correct answers.`}</DialogDescription>
         </DialogHeader>
         <DialogFooter className=''>
           <NextLink href={'/'}>
