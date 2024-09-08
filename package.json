@@ -1,12 +1,12 @@
 {
 	"name": "wordwonders.uz",
-	"version": "0.1.0",
+	"version": "0.0.0",
 	"private": true,
 	"license": "MIT",
 	"author": "Shakhbozbek Usmonov",
 	"homepage": "https://wordwonders.uz",
-	"repository": "https://github.com/shakhbozbekusmonov/wordwonders.uz-v2",
-	"bugs": "https://github.com/shakhbozbekusmonov/wordwonders.uz-v2/issues",
+	"repository": "https://github.com/shakhbozbekusmonov/wordwonders",
+	"bugs": "https://github.com/shakhbozbekusmonov/wordwonders/issues",
 	"engines": {
 		"node": ">=20.1.0"
 	},
@@ -38,6 +38,7 @@
 		"@radix-ui/react-toggle-group": "^1.1.0",
 		"@types/mdx": "^2.0.13",
 		"aos": "^2.3.4",
+		"axios": "^1.7.7",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",
 		"embla-carousel-autoplay": "^8.1.5",

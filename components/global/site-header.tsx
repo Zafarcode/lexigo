@@ -85,7 +85,7 @@ const SiteHeader = () => {
 										variant: 'outline',
 									})
 								)}
-								href='/login'
+								href='/auth/login'
 							>
 								Kirish
 							</Link>

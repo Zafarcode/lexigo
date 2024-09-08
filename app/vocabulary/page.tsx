@@ -6,8 +6,6 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card'
-import Module from '@/components/vocabulary/game-words/module'
-import Nexus from '@/components/vocabulary/game-words/nexus'
 import { lessons } from '@/constants/lessons'
 import { cn } from '@/lib/utils'
 import { Power } from 'lucide-react'
@@ -66,9 +64,6 @@ const Vocabulary = () => {
 						</li>
 					))}
 				</ul>
-
-				<Nexus />
-				<Module />
 			</div>
 		</section>
 	)
