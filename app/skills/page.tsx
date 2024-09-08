@@ -1,10 +1,11 @@
-import StepByStep from "@/components/vocabulary/game-images/step-by-step"
+"use client"
+import GameBody from "@/components/vocabulary/game-images/game-body"
+
 
 const Skills = () => {
 	return (
 		<section>
-			<h1>Skills</h1>
-			<StepByStep/>
+			<GameBody/>
 		</section>
 	)
 }
