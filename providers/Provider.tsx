@@ -1,6 +1,7 @@
 import AuthProvider from '@/providers/AuthProvider'
 import { ThemeProvider } from '@/providers/theme-provider'
 import React from 'react'
+import { RootProvider } from 'next-docs-ui/provider'
 
 const Provider = ({ children }: { children: React.ReactNode }) => {
 	return (
@@ -11,7 +12,7 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
 				enableSystem
 				disableTransitionOnChange
 			>
-				{children}
+				<RootProvider>{children}</RootProvider>
 			</ThemeProvider>
 		</AuthProvider>
 	)

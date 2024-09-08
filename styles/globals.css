@@ -131,3 +131,7 @@ body {
 main {
 	flex-grow: 1;
 }
+
+.grammar-card h3 {
+	font-size: 18px;
+}
