@@ -1,16 +1,17 @@
 'use client'
-import Nexus from '@/components/vocabulary/game-words/nexus'
-import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
 import { buttonVariants } from '@/components/ui/button'
-import { CardTitle } from '@/components/ui/card'
-import { Progress } from '@/components/ui/progress'
-import { SparklesIcon } from '@/components/utils/icons'
-import { cn } from '@/lib/utils'
-import Image from 'next/image'
-import Link from 'next/link'
-import { lessons } from '@/constants/lessons'
-import { Power } from 'lucide-react'
+import {
+	Card,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from '@/components/ui/card'
 import Module from '@/components/vocabulary/game-words/module'
+import Nexus from '@/components/vocabulary/game-words/nexus'
+import { lessons } from '@/constants/lessons'
+import { cn } from '@/lib/utils'
+import { Power } from 'lucide-react'
+import Link from 'next/link'
 
 const Vocabulary = () => {
 	return (
@@ -66,8 +67,8 @@ const Vocabulary = () => {
 					))}
 				</ul>
 
-				<Nexus/>
-				<Module/>
+				<Nexus />
+				<Module />
 			</div>
 		</section>
 	)

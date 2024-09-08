@@ -6,6 +6,7 @@ import Provider from '@/providers/Provider'
 import '@/styles/globals.css'
 import { baseURL, createMetadata } from '@/utils/metadata'
 import type { Viewport } from 'next'
+import 'next-docs-ui/style.css'
 import { Rubik } from 'next/font/google'
 
 const rubik = Rubik({
