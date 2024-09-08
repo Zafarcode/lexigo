@@ -1,4 +1,6 @@
 import { map } from '@/.map'
+import { create } from '@/components/ui/icon'
+import { icons } from 'lucide-react'
 import { createMDXSource, defaultSchemas } from 'next-docs-mdx'
 import { InferMetaType, InferPageType, loader } from 'next-docs-zeta/source'
 import { z } from 'zod'
@@ -6,6 +8,11 @@ import { z } from 'zod'
 export const grammar = loader({
 	baseUrl: '/grammar',
 	rootDir: 'grammar',
+	icon(iconName) {
+		if (iconName && iconName in icons) {
+			return create({ icon: icons[iconName as keyof typeof icons] })
+		}
+	},
 	source: createMDXSource(map, {
 		schema: {
 			frontmatter: defaultSchemas.frontmatter.extend({

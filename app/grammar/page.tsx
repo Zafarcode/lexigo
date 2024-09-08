@@ -15,6 +15,7 @@ const Grammar = () => {
 				<h1 className='text-2xl lg:text-[40px] lg:leading-[48px] font-bold mb-10 text-center'>
 					English Grammar
 				</h1>
+
 				<div className='flex flex-col-reverse lg:flex-row items-start justify-between gap-5 lg:gap-5'>
 					<Cards className='w-full grid grid-cols-1 md:grid-cols-2 gap-3 lg:grid-cols-3'>
 						{pages.map(page => (
