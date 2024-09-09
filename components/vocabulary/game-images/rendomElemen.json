@@ -1,0 +1,122 @@
+[
+    {
+        "id": 1,
+        "name": "The Dog", 
+        "images": [
+            {
+                "id": 1,
+                "img": "/assets/images/dog-image.png",
+                "title": "Dog image",
+                "isCorrect": true
+            },
+            {
+                "id": 2,
+                "img": "/assets/images/cat-image.png",
+                "title": "Cat image",
+                "isCorrect": false
+            },
+            {
+                "id": 3,
+                "img": "/assets/images/lion-image.png",
+                "title": "Lion image",
+                "isCorrect": false
+            },
+            {
+                "id": 3,
+                "img": "/assets/images/zebra-image.png",
+                "title": "Zebra image",
+                "isCorrect": false
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "The Cat", 
+        "images": [
+            {
+                "id": 1,
+                "img": "/assets/images/dog-image.png",
+                "title": "Dog image",
+                "isCorrect": false
+            },
+            {
+                "id": 2,
+                "img": "/assets/images/cat-image.png",
+                "title": "Cat image",
+                "isCorrect": true
+            },
+            {
+                "id": 3,
+                "img": "/assets/images/lion-image.png",
+                "title": "Lion image",
+                "isCorrect": false
+            },
+            {
+                "id": 4,
+                "img": "/assets/images/zebra-image.png",
+                "title": "Zebra image",
+                "isCorrect": false
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "The Lion", 
+        "images": [
+            {
+                "id": 1,
+                "img": "/assets/images/dog-image.png",
+                "title": "Dog image",
+                "isCorrect": false
+            },
+            {
+                "id": 2,
+                "img": "/assets/images/cat-image.png",
+                "title": "Cat image",
+                "isCorrect": false
+            },
+            {
+                "id": 3,
+                "img": "/assets/images/lion-image.png",
+                "title": "Lion image",
+                "isCorrect": true
+            },
+            {
+                "id": 4,
+                "img": "/assets/images/zebra-image.png",
+                "title": "Zebra image",
+                "isCorrect": false
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "The Zebra", 
+        "images": [
+            {
+                "id": 1,
+                "img": "/assets/images/dog-image.png",
+                "title": "Dog image",
+                "isCorrect": false
+            },
+            {
+                "id": 2,
+                "img": "/assets/images/cat-image.png",
+                "title": "Cat image",
+                "isCorrect": false
+            },
+            {
+                "id": 3,
+                "img": "/assets/images/lion-image.png",
+                "title": "Lion image",
+                "isCorrect": false
+            },
+            {
+                "id": 4,
+                "img": "/assets/images/zebra-image.png",
+                "title": "Zebra image",
+                "isCorrect": true
+            }
+        ]
+    }
+]
