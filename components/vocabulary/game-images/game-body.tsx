@@ -5,13 +5,9 @@ import GameHeader from '@/components/vocabulary/game-images/game-start';
 import { Button } from '@/components/ui/button';
 import GameDialog from '@/components/vocabulary/game-images/game-dialog';
 import { Progress } from '@/components/ui/progress';
+import { ImageT } from './game-image';
+import useGameStore from '@/store/game.provider';
 
-interface ImageT {
-  id: number;
-  img: string;
-  title: string;
-  isCorrect: boolean;
-}
 
 const shuffleArray = (array: ImageT[]) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -22,18 +18,15 @@ const shuffleArray = (array: ImageT[]) => {
 };
 
 const GameBody = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnySelected, setIsAnySelected] = useState(false);
-  const [shuffledImages, setShuffledImages] = useState<any[]>([]);
+  const { currentIndex, setCurrentIndex, isAnySelected, setIsAnySelected, shuffledImages, setShuffledImages, showDialog, setShowDialog, correctAnswers, setCorrectAnswers } = useGameStore()
   const [usedIndexes, setUsedIndexes] = useState(new Set<number>());
-  const [showDialog, setShowDialog] = useState(false);
-  const [correctAnswers, setCorrectAnswers] = useState(0); // Track correct answers
+
   const [progressValue, setProgressValue] = useState(0); // Track progress value
 
   useEffect(() => {
     const shuffled = shuffleArray([...rendomElement[currentIndex]?.images || []]);
     setShuffledImages(shuffled);
-  }, [currentIndex]);
+  }, [currentIndex, setShuffledImages]);
 
   const handleNextClick = () => {
     setIsAnySelected(false);
@@ -60,7 +53,7 @@ const GameBody = () => {
 
   const handleCorrectSelection = () => {
     setIsAnySelected(true);
-    setCorrectAnswers(prev => prev + 1); // Increment correct answers count
+    setCorrectAnswers(correctAnswers + 1); 
   };
 
   const currentElement = rendomElement[currentIndex];

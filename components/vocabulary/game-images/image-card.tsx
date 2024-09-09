@@ -1,13 +1,8 @@
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { useState } from 'react';
+import { elementT } from './game-image';
 
-interface elementT {
-  id: number;
-  title: string;
-  isCorrect: boolean;
-  img: string;
-}
 
 const ImageCard = ({ element, index, isDisabled, onSelected }: { element: elementT, index: number | null, isDisabled: boolean, onSelected: () => void }) => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);

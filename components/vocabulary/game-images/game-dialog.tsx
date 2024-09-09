@@ -1,18 +1,12 @@
 import React from 'react';
 import rendomElement from './rendomElemen.json';
+import { GameDialogProps } from './game-image';
 
 
 
-interface GameDialogProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onRestart: () => void;
-  correctAnswers: number; // New prop for correct answers
-}
 
 const GameDialog: React.FC<GameDialogProps> = ({ isOpen, onClose, onRestart, correctAnswers }) => {
   if (!isOpen) return null;
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded shadow-lg">

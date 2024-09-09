@@ -1,31 +1,24 @@
 import { create } from 'zustand'
+import { GameState } from '@/components/vocabulary/game-images/game-image'
 
-type rendomElementType = {
-	id: number
-	isCorrect: boolean
-	images: {
-		isCorrect: boolean
-		id: number
-		img: string
-		title: string
-	}[]
-}
-interface GameState {
-	rendomElement: rendomElementType[]
-	time: number
-	isTimeUpDialogOpen: boolean
-	setTime: (time: number) => void
-	setIsTimeUpDialogOpen: (isOpen: boolean) => void
-	setRendomElement: (rendomElement: rendomElementType[]) => void
-}
 
 const useGameStore = create<GameState>(set => ({
 	rendomElement: [],
-	time: 180,
 	isTimeUpDialogOpen: false,
-	setTime: time => set({ time }),
+	currentIndex: 0,
+	isAnySelected: false,
+	shuffledImages: [],
+	showDialog: false,
+	correctAnswers: 0,
+	progressValue: 0,
 	setIsTimeUpDialogOpen: isOpen => set({ isTimeUpDialogOpen: isOpen }),
 	setRendomElement: rendomElement => set({ rendomElement }),
+	setCurrentIndex: currentIndex => set({ currentIndex }),
+	setIsAnySelected: isAnySelected => set({ isAnySelected }),
+	setShuffledImages: shuffledImages => set({ shuffledImages }),
+	setShowDialog: showDialog => set({ showDialog }),
+	setCorrectAnswers: correctAnswers => set({ correctAnswers }),
+	setProgressValue: progressValue => set({ progressValue }),
 }))
 
 export default useGameStore
