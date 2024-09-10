@@ -6,6 +6,7 @@ import NexusWords from '@/components/vocabulary/game-words/nexusWords'
 import useWordGameStore from '@/store/word.game.provider'
 import NexusCard from './nexusCard'
 
+
 const Nexus = () => {
 	const {level, setLevel, name} = useWordGameStore()
 
