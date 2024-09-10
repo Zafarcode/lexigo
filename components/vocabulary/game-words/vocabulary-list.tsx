@@ -3,7 +3,6 @@ import NexusWords from '@/components/vocabulary/game-words/nexusWords'
 import { Card } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { Layers, Shapes, SquarePi } from 'lucide-react'
-import useGameStore from '@/store/game.provider'
 import useWordGameStore from '@/store/word.game.provider'
 
 
