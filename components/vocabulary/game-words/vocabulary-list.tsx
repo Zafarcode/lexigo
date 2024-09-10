@@ -1,34 +1,19 @@
 import React from 'react'
 import NexusWords from '@/components/vocabulary/game-words/nexusWords'
 import { Card } from '@/components/ui/card'
-import { Progress } from '@/components/ui/progress'
 import { Layers, Shapes, SquarePi } from 'lucide-react'
 import useWordGameStore from '@/store/word.game.provider'
 
 
 const VocabularyList = () => {
-	const { level, time } = useWordGameStore()
-	// const [level, setLevel] = React.useState('')
-	// const { time, setTime } = useGameStore()
+	const { level } = useWordGameStore()
+	
 
-	const handleMinutes = (time: number) => {
-		const seconds: string = String(time % 60)
-		return time / 60 > 0
-			? Math.floor(time / 60) + ' : ' + seconds.padStart(2, '0')
-			: time
-	}
+	
 	return(
 		<div className='container mx-auto h-[80vh] max-[727px]:h-[140vh]'>
 			<div className='flex items-center gap-5 mb-7'>
-				<p>Qolgan vaqt</p>
-				<Progress
-					value={
-						(time / (level == 'Easy' ? 120 : level == 'Medium' ? 90 : 60)) *
-						100
-					}
-					className='w-full'
-				/>
-				<p className='text-gray-500 min-w-[60px]'>{handleMinutes(time)}</p>
+			
 			</div>
 			<div className='flex gap-4 max-[727px]:flex-col'>
 				<Card
