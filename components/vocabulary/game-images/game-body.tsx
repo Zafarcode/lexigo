@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import ImageCard from '@/components/vocabulary/game-images/image-card';
 import rendomElement from './rendomElemen.json';
-import GameHeader from '@/components/vocabulary/game-images/game-start';
 import { Button } from '@/components/ui/button';
 import GameDialog from '@/components/vocabulary/game-images/game-dialog';
 import { Progress } from '@/components/ui/progress';
 import { ImageT } from './game-image';
+import Image from 'next/image';
 import useGameStore from '@/store/game.provider';
 
 
@@ -58,7 +58,13 @@ const GameBody = () => {
 
   const currentElement = rendomElement[currentIndex];
   const elementName = currentElement?.name;
-
+  const handleSpeak = () => {
+    if ('speechSynthesis' in window) {
+      const speech = new SpeechSynthesisUtterance(elementName)
+      speech.lang = 'en-US'
+      window.speechSynthesis.speak(speech)
+    }
+  }  
   return (
     <>
       <div className='container'>
@@ -68,7 +74,24 @@ const GameBody = () => {
           color="green"
         />
       </div>
-      <GameHeader text={elementName} />
+
+      <div className='relative my-3'>
+        <div className='flex justify-center items-center gap-3'>
+          {(
+            <Image
+              className='cursor-pointer'
+              src={'/assets/icons/music-therapy.png'}
+              width={30}
+              height={30}
+              alt='music-therapy'
+              onClick={handleSpeak}
+            />
+          )}
+          <h2 className='text-2xl md:text-3xl font-sans font-medium cursor-pointer my-3' onClick={handleSpeak}>
+            {elementName}
+          </h2>
+        </div>
+      </div>
 
       <div className="grid md:grid-cols-2 grid-cols-2 gap-2 md:gap-5 md:w-[70%] w-full mx-auto">
         {shuffledImages.map((image, imageIndex) => (
@@ -88,7 +111,7 @@ const GameBody = () => {
           className="w-full md:w-1/2 mt-5 font-sans"
           disabled={!isAnySelected}
         >
-          Next
+          Next 
         </Button>
       </div>
 
@@ -98,11 +121,12 @@ const GameBody = () => {
         onRestart={() => {
           setUsedIndexes(new Set());
           setCurrentIndex(0);
-          setCorrectAnswers(0); // Reset correct answers
-          setProgressValue(0); // Reset progress
-          setShowDialog(false);
+          setCorrectAnswers(0);
+          setProgressValue(0);
+          setShowDialog(false);        
         }}
-        correctAnswers={correctAnswers} // Pass correct answers count
+        correctAnswers={correctAnswers}
+        
       />
     </>
   );
@@ -110,4 +134,4 @@ const GameBody = () => {
 
 
 
-export default GameBody;
+export default GameBody
