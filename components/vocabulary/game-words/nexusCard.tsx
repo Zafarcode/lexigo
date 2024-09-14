@@ -5,15 +5,15 @@ import { Layers, Shapes, SquarePi } from 'lucide-react'
 const NexusCard = ({
 	level,
 	handleGameStart,
-	handleTime,
+	
 }: {
 	level: string
 	handleGameStart: () => void
-	handleTime: () => void
+
 }) => {
 	const handleClick = () => {
 		handleGameStart()
-		handleTime()
+		
 	}
 	return (
 		<Card
