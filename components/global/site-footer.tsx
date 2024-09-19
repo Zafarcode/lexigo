@@ -26,7 +26,7 @@ const SiteFooter = () => {
 								<li>
 									<Link
 										className='hover:text-primary hover:underline'
-										href='/skills'
+										href='/dashboard/skills'
 									>
 										Skills
 									</Link>
@@ -34,7 +34,7 @@ const SiteFooter = () => {
 								<li>
 									<Link
 										className='hover:text-primary hover:underline'
-										href='/grammar'
+										href='/dashboard/grammar'
 									>
 										Grammar
 									</Link>
@@ -42,7 +42,7 @@ const SiteFooter = () => {
 								<li>
 									<Link
 										className='hover:text-primary hover:underline'
-										href='/vocabulary'
+										href='/dashboard/vocabulary'
 									>
 										Vocabulary
 									</Link>

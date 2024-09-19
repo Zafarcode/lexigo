@@ -1,7 +1,7 @@
+import { grammar } from '@/app/source'
 import { LibraryIcon } from 'lucide-react'
 import { Card, Cards } from 'next-docs-ui/mdx/card'
 import Image from 'next/image'
-import { grammar } from '../source'
 
 const Grammar = () => {
 	const pages = grammar

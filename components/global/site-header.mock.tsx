@@ -19,21 +19,6 @@ const navList: INavList[] = [
 		href: '/about',
 	},
 	{
-		id: 3,
-		label: 'Grammar',
-		href: '/grammar',
-	},
-	{
-		id: 4,
-		label: 'Vocabulary',
-		href: '/vocabulary',
-	},
-	{
-		id: 5,
-		label: 'Skills',
-		href: '/skills',
-	},
-	{
 		id: 6,
 		label: 'Contact Us',
 		href: '/contacts',

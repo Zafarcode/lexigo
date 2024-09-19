@@ -20,7 +20,10 @@ export default function Page({ params }: { params: Param }) {
 		<article className='min-h-screen'>
 			<div className='container py-10'>
 				<div className='flex flex-col md:flex-row gap-5 justify-end items-start'>
-					<Link className='mb-5 md:fixed md:top-38 md:left-40' href='/grammar'>
+					<Link
+						className='mb-5 md:fixed md:top-38 md:left-40'
+						href='/dashboard/grammar'
+					>
 						<span className='whitespace-nowrap hover:text-primary'>
 							&#8636; Back
 						</span>
