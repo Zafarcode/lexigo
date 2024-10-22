@@ -13,7 +13,7 @@ interface Result {
 interface GameState {
 	name: string
 	level: string
-	time: number,
+	time: number
 	shuffledWords: Word[]
 	shuffledTranslations: Word[]
 	selectedWord: Word | null

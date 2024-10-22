@@ -7,7 +7,9 @@ const LoginComponent = () => {
 		<section className='min-h-[calc(100vh-164px)] flex flex-col justify-center'>
 			<div className='container'>
 				<div className='w-full max-w-[500px] h-full flex flex-col items-center text-center mx-auto'>
-					<LogoIcon />
+					<Link href='/'>
+						<LogoIcon />
+					</Link>
 
 					<h1 className='text-3xl lg:text-5xl font-bold py-5'>
 						Kodni kiriting

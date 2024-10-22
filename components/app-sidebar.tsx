@@ -1,0 +1,100 @@
+'use client'
+
+import { Book, BookOpen, GalleryVerticalEnd, PenTool } from 'lucide-react'
+import * as React from 'react'
+
+import { NavMain } from '@/components/nav-main'
+import { NavUser } from '@/components/nav-user'
+import { TeamSwitcher } from '@/components/team-switcher'
+import {
+	Sidebar,
+	SidebarContent,
+	SidebarFooter,
+	SidebarHeader,
+	SidebarRail,
+} from '@/components/ui/sidebar'
+
+// This is sample data.
+const data = {
+	user: {
+		name: 'Shakhbozbek Usmonov',
+		email: 'shakhbozbek.usmonov@gmail.com',
+		avatar: '/avatars/shadcn.jpg',
+	},
+	teams: [
+		{
+			name: 'Shakhbozbek Usmonov',
+			logo: GalleryVerticalEnd,
+			plan: 'Pro',
+		},
+	],
+	navMain: [
+		{
+			title: 'Grammar',
+			url: '/dashboard/grammar',
+			icon: Book,
+			isActive: true,
+			items: [
+				{
+					title: 'Grammar Lessons',
+					url: '/dashboard/grammar',
+				},
+				{
+					title: 'Grammar Quiz',
+					url: '/dashboard/grammar/quiz',
+				},
+			],
+		},
+		{
+			title: 'Vocabulary',
+			url: '/dashboard/vocabulary',
+			icon: BookOpen,
+			items: [
+				{
+					title: 'Vocabulary Lessons',
+					url: '/dashboard/vocabulary',
+				},
+			],
+		},
+		{
+			title: 'Skills',
+			url: '/dashboard/skills',
+			icon: PenTool,
+			items: [
+				{
+					title: 'Speaking',
+					url: '/dashboard/skills/speaking',
+				},
+				{
+					title: 'Writing',
+					url: '/dashboard/skills/writing',
+				},
+				{
+					title: 'Reading',
+					url: '/dashboard/skills/reading',
+				},
+				{
+					title: 'Listening',
+					url: '/dashboard/skills/listening',
+				},
+			],
+		},
+	],
+}
+
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+	return (
+		<Sidebar collapsible='icon' {...props}>
+			<SidebarHeader>
+				<TeamSwitcher teams={data.teams} />
+			</SidebarHeader>
+			<SidebarContent>
+				<NavMain items={data.navMain} />
+			</SidebarContent>
+			<SidebarFooter>
+				<NavUser user={data.user} />
+			</SidebarFooter>
+			<SidebarRail />
+		</Sidebar>
+	)
+}

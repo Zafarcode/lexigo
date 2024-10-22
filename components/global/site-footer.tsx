@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 const SiteFooter = () => {
 	return (
-		<footer className='w-full py-10 lg:py-16 border-t'>
+		<footer className='w-full pt-10 border-t'>
 			<div className='container'>
 				<div className='flex flex-col lg:flex-row justify-between items-start gap-5'>
 					<div className='flex flex-col space-y-8 w-full max-w-[360px]'>
@@ -111,7 +111,7 @@ const SiteFooter = () => {
 								<li>
 									<Link
 										className='hover:text-primary hover:underline'
-										href='https://www.youtube.com/@wordwonders'
+										href='https://www.youtube.com/@wordwonders_uz'
 										target='blank'
 									>
 										YouTube
@@ -161,7 +161,7 @@ const SiteFooter = () => {
 
 				<hr className='my-10' />
 
-				<div className='flex flex-col lg:flex-row lg:justify-between lg:items-center space-y-4 text-center'>
+				<div className='flex flex-col lg:flex-row lg:justify-between lg:items-center space-y-3 text-center'>
 					<p className='text-sm text-muted-foreground'>
 						&copy; {new Date().getFullYear()}{' '}
 						<Link

@@ -1,7 +1,6 @@
 import { grammar } from '@/app/source'
 import { LibraryIcon } from 'lucide-react'
 import { Card, Cards } from 'next-docs-ui/mdx/card'
-import Image from 'next/image'
 
 const Grammar = () => {
 	const pages = grammar
@@ -12,7 +11,7 @@ const Grammar = () => {
 	return (
 		<section className='pt-5'>
 			<div className='container'>
-				<h1 className='text-2xl lg:text-[40px] lg:leading-[48px] font-bold mb-10 text-center'>
+				<h1 className='text-2xl lg:text-[40px] lg:leading-[48px] font-bold mb-10 text-center sr-only'>
 					English Grammar
 				</h1>
 
@@ -29,14 +28,6 @@ const Grammar = () => {
 							/>
 						))}
 					</Cards>
-					<Image
-						className='w-full lg:w-[450px] h-auto'
-						src='/assets/images/grammar.svg'
-						width={450}
-						height={200}
-						alt='grammar'
-						priority
-					/>
 				</div>
 			</div>
 		</section>

@@ -1,6 +1,3 @@
-import SiteFooter from '@/components/global/site-footer'
-import SiteHeader from '@/components/global/site-header'
-import { Toaster } from '@/components/ui/toaster'
 import { cn } from '@/lib/utils'
 import Provider from '@/providers/Provider'
 import '@/styles/globals.css'
@@ -48,14 +45,9 @@ export default function RootLayout({
 			>
 				<Provider>
 					<div className='flex flex-col relative min-h-dvh'>
-						<SiteHeader />
-						<main className='flex-1 pt-20 md:pt-24 pb-3 lg:pb-20'>
-							{children}
-						</main>
+						{children}
 						<div className='fixed inset-0 w-full h-full -z-10 bg-pattern' />
-						<SiteFooter />
 					</div>
-					<Toaster />
 				</Provider>
 			</body>
 		</html>

@@ -13,7 +13,7 @@ const CTA = () => {
 
 					<Link
 						className={cn(buttonVariants({ variant: 'default', size: 'lg' }))}
-						href='/login'
+						href='/auth/login'
 					>
 						Get Started
 					</Link>

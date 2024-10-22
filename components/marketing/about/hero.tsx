@@ -62,7 +62,7 @@ const AboutHero = () => {
 
 				<Link
 					className={cn(buttonVariants({ size: 'lg' }), 'mt-5')}
-					href='/login'
+					href='/auth/login'
 				>
 					Join Now
 				</Link>

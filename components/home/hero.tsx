@@ -35,7 +35,7 @@ const Hero = () => {
 								className={cn(
 									buttonVariants({ variant: 'default', size: 'lg' })
 								)}
-								href='/vocabulary'
+								href='/dashboard/vocabulary'
 							>
 								Get Started
 							</Link>
@@ -43,7 +43,7 @@ const Hero = () => {
 								className={cn(
 									buttonVariants({ variant: 'outline', size: 'lg' })
 								)}
-								href='/login'
+								href='/auth/login'
 							>
 								Get free trial
 							</Link>

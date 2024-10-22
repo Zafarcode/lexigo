@@ -1,6 +1,5 @@
-import { create } from 'zustand'
 import { GameState } from '@/components/vocabulary/game-images/game-image'
-
+import { create } from 'zustand'
 
 const useGameStore = create<GameState>(set => ({
 	rendomElement: [],
