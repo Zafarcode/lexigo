@@ -3,6 +3,7 @@ import { CustomUser } from '@/types/next-auth'
 import NextAuth, { AuthOptions, Session, User } from 'next-auth'
 import { JWT } from 'next-auth/jwt'
 import CredentialsProvider from 'next-auth/providers/credentials'
+import GoogleProvider from 'next-auth/providers/google'
 
 const authOptions: AuthOptions = {
 	session: {
@@ -10,6 +11,10 @@ const authOptions: AuthOptions = {
 		maxAge: 30 * 24 * 60 * 60, // 30 days
 	},
 	providers: [
+		GoogleProvider({
+			clientId: process.env.GOOGLE_CLIENT_ID!,
+			clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+		}),
 		CredentialsProvider({
 			name: 'Credentials',
 			credentials: {

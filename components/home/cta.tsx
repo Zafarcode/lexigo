@@ -12,7 +12,7 @@ const CTA = () => {
 					</h2>
 
 					<Link
-						className={cn(buttonVariants({ variant: 'default', size: 'lg' }))}
+						className={cn(buttonVariants({ variant: 'primary', size: 'lg' }))}
 						href='/auth/login'
 					>
 						Get Started

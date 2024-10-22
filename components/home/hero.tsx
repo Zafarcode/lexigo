@@ -41,7 +41,7 @@ const Hero = () => {
 							</Link>
 							<Link
 								className={cn(
-									buttonVariants({ variant: 'outline', size: 'lg' })
+									buttonVariants({ variant: 'danger', size: 'lg' })
 								)}
 								href='/auth/login'
 							>

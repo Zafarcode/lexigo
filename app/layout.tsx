@@ -14,7 +14,8 @@ const rubik = Rubik({
 
 export const metadata = createMetadata({
 	title: {
-		template: '%s | WordWonders',
+		template:
+			'%s | WordWonders - Unlock Your Language Potential with WordWonders',
 		default:
 			'WordWonders - Unlock Your Language Potential with WordWonders: Where English Learning Becomes an Adventure.',
 	},

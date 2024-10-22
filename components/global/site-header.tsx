@@ -82,7 +82,7 @@ const SiteHeader = () => {
 							<Link
 								className={cn(
 									buttonVariants({
-										variant: 'outline',
+										variant: 'primary',
 									})
 								)}
 								href='/auth/login'

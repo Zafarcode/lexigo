@@ -12,7 +12,7 @@ const UnitDetail = ({ params: { slug } }: { params: { slug: string } }) => {
 					<div className='space-y-1.5'>
 						{/* Back link */}
 						<Link
-							href='/vocabulary'
+							href='/dashboard/vocabulary'
 							className='flex items-center gap-2 text-lg font-semibold text-neutral-400 hover:text-primary custom-transition'
 						>
 							<ArrowLeft /> Back
@@ -64,7 +64,7 @@ const UnitDetail = ({ params: { slug } }: { params: { slug: string } }) => {
 										{lesson.unit.map(unit => (
 											<Link
 												key={unit.slug}
-												href={`/vocabulary/${lesson.slug}/${unit.slug}`}
+												href={`/dashboard/vocabulary/${lesson.slug}/${unit.slug}`}
 												className='block space-y-1.5 px-5 py-3 custom-transition border rounded-lg'
 											>
 												<h4 className='text-lg sm:text-xl font-bold'>

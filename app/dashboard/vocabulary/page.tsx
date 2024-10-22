@@ -41,7 +41,7 @@ const Vocabulary = () => {
 													}),
 													'flex md:hidden'
 												)}
-												href={`/vocabulary/${lesson.slug}`}
+												href={`/dashboard/vocabulary/${lesson.slug}`}
 											>
 												<Power />
 											</Link>
@@ -60,7 +60,7 @@ const Vocabulary = () => {
 													}),
 													'hidden md:flex'
 												)}
-												href={`/vocabulary/${lesson.slug}`}
+												href={`/dashboard/vocabulary/${lesson.slug}`}
 											>
 												<Power />
 											</Link>

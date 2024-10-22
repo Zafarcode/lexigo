@@ -28,12 +28,8 @@ export default function DashboardBreadcrumb() {
 	return (
 		<Breadcrumb>
 			<BreadcrumbList>
-				<BreadcrumbItem>
-					<BreadcrumbLink href='/'>Home</BreadcrumbLink>
-				</BreadcrumbItem>
 				{breadcrumbs.map((breadcrumb, index) => (
 					<React.Fragment key={breadcrumb.to}>
-						<BreadcrumbSeparator />
 						<BreadcrumbItem>
 							{index === breadcrumbs.length - 1 ? (
 								<BreadcrumbPage className='capitalize'>
@@ -45,6 +41,7 @@ export default function DashboardBreadcrumb() {
 								</BreadcrumbLink>
 							)}
 						</BreadcrumbItem>
+						{index !== breadcrumbs.length - 1 && <BreadcrumbSeparator />}
 					</React.Fragment>
 				))}
 			</BreadcrumbList>

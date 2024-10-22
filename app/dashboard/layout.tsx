@@ -1,4 +1,4 @@
-import { AppSidebar } from '@/components/app-sidebar'
+import { AppSidebar } from '@/components/dashboard/app-sidebar'
 import DashboardBreadcrumb from '@/components/dashboard/dashboard-breadcrumb'
 import { Separator } from '@/components/ui/separator'
 import {

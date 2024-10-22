@@ -32,7 +32,7 @@ export default function FlashcardPage({ params }: FlashcardPageProps) {
 						<div className='space-y-1.5'>
 							{/* Back link */}
 							<Link
-								href={`/vocabulary/${lesson.slug}`}
+								href={`/dashboard/vocabulary/${lesson.slug}`}
 								className='flex items-center gap-2 text-lg font-semibold text-neutral-400 hover:text-primary custom-transition'
 							>
 								<ArrowLeft /> Back
