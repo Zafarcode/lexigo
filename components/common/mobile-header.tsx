@@ -1,4 +1,4 @@
-import { navList } from '@/components/global/site-header.mock'
+import { navList } from '@/components/common/site-header.mock'
 import { ModeToggle } from '@/components/theme/mode-toggle'
 import {
 	Sheet,

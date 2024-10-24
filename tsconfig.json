@@ -26,7 +26,7 @@
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"components/global/site-header.mock.tsx"
+      "components/common/site-header.mock.tsx"
 	],
 	"exclude": ["node_modules"]
 }

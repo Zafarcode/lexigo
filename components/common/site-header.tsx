@@ -1,6 +1,6 @@
 'use client'
-import MobileHeader from '@/components/global/mobile-header'
-import { icons, navList, skillList } from '@/components/global/site-header.mock'
+import MobileHeader from '@/components/common/mobile-header'
+import { icons, navList, skillList } from '@/components/common/site-header.mock'
 import { ModeToggle } from '@/components/theme/mode-toggle'
 import { buttonVariants } from '@/components/ui/button'
 import {

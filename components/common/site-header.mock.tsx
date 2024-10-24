@@ -1,4 +1,4 @@
-import { INavList, ISkillList } from '@/components/global/site-header.types'
+import { INavList, ISkillList } from '@/components/common/site-header.types'
 import {
 	ListeningIcon,
 	ReadingIcon,
