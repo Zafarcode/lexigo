@@ -59,6 +59,7 @@ export default function WordImage() {
 
 			if (currentStep < quizData.length - 1) {
 				setCurrentStep(prev => prev + 1)
+				setResult(null)
 			} else {
 				setResult({
 					message: "Congratulations! You've completed the quiz.",
@@ -74,7 +75,6 @@ export default function WordImage() {
 		}
 		setSelected(null)
 		setIsChecked(false)
-		setResult(null)
 	}
 
 	const resetQuiz = () => {
