@@ -74,6 +74,7 @@ export default function WordImage() {
 		}
 		setSelected(null)
 		setIsChecked(false)
+		setResult(null)
 	}
 
 	const resetQuiz = () => {
@@ -102,8 +103,11 @@ export default function WordImage() {
 					>
 						<div className='flex flex-row items-center gap-2'>
 							<div className='flex items-center gap-2'>
-								<Link href='/' aria-label='Go back to home page'>
-									<X className='h-6 w-6 text-gray-200 hover:text-gray-400 transition-all' />
+								<Link
+									href='/dashboard/vocabulary'
+									aria-label='Go back to vocabulary page'
+								>
+									<X className='h-6 w-6 text-gray-200 hover:text-primary hover:text-gray-400 transition-all' />
 								</Link>
 							</div>
 
