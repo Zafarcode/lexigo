@@ -1,10 +1,5 @@
-"use client"
-import GameBody from "@/components/vocabulary/game-images/game-body"
-
 const Skills = () => {
-	return <section>
-		<GameBody />
-	</section>
+	return <section></section>
 }
 
 export default Skills

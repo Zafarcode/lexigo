@@ -7,9 +7,6 @@
 	"homepage": "https://wordwonders.uz",
 	"repository": "https://github.com/shakhbozbekusmonov/wordwonders",
 	"bugs": "https://github.com/shakhbozbekusmonov/wordwonders/issues",
-	"engines": {
-		"node": ">=20.1.0"
-	},
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
