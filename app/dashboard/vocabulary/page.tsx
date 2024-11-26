@@ -7,7 +7,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card'
-import WordImage from '@/components/vocabulary/word-image/word-image'
+import WordImage from '@/components/vocabulary/word-image'
 import { lessons } from '@/constants/lessons'
 import { cn } from '@/lib/utils'
 import { Power } from 'lucide-react'
