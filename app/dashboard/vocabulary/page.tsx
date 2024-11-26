@@ -7,6 +7,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card'
+import WordImage from '@/components/vocabulary/word-image/word-image'
 import { lessons } from '@/constants/lessons'
 import { cn } from '@/lib/utils'
 import { Power } from 'lucide-react'
@@ -19,6 +20,8 @@ const Vocabulary = () => {
 				<h1 className='text-2xl lg:text-[40px] lg:leading-[48px] font-bold text-center mb-3 max-[776px]:mt-4'>
 					Vocabulary
 				</h1>
+
+				<WordImage />
 
 				<ul className=' xl:max-w-3xl mx-auto grid grid-cols-1 gap-3 mb-2'>
 					{lessons.map((lesson, index) => (
