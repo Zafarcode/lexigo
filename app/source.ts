@@ -6,7 +6,7 @@ import { InferMetaType, InferPageType, loader } from 'next-docs-zeta/source'
 import { z } from 'zod'
 
 export const grammar = loader({
-	baseUrl: '/grammar',
+	baseUrl: '/dashboard/grammar',
 	rootDir: 'grammar',
 	icon(iconName) {
 		if (iconName && iconName in icons) {

@@ -17,7 +17,7 @@ const GrammarItem = ({
 				href={`/grammar/${slug}`}
 				className={cn(
 					buttonVariants({
-						variant: 'outline',
+						variant: 'default',
 						size: 'lg',
 					}),
 					'w-full text-lg justify-start visited:text-gray-400 rounded-lg'

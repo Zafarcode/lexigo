@@ -1,17 +1,24 @@
 import axiosInstance from '@/lib/axios'
 import { CustomUser } from '@/types/next-auth'
-
 import NextAuth, { AuthOptions, Session, User } from 'next-auth'
 import { JWT } from 'next-auth/jwt'
 import CredentialsProvider from 'next-auth/providers/credentials'
+import GoogleProvider from 'next-auth/providers/google'
 
 const authOptions: AuthOptions = {
+	session: {
+		strategy: 'jwt',
+		maxAge: 30 * 24 * 60 * 60, // 30 days
+	},
 	providers: [
+		GoogleProvider({
+			clientId: process.env.GOOGLE_CLIENT_ID!,
+			clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+		}),
 		CredentialsProvider({
 			name: 'Credentials',
 			credentials: {
-				email: { label: 'Email', type: 'text' },
-				password: { label: 'Password', type: 'password' },
+				code: { label: 'Code', type: 'number' },
 			},
 			async authorize(credentials) {
 				if (!credentials) {
@@ -60,13 +67,23 @@ const authOptions: AuthOptions = {
 			return session
 		},
 	},
+	cookies: {
+		sessionToken: {
+			name: 'next-auth.session-token',
+			options: {
+				httpOnly: true,
+				secure: process.env.NODE_ENV === 'production',
+				maxAge: 30 * 24 * 60 * 60, // 30 days
+				path: '/',
+			},
+		},
+	},
 	pages: {
-		signIn: '/auth/login',
+		signIn: '/auth/login', // Correct path for the sign-in page
 	},
 	secret: process.env.NEXTAUTH_SECRET,
 }
 
-// The NextAuth handler function
 const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST }
