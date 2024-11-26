@@ -1,18 +1,18 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
-import { Badge } from '@/components/ui/badge'
-import { Volume2, Heart, Check, X } from 'lucide-react'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import Image from 'next/image'
-import { useState } from 'react'
-import { cn } from '@/lib/utils'
-import Link from 'next/link'
-import { quizData } from './mock'
 import useTTS from '@/hooks/useTTS'
+import { cn } from '@/lib/utils'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Check, Heart, Volume2, X } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'
+import { quizData } from './mock'
 
 export default function WordImage() {
 	const { handleNormalSpeech } = useTTS()
@@ -26,7 +26,6 @@ export default function WordImage() {
 	const [hearts, setHearts] = useState(5)
 	const [isChecked, setIsChecked] = useState(false)
 
-
 	const handleSelectAndSpeak = (
 		event: React.MouseEvent<HTMLButtonElement>,
 		id: string,
@@ -37,7 +36,6 @@ export default function WordImage() {
 		setIsChecked(false)
 		handleNormalSpeech(event, label)
 	}
-
 
 	const handleCheck = () => {
 		if (selected) {
