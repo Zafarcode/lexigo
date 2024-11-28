@@ -18,6 +18,7 @@ const LoginComponent = () => {
 					<p className='text-base lg:text-lg text-gray-500 dark:text-white mb-5'>
 						<Link
 							className='underline text-black dark:text-gray-300'
+							target='blank'
 							href='https://t.me/wordwondersbot'
 						>
 							@wordwondersbot
