@@ -1,5 +1,6 @@
 "use client";
-
+import { useEffect, useState } from "react";
+import script from "@/app/finish-quiz/script";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -8,10 +9,36 @@ import heart from '@/public/assets/icons/heart.png'
 import exitBtn from '@/public/assets/icons/exit-button.png'
 import Link from "next/link";
 
-const Content = () => {
+let options = [
+    { word_eng: "afraid", word_uzb: "Qo'rqqan, cho'chigan" },
+    { word_eng: "agree", word_uzb: "Fikriga qo'shilmoq, rozi bo'lmoq" },
+    { word_eng: "angry", word_uzb: "Jahli chiqqan, badjahl" },
+    { word_eng: "arrive", word_uzb: "Yetib kelmoq, kelmoq" },
+    { word_eng: "attack", word_uzb: "Hujum qilmoq, hujum uyushtirmoq" },
+    { word_eng: "bottom", word_uzb: "Tag, pastki qism" },
+    { word_eng: "clever", word_uzb: "Aqlli, ziyrak" },
+    { word_eng: "cruel", word_uzb: "Shafqatsiz, berahm" },
+    { word_eng: "finally", word_uzb: "Axiyri, vanihoyat" },
+    { word_eng: "hide", word_uzb: "Yashirinmoq, bekinmoq" },
+    { word_eng: "hunt", word_uzb: "Ov qilmoq, ovlamoq" },
+    { word_eng: "lot", word_uzb: "Juda ko'p" },
+    { word_eng: "middle", word_uzb: "O'rta" },
+    { word_eng: "moment", word_uzb: "Sekund; on, zum" },
+    { word_eng: "pleased", word_uzb: "Hursand, mamnun" },
+    { word_eng: "promise", word_uzb: "Va'da bermoq" },
+    { word_eng: "reply", word_uzb: "Javob bermoq" },
+    { word_eng: "safe", word_uzb: "Xavfsiz, bexatar" },
+    { word_eng: "trick", word_uzb: "Xiyla, nayrang; fokus" },
+    { word_eng: "well", word_uzb: "Yaxshi" }
+]
+
+const Quiz = () => {
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const audioRefUk = useRef<HTMLAudioElement | null>(null);
 
+    useEffect(() => {
+        script(options, 'Unit 1', 1, 1);
+    }, []);
 
     const handlePlay = () => {
         if (audioRef.current) {
@@ -19,16 +46,10 @@ const Content = () => {
         }
     };
 
-    const handlePlayUk = () => {
-        if (audioRefUk.current) {
-            audioRefUk.current.play();
-        }
-    };
-
     return (
         <>
             <div className=" w-[60%] mx-auto mt-10 flex justify-between items-center gap-4">
-                <Link href={`/finish-quiz`}>
+                <Link href={`/`}>
                     <Image src={exitBtn} alt="heart" className=" w-[25px] h-[25%]" />
                 </Link>
                 <div id="progress-container" className="w-full bg-gray-300 rounded-xl h-4">
@@ -58,10 +79,7 @@ const Content = () => {
                 <div id="result" className=" text-[#282828]"></div>
                 <div id="word" className=" font-semibold my-4"></div>
                 <div id="unitName" className=" my-2 text-[#6740f6] text-[24px] font-semibold"></div>
-
-                {/* VOICE */}
                 <div className=" p-5 flex justify-center gap-5 flex-col hidden" id="vocabAudio">
-                    {/* USA */}
                     <div className=" flex justify-center gap-5">
                         <audio ref={audioRef} id="audioUsa" />
                         <Image
@@ -80,20 +98,6 @@ const Content = () => {
                             title="Play Sound"
                         />
                     </div>
-                    {/* UK */}
-                    {/* <div className=" flex justify-center gap-5">
-                        <audio ref={audioRefUk} src={""} id="audioUk" />
-                        
-                        <Image
-                            width="30"
-                            height="30"
-                            src="/gif/voice.gif"
-                            alt="Cool Animation"
-                            className=" cursor-pointer"
-                            onClick={handlePlayUk}
-                            title="Play Sound"
-                        />
-                    </div> */}
                 </div>
 
                 <div className="box flex justify-center">
@@ -117,4 +121,4 @@ const Content = () => {
     );
 };
 
-export default Content;
+export default Quiz;

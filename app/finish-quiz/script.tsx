@@ -1,6 +1,4 @@
-import type { MouseEvent } from 'react';
-const scriptType = (options: any, nameUnit: string, linkNameUnit: number, bookId: number, handleNormalSpeech: (evt: MouseEvent<HTMLButtonElement>, text: string) => void) => {
-
+const scriptType = (options: any, nameUnit: string, linkNameUnit: number, bookId: number) => {
     const message = document.getElementById("message") as HTMLDivElement;
     const hintRef = document.getElementById("hint-ref") as HTMLDivElement;
     const controls = document.getElementById("controls-container") as HTMLButtonElement;
@@ -182,16 +180,7 @@ const scriptType = (options: any, nameUnit: string, linkNameUnit: number, bookId
             loopCount++;
             unitName.classList.add("hidden");
             vocabAudio.classList.remove("hidden");
-
-            // handleSpeech funksiyasini chaqirish
-            // const mockEvent = new MouseEvent('click', { bubbles: true, cancelable: true });
-            // handleNormalSpeech(mockEvent as unknown as MouseEvent<HTMLButtonElement>, randomWord);
-            audioUSa.addEventListener("click", (event) => {
-                console.log(1);
-                const mockEvent = event as unknown as MouseEvent<HTMLButtonElement>; // Tur konvertatsiyasi
-                handleNormalSpeech(mockEvent, randomWord); // Normal ovozda o‘qish funksiyasini chaqirish
-            });
-            // audioUSa.src = `${process.env.NEXT_PUBLIC_BASE_URL}/essential-${bookId}/audio/usa/${randomWord}.mp3`;
+            audioUSa.src = `https://word-game-data.vercel.app//essential-${bookId}/audio/usa/${randomWord}.mp3`;
 
             resultText.innerText = "";
             controls.classList.remove('gifBg')
