@@ -10,7 +10,7 @@ const withMDX = createNextDocsMDX({
 
 /** @type {import('next').NextConfig} */
 const config = {
-	reactStrictMode: true,
+	reactStrictMode: false,
 	images: {
 		domains: ['picsum.photos'],
 	},
