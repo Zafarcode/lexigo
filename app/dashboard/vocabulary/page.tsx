@@ -1,80 +1,93 @@
 'use client'
 
 import { buttonVariants } from '@/components/ui/button'
-import {
-	Card,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from '@/components/ui/card'
-import WordImage from '@/components/vocabulary/word-image/word-image'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Progress } from '@/components/ui/progress'
+import { LogoIcon } from '@/components/utils/icons'
+import WordImage from '@/components/vocabulary/word-image'
 import { lessons } from '@/constants/lessons'
 import { cn } from '@/lib/utils'
-import { Power } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { Trophy } from 'lucide-react'
 import Link from 'next/link'
+import { useState } from 'react'
 
 const Vocabulary = () => {
+	const [completedLessons, setCompletedLessons] = useState<number[]>([])
+
 	return (
-		<section>
+		<section className='py-12'>
 			<div className='container'>
-				<h1 className='text-2xl lg:text-[40px] lg:leading-[48px] font-bold text-center mb-3 max-[776px]:mt-4'>
+				<h1 className='text-2xl lg:text-[40px] lg:leading-[48px] font-bold text-center mb-12'>
 					Vocabulary
 				</h1>
 
-				<WordImage />
-
-				<ul className=' xl:max-w-3xl mx-auto grid grid-cols-1 gap-3 mb-2'>
+				<ul className='max-w-4xl mx-auto space-y-8'>
 					{lessons.map((lesson, index) => (
-						<div
+						<motion.li
 							key={lesson.id}
-							className={`${
-								index % 2 === 0 ? 'justify-start' : 'justify-end'
-							} flex`}
+							initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50, y: 50 }}
+							animate={{ opacity: 1, x: 0, y: 0 }}
+							transition={{ delay: index * 0.1, duration: 0.5 }}
+							className={cn(
+								'w-full md:w-2/4',
+								index % 2 === 0 ? 'mr-auto' : 'ml-auto'
+							)}
 						>
-							<li className='w-full max-w-[50%] max-[496px]:max-w-full'>
-								<Card className='hover:shadow-lg hover:bg-gray-100 dark:hover:bg-gray-800'>
-									<CardHeader>
-										<div className='flex items-center justify-between'>
-											<CardTitle>English Module {lesson.id}</CardTitle>
-											<Link
-												className={cn(
-													buttonVariants({
-														variant: 'default',
-														size: 'icon',
-													}),
-													'flex md:hidden'
-												)}
-												href={`/dashboard/vocabulary/${lesson.slug}`}
-											>
-												<Power />
-											</Link>
-										</div>
-
-										<div className='flex justify-between items-center'>
-											<CardDescription>
-												A Beginner course in elementary English. (Lessons 1-30)
-											</CardDescription>
-
-											<Link
-												className={cn(
-													buttonVariants({
-														variant: 'default',
-														size: 'icon',
-													}),
-													'hidden md:flex'
-												)}
-												href={`/dashboard/vocabulary/${lesson.slug}`}
-											>
-												<Power />
-											</Link>
-										</div>
-									</CardHeader>
-								</Card>
-							</li>
-						</div>
+							<Card
+								className={cn(
+									'rounded-lg shadow-md transition-all duration-300 hover:shadow-lg',
+									'dark:bg-[#1c1f26] bg-white text-black dark:text-white'
+								)}
+							>
+								<CardHeader>
+									<CardTitle className='text-lg font-semibold'>
+										English Module {lesson.id}
+									</CardTitle>
+									<div className='flex items-center relative'>
+										<Progress
+											value={completedLessons.includes(lesson.id) ? 1 : 0}
+											className={cn('h-4 w-full max-w-52 bg-green-100', {
+												'bg-primary': completedLessons.includes(lesson.id),
+											})}
+											aria-label={`Progress: ${
+												completedLessons.includes(lesson.id) ? '30' : '1'
+											}`}
+										/>
+										<span className='absolute top-1/2 text-sm left-[45%] -translate-x-[45%] md:left-[45%] md:-translate-x-[45%] lg:left-[45%] xl:left-[22%] xl:-translate-x-[22%] lg:-translate-x-[45%] -translate-y-1/2'>
+											1/30
+										</span>
+										<Trophy className='w-[34px] h-[30px] text-primary absolute top-1/2 left-[100%] -translate-x-[100%] md:left-[110%] md:-translate-x-[110%] xl:left-[53%] lg:left-[110%] lg:-translate-x-[110%] xl:-translate-x-[53%] -translate-y-1/2 fill-white' />
+									</div>
+								</CardHeader>
+								<CardContent className='flex md:flex-col xl:flex-row justify-between items-center mt-4'>
+									<LogoIcon width={100} height={50} />
+									<Link
+										href={`/dashboard/vocabulary/${lesson.slug}`}
+										className={cn(buttonVariants({ variant: 'primary' }), {
+											'opacity-50':
+												index > 0 && !completedLessons.includes(index),
+										})}
+										onClick={() => {
+											if (index === 0 || completedLessons.includes(index)) {
+												setCompletedLessons(prev => [...prev, lesson.id])
+											}
+										}}
+									>
+										{index === 0 || completedLessons.includes(index)
+											? completedLessons.includes(lesson.id)
+												? 'Completed'
+												: 'Continue'
+											: 'Jump Here'}
+									</Link>
+								</CardContent>
+							</Card>
+						</motion.li>
 					))}
 				</ul>
 			</div>
+
+			<WordImage />
 		</section>
 	)
 }
