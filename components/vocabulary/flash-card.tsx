@@ -8,12 +8,18 @@ import { useCallback, useEffect, useState } from 'react'
 
 type FlashcardProps = {
 	cardData: {
+		id: number
 		front_side: string
 		back_side: string
+		viewed: boolean
 	}[]
+	onViewed: (itemId: number) => void
 }
 
-const Flashcard = ({ cardData }: FlashcardProps) => {
+const Flashcard = ({
+	cardData,
+	onViewed,
+}: FlashcardProps) => {
 	const { handleNormalSpeech, handleSlowSpeech } = useTTS()
 	const [isFlipped, setIsFlipped] = useState(false)
 	const [isAnimating, setIsAnimating] = useState(false)
@@ -23,13 +29,22 @@ const Flashcard = ({ cardData }: FlashcardProps) => {
 	const total = cardData.length
 	const currentCard = cardData[currentIndex]
 	const [cardBack, setCardBack] = useState(currentCard.back_side)
-
+	
 	// Delay changing the card back by 150ms to allow the flip animation to complete
 	useEffect(() => {
 		setTimeout(() => {
 			setCardBack(currentCard.back_side)
 		}, 150)
-	}, [currentCard.back_side, currentIndex])
+
+		// Mark the current card as viewed
+		if (!currentCard.viewed) {
+			onViewed(currentCard.id)
+		}
+
+		// Update progress
+		const viewedCount = cardData.filter(card => card.viewed).length
+		setProgress((viewedCount / total) * 100)
+	}, [currentCard, onViewed, cardData, total])
 
 	// Flip card
 	const handleFlip = useCallback(() => {

@@ -20,8 +20,6 @@ export const authOptions: AuthOptions = {
 
 					const data = response.data
 
-					console.log(data)
-
 					if (data.success) {
 						return {
 							id: data.profile_id,
@@ -47,7 +45,6 @@ export const authOptions: AuthOptions = {
 	},
 	callbacks: {
 		async jwt({ token, user }) {
-			console.log('user', user)
 			if (user) {
 				token.accessToken = user.accessToken
 				token.refreshToken = user.refreshToken
@@ -55,7 +52,6 @@ export const authOptions: AuthOptions = {
 			return token
 		},
 		async session({ session, token }) {
-			console.log('token', token)
 			if (token) {
 				session.user.id = token.sub
 				session.user.phone = token.phone
