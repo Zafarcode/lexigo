@@ -1,55 +1,46 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { Section } from '@/components/vocabulary/section'
-import { initialSections } from '@/components/vocabulary/section/mock'
-
-import type { Section as SectionType } from '@/types'
-import { lessons } from '@/constants/lessons'
+import { useProgressStore } from '@/store/use-progress'
 import { useRouter } from 'next/navigation'
 
+export default function VocabularySection({
+	params,
+}: {
+	params: { slug: string }
+}) {
+	const router = useRouter()
+	const { sections, calculateUnitProgress, resetProgress } = useProgressStore()
+	const section = sections.find(s => s.slug === params.slug)
 
-const UnitDetail = ({ params: { slug } }: { params: { slug: string } }) => {
-	const [sections, setSections] = useState<SectionType[]>(initialSections)
-	const lesson = lessons.find(lesson => lesson.slug === slug)
+	useEffect(() => {
+		resetProgress()
+	}, [resetProgress])
 
-	const router = useRouter();
+	if (!section) {
+		return <div>Section not found</div>
+	}
 
-const handleUnitClick = (sectionId: number, unitId: number) => {
-  setSections(prev =>
-    prev.map(section => {
-      if (section.id === sectionId) {
-        return {
-          ...section,
-          units: section.units.map(unit => {
-            if (unit.id === unitId) {
-              router.push(`/dashboard/vocabulary/${lesson?.slug}/${unit.slug}`);
-              return { ...unit, isCompleted: true };
-            }
-            if (unit.id === unitId + 1) {
-              return { ...unit, isLocked: false };
-            }
-            return unit;
-          }),
-        };
-      }
-      return section;
-    })
-  );
-};
+	const handleUnitClick = (unitId: number) => {
+		const unit = section.units.find(u => u.id === unitId)
+		if (unit && !unit.isLocked) {
+			router.push(`/dashboard/vocabulary/${section.slug}/${unit.slug}`)
+		}
+	}
 
+	const unitProgress = section.units.reduce((acc, unit) => {
+		acc[unit.id] = calculateUnitProgress(unit)
+		return acc
+	}, {} as Record<number, number>)
 
 	return (
-		<div className='flex min-h-screen flex-col items-center gap-8'>
-			{sections.map(section => (
-				<Section
-					key={section.id}
-					section={section}
-					onUnitClick={unitId => handleUnitClick(section.id, unitId)}
-				/>
-			))}
+		<div className='h-full flex justify-center items-center'>
+			<Section
+				section={section}
+				onUnitClick={handleUnitClick}
+				unitProgress={unitProgress}
+			/>
 		</div>
 	)
 }
-
-export default UnitDetail

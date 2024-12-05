@@ -7,9 +7,11 @@ const CIRCUMFERENCE = 2 * Math.PI * RADIUS // Circumference of the circle
 const CircularProgress = ({
 	progress,
 	icon,
+	theme,
 }: {
 	progress: number
 	icon: React.ReactNode
+	theme: string
 }) => {
 	return (
 		<div className='relative w-[110px] h-[110px]'>
@@ -34,7 +36,7 @@ const CircularProgress = ({
 					cy='40'
 					r={RADIUS}
 					fill='none'
-					stroke='pink'
+					stroke={theme}
 					strokeWidth='8'
 					strokeDasharray={CIRCUMFERENCE}
 					strokeDashoffset={CIRCUMFERENCE - (progress / 100) * CIRCUMFERENCE}
