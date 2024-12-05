@@ -180,6 +180,7 @@ const scriptType = (options: any, nameUnit: string, linkNameUnit: number, bookId
             loopCount++;
             unitName.classList.add("hidden");
             vocabAudio.classList.remove("hidden");
+            vocabAudio.classList.add('flex')
             audioUSa.src = `https://word-game-data.vercel.app//essential-${bookId}/audio/usa/${randomWord}.mp3`;
 
             resultText.innerText = "";
@@ -191,6 +192,7 @@ const scriptType = (options: any, nameUnit: string, linkNameUnit: number, bookId
             startBtn.addEventListener("click", () => {
                 nextUnit.classList.add("hidden");
                 vocabAudio.classList.remove("hidden");
+            vocabAudio.classList.add('flex')
             });
 
 
