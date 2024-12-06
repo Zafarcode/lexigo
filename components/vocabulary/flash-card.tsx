@@ -5,6 +5,14 @@ import useTTS from '@/hooks/useTTS'
 import { motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight, Snail, Volume2 } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
+import Confetti from 'react-confetti'
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+} from '@/components/ui/dialog'
 
 type FlashcardProps = {
 	cardData: {
@@ -26,6 +34,9 @@ const Flashcard = ({
 	const [currentIndex, setCurrentIndex] = useState(0)
 	const [progress, setProgress] = useState(0)
 
+	const [showConfetti, setShowConfetti] = useState(false)
+	const [showCongratulations, setShowCongratulations] = useState(false)
+
 	const total = cardData.length
 	const currentCard = cardData[currentIndex]
 	const [cardBack, setCardBack] = useState(currentCard.back_side)
@@ -45,6 +56,13 @@ const Flashcard = ({
 		const viewedCount = cardData.filter(card => card.viewed).length
 		setProgress((viewedCount / total) * 100)
 	}, [currentCard, onViewed, cardData, total])
+
+	useEffect(() => {
+		if (progress === 100 && !showConfetti) {
+			setShowConfetti(true)
+			setShowCongratulations(true)
+		}
+	}, [progress, showConfetti])
 
 	// Flip card
 	const handleFlip = useCallback(() => {
@@ -106,6 +124,21 @@ const Flashcard = ({
 
 	return (
 		<div className='flex flex-col items-center justify-center space-y-4'>
+			{showConfetti && <Confetti />}
+			<Dialog open={showCongratulations} onOpenChange={setShowCongratulations}>
+				<DialogContent className='max-w-lg p-8 bg-gradient-to-br from-gray-100 via-white to-gray-50 rounded-xl shadow-2xl text-center space-y-6'>
+					<DialogHeader>
+						<DialogTitle className='text-4xl font-extrabold text-gray-800'>
+							🎉 Congratulations!
+						</DialogTitle>
+						<DialogDescription className='text-lg text-gray-600'>
+							You’ve successfully completed all the words in this unit. Keep up
+							the great work!
+						</DialogDescription>
+					</DialogHeader>
+				</DialogContent>
+			</Dialog>
+
 			<div
 				className='flip-card w-full h-[328px] max-w-[816px] sm:h-[428px]'
 				onClick={handleFlip}
