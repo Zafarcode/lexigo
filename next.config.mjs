@@ -12,7 +12,14 @@ const withMDX = createNextDocsMDX({
 const config = {
 	reactStrictMode: false,
 	images: {
-		domains: ['picsum.photos'],
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'picsum.photos',
+				port: '',
+				pathname: '/**',
+			},
+		],
 	},
 }
 
