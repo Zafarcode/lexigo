@@ -1,10 +1,7 @@
 'use client'
-import React, { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { ToastTitle } from '@/components/ui/toast'
-
-// Shuffle function
+import React, { useEffect, useState } from 'react'
 const shuffleArray = <T,>(array: T[]): T[] => {
 	return [...array].sort(() => Math.random() - 0.5)
 }
@@ -19,11 +16,10 @@ const MatchingPairs: React.FC = () => {
 	const [uzbekWords, setUzbekWords] = useState<{ id: number; value: string }[]>(
 		[]
 	)
-	const [progress, setProgress] = useState(0) // Progress state
-	const [hearts, setHearts] = useState(5) // Initial hearts count
-	const [gameOver, setGameOver] = useState(false) // Game over state
+	const [progress, setProgress] = useState(0)
+	const [hearts, setHearts] = useState(5)
+	const [gameOver, setGameOver] = useState(false)
 
-	// Words list (English - Uzbek)
 	const words = [
 		{ id: 1, value: 'and', pair: 'va' },
 		{ id: 2, value: 'man', pair: 'erkak' },
@@ -32,7 +28,6 @@ const MatchingPairs: React.FC = () => {
 		{ id: 5, value: 'cat', pair: 'mushuk' },
 	]
 
-	// Initialize words after first render
 	useEffect(() => {
 		setEnglishWords(
 			shuffleArray(words.map(w => ({ id: w.id, value: w.value })))
@@ -43,7 +38,7 @@ const MatchingPairs: React.FC = () => {
 	}, [])
 
 	const handleSelect = (id: number, value: string) => {
-		if (selected.some(s => s.id === id)) return // Prevent re-selecting the same button
+		if (selected.some(s => s.id === id)) return
 		const newSelection = [...selected, { id, value }]
 		setSelected(newSelection)
 
@@ -56,17 +51,15 @@ const MatchingPairs: React.FC = () => {
 						(w.value === second.value && w.pair === first.value)
 				)
 			) {
-				// Correct pair
 				setMatchedPairs(prev => [...prev, [first.value, second.value]])
 				setFeedback('Excellent!')
-				setProgress((matchedPairs.length + 1) / words.length) // Update progress
+				setProgress((matchedPairs.length + 1) / words.length)
 				setTimeout(() => setFeedback(''), 1000)
 			} else {
-				// Incorrect pair
 				setFeedback('Try again!')
 				setHearts(prev => {
 					const updatedHearts = prev - 1
-					if (updatedHearts === 0) setGameOver(true) // Trigger game over
+					if (updatedHearts === 0) setGameOver(true)
 					return updatedHearts
 				})
 				setTimeout(() => setFeedback(''), 1000)
