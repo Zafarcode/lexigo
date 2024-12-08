@@ -4,6 +4,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { LogoIcon } from '@/components/utils/icons'
+import MatchingPairs from '@/components/vocabulary/matching-pairs'
 import WordImage from '@/components/vocabulary/word-image'
 import { cn } from '@/lib/utils'
 import { useProgressStore } from '@/store/use-progress'
@@ -24,11 +25,10 @@ const Vocabulary = () => {
 				<ul className='max-w-4xl mx-auto space-y-8'>
 					{sections.map((section, index) => {
 						const completedUnits = section.units.filter(
-							(							u: { isCompleted: any }) => u.isCompleted
+							(u: { isCompleted: any }) => u.isCompleted
 						).length
 						const totalUnits = section.units.length
 						const progress = (completedUnits / totalUnits) * 100
-						
 
 						return (
 							<motion.li
@@ -76,7 +76,6 @@ const Vocabulary = () => {
 												if (index > 0 && progress === 0) {
 													return
 												}
-												
 											}}
 										>
 											{index === 0 || progress
@@ -89,11 +88,12 @@ const Vocabulary = () => {
 								</Card>
 							</motion.li>
 						)
-                    })}
+					})}
 				</ul>
 			</div>
 
 			<WordImage />
+			<MatchingPairs />
 		</section>
 	)
 }
