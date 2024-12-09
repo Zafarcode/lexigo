@@ -4,11 +4,8 @@ import { buttonVariants } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { LogoIcon } from '@/components/utils/icons'
-<<<<<<< HEAD
 import FinishQuiz from '@/components/vocabulary/finish-quiz'
-=======
 import MatchingPairs from '@/components/vocabulary/matching-pairs'
->>>>>>> 67301b6dcf808c24f683b3521be271904ec368d8
 import WordImage from '@/components/vocabulary/word-image'
 import { cn } from '@/lib/utils'
 import { useProgressStore } from '@/store/use-progress'
@@ -20,7 +17,18 @@ const Vocabulary = () => {
 	const { sections } = useProgressStore()
 
 	return (
+		<>
+		    {/* Word Image game */}
+			<WordImage />
+
+			{/* Matching Pairs game */}
+			<MatchingPairs />
+
+			{/* Finish Quiz game */}
+			<FinishQuiz />
+			
 		<section className='py-12'>
+			
 			<div className='container'>
 				<h1 className='text-2xl lg:text-[40px] lg:leading-[48px] font-bold text-center mb-12'>
 					Vocabulary
@@ -33,10 +41,7 @@ const Vocabulary = () => {
 						).length
 						const totalUnits = section.units.length
 						const progress = (completedUnits / totalUnits) * 100
-<<<<<<< HEAD
 
-=======
->>>>>>> 67301b6dcf808c24f683b3521be271904ec368d8
 
 						return (
 							<motion.li
@@ -84,10 +89,6 @@ const Vocabulary = () => {
 												if (index > 0 && progress === 0) {
 													return
 												}
-<<<<<<< HEAD
-
-=======
->>>>>>> 67301b6dcf808c24f683b3521be271904ec368d8
 											}}
 										>
 											{index === 0 || progress
@@ -103,14 +104,9 @@ const Vocabulary = () => {
 					})}
 				</ul>
 			</div>
-
-			<WordImage />
-<<<<<<< HEAD
-			<FinishQuiz />
-=======
-			<MatchingPairs />
->>>>>>> 67301b6dcf808c24f683b3521be271904ec368d8
+            
 		</section>
+		</>
 	)
 }
 
