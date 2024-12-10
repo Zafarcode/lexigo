@@ -22,18 +22,18 @@ export function Section({ section, onUnitClick, unitProgress }: SectionProps) {
 	> => {
 		const positions: Record<number, { top: string; left: string }> = {}
 		const amplitude = 25 // Amplitude of the wave
-		const spacing = 5 // Spacing between units
+		const spacing = 7 // Fixed spacing between units
 		const startY = 5 // Starting Y position
 		const centerX = 50 // Center X position
 		const totalUnits = 30 // Total number of units
 
-		
+		// Calculate endY dynamically based on spacing and totalUnits
+		const endY = startY + spacing * (totalUnits - 1)
 		const frequency = (Math.PI * 2) / (totalUnits - 1) // Frequency
 
-		for (let i = 0; i < totalUnits; i++) { 
-			const y = startY + i * spacing 
+		for (let i = 0; i < totalUnits; i++) {
+			const y = startY + i * spacing
 			const x = centerX + amplitude * Math.sin(frequency * i) // X position
-
 			positions[i + 1] = {
 				top: `${y}%`,
 				left: `${x}%`,

@@ -54,15 +54,20 @@ export default function FlashcardPage({ params }: FlashcardPageProps) {
 								Terms in this set ({unit.item.length})
 							</h2>
 							<ul className='space-y-2'>
-								{unit.item.map((item: { front_side: string; back_side: string }, i: number) => (
-									<li
-										key={`${unit.slug}-${i}`}
-										className='grid sm:grid-cols-2 items-center gap-4 rounded-lg border p-4 lg:p-6'
-									>
-										<div className='text-2xl'>{item.front_side}</div>
-										<div className='text-lg'>{item.back_side}</div>
-									</li>
-								))}
+								{unit.item.map(
+									(
+										item: { front_side: string; back_side: string },
+										i: number
+									) => (
+										<li
+											key={`${unit.slug}-${i}`}
+											className='grid sm:grid-cols-2 items-center gap-4 rounded-lg border p-4 lg:p-6'
+										>
+											<div className='text-2xl'>{item.front_side}</div>
+											<div className='text-lg'>{item.back_side}</div>
+										</li>
+									)
+								)}
 							</ul>
 						</section>
 					)}
