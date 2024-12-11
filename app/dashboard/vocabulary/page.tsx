@@ -17,7 +17,18 @@ const Vocabulary = () => {
 	const { sections } = useProgressStore()
 
 	return (
+		<>
+		    {/* Word Image game */}
+			<WordImage />
+
+			{/* Matching Pairs game */}
+			<MatchingPairs />
+
+			{/* Finish Quiz game */}
+			<FinishQuiz />
+			
 		<section className='py-12'>
+			
 			<div className='container'>
 				<h1 className='text-2xl lg:text-[40px] lg:leading-[48px] font-bold text-center mb-12'>
 					Vocabulary
@@ -30,6 +41,11 @@ const Vocabulary = () => {
 						).length
 						const totalUnits = section.units.length
 						const progress = (completedUnits / totalUnits) * 100
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 561a77503b3be9e9a6342d5a989c1e2848a427d1
 						return (
 							<motion.li
 								key={section.id}
@@ -59,10 +75,10 @@ const Vocabulary = () => {
 												})}
 												aria-label={`Progress: ${progress ? '30' : '1'}`}
 											/>
-											<span className='absolute top-1/2 text-sm left-[45%] -translate-x-[45%] md:left-[45%] md:-translate-x-[45%] lg:left-[45%] xl:left-[24%] xl:-translate-x-[22%] lg:-translate-x-[45%] -translate-y-1/2'>
+											<span className='absolute top-1/2 text-sm left-[45%] min-[375px]:left-[35%] min-[425px]:left-[31%] -translate-x-[45%] md:left-[45%] md:-translate-x-[45%] lg:left-[45%] xl:left-[24%] xl:-translate-x-[22%] lg:-translate-x-[45%] -translate-y-1/2'>
 												{progress.toFixed(0) + ' %'}
 											</span>
-											<Trophy className='w-[34px] h-[30px] text-primary absolute top-[45%] left-[100%] -translate-x-[100%] md:left-[110%] md:-translate-x-[110%] xl:left-[53%] lg:left-[110%] lg:-translate-x-[110%] xl:-translate-x-[53%] -translate-y-1/2 fill-white' />
+											<Trophy className='w-[34px] h-[30px] text-primary absolute top-[45%] min-[375px]:left-[75%] min-[425px]:left-[65%] left-[95%] -translate-x-[100%] md:left-[110%] md:-translate-x-[110%] xl:left-[53%] lg:left-[110%] lg:-translate-x-[110%] xl:-translate-x-[53%] -translate-y-1/2 fill-white' />
 										</div>
 									</CardHeader>
 									<CardContent className='flex md:flex-col xl:flex-row justify-between items-center mt-4'>
@@ -91,11 +107,16 @@ const Vocabulary = () => {
 					})}
 				</ul>
 			</div>
+<<<<<<< HEAD
 
 			<WordImage />
 			<FinishQuiz />
 			<MatchingPairs />
+=======
+            
+>>>>>>> 561a77503b3be9e9a6342d5a989c1e2848a427d1
 		</section>
+		</>
 	)
 }
 
