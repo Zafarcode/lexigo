@@ -41,11 +41,6 @@ const Vocabulary = () => {
 						).length
 						const totalUnits = section.units.length
 						const progress = (completedUnits / totalUnits) * 100
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 561a77503b3be9e9a6342d5a989c1e2848a427d1
 						return (
 							<motion.li
 								key={section.id}
@@ -107,14 +102,9 @@ const Vocabulary = () => {
 					})}
 				</ul>
 			</div>
-<<<<<<< HEAD
-
 			<WordImage />
 			<FinishQuiz />
 			<MatchingPairs />
-=======
-            
->>>>>>> 561a77503b3be9e9a6342d5a989c1e2848a427d1
 		</section>
 		</>
 	)

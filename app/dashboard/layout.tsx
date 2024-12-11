@@ -24,11 +24,8 @@ export default function DashboardLayout({
 						<DashboardBreadcrumb />
 					</div>
 				</header>
-<<<<<<< HEAD
 				<div className='flex flex-1 flex-col gap-4 pt-0'>{children}</div>
-=======
 				<div className='flex flex-1 flex-col gap-4 lg:p-4 pt-0'>{children}</div>
->>>>>>> 561a77503b3be9e9a6342d5a989c1e2848a427d1
 			</SidebarInset>
 		</SidebarProvider>
 	)
