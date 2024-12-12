@@ -94,13 +94,13 @@ const MatchingPairs: React.FC = () => {
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			transition={{ duration: 0.5 }}
-			className='min-h-screen flex items-center justify-center px-4 sm:px-6'
+			className='min-h-screen flex items-center justify-center '
 		>
-			<div className='w-full max-w-4xl'>
-				<CardContent className='p-6'>
+			<div className='w-full max-w-4xl p-0 overflow-hidden shadow-none border-none'>
+				<CardContent className='p-3 sm:p-6'>
 					{gameOver ? (
-						<div className='flex flex-col items-center justify-center h-screen'>
-							<h1 className='text-3xl sm:text-4xl font-bold text-pink-600 mb-8'>
+						<div className='flex flex-col items-center justify-center min-h-[300px]'>
+							<h1 className='text-3xl sm:text-4xl font-bold text-pink-600 mb-6'>
 								Game Over
 							</h1>
 							<Button variant='secondary' onClick={resetGame}>
@@ -109,14 +109,14 @@ const MatchingPairs: React.FC = () => {
 						</div>
 					) : (
 						<>
-							<div className='flex items-center gap-2 mb-6'>
+							<div className='flex items-center gap-4 mb-6'>
 								<Link href='/dashboard/vocabulary'>
 									<X className='h-6 w-6 text-gray-200 hover:text-primary' />
 								</Link>
-								<Progress value={progress} className='h-3 bg-pink-100 flex-1' />
+								<Progress value={progress} className='h-3 flex-1 bg-pink-100' />
 								<div className='flex items-center space-x-1'>
 									<Heart className='h-4 w-4 text-primary' />
-									<span>{hearts}</span>
+									<span className='text-lg'>{hearts}</span>
 								</div>
 							</div>
 							<Badge
@@ -125,23 +125,22 @@ const MatchingPairs: React.FC = () => {
 							>
 								NEW WORD
 							</Badge>
-							<h1 className='text-2xl sm:text-3xl font-bold mb-6'>
+							<h1 className='text-2xl sm:text-3xl font-bold mb-6 text-start'>
 								Tap the matching pairs
 							</h1>
-
-							<div className='grid grid-cols-2  sm:grid-cols-2 gap-6 mb-6'>
-								<Card className='p-6'>
-									<h3 className='text-xl sm:text-2xl font-bold mb-4'>
+							<div className='grid grid-cols-2 sm:grid-cols-2 gap-1 mb-2'>
+								<Card className='p-2'>
+									<h3 className='text-lg sm:text-xl font-bold mb-4 hidden sm:block'>
 										English
 									</h3>
-									<div className='grid grid-cols-1 gap-4'>
+									<div className='grid grid-cols-1 gap-2'>
 										{englishWords.map(({ id, value }) => (
 											<Button
 												key={id}
 												variant='outline'
 												onClick={() => handleSelect(id, value)}
 												disabled={matchedPairs.flat().includes(value)}
-												className={cn('border-b-1', {
+												className={cn('border rounded-md text-sm sm:text-lg', {
 													'border-pink-500 text-pink-500':
 														selected.some(s => s.id === id) && !feedback,
 													'border-gray-200 text-gray-700':
@@ -156,17 +155,18 @@ const MatchingPairs: React.FC = () => {
 										))}
 									</div>
 								</Card>
-
-								<Card className='p-6'>
-									<h3 className='text-xl sm:text-2xl font-bold mb-4'>Uzbek</h3>
-									<div className='grid grid-cols-1 gap-4'>
+								<Card className='p-2'>
+									<h3 className='text-lg sm:text-xl font-bold mb-4 hidden sm:block'>
+										Uzbek
+									</h3>
+									<div className='grid grid-cols-1 gap-2'>
 										{uzbekWords.map(({ id, value }) => (
 											<Button
 												key={id}
 												variant='outline'
 												onClick={() => handleSelect(id, value)}
 												disabled={matchedPairs.flat().includes(value)}
-												className={cn('border-b-1', {
+												className={cn('border rounded-md text-sm sm:text-lg', {
 													'border-pink-500 text-pink-500':
 														selected.some(s => s.id === id) && !feedback,
 													'border-gray-200 text-gray-700':
@@ -183,25 +183,25 @@ const MatchingPairs: React.FC = () => {
 								</Card>
 							</div>
 
-							<div className='flex items-center justify-between min-h-[3rem]'>
-								<div className='flex-1'>
+							<div className='md:h-20 pt-0 flex flex-col md:flex-row items-center justify-between gap-4'>
+								<div className='min-h-[32px] flex items-center'>
 									{feedback && (
-										<div
-											className={`text-lg sm:text-xl font-semibold transition-colors duration-200 ${
+										<span
+											className={`text-lg font-semibold ${
 												feedback === 'Try again!'
 													? 'text-pink-600'
 													: 'text-green-600'
 											}`}
 										>
 											{feedback}
-										</div>
+										</span>
 									)}
 								</div>
-								<div className='flex-shrink-0'>
+								<div className='w-full md:w-auto'>
 									{matchedPairs.length === words.length && (
 										<Button
 											onClick={resetGame}
-											className='text-lg sm:text-xl font-semibold transition-colors duration-200 border-b-4 text-white bg-green-500 hover:bg-green-600 border-green-700'
+											className='w-full text-lg text-white bg-green-500 hover:bg-green-600 font-semibold transition-colors duration-200 border-b-4'
 										>
 											Continue
 										</Button>
