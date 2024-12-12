@@ -47,12 +47,11 @@ const FinishQuiz = () => {
 
     useEffect(() => {
         randomWordRef.current = randomWord;
-    }, [randomWord]);    
+    }, [randomWord]);
 
     const generateWord = useCallback(() => {
         const randomIndex = Math.floor(Math.random() * options.length);
         const selectedWord = options[randomIndex];
-        console.log("Generated Word:", selectedWord.word_eng);
         setRandomWord(selectedWord.word_eng);
         setRandomHint(selectedWord.word_uzb);
 
@@ -69,17 +68,14 @@ const FinishQuiz = () => {
             setProgress(prev =>
                 Math.min(100, Math.round((prev + 100 / lengthOptions) * 100) / 100)
             )
-            console.log(loopCount);
             setGameState("continue");
         } else {
             setLoopCount((prev) => prev + 1);
-            console.log("You won the game!");
             setGameState("end");
         }
     }, [loopCount, lengthOptions]);
 
     const handleLoss = useCallback(() => {
-        console.log("Game Over!");
         setGameState("end");
     }, []);
 
@@ -88,7 +84,6 @@ const FinishQuiz = () => {
         if (!button || button.disabled) return;
 
         const charArray = randomWordRef.current.toUpperCase().split("");
-        console.log("randomWord:", randomWordRef.current);
         const inputSpaces = document.getElementsByClassName(
             "inputSpace"
         ) as HTMLCollectionOf<HTMLElement>;
@@ -103,7 +98,6 @@ const FinishQuiz = () => {
                     setWinCount((prev) => {
                         const winCount = prev + 1;
                         if (winCount === charArray.length) {
-                            console.log("continue");
                             handleWin();
                         }
                         return winCount;
@@ -138,6 +132,7 @@ const FinishQuiz = () => {
         const letterContainer = document.getElementById("letter-container")!;
         letterContainer.innerHTML = "";
         const letters = "QWERTYUIOPASDFGHJKLZXCVBNM".split("");
+        let br1 = document.createElement("br");
         const br = document.createElement("br");
         letters.forEach((letter, index) => {
             const button = document.createElement("button");
@@ -148,25 +143,29 @@ const FinishQuiz = () => {
                 "outline-none",
                 "rounded-md",
                 "cursor-pointer",
-                "h-[28px]",
-                "w-[28px]",
+                "text-[14px]",
+                "h-[27px]",
+                "w-[27px]",
                 "border-2",
                 "mx-[2px]",
                 "sm:mx-1",
-                "sm:w-[2em]",
-                "sm:h-[2em]",
-                "md:w-[3em]",
-                "md:h-[3em]"
+                "sm:w-[34px]",
+                "sm:h-[34px]",
+                "lg:w-[38px]",
+                "lg:h-[38px]",
+                "sm:text-xl",
             );
             button.addEventListener("click", () => handleLetterClick(letter));
             buttonMap.current[letter] = button;
             if (index === 19) {
                 letterContainer.appendChild(br);
+            } else if (index === 10) {
+                letterContainer.appendChild(br1);
             }
             letterContainer.appendChild(button);
         });
     }, [handleLetterClick]);
-    
+
     const initializeGame = useCallback(() => {
         setWinCount(0);
         setLossCount(5);
@@ -199,13 +198,12 @@ const FinishQuiz = () => {
 
     const nextUnit = () => {
         console.log('next unit');
-
     }
 
 
     return (
         <>
-            <div className=" w-full max-w-4xl mx-auto flex justify-normal items-center flex-col gap-7">
+            <div className=" w-full max-w-4xl mx-auto flex justify-normal items-center flex-col gap-7 p-3 md:p-6">
                 <div className="finishQuizProgress w-full mx-auto mt-10 flex justify-between items-center gap-4">
                     <div className='flex items-center gap-2'>
                         <Link
@@ -230,22 +228,19 @@ const FinishQuiz = () => {
                         {lossCount > 0 && <span className='text-primary'>{lossCount}</span>}
                     </div>
                 </div>
-                <Card className="cardFinishQuiz w-[90%] max-w-[40em] h-[350px] p-4 text-center rounded-3xl flex flex-col justify-center items-center">
-                    {/* {gameState === "start" && (
-                        <Button
-                            onClick={startGame}
-                            className="w-full  md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 bg-pink-500 hover:bg-pink-600 border-pink-700"
-                        >
-                            Start
-                        </Button>
-                    )} */}
+                <div className=" w-full text-left">
+                    <h1 className='text-2xl sm:text-3xl font-bold'>
+                        Finish Quiz
+                    </h1>
+                </div>
+                <Card className="cardFinishQuiz w-full h-[350px] p-1 lg:p-4 text-center rounded-3xl flex flex-col justify-center items-center">
                     {gameState === "playing" && (
                         <>
                             <div className=" block">
-                                <div id="hint-ref" className="mb-4 text-black">
+                                <div id="hint-ref" className="mb-4 text-lg- text-gray-800 font-medium dark:text-white">
                                     Hint: {randomHint}
                                 </div>
-                                <div id="user-input-section"></div>
+                                <div id="user-input-section" className=" text-lg"></div>
                                 <div id="message" className="text-[#FE6873]"></div>
                                 <div id="letter-container" className="mt-8 space-y-2"></div>
                             </div>
