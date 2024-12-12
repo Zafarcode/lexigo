@@ -161,7 +161,6 @@ const FinishQuiz = () => {
             if (index === 19) {
                 letterContainer.appendChild(br);
             } else if (index === 10) {
-            } else if (index === 10) {
                 letterContainer.appendChild(br1);
             }
             letterContainer.appendChild(button);
@@ -237,7 +236,6 @@ const FinishQuiz = () => {
                         </h1>
                     </div>
                     <Card className="cardFinishQuiz w-full h-[350px] p-1 lg:p-4 text-center rounded-3xl flex flex-col justify-center items-center">
-                        <Card className="cardFinishQuiz w-[90%] max-w-[40em] h-[350px] p-1 sm:p-4 text-center rounded-3xl flex flex-col justify-center items-center">
                             {gameState === "playing" && (
                                 <>
                                     <div className=" block">
@@ -316,7 +314,6 @@ const FinishQuiz = () => {
 
                                 </>
                             )}
-                        </Card>
                     </Card>
                 </div>
             </div>

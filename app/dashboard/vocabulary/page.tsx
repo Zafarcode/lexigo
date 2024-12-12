@@ -102,9 +102,6 @@ const Vocabulary = () => {
 					})}
 				</ul>
 			</div>
-			<WordImage />
-			<FinishQuiz />
-			<MatchingPairs />
 		</section>
 		</>
 	)
