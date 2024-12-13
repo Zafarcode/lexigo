@@ -138,30 +138,36 @@ const FinishQuiz = () => {
         const letterContainer = document.getElementById("letter-container")!;
         letterContainer.innerHTML = "";
         const letters = "QWERTYUIOPASDFGHJKLZXCVBNM".split("");
-        const br = document.createElement("br");
+        let br = document.createElement("br");
+        let br1 = document.createElement("br");
         letters.forEach((letter, index) => {
             const button = document.createElement("button");
             button.innerText = letter;
+            
             button.classList.add(
                 "bg-white",
                 "text-gray-800",
                 "outline-none",
                 "rounded-md",
                 "cursor-pointer",
-                "h-[28px]",
-                "w-[28px]",
+                "text-[14px]",
+                "h-[27px]",
+                "w-[27px]",
                 "border-2",
                 "mx-[2px]",
                 "sm:mx-1",
-                "sm:w-[2em]",
-                "sm:h-[2em]",
-                "md:w-[3em]",
-                "md:h-[3em]"
+                "sm:w-[34px]",
+                "sm:h-[34px]",
+                "lg:w-[38px]",
+                "lg:h-[38px]",
+                "sm:text-xl",
             );
             button.addEventListener("click", () => handleLetterClick(letter));
             buttonMap.current[letter] = button;
             if (index === 19) {
                 letterContainer.appendChild(br);
+            }else if(index === 10) {
+                letterContainer.appendChild(br1);
             }
             letterContainer.appendChild(button);
         });
@@ -205,7 +211,7 @@ const FinishQuiz = () => {
 
     return (
         <>
-            <div className=" w-full max-w-4xl mx-auto flex justify-normal items-center flex-col gap-7">
+            <div className=" w-full p-3 max-w-4xl mx-auto flex justify-normal items-center flex-col gap-7">
                 <div className="finishQuizProgress w-full mx-auto mt-10 flex justify-between items-center gap-4">
                     <div className='flex items-center gap-2'>
                         <Link
@@ -230,15 +236,7 @@ const FinishQuiz = () => {
                         {lossCount > 0 && <span className='text-primary'>{lossCount}</span>}
                     </div>
                 </div>
-                <Card className="cardFinishQuiz w-[90%] max-w-[40em] h-[350px] p-4 text-center rounded-3xl flex flex-col justify-center items-center">
-                    {/* {gameState === "start" && (
-                        <Button
-                            onClick={startGame}
-                            className="w-full  md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 bg-pink-500 hover:bg-pink-600 border-pink-700"
-                        >
-                            Start
-                        </Button>
-                    )} */}
+                <Card className="cardFinishQuiz w-[90%] max-w-[40em] h-[350px] p-1 sm:p-4 text-center rounded-3xl flex flex-col justify-center items-center">
                     {gameState === "playing" && (
                         <>
                             <div className=" block">
