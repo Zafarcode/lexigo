@@ -47,12 +47,11 @@ const FinishQuiz = () => {
 
     useEffect(() => {
         randomWordRef.current = randomWord;
-    }, [randomWord]);    
+    }, [randomWord]);
 
     const generateWord = useCallback(() => {
         const randomIndex = Math.floor(Math.random() * options.length);
         const selectedWord = options[randomIndex];
-        console.log("Generated Word:", selectedWord.word_eng);
         setRandomWord(selectedWord.word_eng);
         setRandomHint(selectedWord.word_uzb);
 
@@ -69,17 +68,14 @@ const FinishQuiz = () => {
             setProgress(prev =>
                 Math.min(100, Math.round((prev + 100 / lengthOptions) * 100) / 100)
             )
-            console.log(loopCount);
             setGameState("continue");
         } else {
             setLoopCount((prev) => prev + 1);
-            console.log("You won the game!");
             setGameState("end");
         }
     }, [loopCount, lengthOptions]);
 
     const handleLoss = useCallback(() => {
-        console.log("Game Over!");
         setGameState("end");
     }, []);
 
@@ -88,7 +84,6 @@ const FinishQuiz = () => {
         if (!button || button.disabled) return;
 
         const charArray = randomWordRef.current.toUpperCase().split("");
-        console.log("randomWord:", randomWordRef.current);
         const inputSpaces = document.getElementsByClassName(
             "inputSpace"
         ) as HTMLCollectionOf<HTMLElement>;
@@ -103,7 +98,6 @@ const FinishQuiz = () => {
                     setWinCount((prev) => {
                         const winCount = prev + 1;
                         if (winCount === charArray.length) {
-                            console.log("continue");
                             handleWin();
                         }
                         return winCount;
@@ -143,7 +137,7 @@ const FinishQuiz = () => {
         letters.forEach((letter, index) => {
             const button = document.createElement("button");
             button.innerText = letter;
-            
+
             button.classList.add(
                 "bg-white",
                 "text-gray-800",
@@ -166,13 +160,13 @@ const FinishQuiz = () => {
             buttonMap.current[letter] = button;
             if (index === 19) {
                 letterContainer.appendChild(br);
-            }else if(index === 10) {
+            } else if (index === 10) {
                 letterContainer.appendChild(br1);
             }
             letterContainer.appendChild(button);
         });
     }, [handleLetterClick]);
-    
+
     const initializeGame = useCallback(() => {
         setWinCount(0);
         setLossCount(5);
@@ -205,121 +199,126 @@ const FinishQuiz = () => {
 
     const nextUnit = () => {
         console.log('next unit');
-
     }
 
 
     return (
         <>
-            <div className=" w-full p-3 max-w-4xl mx-auto flex justify-normal items-center flex-col gap-7">
-                <div className="finishQuizProgress w-full mx-auto mt-10 flex justify-between items-center gap-4">
-                    <div className='flex items-center gap-2'>
-                        <Link
-                            href='/dashboard/vocabulary'
-                            aria-label='Go back to vocabulary page'
-                        >
-                            <X className='h-6 w-6 text-gray-200 hover:text-primary hover:text-gray-400 transition-all' />
-                        </Link>
-                    </div>
-                    <Progress
-                        value={progress}
-                        className={cn('h-3 bg-pink-100', {
-                            'bg-pink-200': progress > 0,
-                        })}
-                        aria-label={`Quiz progress: ${progress}%`}
-                    />
-                    <div className='flex items-center justify-end space-x-1'>
-                        <Heart
-                            className={cn('h-4 w-4 text-primary')}
-                            aria-hidden='true'
+            <div className=" w-full max-w-4xl mx-auto flex justify-normal items-center flex-col gap-7 p-3 md:p-6">
+                <div className=" w-full p-3 max-w-4xl mx-auto flex justify-normal items-center flex-col gap-7">
+                    <div className="finishQuizProgress w-full mx-auto mt-10 flex justify-between items-center gap-4">
+                        <div className='flex items-center gap-2'>
+                            <Link
+                                href='/dashboard/vocabulary'
+                                aria-label='Go back to vocabulary page'
+                            >
+                                <X className='h-6 w-6 text-gray-200 hover:text-primary hover:text-gray-400 transition-all' />
+                            </Link>
+                        </div>
+                        <Progress
+                            value={progress}
+                            className={cn('h-3 bg-pink-100', {
+                                'bg-pink-200': progress > 0,
+                            })}
+                            aria-label={`Quiz progress: ${progress}%`}
                         />
-                        {lossCount > 0 && <span className='text-primary'>{lossCount}</span>}
+                        <div className='flex items-center justify-end space-x-1'>
+                            <Heart
+                                className={cn('h-4 w-4 text-primary')}
+                                aria-hidden='true'
+                            />
+                            {lossCount > 0 && <span className='text-primary'>{lossCount}</span>}
+                        </div>
                     </div>
-                </div>
-                <Card className="cardFinishQuiz w-[90%] max-w-[40em] h-[350px] p-1 sm:p-4 text-center rounded-3xl flex flex-col justify-center items-center">
-                    {gameState === "playing" && (
-                        <>
-                            <div className=" block">
-                                <div id="hint-ref" className="mb-4 text-black">
-                                    Hint: {randomHint}
-                                </div>
-                                <div id="user-input-section"></div>
-                                <div id="message" className="text-[#FE6873]"></div>
-                                <div id="letter-container" className="mt-8 space-y-2"></div>
-                            </div>
-                            <Button
-                                onClick={continueGame}
-                                className="w-full hidden md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 bg-pink-500 hover:bg-pink-600 border-pink-700"
-                            >
-                                Continue
-                            </Button>
-                        </>
-                    )}
-                    {gameState === "continue" && (
-                        <>
-                            <div className=" hidden">
-                                <div id="hint-ref" className="mb-4 text-black">
-                                    Hint: {randomHint}
-                                </div>
-                                <div id="user-input-section"></div>
-                                <div id="message" className="text-[#FE6873]"></div>
-                                <div id="letter-container" className="mt-8 space-y-2"></div>
-                            </div>
-                            <Button
-                                onClick={continueGame}
-                                className=" w-full md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 bg-green-500 hover:bg-green-600 border-green-700"
-                            >
-                                Continue
-                            </Button>
-                        </>
-                    )}
-                    {gameState === "end" && (
-                        <>
-                            {winCount === randomWord.length ?
-                                (
-                                    <>
-                                        <div className="text-lg font-bold text-red-500">
-                                            You Won!
+                    <div className=" w-full text-left">
+                        <h1 className='text-2xl sm:text-3xl font-bold'>
+                            Finish Quiz
+                        </h1>
+                    </div>
+                    <Card className="cardFinishQuiz w-full h-[350px] p-1 lg:p-4 text-center rounded-3xl flex flex-col justify-center items-center">
+                            {gameState === "playing" && (
+                                <>
+                                    <div className=" block">
+                                        <div id="hint-ref" className="mb-4 text-lg- text-gray-800 font-medium dark:text-white">
+                                            Hint: {randomHint}
                                         </div>
-                                        <div className="flex gap-4 mt-4">
-                                            <Button
-                                                onClick={restartGame}
-                                                className="bg-blue-500 text-white px-4 py-2 rounded-md"
-                                            >
-                                                Restart
-                                            </Button>
-                                            <Button
-                                                onClick={nextUnit}
-                                                className="bg-blue-500 text-white px-4 py-2 rounded-md"
-                                            >
-                                                Next Unit
-                                            </Button>
+                                        <div id="user-input-section" className=" text-lg"></div>
+                                        <div id="message" className="text-[#FE6873]"></div>
+                                        <div id="letter-container" className="mt-8 space-y-2"></div>
+                                    </div>
+                                    <Button
+                                        onClick={continueGame}
+                                        className="w-full hidden md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 bg-pink-500 hover:bg-pink-600 border-pink-700"
+                                    >
+                                        Continue
+                                    </Button>
+                                </>
+                            )}
+                            {gameState === "continue" && (
+                                <>
+                                    <div className=" hidden">
+                                        <div id="hint-ref" className="mb-4 text-black">
+                                            Hint: {randomHint}
                                         </div>
-                                    </>
-                                )
-                                : (
-                                    <>
-                                        <div className="text-lg font-bold text-red-500">
-                                            Game Over
-                                        </div>
-                                        <div className="flex gap-4 mt-4">
-                                            <Button
-                                                onClick={restartGame}
-                                                className="w-full md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 bg-pink-500 hover:bg-pink-600 border-pink-700"
-                                            >
-                                                Restart
-                                            </Button>
-                                        </div>
-                                    </>
-                                )}
+                                        <div id="user-input-section"></div>
+                                        <div id="message" className="text-[#FE6873]"></div>
+                                        <div id="letter-container" className="mt-8 space-y-2"></div>
+                                    </div>
+                                    <Button
+                                        onClick={continueGame}
+                                        className=" w-full md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 bg-green-500 hover:bg-green-600 border-green-700"
+                                    >
+                                        Continue
+                                    </Button>
+                                </>
+                            )}
+                            {gameState === "end" && (
+                                <>
+                                    {winCount === randomWord.length ?
+                                        (
+                                            <>
+                                                <div className="text-lg font-bold text-red-500">
+                                                    You Won!
+                                                </div>
+                                                <div className="flex gap-4 mt-4">
+                                                    <Button
+                                                        onClick={restartGame}
+                                                        className="bg-blue-500 text-white px-4 py-2 rounded-md"
+                                                    >
+                                                        Restart
+                                                    </Button>
+                                                    <Button
+                                                        onClick={nextUnit}
+                                                        className="bg-blue-500 text-white px-4 py-2 rounded-md"
+                                                    >
+                                                        Next Unit
+                                                    </Button>
+                                                </div>
+                                            </>
+                                        )
+                                        : (
+                                            <>
+                                                <div className="text-lg font-bold text-red-500">
+                                                    Game Over
+                                                </div>
+                                                <div className="flex gap-4 mt-4">
+                                                    <Button
+                                                        onClick={restartGame}
+                                                        className="w-full md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 bg-pink-500 hover:bg-pink-600 border-pink-700"
+                                                    >
+                                                        Restart
+                                                    </Button>
+                                                </div>
+                                            </>
+                                        )}
 
-                        </>
-                    )}
-                </Card>
+                                </>
+                            )}
+                    </Card>
+                </div>
             </div>
         </>
     );
 };
 
 export default FinishQuiz;
-
