@@ -47,7 +47,7 @@
 		"fuma-content": "^0.0.2",
 		"input-otp": "^1.2.4",
 		"lucide-react": "^0.395.0",
-		"next": "14.2.12",
+		"next": "14.2.20",
 		"next-auth": "^4.24.7",
 		"next-docs-mdx": "^7.1.2",
 		"next-docs-ui": "^7.1.2",
