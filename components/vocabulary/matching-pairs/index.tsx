@@ -97,10 +97,10 @@ const MatchingPairs: React.FC = () => {
 			className='min-h-screen flex items-center justify-center '
 		>
 			<div className='w-full max-w-4xl p-0 overflow-hidden shadow-none border-none'>
-				<CardContent className='p-3 sm:p-6'>
+				<CardContent className='p-3 md:p-6'>
 					{gameOver ? (
 						<div className='flex flex-col items-center justify-center min-h-[300px]'>
-							<h1 className='text-3xl sm:text-4xl font-bold text-pink-600 mb-6'>
+							<h1 className='text-3xl md:text-4xl font-bold text-pink-600 mb-6'>
 								Game Over
 							</h1>
 							<Button variant='secondary' onClick={resetGame}>
@@ -125,12 +125,12 @@ const MatchingPairs: React.FC = () => {
 							>
 								NEW WORD
 							</Badge>
-							<h1 className='text-2xl sm:text-3xl font-bold mb-6 text-start'>
+							<h1 className='text-2xl md:text-3xl font-bold mb-6 text-start'>
 								Tap the matching pairs
 							</h1>
-							<div className='grid grid-cols-2 sm:grid-cols-2 gap-1 mb-2'>
+							<div className='grid grid-cols-2 md:grid-cols-2 gap-1 mb-2'>
 								<Card className='p-2'>
-									<h3 className='text-lg sm:text-xl font-bold mb-4 hidden sm:block'>
+									<h3 className='text-lg md:text-xl font-bold mb-4 hidden md:block'>
 										English
 									</h3>
 									<div className='grid grid-cols-1 gap-2'>
@@ -140,7 +140,7 @@ const MatchingPairs: React.FC = () => {
 												variant='outline'
 												onClick={() => handleSelect(id, value)}
 												disabled={matchedPairs.flat().includes(value)}
-												className={cn('border rounded-md text-sm sm:text-lg', {
+												className={cn('border rounded-md text-sm md:text-lg', {
 													'border-pink-500 text-pink-500':
 														selected.some(s => s.id === id) && !feedback,
 													'border-gray-200 text-gray-700':
@@ -156,7 +156,7 @@ const MatchingPairs: React.FC = () => {
 									</div>
 								</Card>
 								<Card className='p-2'>
-									<h3 className='text-lg sm:text-xl font-bold mb-4 hidden sm:block'>
+									<h3 className='text-lg md:text-xl font-bold mb-4 hidden sm:block'>
 										Uzbek
 									</h3>
 									<div className='grid grid-cols-1 gap-2'>
@@ -166,7 +166,7 @@ const MatchingPairs: React.FC = () => {
 												variant='outline'
 												onClick={() => handleSelect(id, value)}
 												disabled={matchedPairs.flat().includes(value)}
-												className={cn('border rounded-md text-sm sm:text-lg', {
+												className={cn('border rounded-md text-sm md:text-lg', {
 													'border-pink-500 text-pink-500':
 														selected.some(s => s.id === id) && !feedback,
 													'border-gray-200 text-gray-700':
