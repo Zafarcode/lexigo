@@ -64,6 +64,7 @@ const FinishQuiz = () => {
         randomWordRef.current = randomWord;
     }, [randomWord]);
 
+    // generate word
     const generateWord = useCallback(() => {
         const randomIndex: any = generateRandomValue(options);
         const selectedWord = options[randomIndex];
