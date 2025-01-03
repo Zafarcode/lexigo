@@ -70,7 +70,7 @@ const FinishQuiz = () => {
         const selectedWord = options[randomIndex];
         setRandomWord(selectedWord.word_eng);
         setRandomHint(selectedWord.word_uzb);
-    
+
         const userInpSection = document.getElementById("user-input-section");
         if (userInpSection) {
             userInpSection.innerHTML = selectedWord.word_eng
@@ -108,8 +108,7 @@ const FinishQuiz = () => {
         ) as HTMLCollectionOf<HTMLElement>;
 
         if (charArray.includes(letter)) {
-            button.classList.remove('bg-white')
-            button.classList.add("bg-green-500", "text-white");
+            button.dataset.status = 'correct';
             button.disabled = true;
             charArray.forEach((char, index) => {
                 if (char === letter) {
@@ -124,8 +123,7 @@ const FinishQuiz = () => {
                 }
             });
         } else {
-            button.classList.remove('bg-white')
-            button.classList.add("bg-red-500", "text-white");
+            button.dataset.status = 'incorrect';
             button.disabled = true;
             setLossCount((prev) => {
                 const newLossCount = prev - 1;
@@ -177,13 +175,21 @@ const FinishQuiz = () => {
         };
     }, [gameState, initializeGame, handleKeyPress]);
 
+    const resetButtonStatuses = () => {
+        Object.keys(buttonMap.current).forEach((letter) => {
+            buttonMap.current[letter].dataset.status = "neutral";
+        });
+    };
+
     const restartGame = () => {
+        resetButtonStatuses();
         setLoopCount(0);
         setProgress(0)
         setGameState("playing");
     }
 
     const continueGame = () => {
+        resetButtonStatuses();
         generateWord();
         setGameState("playing");
     };
@@ -236,43 +242,43 @@ const FinishQuiz = () => {
                                     <div id="user-input-section" className=" text-lg"></div>
                                     <div id="message" className="text-[#FE6873]"></div>
                                     <div id="letter-container" className="mt-8 space-y-2">
-                                        <div className="keyboard-row">
-                                            {row1.map((letter) => (
-                                                <button
-                                                    key={letter}
-                                                    data-letter={letter}
-                                                    className="bg-white text-gray-800 outline-none rounded-md cursor-pointer text-[14px] h-[27px] w-[27px] border-2 mx-[2px] sm:mx-1 sm:w-[34px] sm:h-[34px] lg:w-[38px] lg:h-[38px] sm:text-xl"
-                                                >
-                                                    {letter}
-                                                </button>
-                                            ))}
-                                        </div>
-                                        <div className="keyboard-row">
-                                            {row2.map((letter) => (
-                                                <button
-                                                    key={letter}
-                                                    data-letter={letter}
-                                                    className="bg-white text-gray-800 outline-none rounded-md cursor-pointer text-[14px] h-[27px] w-[27px] border-2 mx-[2px] sm:mx-1 sm:w-[34px] sm:h-[34px] lg:w-[38px] lg:h-[38px] sm:text-xl"
-                                                >
-                                                    {letter}
-                                                </button>
-                                            ))}
-                                        </div>
-                                        <div className="keyboard-row">
-                                            {row3.map((letter) => (
-                                                <button
-                                                    key={letter}
-                                                    data-letter={letter}
-                                                    className="bg-white text-gray-800 outline-none rounded-md cursor-pointer text-[14px] h-[27px] w-[27px] border-2 mx-[2px] sm:mx-1 sm:w-[34px] sm:h-[34px] lg:w-[38px] lg:h-[38px] sm:text-xl"
-                                                >
-                                                    {letter}
-                                                </button>
-                                            ))}
-                                        </div>
+                                        {[row1, row2, row3].map((row, rowIndex) => (
+                                            <div key={rowIndex} className="keyboard-row">
+                                                {row.map((letter) => (
+                                                    <button
+                                                        key={letter}
+                                                        data-letter={letter}
+                                                        data-status={
+                                                            buttonMap.current[letter]?.dataset
+                                                                .status || "neutral"
+                                                        }
+                                                        className={cn(
+                                                            "outline-none rounded-md cursor-pointer text-[14px] h-[27px] w-[27px] border-2 mx-[2px] sm:mx-1 sm:w-[34px] sm:h-[34px] lg:w-[38px] lg:h-[38px] sm:text-xl",
+                                                            {
+                                                                "bg-white text-gray-800":
+                                                                    buttonMap.current[letter]?.dataset
+                                                                        .status === "neutral",
+                                                                "bg-green-500 text-white":
+                                                                    buttonMap.current[letter]?.dataset
+                                                                        .status === "correct",
+                                                                "bg-red-500 text-white":
+                                                                    buttonMap.current[letter]?.dataset
+                                                                        .status === "incorrect",
+                                                            }
+                                                        )}
+                                                    >
+                                                        {letter}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
                                 <Button
-                                    onClick={continueGame}
+                                    onClick={() => {
+                                        resetButtonStatuses();
+                                        continueGame();
+                                    }}
                                     className="w-full hidden md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 bg-pink-500 hover:bg-pink-600 border-pink-700"
                                 >
                                     Continue
@@ -282,7 +288,10 @@ const FinishQuiz = () => {
                         {gameState === "continue" && (
                             <>
                                 <Button
-                                    onClick={continueGame}
+                                    onClick={() => {
+                                        resetButtonStatuses();
+                                        continueGame();
+                                    }}
                                     className=" w-full md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 bg-green-500 hover:bg-green-600 border-green-700"
                                 >
                                     Continue
@@ -317,8 +326,8 @@ const FinishQuiz = () => {
                             </>
                         )}
                     </Card>
-                </div>
-            </div>
+                </div >
+            </div >
         </>
     );
 };
