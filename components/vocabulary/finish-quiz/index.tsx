@@ -1,13 +1,25 @@
 "use client";
 import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { Card } from "@/components/ui/card";
-import Image from "next/image";
-import heart from "@/public/assets/icons/heart.png";
-import { Check, Heart, Volume2, X } from 'lucide-react'
+import { Heart, X } from 'lucide-react'
 import Link from "next/link";
 import { Progress } from "@/components/ui/progress";
 import { cn } from '@/lib/utils'
 import { Button } from "@/components/ui/button";
+
+const generateRandomValue = (() => {
+    let availableIndices: number[] = [];
+
+    return (array: any[]): number | undefined => {
+        if (availableIndices.length === 0) {
+            availableIndices = Array.from(array.keys());
+        }
+
+        const randomIndex = Math.floor(Math.random() * availableIndices.length);
+
+        return availableIndices.splice(randomIndex, 1)[0];
+    };
+})();
 
 const FinishQuiz = () => {
     const [randomWord, setRandomWord] = useState<string>("");
@@ -18,6 +30,9 @@ const FinishQuiz = () => {
     const [loopCount, setLoopCount] = useState<number>(0);
     const [progress, setProgress] = useState(0)
     const [gameState, setGameState] = useState<"playing" | "end" | "continue">("playing");
+    const row1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
+    const row2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"]
+    const row3 = ["Z", "X", "C", "V", "B", "N", "M"]
 
     const buttonMap = useRef<Record<string, HTMLButtonElement>>({});
     const options = useMemo(() => [
@@ -49,18 +64,22 @@ const FinishQuiz = () => {
         randomWordRef.current = randomWord;
     }, [randomWord]);
 
+    // generate word
     const generateWord = useCallback(() => {
-        const randomIndex = Math.floor(Math.random() * options.length);
+        const randomIndex: any = generateRandomValue(options);
         const selectedWord = options[randomIndex];
         setRandomWord(selectedWord.word_eng);
         setRandomHint(selectedWord.word_uzb);
 
-        const userInpSection = document.getElementById("user-input-section")!;
-        userInpSection.innerHTML = selectedWord.word_eng
-            .split("")
-            .map(() => `<span class="inputSpace">_</span>`)
-            .join("");
+        const userInpSection = document.getElementById("user-input-section");
+        if (userInpSection) {
+            userInpSection.innerHTML = selectedWord.word_eng
+                .split("")
+                .map(() => `<span class="inputSpace">_</span>`)
+                .join("");
+        }
     }, [options]);
+
 
     const handleWin = useCallback(() => {
         if (loopCount < lengthOptions - 1) {
@@ -89,8 +108,7 @@ const FinishQuiz = () => {
         ) as HTMLCollectionOf<HTMLElement>;
 
         if (charArray.includes(letter)) {
-            button.classList.remove('bg-white')
-            button.classList.add("bg-green-500", "text-white");
+            button.dataset.status = 'correct';
             button.disabled = true;
             charArray.forEach((char, index) => {
                 if (char === letter) {
@@ -105,8 +123,7 @@ const FinishQuiz = () => {
                 }
             });
         } else {
-            button.classList.remove('bg-white')
-            button.classList.add("bg-red-500", "text-white");
+            button.dataset.status = 'incorrect';
             button.disabled = true;
             setLossCount((prev) => {
                 const newLossCount = prev - 1;
@@ -130,40 +147,12 @@ const FinishQuiz = () => {
 
     const createLetterButtons = useCallback(() => {
         const letterContainer = document.getElementById("letter-container")!;
-        letterContainer.innerHTML = "";
-        const letters = "QWERTYUIOPASDFGHJKLZXCVBNM".split("");
-        let br = document.createElement("br");
-        let br1 = document.createElement("br");
-        letters.forEach((letter, index) => {
-            const button = document.createElement("button");
-            button.innerText = letter;
-
-            button.classList.add(
-                "bg-white",
-                "text-gray-800",
-                "outline-none",
-                "rounded-md",
-                "cursor-pointer",
-                "text-[14px]",
-                "h-[27px]",
-                "w-[27px]",
-                "border-2",
-                "mx-[2px]",
-                "sm:mx-1",
-                "sm:w-[34px]",
-                "sm:h-[34px]",
-                "lg:w-[38px]",
-                "lg:h-[38px]",
-                "sm:text-xl",
-            );
-            button.addEventListener("click", () => handleLetterClick(letter));
-            buttonMap.current[letter] = button;
-            if (index === 19) {
-                letterContainer.appendChild(br);
-            } else if (index === 10) {
-                letterContainer.appendChild(br1);
-            }
-            letterContainer.appendChild(button);
+        const buttons = letterContainer.querySelectorAll("button[data-letter]");
+        buttons.forEach((button) => {
+            const letter = button.getAttribute("data-letter")!;
+            const htmlButton = button as HTMLButtonElement;
+            htmlButton.addEventListener("click", () => handleLetterClick(letter));
+            buttonMap.current[letter] = htmlButton;
         });
     }, [handleLetterClick]);
 
@@ -186,13 +175,21 @@ const FinishQuiz = () => {
         };
     }, [gameState, initializeGame, handleKeyPress]);
 
+    const resetButtonStatuses = () => {
+        Object.keys(buttonMap.current).forEach((letter) => {
+            buttonMap.current[letter].dataset.status = "neutral";
+        });
+    };
+
     const restartGame = () => {
+        resetButtonStatuses();
         setLoopCount(0);
         setProgress(0)
         setGameState("playing");
     }
 
     const continueGame = () => {
+        resetButtonStatuses();
         generateWord();
         setGameState("playing");
     };
@@ -236,87 +233,101 @@ const FinishQuiz = () => {
                         </h1>
                     </div>
                     <Card className="cardFinishQuiz w-full h-[350px] p-1 lg:p-4 text-center rounded-3xl flex flex-col justify-center items-center">
-                            {gameState === "playing" && (
-                                <>
-                                    <div className=" block">
-                                        <div id="hint-ref" className="mb-4 text-lg- text-gray-800 font-medium dark:text-white">
-                                            Hint: {randomHint}
-                                        </div>
-                                        <div id="user-input-section" className=" text-lg"></div>
-                                        <div id="message" className="text-[#FE6873]"></div>
-                                        <div id="letter-container" className="mt-8 space-y-2"></div>
+                        {gameState === "playing" && (
+                            <>
+                                <div className=" block">
+                                    <div id="hint-ref" className="mb-4 text-lg- text-gray-800 font-medium dark:text-white">
+                                        Hint: {randomHint}
                                     </div>
-                                    <Button
-                                        onClick={continueGame}
-                                        className="w-full hidden md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 bg-pink-500 hover:bg-pink-600 border-pink-700"
-                                    >
-                                        Continue
-                                    </Button>
-                                </>
-                            )}
-                            {gameState === "continue" && (
-                                <>
-                                    <div className=" hidden">
-                                        <div id="hint-ref" className="mb-4 text-black">
-                                            Hint: {randomHint}
-                                        </div>
-                                        <div id="user-input-section"></div>
-                                        <div id="message" className="text-[#FE6873]"></div>
-                                        <div id="letter-container" className="mt-8 space-y-2"></div>
+                                    <div id="user-input-section" className=" text-lg"></div>
+                                    <div id="message" className="text-[#FE6873]"></div>
+                                    <div id="letter-container" className="mt-8 space-y-2">
+                                        {[row1, row2, row3].map((row, rowIndex) => (
+                                            <div key={rowIndex} className="keyboard-row">
+                                                {row.map((letter) => (
+                                                    <button
+                                                        key={letter}
+                                                        data-letter={letter}
+                                                        data-status={
+                                                            buttonMap.current[letter]?.dataset
+                                                                .status || "neutral"
+                                                        }
+                                                        className={cn(
+                                                            "outline-none rounded-md cursor-pointer text-[14px] h-[27px] w-[27px] border-2 mx-[2px] sm:mx-1 sm:w-[34px] sm:h-[34px] lg:w-[38px] lg:h-[38px] sm:text-xl",
+                                                            {
+                                                                "bg-white text-gray-800":
+                                                                    buttonMap.current[letter]?.dataset
+                                                                        .status === "neutral",
+                                                                "bg-green-500 text-white":
+                                                                    buttonMap.current[letter]?.dataset
+                                                                        .status === "correct",
+                                                                "bg-red-500 text-white":
+                                                                    buttonMap.current[letter]?.dataset
+                                                                        .status === "incorrect",
+                                                            }
+                                                        )}
+                                                    >
+                                                        {letter}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        ))}
                                     </div>
+                                </div>
+                                <Button
+                                    onClick={() => {
+                                        resetButtonStatuses();
+                                        continueGame();
+                                    }}
+                                    className="w-full hidden md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 bg-pink-500 hover:bg-pink-600 border-pink-700"
+                                >
+                                    Continue
+                                </Button>
+                            </>
+                        )}
+                        {gameState === "continue" && (
+                            <>
+                                <Button
+                                    onClick={() => {
+                                        resetButtonStatuses();
+                                        continueGame();
+                                    }}
+                                    className=" w-full md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 bg-green-500 hover:bg-green-600 border-green-700"
+                                >
+                                    Continue
+                                </Button>
+                            </>
+                        )}
+                        {gameState === "end" && (
+                            <>
+                                <div className="text-lg font-bold text-red-500">
+                                    {winCount === randomWord.length ? "You Won!" : "Game Over"}
+                                </div>
+                                <div className="flex gap-4 mt-4">
                                     <Button
-                                        onClick={continueGame}
-                                        className=" w-full md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 bg-green-500 hover:bg-green-600 border-green-700"
+                                        onClick={restartGame}
+                                        className={
+                                            winCount === randomWord.length
+                                                ? "bg-blue-500 text-white px-4 py-2 rounded-md"
+                                                : "w-full md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 bg-pink-500 hover:bg-pink-600 border-pink-700"
+                                        }
                                     >
-                                        Continue
+                                        Restart
                                     </Button>
-                                </>
-                            )}
-                            {gameState === "end" && (
-                                <>
-                                    {winCount === randomWord.length ?
-                                        (
-                                            <>
-                                                <div className="text-lg font-bold text-red-500">
-                                                    You Won!
-                                                </div>
-                                                <div className="flex gap-4 mt-4">
-                                                    <Button
-                                                        onClick={restartGame}
-                                                        className="bg-blue-500 text-white px-4 py-2 rounded-md"
-                                                    >
-                                                        Restart
-                                                    </Button>
-                                                    <Button
-                                                        onClick={nextUnit}
-                                                        className="bg-blue-500 text-white px-4 py-2 rounded-md"
-                                                    >
-                                                        Next Unit
-                                                    </Button>
-                                                </div>
-                                            </>
-                                        )
-                                        : (
-                                            <>
-                                                <div className="text-lg font-bold text-red-500">
-                                                    Game Over
-                                                </div>
-                                                <div className="flex gap-4 mt-4">
-                                                    <Button
-                                                        onClick={restartGame}
-                                                        className="w-full md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 bg-pink-500 hover:bg-pink-600 border-pink-700"
-                                                    >
-                                                        Restart
-                                                    </Button>
-                                                </div>
-                                            </>
-                                        )}
-
-                                </>
-                            )}
+                                    {winCount === randomWord.length && (
+                                        <Button
+                                            onClick={nextUnit}
+                                            className="bg-blue-500 text-white px-4 py-2 rounded-md"
+                                        >
+                                            Next Unit
+                                        </Button>
+                                    )}
+                                </div>
+                            </>
+                        )}
                     </Card>
-                </div>
-            </div>
+                </div >
+            </div >
         </>
     );
 };
