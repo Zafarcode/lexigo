@@ -1,5 +1,6 @@
 'use client'
 
+import { Button } from '@/components/ui/button'
 import { CardContent } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { motion } from 'framer-motion'
@@ -150,12 +151,12 @@ export default function Fillinblank() {
 								</span>
 								/{questions.length}
 							</p>
-							<button
+							<Button
 								onClick={handleRestartQuiz}
 								className='mt-6 w-40 py-2 rounded-lg bg-purple-600 text-white'
 							>
 								Restart Quiz
-							</button>
+							</Button>
 						</div>
 					) : (
 						<div className='relative w-full max-w-4xl border-2 rounded-lg shadow-md p-6 mt-16'>
@@ -177,7 +178,7 @@ export default function Fillinblank() {
 							</p>
 							<div className='grid grid-cols-1 sm:grid-cols-3 gap-5'>
 								{currentQuestion.options.map((option, index) => (
-									<button
+									<Button
 										key={index}
 										onClick={() => setSelectedOption(option)}
 										className={`mt-6 w-full sm:w-auto py-2 rounded-lg border text-xl ${
@@ -187,7 +188,7 @@ export default function Fillinblank() {
 										}`}
 									>
 										{option}
-									</button>
+									</Button>
 								))}
 							</div>
 						</div>
@@ -200,12 +201,12 @@ export default function Fillinblank() {
 							<p className='text-green-600'>✅ Well done!</p>
 						) : !gameOver && status === 'incorrect' ? (
 							<p className='text-red-600'>
-								❌ Correct Answer: {currentQuestion.correctAnswer}
+								<X /> Correct Answer: {currentQuestion.correctAnswer}
 							</p>
 						) : null}
 					</div>
 					{!gameOver && (
-						<button
+						<Button
 							onClick={status === null ? handleCheckAnswer : handleNextQuestion}
 							className={`w-full sm:w-40 h-12 rounded-lg text-white ${
 								status
@@ -216,7 +217,7 @@ export default function Fillinblank() {
 							}`}
 						>
 							{status === null ? 'CHECK' : 'NEXT'}
-						</button>
+						</Button>
 					)}
 				</div>
 			</div>
