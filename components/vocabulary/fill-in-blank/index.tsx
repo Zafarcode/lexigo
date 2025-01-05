@@ -169,10 +169,10 @@ export default function Fillinblank() {
 										{part}
 										{index <
 											currentQuestion.question.split('___').length - 1 && (
-											<span className='underline decoration-dashed'>
-												{selectedOption || '___'}
-											</span>
-										)}
+												<span className='underline decoration-dashed'>
+													{selectedOption || '___'}
+												</span>
+											)}
 									</span>
 								))}
 							</p>
@@ -181,11 +181,10 @@ export default function Fillinblank() {
 									<Button
 										key={index}
 										onClick={() => setSelectedOption(option)}
-										className={`mt-6 w-full sm:w-auto py-2 rounded-lg border text-xl ${
-											selectedOption === option
-												? 'bg-pink-500 text-white border-pink-700'
-												: 'bg-gray-100 text-gray-800 border-gray-300'
-										}`}
+										className={`  ${selectedOption === option
+											? 'border-blue-400 text-blue-400 bg-blue-50 hover:bg-blue-50'
+											: 'bg-white hover:bg-gray-50 text-gray-800 border-gray-300'
+											}`}
 									>
 										{option}
 									</Button>
@@ -208,13 +207,12 @@ export default function Fillinblank() {
 					{!gameOver && (
 						<Button
 							onClick={status === null ? handleCheckAnswer : handleNextQuestion}
-							className={`w-full sm:w-40 h-12 rounded-lg text-white ${
-								status
-									? status === 'correct'
-										? 'bg-green-500'
-										: 'bg-red-500'
-									: 'bg-pink-500'
-							}`}
+							className={`w-full md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 ${status
+								? status === 'correct'
+									? 'bg-green-500 hover:bg-green-600 border-green-700'
+									: 'bg-red-500 hover:bg-red-600 border-red-700'
+								: 'bg-pink-500 hover:bg-pink-600 border-pink-700'
+								}`}
 						>
 							{status === null ? 'CHECK' : 'NEXT'}
 						</Button>
