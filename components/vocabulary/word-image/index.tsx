@@ -12,9 +12,15 @@ import { Check, Heart, Volume2, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import { quizData } from './mock'
+import { ImageSelection } from '@/types'
 
-export default function WordImage() {
+type WordImageProps = {
+	quizData: ImageSelection[]
+	onViewed: (itemId: number) => void
+}
+
+
+export default function WordImage({ quizData, onViewed }: WordImageProps) {
 	const { handleNormalSpeech } = useTTS()
 	const [currentStep, setCurrentStep] = useState(0)
 	const [selected, setSelected] = useState<string | null>(null)
@@ -56,6 +62,8 @@ export default function WordImage() {
 			setProgress(prev =>
 				Math.min(100, Math.round((prev + 100 / quizData.length) * 100) / 100)
 			)
+
+			onViewed(quizData[currentStep].id)
 
 			if (currentStep < quizData.length - 1) {
 				setCurrentStep(prev => prev + 1)

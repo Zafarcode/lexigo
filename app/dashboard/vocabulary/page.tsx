@@ -4,10 +4,6 @@ import { buttonVariants } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { LogoIcon } from '@/components/utils/icons'
-import FinishQuiz from '@/components/vocabulary/finish-quiz'
-import MatchingPairs from '@/components/vocabulary/matching-pairs'
-import WordImage from '@/components/vocabulary/word-image'
-import Fillinblank from '@/components/vocabulary/fill-in-blank'
 import { cn } from '@/lib/utils'
 import { useProgressStore } from '@/store/use-progress'
 import { motion } from 'framer-motion'
@@ -18,19 +14,6 @@ const Vocabulary = () => {
 	const { sections } = useProgressStore()
 
 	return (
-		<>
-			{/* Word Image game */}
-			<WordImage />
-
-			{/* Matching Pairs game */}
-			<MatchingPairs />
-
-			{/* Fill-in-blank game */}
-			<Fillinblank />
-
-			{/* Finish Quiz game */}
-			<FinishQuiz />
-
 			<section className='py-12'>
 				<div className='container'>
 					<h1 className='text-2xl lg:text-[40px] lg:leading-[48px] font-bold text-center mb-12'>
@@ -40,7 +23,7 @@ const Vocabulary = () => {
 					<ul className='max-w-4xl mx-auto space-y-8'>
 						{sections.map((section, index) => {
 							const completedUnits = section.units.filter(
-								(u: { isCompleted: any }) => u.isCompleted
+								(u: { isCompleted: boolean }) => u.isCompleted
 							).length
 							const totalUnits = section.units.length
 							const progress = (completedUnits / totalUnits) * 100
@@ -106,7 +89,6 @@ const Vocabulary = () => {
 					</ul>
 				</div>
 			</section>
-		</>
 	)
 }
 
