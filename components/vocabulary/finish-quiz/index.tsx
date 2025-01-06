@@ -1,335 +1,185 @@
-"use client";
-import { useEffect, useState, useRef, useCallback, useMemo } from "react";
-import { Card } from "@/components/ui/card";
+'use client'
+import { useEffect, useState, useCallback } from 'react'
+import { Card } from '@/components/ui/card'
 import { Heart, X } from 'lucide-react'
-import Link from "next/link";
-import { Progress } from "@/components/ui/progress";
-import { cn } from '@/lib/utils'
-import { Button } from "@/components/ui/button";
+import Link from 'next/link'
+import { Progress } from '@/components/ui/progress'
+import { Button } from '@/components/ui/button'
+import Confetti from 'react-confetti'
+import { FinishQuiz as FinishQuizType } from '@/types'
 
-const generateRandomValue = (() => {
-    let availableIndices: number[] = [];
+type FinishQuizProps = {
+	options: FinishQuizType[]
+	onViewed: (itemId: number) => void
+}
 
-    return (array: any[]): number | undefined => {
-        if (availableIndices.length === 0) {
-            availableIndices = Array.from(array.keys());
-        }
+const FinishQuiz = ({ options, onViewed }: FinishQuizProps) => {
+	const [currentIndex, setCurrentIndex] = useState(0)
+	const [lossCount, setLossCount] = useState(5)
+	const [progress, setProgress] = useState(0)
+	const [gameState, setGameState] = useState<'playing' | 'continue'>('playing')
+	const [inputSpaces, setInputSpaces] = useState<string[]>([])
+	const [clickedLetters, setClickedLetters] = useState<Record<string, boolean>>(
+		{}
+	)
+	const [showConfetti, setShowConfetti] = useState(false)
 
-        const randomIndex = Math.floor(Math.random() * availableIndices.length);
+	const currentWord = options[currentIndex]?.en || ''
+	const currentHint = options[currentIndex]?.uz || ''
 
-        return availableIndices.splice(randomIndex, 1)[0];
-    };
-})();
+	const initializeWord = useCallback(() => {
+		setInputSpaces(Array(currentWord.length).fill('_'))
+		setClickedLetters({})
+	}, [currentWord])
 
-const FinishQuiz = () => {
-    const [randomWord, setRandomWord] = useState<string>("");
-    const randomWordRef = useRef(randomWord);
-    const [randomHint, setRandomHint] = useState<string>("");
-    const [winCount, setWinCount] = useState<number>(0);
-    const [lossCount, setLossCount] = useState<number>(5);
-    const [loopCount, setLoopCount] = useState<number>(0);
-    const [progress, setProgress] = useState(0)
-    const [gameState, setGameState] = useState<"playing" | "end" | "continue">("playing");
-    const row1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
-    const row2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"]
-    const row3 = ["Z", "X", "C", "V", "B", "N", "M"]
+	const handleWin = useCallback(() => {
+		const isLastWord = currentIndex === options.length - 1
+		onViewed(options[currentIndex].id)
+		if (!isLastWord) {
+			setCurrentIndex(prev => prev + 1)
+			setProgress(((currentIndex + 1) / options.length) * 100)
+			setGameState('continue')
+		} else {
+			setProgress(100)
+			setShowConfetti(true)
+			setTimeout(() => setShowConfetti(false), 5000)
+		}
+	}, [currentIndex, options, onViewed])
 
-    const buttonMap = useRef<Record<string, HTMLButtonElement>>({});
-    const options = useMemo(() => [
-        { word_eng: "afraid", word_uzb: "Qo'rqqan, cho'chigan" },
-        { word_eng: "agree", word_uzb: "Fikriga qo'shilmoq, rozi bo'lmoq" },
-        { word_eng: "angry", word_uzb: "Jahli chiqqan, badjahl" },
-        { word_eng: "arrive", word_uzb: "Yetib kelmoq, kelmoq" },
-        { word_eng: "attack", word_uzb: "Hujum qilmoq, hujum uyushtirmoq" },
-        { word_eng: "bottom", word_uzb: "Tag, pastki qism" },
-        { word_eng: "clever", word_uzb: "Aqlli, ziyrak" },
-        { word_eng: "cruel", word_uzb: "Shafqatsiz, berahm" },
-        { word_eng: "finally", word_uzb: "Axiyri, vanihoyat" },
-        { word_eng: "hide", word_uzb: "Yashirinmoq, bekinmoq" },
-        { word_eng: "hunt", word_uzb: "Ov qilmoq, ovlamoq" },
-        { word_eng: "lot", word_uzb: "Juda ko'p" },
-        { word_eng: "middle", word_uzb: "O'rta" },
-        { word_eng: "moment", word_uzb: "Sekund; on, zum" },
-        { word_eng: "pleased", word_uzb: "Hursand, mamnun" },
-        { word_eng: "promise", word_uzb: "Va'da bermoq" },
-        { word_eng: "reply", word_uzb: "Javob bermoq" },
-        { word_eng: "safe", word_uzb: "Xavfsiz, bexatar" },
-        { word_eng: "trick", word_uzb: "Xiyla, nayrang; fokus" },
-        { word_eng: "well", word_uzb: "Yaxshi" },
-    ], []);
+	const handleLoss = useCallback(() => {
+		setLossCount(5)
+		setCurrentIndex(0)
+		setProgress(0)
+		setGameState('playing')
+	}, [])
 
-    const lengthOptions = options.length
+	const handleLetterClick = useCallback(
+		(letter: string) => {
+			if (clickedLetters[letter]) return
 
-    useEffect(() => {
-        randomWordRef.current = randomWord;
-    }, [randomWord]);
+			setClickedLetters(prev => ({ ...prev, [letter]: true }))
 
-    // generate word
-    const generateWord = useCallback(() => {
-        const randomIndex: any = generateRandomValue(options);
-        const selectedWord = options[randomIndex];
-        setRandomWord(selectedWord.word_eng);
-        setRandomHint(selectedWord.word_uzb);
+			const charArray = currentWord.toUpperCase().split('')
 
-        const userInpSection = document.getElementById("user-input-section");
-        if (userInpSection) {
-            userInpSection.innerHTML = selectedWord.word_eng
-                .split("")
-                .map(() => `<span class="inputSpace">_</span>`)
-                .join("");
-        }
-    }, [options]);
+			if (charArray.includes(letter)) {
+				setInputSpaces(prev =>
+					prev.map((char, index) =>
+						charArray[index] === letter ? letter : char
+					)
+				)
 
+				if (
+					charArray.every(
+						(char, index) => inputSpaces[index] === char || char === letter
+					)
+				) {
+					handleWin()
+				}
+			} else {
+				setLossCount(prev => {
+					const newLossCount = prev - 1
+					if (newLossCount === 0) {
+						handleLoss()
+					}
+					return newLossCount
+				})
+			}
+		},
+		[clickedLetters, currentWord, inputSpaces, handleWin, handleLoss]
+	)
 
-    const handleWin = useCallback(() => {
-        if (loopCount < lengthOptions - 1) {
-            setLoopCount((prev) => prev + 1);
-            setProgress(prev =>
-                Math.min(100, Math.round((prev + 100 / lengthOptions) * 100) / 100)
-            )
-            setGameState("continue");
-        } else {
-            setLoopCount((prev) => prev + 1);
-            setGameState("end");
-        }
-    }, [loopCount, lengthOptions]);
+	useEffect(() => {
+		if (gameState === 'playing') {
+			initializeWord()
+		}
+	}, [gameState, initializeWord])
 
-    const handleLoss = useCallback(() => {
-        setGameState("end");
-    }, []);
+	const handleKeyDown = useCallback(
+		(event: KeyboardEvent) => {
+			const letter = event.key.toUpperCase()
+			if (/[A-Z]/.test(letter) && letter.length === 1) {
+				handleLetterClick(letter)
+			}
+			if (event.key === 'Enter' && gameState === 'continue') {
+				setGameState('playing')
+			}
+		},
+		[handleLetterClick, gameState]
+	)
 
-    const handleLetterClick = useCallback((letter: string) => {
-        const button = buttonMap.current[letter];
-        if (!button || button.disabled) return;
+	useEffect(() => {
+		window.addEventListener('keydown', handleKeyDown)
+		return () => {
+			window.removeEventListener('keydown', handleKeyDown)
+		}
+	}, [handleKeyDown])
 
-        const charArray = randomWordRef.current.toUpperCase().split("");
-        const inputSpaces = document.getElementsByClassName(
-            "inputSpace"
-        ) as HTMLCollectionOf<HTMLElement>;
+	return (
+		<div className='w-full max-w-4xl mx-auto flex flex-col items-center gap-5 p-3 sm:p-5'>
+			{showConfetti && (
+				<Confetti />
+			)}
+			<div className='w-full flex justify-between items-center gap-2'>
+				<Link href='/dashboard/vocabulary'>
+					<X className='h-6 w-6 text-gray-200 hover:text-primary' />
+				</Link>
+				<Progress value={progress} className='h-3 bg-pink-100' />
+				<div className='flex items-center text-sm'>
+					<Heart className='h-4 w-4 text-primary mr-1' />
+					<span>{lossCount}</span>
+				</div>
+			</div>
 
-        if (charArray.includes(letter)) {
-            button.dataset.status = 'correct';
-            button.disabled = true;
-            charArray.forEach((char, index) => {
-                if (char === letter) {
-                    inputSpaces[index].innerText = char;
-                    setWinCount((prev) => {
-                        const winCount = prev + 1;
-                        if (winCount === charArray.length) {
-                            handleWin();
-                        }
-                        return winCount;
-                    });
-                }
-            });
-        } else {
-            button.dataset.status = 'incorrect';
-            button.disabled = true;
-            setLossCount((prev) => {
-                const newLossCount = prev - 1;
-                if (newLossCount === 0) {
-                    handleLoss();
-                }
-                return newLossCount;
-            });
-        }
-    }, [handleWin, handleLoss]);
+			<Card className='w-full h-[calc(50vh)] sm:h-[350px] min-[320px]:h-[250px] p-0 md:p-4 text-center rounded-2xl border-none flex flex-col justify-center items-center'>
+				{gameState === 'playing' && (
+					<>
+						<p className='mb-4 text-sm sm:text-lg'>
+							<span className='font-bold'>Hint:</span> {currentHint}
+						</p>
+						<p className='flex gap-2 text-base sm:text-lg'>
+							{inputSpaces.map((char, idx) => (
+								<span key={idx}>{char}</span>
+							))}
+						</p>
+						<ul className='mt-6 grid grid-cols-10 gap-1 md:gap-3'>
+							{['QWERTYUIOP', 'ASDFGHJKL', 'ZXCVBNM'].map((row, rowIndex) => (
+								<li
+									key={rowIndex}
+									className='flex justify-center col-span-full sm:gap-2'
+								>
+									{row.split('').map(letter => (
+										<Button
+											key={letter}
+											onClick={() => handleLetterClick(letter)}
+											disabled={!!clickedLetters[letter]}
+											className={`rounded-md px-2 py-1 text-xs sm:text-sm ${
+												clickedLetters[letter]
+													? currentWord.toUpperCase().includes(letter)
+														? 'bg-green-500 text-white'
+														: 'bg-red-500 text-white'
+													: ''
+											}`}
+										>
+											{letter}
+										</Button>
+									))}
+								</li>
+							))}
+						</ul>
+					</>
+				)}
+				{gameState === 'continue' && (
+					<Button
+						onClick={() => setGameState('playing')}
+						className='bg-green-500 hover:bg-green-400 text-white px-4 py-2'
+					>
+						Continue
+					</Button>
+				)}
+			</Card>
+		</div>
+	)
+}
 
-    const handleKeyPress = useCallback(
-        (event: KeyboardEvent) => {
-            const key = event.key.toUpperCase();
-            if (/^[A-Z]$/.test(key)) {
-                handleLetterClick(key);
-            }
-        },
-        [handleLetterClick]
-    );
+export default FinishQuiz
 
-    const createLetterButtons = useCallback(() => {
-        const letterContainer = document.getElementById("letter-container")!;
-        const buttons = letterContainer.querySelectorAll("button[data-letter]");
-        buttons.forEach((button) => {
-            const letter = button.getAttribute("data-letter")!;
-            const htmlButton = button as HTMLButtonElement;
-            htmlButton.addEventListener("click", () => handleLetterClick(letter));
-            buttonMap.current[letter] = htmlButton;
-        });
-    }, [handleLetterClick]);
-
-    const initializeGame = useCallback(() => {
-        setWinCount(0);
-        setLossCount(5);
-        generateWord();
-        buttonMap.current = {};
-        createLetterButtons();
-        document.addEventListener("keydown", handleKeyPress);
-    }, [setWinCount, setLossCount, generateWord, createLetterButtons, handleKeyPress]);
-
-    useEffect(() => {
-        if (gameState === "playing") {
-            initializeGame();
-        }
-
-        return () => {
-            document.removeEventListener("keydown", handleKeyPress);
-        };
-    }, [gameState, initializeGame, handleKeyPress]);
-
-    const resetButtonStatuses = () => {
-        Object.keys(buttonMap.current).forEach((letter) => {
-            buttonMap.current[letter].dataset.status = "neutral";
-        });
-    };
-
-    const restartGame = () => {
-        resetButtonStatuses();
-        setLoopCount(0);
-        setProgress(0)
-        setGameState("playing");
-    }
-
-    const continueGame = () => {
-        resetButtonStatuses();
-        generateWord();
-        setGameState("playing");
-    };
-
-    const nextUnit = () => {
-        console.log('next unit');
-    }
-
-
-    return (
-        <>
-            <div className=" w-full max-w-4xl mx-auto flex justify-normal items-center flex-col gap-7 p-3 md:p-6">
-                <div className=" w-full p-3 max-w-4xl mx-auto flex justify-normal items-center flex-col gap-7">
-                    <div className="finishQuizProgress w-full mx-auto mt-10 flex justify-between items-center gap-4">
-                        <div className='flex items-center gap-2'>
-                            <Link
-                                href='/dashboard/vocabulary'
-                                aria-label='Go back to vocabulary page'
-                            >
-                                <X className='h-6 w-6 text-gray-200 hover:text-primary hover:text-gray-400 transition-all' />
-                            </Link>
-                        </div>
-                        <Progress
-                            value={progress}
-                            className={cn('h-3 bg-pink-100', {
-                                'bg-pink-200': progress > 0,
-                            })}
-                            aria-label={`Quiz progress: ${progress}%`}
-                        />
-                        <div className='flex items-center justify-end space-x-1'>
-                            <Heart
-                                className={cn('h-4 w-4 text-primary')}
-                                aria-hidden='true'
-                            />
-                            {lossCount > 0 && <span className='text-primary'>{lossCount}</span>}
-                        </div>
-                    </div>
-                    <div className=" w-full text-left">
-                        <h1 className='text-2xl sm:text-3xl font-bold'>
-                            Finish Quiz
-                        </h1>
-                    </div>
-                    <Card className="cardFinishQuiz w-full h-[350px] p-1 lg:p-4 text-center rounded-3xl flex flex-col justify-center items-center">
-                        {gameState === "playing" && (
-                            <>
-                                <div className=" block">
-                                    <div id="hint-ref" className="mb-4 text-lg- text-gray-800 font-medium dark:text-white">
-                                        Hint: {randomHint}
-                                    </div>
-                                    <div id="user-input-section" className=" text-lg"></div>
-                                    <div id="message" className="text-[#FE6873]"></div>
-                                    <div id="letter-container" className="mt-8 space-y-2">
-                                        {[row1, row2, row3].map((row, rowIndex) => (
-                                            <div key={rowIndex} className="keyboard-row">
-                                                {row.map((letter) => (
-                                                    <button
-                                                        key={letter}
-                                                        data-letter={letter}
-                                                        data-status={
-                                                            buttonMap.current[letter]?.dataset
-                                                                .status || "neutral"
-                                                        }
-                                                        className={cn(
-                                                            "outline-none rounded-md cursor-pointer text-[14px] h-[27px] w-[27px] border-2 mx-[2px] sm:mx-1 sm:w-[34px] sm:h-[34px] lg:w-[38px] lg:h-[38px] sm:text-xl",
-                                                            {
-                                                                "bg-white text-gray-800":
-                                                                    buttonMap.current[letter]?.dataset
-                                                                        .status === "neutral",
-                                                                "bg-green-500 text-white":
-                                                                    buttonMap.current[letter]?.dataset
-                                                                        .status === "correct",
-                                                                "bg-red-500 text-white":
-                                                                    buttonMap.current[letter]?.dataset
-                                                                        .status === "incorrect",
-                                                            }
-                                                        )}
-                                                    >
-                                                        {letter}
-                                                    </button>
-                                                ))}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                                <Button
-                                    onClick={() => {
-                                        resetButtonStatuses();
-                                        continueGame();
-                                    }}
-                                    className="w-full hidden md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 bg-pink-500 hover:bg-pink-600 border-pink-700"
-                                >
-                                    Continue
-                                </Button>
-                            </>
-                        )}
-                        {gameState === "continue" && (
-                            <>
-                                <Button
-                                    onClick={() => {
-                                        resetButtonStatuses();
-                                        continueGame();
-                                    }}
-                                    className=" w-full md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 bg-green-500 hover:bg-green-600 border-green-700"
-                                >
-                                    Continue
-                                </Button>
-                            </>
-                        )}
-                        {gameState === "end" && (
-                            <>
-                                <div className="text-lg font-bold text-red-500">
-                                    {winCount === randomWord.length ? "You Won!" : "Game Over"}
-                                </div>
-                                <div className="flex gap-4 mt-4">
-                                    <Button
-                                        onClick={restartGame}
-                                        className={
-                                            winCount === randomWord.length
-                                                ? "bg-blue-500 text-white px-4 py-2 rounded-md"
-                                                : "w-full md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 bg-pink-500 hover:bg-pink-600 border-pink-700"
-                                        }
-                                    >
-                                        Restart
-                                    </Button>
-                                    {winCount === randomWord.length && (
-                                        <Button
-                                            onClick={nextUnit}
-                                            className="bg-blue-500 text-white px-4 py-2 rounded-md"
-                                        >
-                                            Next Unit
-                                        </Button>
-                                    )}
-                                </div>
-                            </>
-                        )}
-                    </Card>
-                </div >
-            </div >
-        </>
-    );
-};
-
-export default FinishQuiz;

@@ -42,7 +42,7 @@ export const useProgressStore = create<ProgressState>()(
 								unit.item[itemIndex].viewed = true
 
 								// Check if all items in the unit have been viewed
-								const allItemsViewed = unit.item.every((i: { viewed: any }) => i.viewed)
+								const allItemsViewed = unit.item.every((i: { viewed: boolean }) => i.viewed)
 								if (allItemsViewed) {
 									unit.isCompleted = true
 
@@ -64,7 +64,7 @@ export const useProgressStore = create<ProgressState>()(
 			calculateSectionProgress: (section: Section) => {
 				const totalUnits = section.units.length
 				const completedUnits = section.units.filter((unit: { item: any[] }) =>
-					unit.item.every((item: { viewed: any }) => item.viewed)
+					unit.item.every((item: { viewed: boolean }) => item.viewed)
 				).length
 				return (completedUnits / totalUnits) * 100
 			},

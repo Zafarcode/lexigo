@@ -3,7 +3,47 @@ export interface Tag {
 	name: string
 }
 
-export interface Item {
+export type FillInBlank = {
+	id: number
+	type: 'fillInBlank'
+	question: string
+	correctAnswer: string
+	options: string[]
+	viewed: boolean
+}
+
+export type FinishQuiz = {
+	id: number
+	type: 'finishQuiz'
+	en: string
+	uz: string
+	viewed: boolean
+}
+
+export type WordPair = {
+	type: 'wordPair'
+	id: number
+	value: string
+	pair: string
+	viewed: boolean
+}
+
+export type ImageSelection = {
+	type: 'imageSelection'
+	id: number
+	word: string
+	question: string
+	options: {
+		id: string
+		image: string
+		label: string
+	}[]
+	correct: string
+	viewed: boolean
+}
+
+export type Flashcards = {
+	type: 'flashcard'
 	id: number
 	front_side: string
 	back_side: string
@@ -14,6 +54,13 @@ export interface Item {
 	viewed: boolean
 }
 
+export type Item =
+	| FillInBlank
+	| FinishQuiz
+	| WordPair
+	| ImageSelection
+	| Flashcards
+
 export interface Unit {
 	id: number
 	title: string
@@ -21,7 +68,7 @@ export interface Unit {
 	type: 'start' | 'trophy' | 'star' | 'character' | 'chest'
 	isCompleted: boolean
 	isLocked: boolean
-	item: Item[]
+	item: Item[] // Updated to use the new `Item` type
 }
 
 export interface Section {
@@ -29,5 +76,5 @@ export interface Section {
 	title: string
 	theme: string
 	slug: string
-	units: Unit[]
+	units: Unit[] // Contains an array of `Unit`
 }

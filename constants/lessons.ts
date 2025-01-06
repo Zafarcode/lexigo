@@ -4,97 +4,157 @@ export const lessons: Section[] = [
 	{
 		id: 1,
 		title: 'Basic Vocabulary',
-		theme: 'pink',
-		slug: 'basic-vocabulary',
-		units: Array.from({ length: 30 }, (_, i) => ({
-			id: i + 1,
-			title: `Unit ${i + 1}`,
-			slug: `unit-${i + 1}`,
-			type:
-				i === 0
-					? 'start'
-					: i === 29
-					? 'trophy'
-					: (['star', 'character', 'chest'][i % 3] as
-							| 'star'
-							| 'character'
-							| 'chest'),
-			isCompleted: false,
-			isLocked: i !== 0,
-			item: Array.from({ length: 20 }, (_, j) => ({
-				id: j + 1,
-				front_side: `Word ${j + 1}`,
-				viewed: false,
-				back_side: `Definition ${j + 1}`,
-				description: `Example sentence for Word ${j + 1}`,
-				synonyms: [`Synonym ${j + 1}A`, `Synonym ${j + 1}B`],
-				tags: { id: 1, name: 'noun' },
-				image: `/placeholder.svg?height=100&width=100&text=Word${j + 1}`,
-			})),
-		})),
-	},
-	{
-		id: 2,
-		title: 'Intermediate Vocabulary',
 		theme: 'blue',
-		slug: 'intermediate-vocabulary',
-		units: Array.from({ length: 30 }, (_, i) => ({
-			id: i + 1,
-			title: `Unit ${i + 1}`,
-			slug: `unit-${i + 1}`,
-			type:
-				i === 0
-					? 'start'
-					: i === 29
-					? 'trophy'
-					: (['star', 'character', 'chest'][i % 3] as
-							| 'star'
-							| 'character'
-							| 'chest'),
-			isCompleted: false,
-			isLocked: i !== 0,
-			item: Array.from({ length: 20 }, (_, j) => ({
-				id: j + 1,
-				viewed: false,
-				front_side: `Advanced Word ${j + 1}`,
-				back_side: `Advanced Definition ${j + 1}`,
-				description: `Complex example sentence for Advanced Word ${j + 1}`,
-				synonyms: [`Advanced Synonym ${j + 1}A`, `Advanced Synonym ${j + 1}B`],
-				tags: { id: 2, name: 'verb' },
-				image: `/placeholder.svg?height=100&width=100&text=AdvWord${j + 1}`,
-			})),
-		})),
-	},
-	{
-		id: 3,
-		title: 'Advanced Vocabulary',
-		theme: 'green',
-		slug: 'advanced-vocabulary',
-		units: Array.from({ length: 30 }, (_, i) => ({
-			id: i + 1,
-			title: `Unit ${i + 1}`,
-			slug: `unit-${i + 1}`,
-			type:
-				i === 0
-					? 'start'
-					: i === 29
-					? 'trophy'
-					: (['star', 'character', 'chest'][i % 3] as
-							| 'star'
-							| 'character'
-							| 'chest'),
-			isCompleted: false,
-			isLocked: i !== 0,
-			item: Array.from({ length: 20 }, (_, j) => ({
-				id: j + 1,
-				viewed: false,
-				front_side: `Super Advanced Word ${j + 1}`,
-				back_side: `Super Advanced Definition ${j + 1}`,
-				description: `Super complex example sentence for Super Advanced Word ${j + 1}`,
-				synonyms: [`Super Advanced Synonym ${j + 1}A`, `Super Advanced Synonym ${j + 1}B`],
-				tags: { id: 3, name: 'adjective' },
-				image: `/placeholder.svg?height=100&width=100&text=SuperAdvWord${j + 1}`,
-			})),
-		})),
+		slug: 'basic-vocabulary',
+		units: [
+			{
+				id: 1,
+				title: 'Unit 1',
+				slug: 'unit-1',
+				type: 'start',
+				isCompleted: false,
+				isLocked: false,
+				item: [
+					{
+						type: 'flashcard',
+						id: 10,
+						viewed: false,
+						front_side: `Advanced Word `,
+						back_side: `Advanced Definition `,
+						description: `Complex example sentence for Advanced Word `,
+						synonyms: [`Advanced Synonym A`, `Advanced Synonym B`],
+						tags: { id: 2, name: 'verb' },
+						image: `/placeholder.svg?height=100&width=100&text=AdvWor `,
+					},
+					{
+						type: 'flashcard',
+						id: 11,
+						viewed: false,
+						front_side: `Advanced Word `,
+						back_side: `Advanced Definition `,
+						description: `Complex example sentence for Advanced Word `,
+						synonyms: [`Advanced Synonym A`, `Advanced Synonym B`],
+						tags: { id: 2, name: 'verb' },
+						image: `/placeholder.svg?height=100&width=100&text=AdvWor `,
+					},
+				],
+			},
+			{
+				id: 2,
+				title: 'Unit 2',
+				slug: 'unit-2',
+				type: 'star',
+				isCompleted: false,
+				isLocked: true,
+				item: [
+					{
+						type: 'imageSelection',
+						id: 1,
+						viewed: false,
+						word: `Super Advanced Word `,
+						question: `Advanced Question `,
+						options: [
+							{
+								id: '1',
+								image: 'https://picsum.photos/200/300',
+								label: `Advanced Option A`,
+							},
+							{
+								id: '2',
+								image: 'https://picsum.photos/200/303',
+								label: `Advanced Option B`,
+							},
+							{
+								id: '3',
+								image: 'https://picsum.photos/200/302',
+								label: `Advanced Option C`,
+							},
+							{
+								id: '4',
+								image: 'https://picsum.photos/200/301',
+								label: `Advanced Option D`,
+							},
+						],
+						correct: `1`,
+					},
+					{
+						type: 'imageSelection',
+						id: 12,
+						viewed: false,
+						word: `Super Advanced Word `,
+						question: `Advanced Question `,
+						options: [
+							{
+								id: '1',
+								image: '/placeholder.svg?height=100&width=100&text=AdvWord1',
+								label: `Advanced Option A`,
+							},
+							{
+								id: '2',
+								image: '/placeholder.svg?height=100&width=100&text=AdvWord2',
+								label: `Advanced Option B`,
+							},
+							{
+								id: '3',
+								image: '/placeholder.svg?height=100&width=100&text=AdvWord3',
+								label: `Advanced Option C`,
+							},
+							{
+								id: '4',
+								image: '/placeholder.svg?height=100&width=100&text=AdvWord4',
+								label: `Advanced Option D`,
+							},
+						],
+						correct: `1`,
+					},
+				],
+			},
+			{
+				id: 3,
+				title: 'Unit 4',
+				slug: 'unit-4',
+				type: 'star',
+				isCompleted: false,
+				isLocked: true,
+				item: Array.from({ length: 2 }, (_, j) => ({
+					type: 'wordPair',
+					id: j + 1,
+					viewed: false,
+					value: `Advanced Word ${j + 1}`,
+					pair: `Advanced Translation ${j + 1}`,
+				})),
+			},
+			{
+				id: 4,
+				title: 'Unit 5',
+				slug: 'unit-5',
+				type: 'star',
+				isCompleted: false,
+				isLocked: true,
+				item: Array.from({ length: 2 }, (_, j) => ({
+					type: 'fillInBlank',
+					id: j + 1,
+					viewed: false,
+					options: [`go`, `goes`, `going`],
+					question: `I ___ to the park every morning.`,
+					correctAnswer: `go`,
+				})),
+			},
+			{
+				id: 5,
+				title: 'Unit 3',
+				slug: 'unit-3',
+				type: 'star',
+				isCompleted: false,
+				isLocked: true,
+				item: Array.from({ length: 8 }, (_, j) => ({
+					type: 'finishQuiz',
+					id: j + 1,
+					viewed: false,
+					en: `hello`,
+					uz: `alo`,
+				})),
+			},
+		],
 	},
 ]
