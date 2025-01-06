@@ -2,71 +2,19 @@
 
 import { CardContent } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
+import { FillInBlank } from '@/types'
 import { motion } from 'framer-motion'
 import { Heart, X } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
-interface Question {
-	question: string
-	correctAnswer: string
-	options: string[]
+
+type FillInBlankProps = {
+	questions: FillInBlank[]
+	onViewed: (itemId: number) => void
 }
 
-const questions: Question[] = [
-	{
-		question: 'I ___ to the park every morning.',
-		correctAnswer: 'go',
-		options: ['go', 'goes', 'going'],
-	},
-	{
-		question: 'She ___ a book right now.',
-		correctAnswer: 'is reading',
-		options: ['reads', 'is reading', 'read'],
-	},
-	{
-		question: 'They ___ to the cinema yesterday.',
-		correctAnswer: 'went',
-		options: ['go', 'went', 'going'],
-	},
-	{
-		question: 'We ___ a new project at work.',
-		correctAnswer: 'started',
-		options: ['start', 'starts', 'started'],
-	},
-	{
-		question: 'My brother ___ very fast.',
-		correctAnswer: 'runs',
-		options: ['run', 'runs', 'running'],
-	},
-	{
-		question: 'I ___ to music every day.',
-		correctAnswer: 'listen',
-		options: ['listens', 'listen', 'listening'],
-	},
-	{
-		question: 'He ___ in New York.',
-		correctAnswer: 'lives',
-		options: ['live', 'lives', 'living'],
-	},
-	{
-		question: 'She ___ like coffee.',
-		correctAnswer: 'does',
-		options: ['does', 'do', 'did'],
-	},
-	{
-		question: 'We ___ the meeting at 3 PM.',
-		correctAnswer: 'will start',
-		options: ['will starts', 'will start', 'start'],
-	},
-	{
-		question: 'I ___ home at 7 PM.',
-		correctAnswer: 'arrive',
-		options: ['arrives', 'arrived', 'arrive'],
-	},
-]
-
-export default function Fillinblank() {
+export default function Fillinblank({ questions, onViewed }: FillInBlankProps) {
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
 	const [selectedOption, setSelectedOption] = useState<string | null>(null)
 	const [status, setStatus] = useState<'correct' | 'incorrect' | null>(null)
@@ -95,6 +43,7 @@ export default function Fillinblank() {
 
 	const handleNextQuestion = () => {
 		setSelectedOption(null)
+		onViewed(currentQuestion.id)
 		setStatus(null)
 		if (currentQuestionIndex < questions.length - 1) {
 			setCurrentQuestionIndex(prev => {
