@@ -182,3 +182,4 @@ const FinishQuiz = ({ options, onViewed }: FinishQuizProps) => {
 }
 
 export default FinishQuiz
+

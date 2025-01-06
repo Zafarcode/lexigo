@@ -1,5 +1,6 @@
 'use client'
 
+import { Button } from '@/components/ui/button'
 import { CardContent } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { FillInBlank } from '@/types'
@@ -99,12 +100,12 @@ export default function Fillinblank({ questions, onViewed }: FillInBlankProps) {
 								</span>
 								/{questions.length}
 							</p>
-							<button
+							<Button
 								onClick={handleRestartQuiz}
 								className='mt-6 w-40 py-2 rounded-lg bg-purple-600 text-white'
 							>
 								Restart Quiz
-							</button>
+							</Button>
 						</div>
 					) : (
 						<div className='relative w-full max-w-4xl border-2 rounded-lg shadow-md p-6 mt-16'>
@@ -117,26 +118,25 @@ export default function Fillinblank({ questions, onViewed }: FillInBlankProps) {
 										{part}
 										{index <
 											currentQuestion.question.split('___').length - 1 && (
-											<span className='underline decoration-dashed'>
-												{selectedOption || '___'}
-											</span>
-										)}
+												<span className='underline decoration-dashed'>
+													{selectedOption || '___'}
+												</span>
+											)}
 									</span>
 								))}
 							</p>
 							<div className='grid grid-cols-1 sm:grid-cols-3 gap-5'>
 								{currentQuestion.options.map((option, index) => (
-									<button
+									<Button
 										key={index}
 										onClick={() => setSelectedOption(option)}
-										className={`mt-6 w-full sm:w-auto py-2 rounded-lg border text-xl ${
-											selectedOption === option
-												? 'bg-pink-500 text-white border-pink-700'
-												: 'bg-gray-100 text-gray-800 border-gray-300'
-										}`}
+										className={`  ${selectedOption === option
+											? 'border-blue-400 text-blue-400 bg-blue-50 hover:bg-blue-50'
+											: 'bg-white hover:bg-gray-50 text-gray-800 border-gray-300'
+											}`}
 									>
 										{option}
-									</button>
+									</Button>
 								))}
 							</div>
 						</div>
@@ -149,23 +149,22 @@ export default function Fillinblank({ questions, onViewed }: FillInBlankProps) {
 							<p className='text-green-600'>✅ Well done!</p>
 						) : !gameOver && status === 'incorrect' ? (
 							<p className='text-red-600'>
-								❌ Correct Answer: {currentQuestion.correctAnswer}
+								<X /> Correct Answer: {currentQuestion.correctAnswer}
 							</p>
 						) : null}
 					</div>
 					{!gameOver && (
-						<button
+						<Button
 							onClick={status === null ? handleCheckAnswer : handleNextQuestion}
-							className={`w-full sm:w-40 h-12 rounded-lg text-white ${
-								status
-									? status === 'correct'
-										? 'bg-green-500'
-										: 'bg-red-500'
-									: 'bg-pink-500'
-							}`}
+							className={`w-full md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 ${status
+								? status === 'correct'
+									? 'bg-green-500 hover:bg-green-600 border-green-700'
+									: 'bg-red-500 hover:bg-red-600 border-red-700'
+								: 'bg-pink-500 hover:bg-pink-600 border-pink-700'
+								}`}
 						>
 							{status === null ? 'CHECK' : 'NEXT'}
-						</button>
+						</Button>
 					)}
 				</div>
 			</div>
