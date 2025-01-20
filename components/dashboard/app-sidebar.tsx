@@ -40,10 +40,6 @@ const data = {
 					title: 'Grammar Lessons',
 					url: '/dashboard/grammar',
 				},
-				{
-					title: 'Grammar Quiz',
-					url: '/dashboard/grammar/quiz',
-				},
 			],
 		},
 		{
