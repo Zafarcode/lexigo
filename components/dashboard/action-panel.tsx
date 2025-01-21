@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { skills, type skillT } from "@/app/dashboard/skills/page";
+import { skills, skillT } from "@/app/dashboard/skills/page";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Collapsible,

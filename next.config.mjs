@@ -11,16 +11,6 @@ const withMDX = createNextDocsMDX({
 /** @type {import('next').NextConfig} */
 const config = {
 	reactStrictMode: false,
-	images: {
-		remotePatterns: [
-			{
-				protocol: 'https',
-				hostname: 'picsum.photos',
-				port: '',
-				pathname: '/**',
-			},
-		],
-	},
 }
 
 export default withMDX(config)
