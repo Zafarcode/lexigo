@@ -1,6 +1,6 @@
 'use client'
 
-import { Book, BookOpen, GalleryVerticalEnd, PenTool } from 'lucide-react'
+import { Book, BookOpen, GalleryVerticalEnd, PenTool, ShieldCheckIcon, Volume2 } from 'lucide-react'
 import * as React from 'react'
 
 import { NavMain } from '@/components/dashboard/nav-main'
@@ -75,6 +75,16 @@ const data = {
 					url: '/dashboard/skills/listening',
 				},
 			],
+		},
+		{
+			title: 'Sounds',
+			url: '/dashboard/characters',
+			icon: Volume2,
+		},
+		{
+			title: 'Leaderboard',
+			url: '/dashboard/leaderboard',
+			icon: ShieldCheckIcon,
 		},
 	],
 }

@@ -26,7 +26,7 @@ const navList: INavList[] = [
 	{
 		id: 7,
 		label: "FAQ's",
-		href: '#faq',
+		href: '/faqs',
 	},
 ]
 
