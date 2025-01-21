@@ -4,7 +4,7 @@ export const lessons: Section[] = [
 	{
 		id: 1,
 		title: 'Basic Vocabulary',
-		theme: 'blue',
+		theme: 'pink',
 		slug: 'basic-vocabulary',
 		units: [
 			{
@@ -111,8 +111,8 @@ export const lessons: Section[] = [
 			},
 			{
 				id: 3,
-				title: 'Unit 4',
-				slug: 'unit-4',
+				title: 'Unit 3',
+				slug: 'unit-3',
 				type: 'star',
 				isCompleted: false,
 				isLocked: true,
@@ -126,8 +126,8 @@ export const lessons: Section[] = [
 			},
 			{
 				id: 4,
-				title: 'Unit 5',
-				slug: 'unit-5',
+				title: 'Unit 4',
+				slug: 'unit-4',
 				type: 'star',
 				isCompleted: false,
 				isLocked: true,
@@ -142,8 +142,8 @@ export const lessons: Section[] = [
 			},
 			{
 				id: 5,
-				title: 'Unit 3',
-				slug: 'unit-3',
+				title: 'Unit 5',
+				slug: 'unit-5',
 				type: 'star',
 				isCompleted: false,
 				isLocked: true,
@@ -155,6 +155,7 @@ export const lessons: Section[] = [
 					uz: `alo`,
 				})),
 			},
+			
 		],
 	},
 ]
