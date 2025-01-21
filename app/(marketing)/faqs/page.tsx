@@ -45,23 +45,23 @@ const faqs = [
 export default function FAQPage() {
 	return (
 		<div className='max-w-2xl mx-auto py-10'>
-			<h2 className='text-2xl font-bold text-center mb-4'>
+			<h2 className='text-2xl font-bold text-center mb-4 text-gray-900 dark:text-white'>
 				Ko&apos;p Beriladigan Savollar!!
 			</h2>
-			<p className='text-center mb-6'>
+			<p className='text-center mb-6 text-gray-700 dark:text-gray-300'>
 				Yana sizni qiziqtirgan savollar bo&apos;lsa, biz bilan bog&apos;laning.
 			</p>
 			<Accordion
 				type='single'
 				collapsible
-				className='rounded-lg bg-white border-b-0'
+				className='rounded-lg bg-white dark:bg-black/60'
 			>
 				{faqs.map((faq, index) => (
 					<AccordionItem key={index} value={String(index)}>
-						<AccordionTrigger className='flex justify-between w-full transition font-semibold text-lg text-gray-800'>
+						<AccordionTrigger className='flex justify-between dark:px-4 w-full transition font-semibold text-lg text-gray-800 dark:text-gray-200'>
 							{faq.question}
 						</AccordionTrigger>
-						<AccordionContent className='text-gray-500 text-base'>
+						<AccordionContent className='text-gray-500 dark:px-4 dark:text-gray-400 text-base'>
 							{faq.answer}
 						</AccordionContent>
 					</AccordionItem>
