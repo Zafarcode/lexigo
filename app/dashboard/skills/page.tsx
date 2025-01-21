@@ -2,6 +2,7 @@
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Book, MessageSquare, Mic, Pencil } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -9,12 +10,12 @@ export type skillT = {
   name: string;
   slug: string;
   level: string[];
-  icon: any;
+  icon: LucideIcon;
   color: string;
   hoverColor: string;
 };
 
-export  const skills:skillT[] = [
+export const skills: skillT[] = [
   {
     name: "Reading",
     slug: "reading",
