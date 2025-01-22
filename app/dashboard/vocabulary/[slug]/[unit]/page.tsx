@@ -49,64 +49,33 @@ export default function UnitPage({ params }: UnitPageProps) {
 	const finishQuiz = unit.item.filter(i => i.type === 'finishQuiz')
 	const wordPairs = unit.item.filter(i => i.type === 'wordPair')
 	const fillInBlank = unit.item.filter(i => i.type === 'fillInBlank')
+	
+
 
 	return (
 		<section className='pt-10'>
 			<div className='container'>
-				<div className='w-full rounded-lg border p-4 lg:p-6'>
-					<div className='mb-12 space-y-5'>
-						<div className='space-y-1.5'>
-							<Link
-								href={`/dashboard/vocabulary/${section.slug}`}
-								className='flex items-center gap-2 text-lg font-semibold text-neutral-400 hover:text-primary custom-transition'
-								aria-label={`Back to ${section.title}`}
-							>
-								<ArrowLeft /> Back
-							</Link>
-							<h1 className='text-2xl sm:text-4xl font-bold'>{unit.title}</h1>
-						</div>
+				
+				{/* Render Flashcard Component */}
+				{flashcards.length > 0 && (
+					<div className='w-full rounded-lg border p-4 lg:p-6'>
+						<div className='mb-12 space-y-5'>
+							<div className='space-y-1.5'>
+								<Link
+									href={`/dashboard/vocabulary/${section.slug}`}
+									className='flex items-center gap-2 text-lg font-semibold text-neutral-400 hover:text-primary custom-transition'
+									aria-label={`Back to ${section.title}`}
+								>
+									<ArrowLeft /> Back
+								</Link>
+								<h1 className='text-2xl sm:text-4xl font-bold'>{unit.title}</h1>
+							</div>
 
-						{/* Render Flashcard Component */}
-						{flashcards.length > 0 && (
 							<Flashcard
 								onViewed={handleViewed}
 								cardData={flashcards} // Pass only flashcards
 							/>
-						)}
 
-						{/* Render WordImage Component */}
-						{imageSelections.length > 0 && (
-							<WordImage
-								onViewed={handleViewed}
-								quizData={imageSelections} // Pass only image selections
-							/>
-						)}
-
-						{/* Render FinishQuiz Component */}
-						{finishQuiz.length > 0 && (
-							<FinishQuiz
-								onViewed={handleViewed}
-								options={finishQuiz} // Pass only translations
-							/>
-						)}
-
-						{/* Render MatchingPairs Component */}
-						{wordPairs.length > 0 && (
-							<MatchingPairs
-								onViewed={handleViewed}
-								words={wordPairs} // Pass only word pairs
-							/>
-						)}
-
-						{/* Render FillInBlank Component */}
-						{fillInBlank.length > 0 && (
-							<FillInBlank
-								onViewed={handleViewed}
-								questions={fillInBlank} // Pass only fill-in-blank questions
-							/>
-						)}
-
-						{flashcards.length > 0 && (
 							<section className='space-y-5'>
 								<h2 className='text-xl font-bold'>
 									Terms in this set ({unit.item.length})
@@ -127,9 +96,41 @@ export default function UnitPage({ params }: UnitPageProps) {
 									))}
 								</ul>
 							</section>
-						)}
+						</div>
 					</div>
-				</div>
+				)}
+
+				{/* Render WordImage Component */}
+				{imageSelections.length > 0 && (
+					<WordImage
+						onViewed={handleViewed}
+						quizData={imageSelections} // Pass only image selections
+					/>
+				)}
+
+				{/* Render FinishQuiz Component */}
+				{finishQuiz.length > 0 && (
+					<FinishQuiz
+						onViewed={handleViewed}
+						options={finishQuiz} // Pass only translations
+					/>
+				)}
+
+				{/* Render MatchingPairs Component */}
+				{wordPairs.length > 0 && (
+					<MatchingPairs
+						onViewed={handleViewed}
+						words={wordPairs} // Pass only word pairs
+					/>
+				)}
+
+				{/* Render FillInBlank Component */}
+				{fillInBlank.length > 0 && (
+					<FillInBlank
+						onViewed={handleViewed}
+						questions={fillInBlank} // Pass only fill-in-blank questions
+					/>
+				)}
 			</div>
 		</section>
 	)

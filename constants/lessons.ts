@@ -56,22 +56,22 @@ export const lessons: Section[] = [
 						options: [
 							{
 								id: '1',
-								image: 'https://picsum.photos/200/300',
+								image: '/placeholder.svg?height=100&width=100&text=AdvWord1',
 								label: `Advanced Option A`,
 							},
 							{
 								id: '2',
-								image: 'https://picsum.photos/200/303',
+								image: '/placeholder.svg?height=100&width=100&text=AdvWord1',
 								label: `Advanced Option B`,
 							},
 							{
 								id: '3',
-								image: 'https://picsum.photos/200/302',
+								image: '/placeholder.svg?height=100&width=100&text=AdvWord1',
 								label: `Advanced Option C`,
 							},
 							{
 								id: '4',
-								image: 'https://picsum.photos/200/301',
+								image: '/placeholder.svg?height=100&width=100&text=AdvWord1',
 								label: `Advanced Option D`,
 							},
 						],

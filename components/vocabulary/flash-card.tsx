@@ -4,8 +4,9 @@ import { Progress } from '@/components/ui/progress'
 import useTTS from '@/hooks/useTTS'
 import { motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight, Snail, Volume2 } from 'lucide-react'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Confetti from 'react-confetti'
+import { Howl } from 'howler'
 import {
 	Dialog,
 	DialogContent,
@@ -36,10 +37,13 @@ const Flashcard = ({
 
 	const [showConfetti, setShowConfetti] = useState(false)
 	const [showCongratulations, setShowCongratulations] = useState(false)
+	const soundRef = useRef<Howl | null>(null)
 
 	const total = cardData.length
 	const currentCard = cardData[currentIndex]
 	const [cardBack, setCardBack] = useState(currentCard.back_side)
+
+	
 	
 	// Delay changing the card back by 150ms to allow the flip animation to complete
 	useEffect(() => {
@@ -61,6 +65,15 @@ const Flashcard = ({
 		if (progress === 100 && !showConfetti) {
 			setShowConfetti(true)
 			setShowCongratulations(true)
+
+			if (!soundRef.current) {
+				soundRef.current = new Howl({
+					src: ['/sounds/congratulations.mp3'],
+					volume: 1.0,
+				})
+			}
+
+			soundRef.current.play()
 		}
 	}, [progress, showConfetti])
 
