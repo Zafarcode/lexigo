@@ -1,7 +1,7 @@
 import { grammar } from '@/app/source'
 import FillInTheBlankGame from '@/components/grammar/fill-in-the-blank'
 import { Separator } from '@/components/ui/separator'
-import { tense } from '@/constants/mock'
+import { tense } from '@/constants/grammer'
 import { createMetadata } from '@/utils/metadata'
 import type { Metadata } from 'next'
 import Link from 'next/link'
