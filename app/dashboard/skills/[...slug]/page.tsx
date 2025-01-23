@@ -1,5 +1,6 @@
 import ActionPanel from "@/components/dashboard/action-panel";
 import SkillCard from "@/components/dashboard/skills-card";
+import TaskPrioritization from "@/components/dashboard/task";
 
 const page = ({ params }: { params: { slug: string[] } }) => {
   return (
@@ -15,7 +16,7 @@ const page = ({ params }: { params: { slug: string[] } }) => {
           {params.slug.length !== 3 ? (
             <SkillCard params={params.slug} />
           ) : (
-            <p>Hozircha malumot mavjud emas 👋 {params.slug[2]}</p>
+            <TaskPrioritization  />
           )}
         </div>
         <ActionPanel params={params.slug} />
