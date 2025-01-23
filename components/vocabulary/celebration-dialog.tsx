@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import Confetti from 'react-confetti'
-import { Howl } from 'howler'
 import {
 	Dialog,
 	DialogContent,
@@ -17,20 +16,18 @@ type CelebrationDialogProps = {
 
 const CelebrationDialog = ({ isOpen, onClose }: CelebrationDialogProps) => {
 	const [showConfetti, setShowConfetti] = useState(false)
-	const soundRef = useRef<Howl | null>(null)
+	const audioRef = useRef<HTMLAudioElement | null>(null)
 
 	useEffect(() => {
 		if (isOpen) {
 			setShowConfetti(true)
 
-			// Initialize and play sound only once
-			if (!soundRef.current) {
-				soundRef.current = new Howl({
-					src: ['/sounds/congratulations.mp3'],
-					volume: 1.0,
-				})
+			// Initialize and play audio
+			if (!audioRef.current) {
+				audioRef.current = new Audio('/sounds/congratulations.mp3')
+				audioRef.current.volume = 1.0
 			}
-			soundRef.current.play()
+			audioRef.current.play()
 
 			// Automatically close dialog after 5 seconds
 			const timer = setTimeout(() => {
@@ -39,6 +36,12 @@ const CelebrationDialog = ({ isOpen, onClose }: CelebrationDialogProps) => {
 			}, 5000)
 
 			return () => clearTimeout(timer) // Cleanup on unmount
+		} else {
+			// Pause and reset audio when dialog closes
+			if (audioRef.current) {
+				audioRef.current.pause()
+				audioRef.current.currentTime = 0
+			}
 		}
 	}, [isOpen, onClose])
 
