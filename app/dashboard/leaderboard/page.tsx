@@ -46,7 +46,7 @@ const dataStatuses = [
   { id: 3, url: 'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/6b8a8db5ac7f847e7e87efe97c8b451a.svg' },
   { id: 4, url: 'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/a8e5c18e80054228b2c61168846ff643.svg' },
   { id: 5, url: 'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/573de2bc90b2499eeb2b3738cff90133.svg' },
-  { id: 6, url: '/assets/icons/flag.png' },
+  { id: 6, url: '/assets/icons/flag.svg' },
   { id: 7, url: 'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/f12703218fc80de76a63e650726f742e.svg' },
   { id: 8, url: 'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/5642e1e72813a88e8973b551a2004c7f.svg' },
   { id: 9, url: 'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/beb0df263d0f696bc7095d56b448ca78.svg' },
@@ -246,7 +246,7 @@ const Page = () => {
 
                             <div className="relative">
                               <div className=' w-[75px] h-[75px] rounded-full overflow-hidden'>
-                                <Image src={'/assets/icons/profileIcon1.png'} alt='' width={50} height={50} className='w-full object-contain' />
+                                <Image src={'/assets/icons/profileIcon1.svg'} alt='' width={50} height={50} className='w-full object-contain' />
                               </div>
                               <div className="absolute -bottom-1 right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
                               <div className="absolute -top-5 -right-7 flex items-center justify-center w-[50px] h-[50px] bg-gray-100 rounded-full border-2 border-dashed border-gray-300 p-1">

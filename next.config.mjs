@@ -13,7 +13,7 @@ const config = {
 	reactStrictMode: false,
 
 	images: {
-		domains: ['picsum.photos'],
+		domains: ['picsum.photos', 'simg-ssl.duolingo.com'],
 	},
 }
 
