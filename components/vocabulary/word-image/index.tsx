@@ -11,7 +11,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { CheckCheck, Heart, Volume2, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { ImageSelection } from '@/types'
 import CelebrationDialog from '../celebration-dialog'
 
@@ -33,6 +33,7 @@ export default function WordImage({ quizData, onViewed }: WordImageProps) {
 	const [hearts, setHearts] = useState(5)
 	const [isChecked, setIsChecked] = useState(false)
 	const [showCongratulations, setShowCongratulations] = useState(false)
+	const audioRef = useRef<HTMLAudioElement | null>(null)
 
 	const handleSelectAndSpeak = (
 		event: React.MouseEvent<HTMLButtonElement>,
@@ -46,35 +47,36 @@ export default function WordImage({ quizData, onViewed }: WordImageProps) {
 	}
 
 	const handleCheck = () => {
-		if (selected) {
-			const isCorrect = selected === quizData[currentStep].correct
+	if (selected) {
+		const isCorrect = selected === quizData[currentStep].correct
 
-			const successAudio = new Howl({
-				src: ['/sounds/success.mp3'], 
-			})
+		// Create and manage a single audio reference
+		if (!audioRef.current) {
+			audioRef.current = new Audio()
+		}
 
-			const loseAudio = new Howl({
-				src: ['/sounds/lose.mp3'], 
-			})
+		const audioSrc = isCorrect ? '/sounds/success.mp3' : '/sounds/lose.mp3'
 
-			setResult({
-				message: isCorrect ? 'Amazing!' : 'Incorrect. Try again.',
-				isCorrect,
-			})
+		// Update the audio source dynamically
+		audioRef.current.src = audioSrc
+		audioRef.current.volume = 1.0
+		audioRef.current.pause()
+		audioRef.current.currentTime = 0
+		audioRef.current.play()
 
-			setIsChecked(true)
+		// Update result and states
+		setResult({
+			message: isCorrect ? 'Amazing!' : 'Incorrect. Try again.',
+			isCorrect,
+		})
+		setIsChecked(true)
 
-
-			if (isCorrect) {
-				successAudio.stop()
-				successAudio.play() 
-			} else {
-				loseAudio.stop()
-				loseAudio.play() 
-				setHearts(prev => Math.max(0, prev - 1)) 
-			}
+		// Update hearts if the answer is incorrect
+		if (!isCorrect) {
+			setHearts(prev => Math.max(0, prev - 1))
 		}
 	}
+}
 
 
 	const handleContinue = () => {
