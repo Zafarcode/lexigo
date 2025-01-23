@@ -5,29 +5,35 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import { Badge } from "../ui/badge";
-import { levelDataT, levelTaskT, skillT } from "@/types";
+import { levelDataT, skillT } from "@/types";
 import { levelTask, skills } from "@/constants/skills";
 import Image from "next/image";
+import Link from "next/link";
 
 const SkillCard = ({ params }: { params: string[] }) => {
+  const [category, level] = params;
+
   const [selectedSkill, setSelectedSkill] = useState<skillT | null>(null);
   const [task, setTask] = useState<levelDataT[] | null>(null);
 
   useEffect(() => {
-    const foundSkill = skills.find((skill) => skill.slug === params[0]);
+    const foundSkill = skills.find((skill) => skill.slug === category);
     if (foundSkill) {
       setSelectedSkill(foundSkill);
     }
-    const foundTask = levelTask.find((skill) => skill.slug === params[1]);
+    const foundTask = levelTask.find((skill) => skill.slug === level);
     if (foundTask) {
       setTask(foundTask.data);
     }
-  }, [params]);
+  }, [category, level]);
+
+  console.log(task);
 
   return (
     <div className="overflow-hidden  shadow-lg">
       <div className="flex flex-col gap-y-4 p-0">
-        {params.length === 1 &&
+        {category &&
+          !level &&
           selectedSkill?.level.map((skill, i) => (
             <Card className="w-full p-0" key={skill}>
               <CardContent className="grid md:grid-cols-2 p-0">
@@ -60,16 +66,20 @@ const SkillCard = ({ params }: { params: string[] }) => {
                     </p>
                   </div>
 
-                  <Button className="w-full sm:w-auto">
-                    Start Learning
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
+                  <Link
+                    href={`/dashboard/skills/${category}/${skill.toLowerCase()}`}
+                  >
+                    <Button className="w-full sm:w-auto">
+                      Start Learning
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </Link>
                 </div>
               </CardContent>
             </Card>
           ))}
 
-        {params.length === 2 &&
+        {level &&
           task?.map((task, i) => (
             <Card className="w-full p-0" key={task.title}>
               <CardContent className="grid md:grid-cols-2 p-0">
@@ -100,10 +110,14 @@ const SkillCard = ({ params }: { params: string[] }) => {
                     </p>
                   </div>
 
-                  <Button className="w-full sm:w-auto">
-                    Start Learning
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
+                  <Link
+                    href={`/dashboard/skills/${category}/${level}/${task.slug}`}
+                  >
+                    <Button className="w-full sm:w-auto">
+                      Start Learning
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </Link>
                 </div>
               </CardContent>
             </Card>
