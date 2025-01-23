@@ -45,6 +45,7 @@ export const authOptions: AuthOptions = {
 	},
 	callbacks: {
 		async jwt({ token, user }) {
+			console.log('JWT Callback - token:', token, 'user:', user) // Debug
 			if (user) {
 				token.accessToken = user.accessToken
 				token.refreshToken = user.refreshToken
@@ -52,14 +53,18 @@ export const authOptions: AuthOptions = {
 			return token
 		},
 		async session({ session, token }) {
+			console.log('Session Callback - session:', session, 'token:', token) // Debug
 			if (token) {
-				session.user.id = token.sub
-				session.user.phone = token.phone
-				session.user.username = token.username
-				session.user.firstName = token.firstName
-				session.user.lastName = token.lastName
-				session.user.accessToken = token.accessToken
-				session.user.refreshToken = token.refreshToken
+				session.user = {
+					...session.user,
+					id: token.sub,
+					phone: token.phone,
+					username: token.username,
+					firstName: token.firstName,
+					lastName: token.lastName,
+					accessToken: token.accessToken,
+					refreshToken: token.refreshToken,
+				}
 			}
 			return session
 		},

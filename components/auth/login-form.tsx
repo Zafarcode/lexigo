@@ -6,20 +6,32 @@ import {
 	InputOTPSlot,
 } from '@/components/ui/input-otp'
 import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import * as React from 'react'
 
 const LoginForm = () => {
 	const [value, setValue] = React.useState('')
+	const router = useRouter()
 
 	const handleLogin = React.useCallback(async () => {
 		if (value.length === 6) {
-			await signIn('credentials', { code: value, redirect: false })
+			const result = await signIn('credentials', {
+				code: value,
+				redirect: false,
+			})
+			if (result?.ok) {
+				router.push('/dashboard')
+			} else {
+				console.error('Login failed:', result?.error)
+			}
 		}
-	}, [value])
+	}, [router, value])
 
 	React.useEffect(() => {
-		handleLogin()
-	}, [value, handleLogin])
+		if (value.length === 6) {
+			handleLogin()
+		}
+	}, [handleLogin, value])
 
 	return (
 		<div className='space-y-2'>

@@ -8,11 +8,12 @@ import { Progress } from '@/components/ui/progress'
 import useTTS from '@/hooks/useTTS'
 import { cn } from '@/lib/utils'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Check, Heart, Volume2, X } from 'lucide-react'
+import { CheckCheck, Heart, Volume2, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { ImageSelection } from '@/types'
+import CelebrationDialog from '../celebration-dialog'
 
 type WordImageProps = {
 	quizData: ImageSelection[]
@@ -31,6 +32,8 @@ export default function WordImage({ quizData, onViewed }: WordImageProps) {
 	} | null>(null)
 	const [hearts, setHearts] = useState(5)
 	const [isChecked, setIsChecked] = useState(false)
+	const [showCongratulations, setShowCongratulations] = useState(false)
+	const audioRef = useRef<HTMLAudioElement | null>(null)
 
 	const handleSelectAndSpeak = (
 		event: React.MouseEvent<HTMLButtonElement>,
@@ -44,18 +47,37 @@ export default function WordImage({ quizData, onViewed }: WordImageProps) {
 	}
 
 	const handleCheck = () => {
-		if (selected) {
-			const isCorrect = selected === quizData[currentStep].correct
-			setResult({
-				message: isCorrect ? 'Amazing!' : 'Incorrect. Try again.',
-				isCorrect,
-			})
-			setIsChecked(true)
-			if (!isCorrect) {
-				setHearts(prev => Math.max(0, prev - 1))
-			}
+	if (selected) {
+		const isCorrect = selected === quizData[currentStep].correct
+
+		// Create and manage a single audio reference
+		if (!audioRef.current) {
+			audioRef.current = new Audio()
+		}
+
+		const audioSrc = isCorrect ? '/sounds/success.mp3' : '/sounds/lose.mp3'
+
+		// Update the audio source dynamically
+		audioRef.current.src = audioSrc
+		audioRef.current.volume = 1.0
+		audioRef.current.pause()
+		audioRef.current.currentTime = 0
+		audioRef.current.play()
+
+		// Update result and states
+		setResult({
+			message: isCorrect ? 'Amazing!' : 'Incorrect. Try again.',
+			isCorrect,
+		})
+		setIsChecked(true)
+
+		// Update hearts if the answer is incorrect
+		if (!isCorrect) {
+			setHearts(prev => Math.max(0, prev - 1))
 		}
 	}
+}
+
 
 	const handleContinue = () => {
 		if (result?.isCorrect) {
@@ -73,6 +95,7 @@ export default function WordImage({ quizData, onViewed }: WordImageProps) {
 					message: "Congratulations! You've completed the quiz.",
 					isCorrect: true,
 				})
+				setShowCongratulations(true)
 			}
 		} else if (hearts <= 1) {
 			setResult({
@@ -99,9 +122,14 @@ export default function WordImage({ quizData, onViewed }: WordImageProps) {
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			transition={{ duration: 0.5 }}
-			className='min-h-screen flex items-center justify-center'
+			className='flex items-center justify-center'
 		>
-			<Card className='w-full max-w-4xl p-0 overflow-hidden shadow-none border-none'>
+			<CelebrationDialog
+				isOpen={showCongratulations}
+				onClose={() => setShowCongratulations(false)}
+			/>
+
+			<Card className='w-full lg:max-w-5xl p-0 overflow-hidden shadow-none border-none'>
 				<CardContent className='p-3 md:p-6'>
 					<motion.div
 						initial={{ opacity: 0 }}
@@ -174,7 +202,7 @@ export default function WordImage({ quizData, onViewed }: WordImageProps) {
 						</div>
 
 						<div
-							className='grid grid-cols-2 md:grid-cols-4 gap-4'
+							className='grid md:grid-cols-2 lg:grid-cols-4 gap-4'
 							role='group'
 							aria-label='Answer options'
 						>
@@ -238,7 +266,7 @@ export default function WordImage({ quizData, onViewed }: WordImageProps) {
 								}-600`}
 							>
 								{result.isCorrect ? (
-									<Check className='h-10 w-10 text-green-600' />
+									<CheckCheck className='h-10 w-10 text-green-600' />
 								) : (
 									<X className='h-10 w-10 text-pink-600' />
 								)}
@@ -254,11 +282,8 @@ export default function WordImage({ quizData, onViewed }: WordImageProps) {
 					)}
 					<Button
 						disabled={!selected && !isChecked}
-						className={`w-full md:max-w-28 text-lg text-white font-semibold transition-colors duration-200 border-b-4 ${
-							result?.isCorrect
-								? 'bg-green-500 hover:bg-green-600 border-green-700'
-								: 'bg-pink-500 hover:bg-pink-600 border-pink-700'
-						}`}
+						variant={result?.isCorrect ? 'secondary' : 'primary'}
+						className={`w-full md:max-w-28 text-lg text-white font-semibold transition-colors duration-200`}
 						onClick={isChecked ? handleContinue : handleCheck}
 					>
 						{isChecked ? 'Continue' : 'Check'}

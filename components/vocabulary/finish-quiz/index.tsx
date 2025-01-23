@@ -5,8 +5,8 @@ import { Heart, X } from 'lucide-react'
 import Link from 'next/link'
 import { Progress } from '@/components/ui/progress'
 import { Button } from '@/components/ui/button'
-import Confetti from 'react-confetti'
 import { FinishQuiz as FinishQuizType } from '@/types'
+import CelebrationDialog from '../celebration-dialog'
 
 type FinishQuizProps = {
 	options: FinishQuizType[]
@@ -22,7 +22,7 @@ const FinishQuiz = ({ options, onViewed }: FinishQuizProps) => {
 	const [clickedLetters, setClickedLetters] = useState<Record<string, boolean>>(
 		{}
 	)
-	const [showConfetti, setShowConfetti] = useState(false)
+	const [showCongratulations, setShowCongratulations] = useState(false)
 
 	const currentWord = options[currentIndex]?.en || ''
 	const currentHint = options[currentIndex]?.uz || ''
@@ -41,8 +41,8 @@ const FinishQuiz = ({ options, onViewed }: FinishQuizProps) => {
 			setGameState('continue')
 		} else {
 			setProgress(100)
-			setShowConfetti(true)
-			setTimeout(() => setShowConfetti(false), 5000)
+			setShowCongratulations(true)
+			setTimeout(() => setShowCongratulations(false), 5000)
 		}
 	}, [currentIndex, options, onViewed])
 
@@ -116,9 +116,7 @@ const FinishQuiz = ({ options, onViewed }: FinishQuizProps) => {
 
 	return (
 		<div className='w-full max-w-4xl mx-auto flex flex-col items-center gap-5 p-3 sm:p-5'>
-			{showConfetti && (
-				<Confetti />
-			)}
+			<CelebrationDialog isOpen={showCongratulations} onClose={() => 	setShowCongratulations} />
 			<div className='w-full flex justify-between items-center gap-2'>
 				<Link href='/dashboard/vocabulary'>
 					<X className='h-6 w-6 text-gray-200 hover:text-primary' />
