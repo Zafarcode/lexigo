@@ -11,9 +11,10 @@ import CelebrationDialog from '../celebration-dialog'
 type FinishQuizProps = {
 	options: FinishQuizType[]
 	onViewed: (itemId: number) => void
+	slug: string
 }
 
-const FinishQuiz = ({ options, onViewed }: FinishQuizProps) => {
+const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 	const [currentIndex, setCurrentIndex] = useState(0)
 	const [lossCount, setLossCount] = useState(5)
 	const [progress, setProgress] = useState(0)
@@ -115,10 +116,10 @@ const FinishQuiz = ({ options, onViewed }: FinishQuizProps) => {
 	}, [handleKeyDown])
 
 	return (
-		<div className='w-full max-w-4xl mx-auto flex flex-col items-center gap-5 p-3 sm:p-5'>
-			<CelebrationDialog isOpen={showCongratulations} onClose={() => 	setShowCongratulations} />
+		<div className='w-full lg:max-w-5xl mx-auto flex flex-col items-center gap-5 p-3 sm:p-5'>
+			<CelebrationDialog isOpen={showCongratulations} onClose={() => 	setShowCongratulations(false)} />
 			<div className='w-full flex justify-between items-center gap-2'>
-				<Link href='/dashboard/vocabulary'>
+				<Link href={`/dashboard/vocabulary/${slug}`}>
 					<X className='h-6 w-6 text-gray-200 hover:text-primary' />
 				</Link>
 				<Progress value={progress} className='h-3 bg-pink-100' />

@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion} from 'framer-motion'
 import { ArrowLeft, Star, Trophy, Box, Play } from 'lucide-react'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -25,10 +25,10 @@ export function Section({ section, onUnitClick, unitProgress }: SectionProps) {
 		const spacing = 7 // Fixed spacing between units
 		const startY = 5 // Starting Y position
 		const centerX = 50 // Center X position
-		const totalUnits = 30 // Total number of units
+		const totalUnits = section.units.length // Total number of units
+		
 
 		// Calculate endY dynamically based on spacing and totalUnits
-		const endY = startY + spacing * (totalUnits - 1)
 		const frequency = (Math.PI * 2) / (totalUnits - 1) // Frequency
 
 		for (let i = 0; i < totalUnits; i++) {
@@ -104,37 +104,35 @@ export function Section({ section, onUnitClick, unitProgress }: SectionProps) {
 		switch (theme) {
 			case 'pink':
 				return isCompleted
-					? 'bg-pink-500 text-white'
+					? 'from-pink-600 to-pink-400 text-white'
 					: isLocked
-					? 'bg-gray-300 text-gray-500'
-					: 'bg-pink-100 text-pink-500'
+					? 'from-gray-600 to-gray-400 text-gray-500'
+					: 'from-pink-600 to-pink-400 text-pink-100'
 			case 'blue':
 				return isCompleted
-					? 'bg-blue-500 text-white'
+					? 'from-blue-600 to-blue-400 text-white'
 					: isLocked
-					? 'bg-gray-300 text-gray-500'
-					: 'bg-blue-100 text-blue-500'
+					? 'from-gray-600 to-gray-400 text-gray-500'
+					: 'from-blue-600 to-blue-400 text-blue-100'
 			case 'green':
 				return isCompleted
-					? 'bg-green-500 text-white '
+					? 'from-green-600 to-green-400 text-white'
 					: isLocked
-					? 'bg-gray-300 text-gray-500'
-					: 'bg-green-100 text-green-500'
+					? 'from-gray-600 to-gray-400 text-gray-500'
+					: 'from-green-600 to-green-400 text-green-100'
 			default:
 				return isCompleted
-					? 'bg-gray-500 text-white'
+					? 'from-gray-600 to-gray-400 text-white'
 					: isLocked
-					? 'bg-gray-300 text-gray-500'
-					: 'bg-gray-100 text-gray-500'
+					? 'from-gray-400 to-gray-300 text-gray-500'
+					: 'from-gray-600 to-gray-400 text-gray-100'
 		}
 	}
 
 	const unitPositions = getUnitPositions()
 
 	return (
-		<Card
-			className={`relative w-full max-w-4xl border-none shadow-none`}
-		>
+		<Card className={`relative w-full max-w-4xl border-none shadow-none`}>
 			<div
 				className={`flex flex-col items-center justify-between p-4 rounded-lg ${colors.header} text-white`}
 			>
@@ -165,32 +163,42 @@ export function Section({ section, onUnitClick, unitProgress }: SectionProps) {
 						initial={{ scale: 0.8, opacity: 0 }}
 						animate={{ scale: 1, opacity: 1 }}
 						transition={{ duration: 0.5 }}
-						className='absolute'
+						className='absolute group'
 						style={{
 							top: unitPositions[unit.id].top,
 							left: unitPositions[unit.id].left,
 							transform: 'translate(-50%, -50%)',
+							perspective: 1000,
 						}}
 					>
-						<motion.button
-							initial={{ scale: 0.8, opacity: 0 }}
-							animate={{ scale: 1, opacity: 1 }}
-							whileHover={{ scale: 1.1 }}
-							whileTap={{ scale: 0.95 }}
-							onClick={() => !unit.isLocked && onUnitClick(unit.id)}
-							disabled={unit.isLocked}
-							className={`relative flex h-16 w-16 items-center justify-center rounded-full ${getUnitThemeColors(
-								unit.isCompleted,
-								unit.isLocked,
-								section.theme
-							)} shadow-2xl`}
-						>
-							<CircularProgress
-								progress={unitProgress[unit.id] || 0}
-								icon={getIcon(unit.type)} theme={colors.progress}							/>
-							
-						</motion.button>
-					</motion.div>
+							<motion.button
+								initial={{ scale: 0.8, opacity: 0 }}
+								animate={{ scale: 1, opacity: 1 }}
+								whileHover={{ scale: 1.1 }}
+								whileTap={{ scale: 0.95 }}
+								onClick={() => !unit.isLocked && onUnitClick(unit.id)}
+								disabled={unit.isLocked}
+								className={`relative flex h-24 w-24 items-center bg-gradient-to-br transform-gpu shadow-[0_10px_20px_rgba(0,0,0,0.3)] justify-center rounded-full ${getUnitThemeColors(
+									unit.isCompleted,
+									unit.isLocked,
+									section.theme
+								)} `}
+							>
+								<div className='absolute inset-0 rounded-full shadow-inner' />
+								<CircularProgress progress={unitProgress[unit.id] || 0} />
+								<motion.div className='absolute inset-0 flex items-center justify-center z-20'>
+									<motion.div
+										className='text-white text-2xl drop-shadow-lg'
+										initial={{ scale: 0.8 }}
+										animate={{ scale: 1 }}
+										whileHover={{ scale: 1.1 }}
+									>
+										{getIcon(unit.type)}
+									</motion.div>
+								</motion.div>
+							</motion.button>
+							<div className='absolute -bottom-4 left-1/2 -translate-x-1/2 w-3/4 h-4 bg-black/20 blur-md rounded-full transform-gpu scale-y-50' />
+						</motion.div>
 				))}
 			</div>
 		</Card>

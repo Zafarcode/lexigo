@@ -11,17 +11,18 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { CheckCheck, Heart, Volume2, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { ImageSelection } from '@/types'
 import CelebrationDialog from '../celebration-dialog'
 
 type WordImageProps = {
 	quizData: ImageSelection[]
 	onViewed: (itemId: number) => void
+	slug: string
 }
 
 
-export default function WordImage({ quizData, onViewed }: WordImageProps) {
+export default function WordImage({ quizData, onViewed, slug }: WordImageProps) {
 	const { handleNormalSpeech } = useTTS()
 	const [currentStep, setCurrentStep] = useState(0)
 	const [selected, setSelected] = useState<string | null>(null)
@@ -46,40 +47,34 @@ export default function WordImage({ quizData, onViewed }: WordImageProps) {
 		handleNormalSpeech(event, label)
 	}
 
-	const handleCheck = () => {
-	if (selected) {
-		const isCorrect = selected === quizData[currentStep].correct
+	const handleCheck = useCallback(() => {
+		if (selected) {
+			const isCorrect = selected === quizData[currentStep].correct
 
-		// Create and manage a single audio reference
-		if (!audioRef.current) {
-			audioRef.current = new Audio()
+			if (!audioRef.current) {
+				audioRef.current = new Audio()
+			}
+
+			const audioSrc = isCorrect ? '/sounds/success.mp3' : '/sounds/lose.mp3'
+			audioRef.current.src = audioSrc
+			audioRef.current.volume = 1.0
+			audioRef.current.pause()
+			audioRef.current.currentTime = 0
+			audioRef.current.play()
+
+			setResult({
+				message: isCorrect ? 'Amazing!' : 'Incorrect. Try again.',
+				isCorrect,
+			})
+			setIsChecked(true)
+
+			if (!isCorrect) {
+				setHearts(prev => Math.max(0, prev - 1))
+			}
 		}
+	}, [selected, quizData, currentStep]) // Dependencies of handleCheck
 
-		const audioSrc = isCorrect ? '/sounds/success.mp3' : '/sounds/lose.mp3'
-
-		// Update the audio source dynamically
-		audioRef.current.src = audioSrc
-		audioRef.current.volume = 1.0
-		audioRef.current.pause()
-		audioRef.current.currentTime = 0
-		audioRef.current.play()
-
-		// Update result and states
-		setResult({
-			message: isCorrect ? 'Amazing!' : 'Incorrect. Try again.',
-			isCorrect,
-		})
-		setIsChecked(true)
-
-		// Update hearts if the answer is incorrect
-		if (!isCorrect) {
-			setHearts(prev => Math.max(0, prev - 1))
-		}
-	}
-}
-
-
-	const handleContinue = () => {
+	const handleContinue = useCallback(() => {
 		if (result?.isCorrect) {
 			setProgress(prev =>
 				Math.min(100, Math.round((prev + 100 / quizData.length) * 100) / 100)
@@ -106,7 +101,27 @@ export default function WordImage({ quizData, onViewed }: WordImageProps) {
 		}
 		setSelected(null)
 		setIsChecked(false)
-	}
+	}, [result, hearts, quizData, currentStep, onViewed])
+
+	useEffect(() => {
+  const handleKeyPress = (event: KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      if (!isChecked) {
+        handleCheck()
+      } else {
+        handleContinue()
+      }
+    }
+  }
+
+  // Add keydown event listener
+  window.addEventListener('keydown', handleKeyPress)
+
+    // Remove keydown event listener
+    return () => {
+    window.removeEventListener('keydown', handleKeyPress)
+}
+}, [isChecked, selected, quizData, currentStep, hearts, result, handleCheck, handleContinue])
 
 	const resetQuiz = () => {
 		setCurrentStep(0)
@@ -140,7 +155,7 @@ export default function WordImage({ quizData, onViewed }: WordImageProps) {
 						<div className='flex flex-row items-center gap-2'>
 							<div className='flex items-center gap-2'>
 								<Link
-									href='/dashboard/vocabulary'
+									href={`/dashboard/vocabulary/${slug}`}
 									aria-label='Go back to vocabulary page'
 								>
 									<X className='h-6 w-6 text-gray-200 hover:text-primary hover:text-gray-400 transition-all' />
@@ -261,14 +276,14 @@ export default function WordImage({ quizData, onViewed }: WordImageProps) {
 					{result && (
 						<Alert className='w-full flex items-center border-none'>
 							<AlertTitle
-								className={`mb-0 p-2 flex items-center justify-center rounded-full bg-${
-									result.isCorrect ? 'green' : 'pink'
-								}-600`}
+								className={`mb-0 p-2 flex items-center justify-center rounded-full ${
+									result.isCorrect ? 'bg-green-600' : 'bg-pink-600'
+								}`}
 							>
 								{result.isCorrect ? (
-									<CheckCheck className='h-10 w-10 text-green-600' />
+									<CheckCheck className='h-10 w-10 text-white' />
 								) : (
-									<X className='h-10 w-10 text-pink-600' />
+									<X className='h-10 w-10 text-white' />
 								)}
 							</AlertTitle>
 							<AlertDescription

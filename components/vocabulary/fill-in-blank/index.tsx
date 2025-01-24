@@ -8,14 +8,16 @@ import { motion } from 'framer-motion'
 import { Heart, X } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
+import CelebrationDialog from '../celebration-dialog'
 
 
 type FillInBlankProps = {
 	questions: FillInBlank[]
 	onViewed: (itemId: number) => void
+	slug: string
 }
 
-export default function Fillinblank({ questions, onViewed }: FillInBlankProps) {
+export default function Fillinblank({ questions, onViewed, slug }: FillInBlankProps) {
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
 	const [selectedOption, setSelectedOption] = useState<string | null>(null)
 	const [status, setStatus] = useState<'correct' | 'incorrect' | null>(null)
@@ -23,6 +25,7 @@ export default function Fillinblank({ questions, onViewed }: FillInBlankProps) {
 	const [gameOver, setGameOver] = useState(false)
 	const [correctAnswersCount, setCorrectAnswersCount] = useState(0)
 	const [progress, setProgress] = useState(0)
+	const [showCongratulations, setShowCongratulations] = useState(false)
 
 	const currentQuestion = questions[currentQuestionIndex]
 
@@ -50,6 +53,7 @@ export default function Fillinblank({ questions, onViewed }: FillInBlankProps) {
 			setCurrentQuestionIndex(prev => {
 				const nextIndex = prev + 1
 				setProgress(((nextIndex + 1) / questions.length) * 100)
+				setShowCongratulations(true)
 				return nextIndex
 			})
 		} else {
@@ -72,12 +76,13 @@ export default function Fillinblank({ questions, onViewed }: FillInBlankProps) {
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			transition={{ duration: 0.5 }}
-			className='min-h-screen flex items-center justify-center px-4 sm:px-6'
+			className='flex items-center justify-center px-4 sm:px-6'
 		>
-			<div className='w-full max-w-4xl'>
+			<CelebrationDialog isOpen={showCongratulations} onClose={() => setShowCongratulations(false)} />
+			<div className='w-full max-w-5xl'>
 				<CardContent className='p-6'>
 					<div className='flex items-center gap-2 mb-6'>
-						<Link href='/dashboard/vocabulary'>
+						<Link href={`/dashboard/vocabulary/${slug}`}>
 							<X className='h-6 w-6 text-gray-200 hover:text-primary' />
 						</Link>
 						<Progress value={progress} className='h-3 bg-pink-100 flex-1' />
@@ -108,7 +113,7 @@ export default function Fillinblank({ questions, onViewed }: FillInBlankProps) {
 							</Button>
 						</div>
 					) : (
-						<div className='relative w-full max-w-4xl border-2 rounded-lg shadow-md p-6 mt-16'>
+						<div className='relative w-full lg:max-w-5xl border-2 rounded-lg shadow-md p-6 mt-16'>
 							<h2 className='text-xl sm:text-3xl font-bold mb-6'>
 								Fill in the blank
 							</h2>
