@@ -13,13 +13,14 @@ import React, { useEffect, useState } from 'react'
 type WordPairProps = {
 	words: WordPair[]
 	onViewed: (itemId: number) => void
+	slug: string
 }
 
 const shuffleArray = <T,>(array: T[]): T[] => {
 	return [...array].sort(() => Math.random() - 0.5)
 }
 
-const MatchingPairs = ({ words, onViewed }: WordPairProps) => {
+const MatchingPairs = ({ words, onViewed, slug }: WordPairProps) => {
 	const [selected, setSelected] = useState<{ id: number; value: string }[]>([])
 	const [matchedPairs, setMatchedPairs] = useState<string[][]>([])
 	const [feedback, setFeedback] = useState('')
@@ -100,9 +101,9 @@ const MatchingPairs = ({ words, onViewed }: WordPairProps) => {
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			transition={{ duration: 0.5 }}
-			className='min-h-screen flex items-center justify-center '
+			className='flex items-center justify-center'
 		>
-			<div className='w-full max-w-4xl p-0 overflow-hidden shadow-none border-none'>
+			<div className='w-full lg:max-w-5xl p-0 overflow-hidden shadow-none border-none'>
 				<CardContent className='p-3 md:p-6'>
 					{gameOver ? (
 						<section className='flex flex-col items-center justify-center min-h-[300px]'>
@@ -115,8 +116,8 @@ const MatchingPairs = ({ words, onViewed }: WordPairProps) => {
 						</section>
 					) : (
 						<>
-							<section className='flex items-center gap-4 mb-6'>
-								<Link href='/dashboard/vocabulary'>
+							<div className='flex items-center gap-4 mb-6'>
+								<Link href={`/dashboard/vocabulary/${slug}`}>
 									<X className='h-6 w-6 text-gray-200 hover:text-primary' />
 								</Link>
 								<Progress value={progress} className='h-3 flex-1 bg-pink-100' />
@@ -124,7 +125,7 @@ const MatchingPairs = ({ words, onViewed }: WordPairProps) => {
 									<Heart className='h-4 w-4 text-primary' />
 									<span className='text-lg'>{hearts}</span>
 								</div>
-							</section>
+							</div>
 							<Badge
 								variant='secondary'
 								className='text-xs mb-6 font-semibold bg-pink-200 text-pink-700'

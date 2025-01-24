@@ -4,7 +4,7 @@ export const lessons: Section[] = [
 	{
 		id: 1,
 		title: 'Basic Vocabulary',
-		theme: 'pink',
+		theme: 'blue',
 		slug: 'basic-vocabulary',
 		units: [
 			{
@@ -147,12 +147,12 @@ export const lessons: Section[] = [
 				type: 'star',
 				isCompleted: false,
 				isLocked: true,
-				item: Array.from({ length: 8 }, (_, j) => ({
+				item: Array.from({ length: 2 }, (_, j) => ({
 					type: 'finishQuiz',
 					id: j + 1,
 					viewed: false,
-					en: `hello`,
-					uz: `alo`,
+					en: `hi`,
+					uz: `salom`,
 				})),
 			},
 			
