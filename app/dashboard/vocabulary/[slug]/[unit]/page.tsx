@@ -104,6 +104,7 @@ export default function UnitPage({ params }: UnitPageProps) {
 				{imageSelections.length > 0 && (
 					<WordImage
 						onViewed={handleViewed}
+						slug={section.slug}
 						quizData={imageSelections} // Pass only image selections
 					/>
 				)}
@@ -112,6 +113,7 @@ export default function UnitPage({ params }: UnitPageProps) {
 				{finishQuiz.length > 0 && (
 					<FinishQuiz
 						onViewed={handleViewed}
+						slug={section.slug}
 						options={finishQuiz} // Pass only translations
 					/>
 				)}
@@ -120,6 +122,7 @@ export default function UnitPage({ params }: UnitPageProps) {
 				{wordPairs.length > 0 && (
 					<MatchingPairs
 						onViewed={handleViewed}
+						slug={section.slug}
 						words={wordPairs} // Pass only word pairs
 					/>
 				)}
@@ -128,6 +131,7 @@ export default function UnitPage({ params }: UnitPageProps) {
 				{fillInBlank.length > 0 && (
 					<FillInBlank
 						onViewed={handleViewed}
+						slug={section.slug}
 						questions={fillInBlank} // Pass only fill-in-blank questions
 					/>
 				)}
