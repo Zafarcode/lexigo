@@ -92,18 +92,6 @@ const Page = () => {
                           <div className='bg-gradient-to-b from-white/0 to-white/100 dark:from-black/0 dark:to-black/100 absolute left-0 bottom-0 w-full h-full'></div>
                         </div>
                       </div>
-                      {/* <div className='w-[450px] h-[284px] hidden sm:block'>
-                        <div className=' flex justify-between items-center w-full pl-6 border-2 rounded-lg border-gray-200'>
-                          <div className=' flex flex-col gap-1 w-[70%]'>
-                            <p className=' text-xl font-medium text-gray-400'>WHAT IS RATING?</p>
-                            <p className=' text-xl font-medium'>Learn.<br />Gain experience.<br />Compete.</p>
-                            <p className=' text-lg'>Try to take a new position in the weekly ranking by gaining as many experience points as possible for lessons.</p>
-                          </div>
-                          <div className=' w-[120px] flex justify-center items-end'>
-                            <Image src={'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/071159d03311fcb556c4dfe730941de1.svg'} alt='icons' width={50} height={50} className=' w-full object-contain' />
-                          </div>
-                        </div>
-                      </div> */}
                     </div>
                   </main>
                 </> :
