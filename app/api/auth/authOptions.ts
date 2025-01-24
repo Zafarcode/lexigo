@@ -14,7 +14,7 @@ export const authOptions: AuthOptions = {
 
 				try {
 					const response = await axios.post(
-						'http://127.0.0.1:8000/api/accounts/verify-code/',
+						'http://127.0.0.1:8000/api/v1/accounts/verify-code/',
 						{ code: credentials.code }
 					)
 
@@ -45,7 +45,6 @@ export const authOptions: AuthOptions = {
 	},
 	callbacks: {
 		async jwt({ token, user }) {
-			console.log('JWT Callback - token:', token, 'user:', user) // Debug
 			if (user) {
 				token.accessToken = user.accessToken
 				token.refreshToken = user.refreshToken
@@ -53,7 +52,6 @@ export const authOptions: AuthOptions = {
 			return token
 		},
 		async session({ session, token }) {
-			console.log('Session Callback - session:', session, 'token:', token) // Debug
 			if (token) {
 				session.user = {
 					...session.user,
