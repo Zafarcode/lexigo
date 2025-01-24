@@ -1,11 +1,5 @@
 import { LevelT, skillT } from "@/types";
-import {
-  Book,
-  MessageSquare,
-  Mic,
-  Pencil,
-  Brain,
-} from "lucide-react";
+import { Book, MessageSquare, Mic, Pencil, Brain } from "lucide-react";
 
 export const skills: skillT[] = [
   {
@@ -33,7 +27,7 @@ export const skills: skillT[] = [
     slug: "writing",
     level: ["A1-writing", "A2-writing", "B1-writing", "B2-writing"],
     icon: Pencil,
-    color: "bg-blue-500/90",
+    color: "blue-500/90",
     hoverColor: "hover:text-blue-700",
     bgPattern:
       "radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)",
@@ -50,7 +44,7 @@ export const skills: skillT[] = [
   },
 ];
 
-export const levelTask:LevelT[] = [
+export const levelTask: LevelT[] = [
   // Listening Levels
   {
     id: 1,
@@ -133,7 +127,8 @@ export const levelTask:LevelT[] = [
       {
         title: "A simple recipe",
         slug: "a-simple-recipe",
-        description: "Read the recipe and follow the steps in the correct order.",
+        description:
+          "Read the recipe and follow the steps in the correct order.",
       },
       {
         title: "A school timetable",
@@ -265,8 +260,6 @@ export const levelTask:LevelT[] = [
   },
 ];
 
-
-
 export const infodata = [
   {
     id: 1,
@@ -320,15 +313,13 @@ export const dialogue = [
   { speaker: "Mario", text: "Right. I'll do it today." },
 ];
 
-
-
 export const ListeningTask = {
   title: "Listening A1: A request from your boss - 2",
   instruction: "Put the tasks in order of priority based on the conversation.",
-  initialTasks:[
+  initialTasks: [
     { id: "1", content: "Send an email to the customer" },
     { id: "2", content: "Reserve a meeting room" },
     { id: "3", content: "Invite people to the meeting" },
     { id: "4", content: "Visit the customer" },
   ],
-}
+};

@@ -15,7 +15,7 @@ const page = ({ params }: { params: { slug: string[] } }) => {
     <section className="w-full px-4">
       <div className="grid grid-cols-1 lg:grid-cols-[75%,25%]  gap-4">
         <div>
-          <h1 className="text-3xl font-bold mb-8">
+          <h1 className="text-xl md:text-3xl font-bold mb-8">
             Choose your level to practise your{" "}
             {(category && !level)
               ? category.toUpperCase()

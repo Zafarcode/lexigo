@@ -31,7 +31,7 @@ export default function ActionPanel({ params }: ActionPanelProps) {
   }, [params]);
 
   return (
-    <div className="w-full h-96 overflow-hidden rounded-lg border border-border/50 bg-card/50 backdrop-blur-sm text-card-foreground shadow-lg hidden lg:block transition-all duration-300 hover:shadow-xl hover:border-border">
+    <div className="w-full h-[400px] overflow-hidden rounded-lg border border-border/50 bg-gradient-to-br from-background via-background/95 to-background/90 backdrop-blur-sm text-card-foreground shadow-lg hidden lg:block transition-all duration-300 hover:shadow-xl hover:border-border/80">
       <ScrollArea className="h-full">
         <nav className="p-2 space-y-1">
           <AnimatePresence>
@@ -47,10 +47,10 @@ export default function ActionPanel({ params }: ActionPanelProps) {
                     className={cn(
                       "relative w-full justify-start gap-3 p-4 text-left text-base font-medium",
                       "transition-all duration-300 ease-in-out",
-                      "hover:bg-muted/80 hover:text-primary",
-                      "focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-                      selectedSkill?.slug === skill.slug &&
-                        "bg-primary/10 text-primary font-semibold shadow-sm"
+                      "hover:bg-indigo-500/10 dark:hover:bg-indigo-400/10",
+                      "focus-visible:ring-2 focus-visible:ring-indigo-500/50 dark:focus-visible:ring-indigo-400/50 focus-visible:ring-offset-2",
+                      selectedSkill?.slug === skill.slug && 
+                        "bg-gradient-to-r from-indigo-500/90 to-violet-500/90 dark:from-indigo-400/90 dark:to-violet-400/90 text-white font-semibold shadow-sm"
                     )}
                   >
                     <motion.div
@@ -60,12 +60,11 @@ export default function ActionPanel({ params }: ActionPanelProps) {
                       }}
                       transition={{ duration: 0.4 }}
                       className={cn(
-                        "p-1.5 rounded-md",
-                        skill.color,
+                        "p-1.5 rounded-md bg-transparent",
                         selectedSkill?.slug === skill.slug && "shadow-inner"
                       )}
                     >
-                      <skill.icon className="h-5 w-5 shrink-0" />
+                      <skill.icon className="h-5 w-5" />
                     </motion.div>
                     <Link
                       href={`/dashboard/skills/${skill.slug}`}
@@ -81,7 +80,12 @@ export default function ActionPanel({ params }: ActionPanelProps) {
                       transition={{ duration: 0.3 }}
                       className="ml-auto"
                     >
-                      <ChevronDown className="h-4 w-4 shrink-0 opacity-50 group-hover:opacity-100" />
+                      <ChevronDown className={cn(
+                        "h-4 w-4 shrink-0",
+                        selectedSkill?.slug === skill.slug 
+                          ? "opacity-100" 
+                          : "opacity-50 group-hover:opacity-100"
+                      )} />
                     </motion.div>
                   </Button>
                 </CollapsibleTrigger>
@@ -111,18 +115,18 @@ export default function ActionPanel({ params }: ActionPanelProps) {
                             className={cn(
                               "w-full justify-start pl-12 font-normal",
                               "transition-all duration-200",
-                              "hover:bg-muted/80 hover:text-primary hover:translate-x-1",
-                              "focus-visible:ring-1 focus-visible:ring-primary",
-                              isActive &&
-                                "bg-primary/5 text-primary font-medium",
-                              hoveredLevel === level && "bg-muted/60"
+                              "hover:bg-indigo-500/5 dark:hover:bg-indigo-400/5",
+                              "hover:text-indigo-600 dark:hover:text-indigo-400",
+                              "hover:translate-x-1",
+                              "focus-visible:ring-1 focus-visible:ring-indigo-500/50 dark:focus-visible:ring-indigo-400/50",
+                              isActive && "bg-indigo-500/10 dark:bg-indigo-400/10 text-indigo-600 dark:text-indigo-400 font-medium",
+                              hoveredLevel === level && "bg-indigo-500/5 dark:bg-indigo-400/5"
                             )}
                           >
                             <motion.span
                               initial={false}
                               animate={{
-                                scale:
-                                  isActive || hoveredLevel === level ? 1.02 : 1,
+                                scale: isActive || hoveredLevel === level ? 1.02 : 1,
                               }}
                               transition={{ duration: 0.2 }}
                             >

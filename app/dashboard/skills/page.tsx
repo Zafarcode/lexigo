@@ -85,13 +85,13 @@ const Skills = () => {
               <Card className="h-full overflow-hidden relative group perspective">
                 <motion.div className="relative h-full transform-gpu transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(10deg)]">
                   <div
-                    className={`absolute inset-0 bg-gradient-to-r ${info.gradient} opacity-10 group-hover:opacity-20 transition-opacity duration-500`}
+                    className={`absolute inset-0 bg-gradient-to-r opacity-10 group-hover:opacity-20 transition-opacity duration-500`}
                   />
                   <div className="absolute inset-0 backdrop-blur-[2px] group-hover:backdrop-blur-[1px] transition-all duration-500" />
                   <div className="p-6 relative">
                     <div className="flex items-center gap-4 mb-4">
                       <info.icon />
-                      <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
+                      <h3 className="text-2xl font-bold bg-clip-text text-blue-500 bg-gradient-to-r from-primary to-primary/80">
                         {info.title}
                       </h3>
                     </div>
@@ -144,9 +144,7 @@ const Skills = () => {
                         whileHover={{ rotate: 360, scale: 1.1 }}
                         transition={{ duration: 0.5 }}
                       >
-                        <skill.icon
-                          className={`w-8 h-8 text-[${skill.color}]`}
-                        />
+                        <skill.icon className={`w-8 h-8`} />
                       </motion.div>
                       <motion.div
                         initial={false}
