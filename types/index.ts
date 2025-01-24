@@ -100,6 +100,7 @@ export type levelTaskT = {
 export type levelDataT = {
   title: string;
   description: string;
+  slug: string
 };
 
 export interface Task {
@@ -120,3 +121,16 @@ export interface ListetningTaskT {
   instruction?: string;
   initialTasks?: Task[];
 }
+
+
+type SkillTaskT = {
+  title: string;
+  slug: string;
+  description: string;
+};
+
+export type LevelT = {
+  id: number;
+  slug: string;
+  data: SkillTaskT[];
+};
