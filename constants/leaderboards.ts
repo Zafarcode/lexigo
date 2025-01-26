@@ -34,15 +34,15 @@ export const dataUsers = [
 
 export const dataStatuses = [
     { id: 0, url: 'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/a35f1db4398fd29e66f1abc33a0d11a2.svg' },
-    { id: 1, url: '/assets/icons/fire.svg' },
+    { id: 1, url: '/assets/icons/fireIcon.svg' },
     { id: 2, url: 'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/2ceb401cae52712705b66a77df83ce40.svg' },
     { id: 3, url: 'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/6b8a8db5ac7f847e7e87efe97c8b451a.svg' },
     { id: 4, url: 'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/a8e5c18e80054228b2c61168846ff643.svg' },
     { id: 5, url: 'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/573de2bc90b2499eeb2b3738cff90133.svg' },
     { id: 6, url: '/assets/icons/united-states.svg' },
-    { id: 7, url: '/assets/icons/rocket.svg' },
+    { id: 7, url: '/assets/icons/rocketIcon.svg' },
     { id: 8, url: 'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/5642e1e72813a88e8973b551a2004c7f.svg' },
-    { id: 9, url: '/assets/icons/brain.svg' },
+    { id: 9, url: '/assets/icons/brainIcon.svg' },
     { id: 10, url: 'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/22df4cb957e6cf2d7198b6e5449a342e.svg' },
     { id: 11, url: 'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/9fadb349c2ece257386a0e576359c867.svg' },
     { id: 12, url: 'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/535fc27de224cc7d311dbb5de4f33be6.svg' },
