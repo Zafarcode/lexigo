@@ -23,6 +23,10 @@ const config = {
 				sans: ['var(--font-sans)', ...fontFamily.sans],
 			},
 			colors: {
+				duolingoBgRed: 'rgba(255,223,224,255)',
+				duolingoRed: 'rgba(255,75,75,255)',
+				duolingoBgGreen: 'rgba(215,255,184,255)',
+				duolingoGreen: 'rgba(88,204,2,255)',
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',

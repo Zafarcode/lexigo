@@ -131,11 +131,9 @@ const Page = () => {
                                     </div>
                                     {
                                       item.condition === 'user' ?
-                                        <div className="absolute -top-3 -right-5 flex items-center justify-center w-[30px] h-[30px] bg-gray-100 rounded-full border-2 border-dashed border-gray-300 p-1">
-                                          <button onClick={toggleStatus}>
-                                            <Image src={selectedIcon} width={50} height={50} alt='' />
-                                          </button>
-                                        </div>
+                                        <Button className=' absolute -top-3 -right-5 flex items-center justify-center w-[30px] h-[30px] bg-gray-100 rounded-full border-2 border-dashed border-gray-300 p-0' onClick={toggleStatus}>
+                                          <Image src={selectedIcon} width={50} height={50} alt='' />
+                                        </Button>
                                         : <></>
                                     }
 
@@ -206,9 +204,9 @@ const Page = () => {
                                         <></> :
                                         <>
                                           <div className=' w-[50px] h-[50px] border-2 border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden flex justify-center items-center hover:bg-gray-200 dark:hover:bg-gray-900' key={key}>
-                                            <button onClick={() => handleIconClick(item.url)}>
+                                            <Button className=' p-1 border-none' onClick={() => handleIconClick(item.url)}>
                                               <Image src={item.url} alt='status icon' width={48} height={48} className=' object-contain w-full' />
-                                            </button>
+                                            </Button>
                                           </div>
                                         </>
                                     }
