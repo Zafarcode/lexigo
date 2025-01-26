@@ -4,35 +4,41 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { pronunciations, consonantPronunciations } from '@/constants/sounds'
 
-// Grid component
-export const Grid: React.FC<{
-	children: React.ReactNode
-	columns: { base: number; md: number; lg: number }
-	gap: number
-}> = ({ children, columns, gap }) => {
-	return (
-		<div
-			className={`grid grid-cols-3 md:grid-cols-${columns.md} lg:grid-cols-${
-				columns.lg
-			} gap-${4}`}
-		>
-			{children}
-		</div>
-	)
-}
 
 
-
-export default function Home() {
+export default function Characters() {
 	const [activeSound, setActiveSound] = useState<string | null>(null)
 	const [clickedSymbol, setClickedSymbol] = useState<string | null>(null)
+	const handleButtonClick = (symbol: string, example: string) => {
+		// Tugmadagi matnlarni o'qish uchun ovoz chiqarish funksiyasi
+		const speak = (text: string) => {
+			if ('speechSynthesis' in window) {
+				const utterance = new SpeechSynthesisUtterance(text)
+				utterance.lang = 'en-USA' // Tilni sozlash (kerak bo'lsa 'uz-UZ' uchun almashtiring)
+				window.speechSynthesis.speak(utterance)
+			} else {
+				alert(
+					'Sizning brauzeringiz matnni ovozga o‘girishni qo‘llab-quvvatlamaydi.'
+				)
+			}
+		}
 
-	const handleButtonClick = (symbol: string) => {
+		// Tugmadagi p.symbol va p.example matnlarini ovoz bilan o'qish
+		speak(symbol) // p.symbol ni o'qish
+		speak(example) // p.example ni o'qish
+
+		// Faol ovozni belgilash va bosilgan simbolni saqlash
 		setActiveSound(symbol)
 		setClickedSymbol(symbol)
 
+		// 100ms keyin bosilgan simbolni tozalash
 		setTimeout(() => setClickedSymbol(null), 100)
 	}
+
+
+	
+
+	
 
 	return (
 		<main className='min-h-screen mx-auto p-4 flex flex-rows items-center'>
@@ -62,7 +68,7 @@ export default function Home() {
 						</span>
 						<span className='flex-grow h-[3px] bg-gray-200 dark:bg-gray-600'></span>
 					</h2>
-					<Grid columns={{ base: 3, md: 3, lg: 3 }} gap={10}>
+					<div className=' grid grid-cols-3 gap-4 '>
 						{pronunciations.map((p, index) => (
 							<Button
 								key={index}
@@ -72,39 +78,7 @@ export default function Home() {
 									rounded-2xl shadow-sm transition duration-200 
 									${clickedSymbol === p.symbol ? 'translate-y-1' : ''}
 								`}
-								onClick={() => handleButtonClick(p.symbol)}
-							>
-								<div className='flex flex-col items-center justify-center py-2'>
-									<div className=' text-sm sm:text-base md:text-lg  font-medium'>
-										{p.symbol}
-									</div>
-									<div className='text-xs text-gray-400 mb-2'>{p.example}</div>
-									<div className='w-6 sm:w-8 md:w-10 h-1 sm:h-2 bg-gray-200 dark:bg-gray-800 rounded-full'></div>
-								</div>
-							</Button>
-						))}
-					</Grid>
-				</section>
-
-				<section className='rounded-lg p-6 mb-8'>
-					<h2 className='text-lg sm:text-xl md:text-2xl font-bold mb-4 flex items-center px-3'>
-						<span className='flex-grow h-[3px] bg-gray-200 dark:bg-gray-600'></span>
-						<span className='px-4 text-gray-600 dark:text-gray-50'>
-							Concords
-						</span>
-						<span className='flex-grow h-[3px] bg-gray-200 dark:bg-gray-600'></span>
-					</h2>
-					<Grid columns={{ base: 3, md: 3, lg: 3 }} gap={20}>
-						{consonantPronunciations.map((p, index) => (
-							<Button
-								key={index}
-								className={`
-									bg-white dark:bg-gray-950 dark:text-gray-100 dark:border-gray-800 py-8 sm:py-10 font-bold 
-									border-2 border-b-4 border-gray-200 hover:bg-gray-50 text-gray-600 
-									rounded-2xl shadow-sm transition duration-200 
-									${clickedSymbol === p.symbol ? 'translate-y-1' : ''}
-								`}
-								onClick={() => handleButtonClick(p.symbol)}
+								onClick={() => handleButtonClick(p.symbol, p.example)}
 							>
 								<div className='flex flex-col items-center justify-center py-4'>
 									<div className=' text-sm sm:text-base md:text-lg  font-medium'>
@@ -115,7 +89,39 @@ export default function Home() {
 								</div>
 							</Button>
 						))}
-					</Grid>
+					</div>
+				</section>
+
+				<section className='rounded-lg p-6 mb-8'>
+					<h2 className='text-lg sm:text-xl md:text-2xl font-bold mb-4 flex items-center px-3'>
+						<span className='flex-grow h-[3px] bg-gray-200 dark:bg-gray-600'></span>
+						<span className='px-4 text-gray-600 dark:text-gray-50'>
+							Concords
+						</span>
+						<span className='flex-grow h-[3px] bg-gray-200 dark:bg-gray-600'></span>
+					</h2>
+					<div className=' grid grid-cols-3 gap-4 '>
+						{consonantPronunciations.map((p, index) => (
+							<Button
+								key={index}
+								className={`
+									bg-white dark:bg-gray-950 dark:text-gray-100 dark:border-gray-800 py-8 sm:py-10 font-bold 
+									border-2 border-b-4 border-gray-200 hover:bg-gray-50 text-gray-600 
+									rounded-2xl shadow-sm transition duration-200 
+									${clickedSymbol === p.symbol ? 'translate-y-1' : ''}
+								`}
+								onClick={() => handleButtonClick(p.symbol, p.example)}
+							>
+								<div className='flex flex-col items-center justify-center py-4'>
+									<div className=' text-sm sm:text-base md:text-lg  font-medium'>
+										{p.symbol}
+									</div>
+									<div className='text-xs text-gray-400 mb-2'>{p.example}</div>
+									<div className='w-6 sm:w-8 md:w-10 h-1 sm:h-2 bg-gray-200 dark:bg-gray-800 rounded-full'></div>
+								</div>
+							</Button>
+						))}
+					</div>
 				</section>
 			</div>
 		</main>
