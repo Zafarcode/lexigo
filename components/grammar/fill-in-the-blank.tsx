@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
 	Accordion,
@@ -29,17 +29,32 @@ export default function FillInTheBlankGame({
 	const [isCorrect, setIsCorrect] = useState<boolean | null>(null)
 	const [gameCompleted, setGameCompleted] = useState(false)
 	const [isOpen, setIsOpen] = useState('active')
+	const audioRef = useRef<HTMLAudioElement | null>(null)
 
 	const handleOptionChange = (value: string) => {
 		setSelectedOption(value)
 	}
 
-	const checkAnswer = () => {
+	const checkAnswer = useCallback(() => {
 		const correctAnswer = questions[currentQuestionIndex].answer.toLowerCase()
-		setIsCorrect(selectedOption.toLowerCase() === correctAnswer)
-	}
+		const isAnswerCorrect = selectedOption.toLowerCase() === correctAnswer
+		setIsCorrect(isAnswerCorrect)
 
-	const goToNextQuestion = () => {
+		// Play audio feedback
+		if (!audioRef.current) {
+			audioRef.current = new Audio()
+		}
+		const audioSrc = isAnswerCorrect
+			? '/sounds/success.mp3'
+			: '/sounds/lose.mp3'
+		audioRef.current.src = audioSrc
+		audioRef.current.volume = 1.0
+		audioRef.current.pause()
+		audioRef.current.currentTime = 0
+		audioRef.current.play()
+	}, [questions, currentQuestionIndex, selectedOption])
+
+	const goToNextQuestion = useCallback(() => {
 		if (currentQuestionIndex < questions.length - 1) {
 			setCurrentQuestionIndex(prev => prev + 1)
 			setSelectedOption('')
@@ -47,7 +62,41 @@ export default function FillInTheBlankGame({
 		} else {
 			setGameCompleted(true)
 		}
+	}, [currentQuestionIndex, questions.length])
+
+	const renderQuestionWithUnderline = () => {
+		const { question } = questions[currentQuestionIndex]
+		return (
+			<>
+				{question.split('__')[0]}
+				<span
+					className={`underline decoration-clone font-semibold ${
+						selectedOption ? 'decoration-gray-800' : 'decoration-transparent'
+					}`}
+				>
+					{selectedOption || '____'}
+				</span>
+				{question.split('___')[1]}
+			</>
+		)
 	}
+
+	// Add keyboard shortcuts
+	useEffect(() => {
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.key === 'Enter') {
+				if (isCorrect === null && selectedOption) {
+					checkAnswer()
+				} else if (isCorrect) {
+					goToNextQuestion()
+				}
+			}
+		}
+		window.addEventListener('keydown', handleKeyDown)
+		return () => {
+			window.removeEventListener('keydown', handleKeyDown)
+		}
+	}, [checkAnswer, goToNextQuestion, isCorrect, selectedOption])
 
 	return (
 		<div className='w-full md:py-8 py-4'>
@@ -87,7 +136,7 @@ export default function FillInTheBlankGame({
 							) : (
 								<>
 									<h3 className='text-xl font-semibold mb-6 text-gray-800 dark:text-gray-200'>
-										{questions[currentQuestionIndex].question}
+										{renderQuestionWithUnderline()}
 									</h3>
 
 									<RadioGroup
@@ -132,16 +181,11 @@ export default function FillInTheBlankGame({
 													}`}
 												>
 													{isCorrect ? (
-														<>
-															<CheckCircle className='w-5 h-5 mr-2' />{' '}
-															To&apos;g&apos;ri!
-														</>
+														<CheckCircle className='w-5 h-5 mr-2' />
 													) : (
-														<>
-															<XCircle className='w-5 h-5 mr-2' />{' '}
-															Noto&apos;g&apos;ri, qaytadan urinib ko&apos;ring.
-														</>
+														<XCircle className='w-5 h-5 mr-2' />
 													)}
+													{isCorrect ? 'Correct!' : 'Incorrect, try again.'}
 												</motion.p>
 											)}
 										</AnimatePresence>
@@ -153,7 +197,7 @@ export default function FillInTheBlankGame({
 												onClick={checkAnswer}
 												className={`${isCorrect ? 'hidden' : 'inline-flex'}`}
 											>
-												Tekshirish
+												Check Answer
 											</Button>
 
 											{isCorrect && (
