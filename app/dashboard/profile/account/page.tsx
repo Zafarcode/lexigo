@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Camera } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -23,8 +24,25 @@ import { Separator } from '@/components/ui/separator'
 import Image from 'next/image'
 
 export default function AccountPage() {
+	const [profileImage, setProfileImage] = useState<string>(
+		'https://picsum.photos/200'
+	)
+
+	const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const file = event.target.files?.[0]
+		if (file) {
+			const reader = new FileReader()
+			reader.onload = () => {
+				if (reader.result) {
+					setProfileImage(reader.result.toString())
+				}
+			}
+			reader.readAsDataURL(file)
+		}
+	}
+
 	return (
-		<div className='container grid gap-6 p-0'>
+		<div className='container grid gap-6'>
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
@@ -54,7 +72,7 @@ export default function AccountPage() {
 									<Image
 										width={80}
 										height={80}
-										src='https://picsum.photos/200'
+										src={profileImage}
 										alt='Avatar'
 										className='md:h-20 md:w-20 rounded-full object-cover'
 									/>
@@ -64,6 +82,13 @@ export default function AccountPage() {
 										className='absolute -bottom-2 -right-2 h-6 w-6 md:h-8 md:w-8 rounded-full'
 									>
 										<Camera className='h-4 w-4' />
+										{/* Hidden file input for image upload */}
+										<input
+											type='file'
+											accept='image/*'
+											className='absolute inset-0 opacity-0 cursor-pointer'
+											onChange={handleImageChange}
+										/>
 									</Button>
 								</div>
 								<div className='grid gap-1'>

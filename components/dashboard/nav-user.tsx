@@ -25,6 +25,7 @@ import {
 	SidebarMenuItem,
 	useSidebar,
 } from '@/components/ui/sidebar'
+import { useRouter } from 'next/navigation'
 
 export function NavUser({
 	user,
@@ -36,6 +37,11 @@ export function NavUser({
 	}
 }) {
 	const { isMobile } = useSidebar()
+	const router = useRouter()
+
+	const handleNavigation = (path: string) => {
+		router.push(path)
+	}
 
 	return (
 		<SidebarMenu>
@@ -79,28 +85,28 @@ export function NavUser({
 						</DropdownMenuLabel>
 						<DropdownMenuSeparator />
 						<DropdownMenuGroup>
-							<DropdownMenuItem>
+							<DropdownMenuItem onClick={() => handleNavigation('/dashboard/profile/pricing')}>
 								<Sparkles />
 								Upgrade to Pro
 							</DropdownMenuItem>
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator />
 						<DropdownMenuGroup>
-							<DropdownMenuItem>
+							<DropdownMenuItem onClick={() => handleNavigation('/dashboard/profile/account')}>
 								<BadgeCheck />
 								Account
 							</DropdownMenuItem>
-							<DropdownMenuItem>
+							<DropdownMenuItem onClick={() => handleNavigation('/dashboard/profile/pricing')}>
 								<CreditCard />
 								Billing
 							</DropdownMenuItem>
-							<DropdownMenuItem>
+							<DropdownMenuItem onClick={() => handleNavigation('/dashboard/profile/notifications')}>
 								<Bell />
 								Notifications
 							</DropdownMenuItem>
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem>
+						<DropdownMenuItem onClick={() => handleNavigation('/signout')}>
 							<LogOut />
 							Log out
 						</DropdownMenuItem>

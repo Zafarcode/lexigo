@@ -13,7 +13,7 @@ import { notifications } from '@/constants/profile'
 
 export default function NotificationsPage() {
 	return (
-		<div className='container grid gap-6 p-0'>
+		<div className='container grid gap-6'>
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
