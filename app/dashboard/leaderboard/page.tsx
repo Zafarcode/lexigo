@@ -3,11 +3,11 @@
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useProgressStore } from '@/store/use-progress'
 import { dataUsers, dataStatuses } from '@/constants/leaderboards'
 
-const Page = () => {
+const LeaderBoard = () => {
 
   const { sections } = useProgressStore()
 
@@ -52,6 +52,8 @@ const Page = () => {
       score: user.score,
       condition: user.condition
     }));
+    // console.log(sortedUsers);
+    
 
   return (
     <>
@@ -63,10 +65,11 @@ const Page = () => {
         const progress = (completedUnits / totalUnits) * 100
 
         return (
-          <div key={section.id}>
+          <div key={key}>
             {
               progress === 0 ?
-                <>
+                <React.Fragment>
+                  {/* 1-holat */}
                   <main className=' w-full'>
                     <div className='  flex justify-center items-start flex-col sm:flex-row mx-auto gap-0 sm:gap-10'>
                       <div className=' flex justify-start flex-col items-center gap-5'>
@@ -94,8 +97,9 @@ const Page = () => {
                       </div>
                     </div>
                   </main>
-                </> :
-                <>
+                </React.Fragment> :
+                <React.Fragment>
+                  {/* 2-holat */}
                   <main className=' flex justify-center items-start mx-auto gap-0 flex-col sm:flex-row sm:gap-10'>
                     <div className='flex flex-col justify-center items-start mx-auto gap-10 z-10'>
                       <div className=' w-full mx-auto  flex flex-col justify-center items-center gap-3 z-30'>
@@ -109,14 +113,17 @@ const Page = () => {
                         </div>
                       </div>
                       <div className=' w-full flex flex-col items-center'>
-
                         <div className=' w-full border-t-2 border-gray-300 pt-3 px-1 relative z-20'>
                           {
-                            sortedUsers.map((item) => (
-                              <>
-                                <div className={` w-full sm:w-[90%] mx-auto py-3 px-5 rounded-2xl font-semibold hover:bg-gray-200 dark:hover:bg-gray-900 flex items-center gap-3 
-                        ${item.condition === 'user' && item.id > 22 ? 'bg-red-200 text-red-600 dark:bg-gray-900 hover:bg-red-200' : item.condition === 'user' && item.id < 8 ? 'bg-green-200 text-green-600 dark:bg-gray-900 hover:bg-green-200' : item.condition === 'user' && item.id > 7 && item.id < 23 ? ' bg-gray-300' : 'bg-white dark:bg-background'}
-                      `} key={item.id}>
+                            sortedUsers.map((item, key) => (
+                              <React.Fragment key={key}>
+                                <div
+                                  className={`w-full sm:w-[90%] mx-auto py-3 px-5 rounded-2xl font-semibold hover:bg-gray-200 dark:hover:bg-gray-900 flex items-center gap-3 
+                                      ${item.condition === 'user' && item.id > 22 ? 'bg-red-200 text-red-600 dark:bg-gray-900 hover:bg-red-200' :
+                                      item.condition === 'user' && item.id < 8 ? 'bg-green-200 text-green-600 dark:bg-gray-900 hover:bg-green-200' :
+                                        item.condition === 'user' && item.id > 7 && item.id < 23 ? ' bg-gray-300' : 'bg-white dark:bg-background'}`}
+                                >
+                                  
                                   <div className=' w-[25px]'>
                                     <span
                                       className={`font-semibold text-center ${item.id < 8
@@ -134,7 +141,7 @@ const Page = () => {
                                         <Button className=' absolute -top-3 -right-5 flex items-center justify-center w-[30px] h-[30px] bg-gray-100 rounded-full border-2 border-dashed border-gray-300 p-0' onClick={toggleStatus}>
                                           <Image src={selectedIcon} width={50} height={50} alt='' />
                                         </Button>
-                                        : <></>
+                                        : <React.Fragment></React.Fragment>
                                     }
 
                                   </div>
@@ -145,24 +152,27 @@ const Page = () => {
                                     <span className={`${item.condition === 'user' && item.id > 22 ? ' text-red-600' : item.condition === 'user' && item.id < 8 ? ' text-green-600' : 'text-gray-500'}`}>{item.score} points</span>
                                   </div>
                                 </div>
-                                {
-                                  item.id === 7
-                                    ?
-                                    <div className=' flex justify-center items-center gap-5'>
-                                      <Image src={'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/577cf633b59ce72791f725d0cb973061.svg'} alt='' width={24} height={24} />
-                                      <p className=' text-xl font-semibold text-green-600'>Increase zone</p>
-                                      <Image src={'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/577cf633b59ce72791f725d0cb973061.svg'} alt='' width={24} height={24} />
-                                    </div>
-                                    : item.id === 22
+                                <div>
+                                  {
+                                    item.id === 7
                                       ?
                                       <div className=' flex justify-center items-center gap-5'>
-                                        <Image src={'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/248453c5e2d9de19fba7a2f4fef7f016.svg'} alt='' width={24} height={24} />
-                                        <p className=' text-xl font-semibold text-red-600'>Depression zone</p>
-                                        <Image src={'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/248453c5e2d9de19fba7a2f4fef7f016.svg'} alt='' width={24} height={24} />
+                                        <Image src={'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/577cf633b59ce72791f725d0cb973061.svg'} alt='' width={24} height={24} />
+                                        <p className=' text-xl font-semibold text-green-600'>Increase zone</p>
+                                        <Image src={'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/577cf633b59ce72791f725d0cb973061.svg'} alt='' width={24} height={24} />
                                       </div>
-                                      : <div></div>
-                                }
-                              </>
+                                      : item.id === 22
+                                        ?
+                                        <div className=' flex justify-center items-center gap-5'>
+                                          <Image src={'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/248453c5e2d9de19fba7a2f4fef7f016.svg'} alt='' width={24} height={24} />
+                                          <p className=' text-xl font-semibold text-red-600'>Depression zone</p>
+                                          <Image src={'https://d35aaqx5ub95lt.cloudfront.net/images/leagues/248453c5e2d9de19fba7a2f4fef7f016.svg'} alt='' width={24} height={24} />
+                                        </div>
+                                        :
+                                        <div></div>
+                                  }
+                                </div>
+                              </React.Fragment>
                             ))
                           }
                         </div>
@@ -177,7 +187,7 @@ const Page = () => {
                             <p className=' text-xl'>Set status</p>
                             {
                               selectedIcon === dataStatuses[0].url ?
-                                <></> :
+                                <React.Fragment></React.Fragment> :
                                 <Button className=' hidden sm:block text-lg border-none text-blue-400 font-medium hover:bg-white dark:bg-black' onClick={handleIconClearClick}>
                                   Clear
                                 </Button>
@@ -198,19 +208,16 @@ const Page = () => {
                             <div className=' grid grid-cols-6 gap-3 sm:gap-5'>
                               {
                                 dataStatuses.map((item, key) => (
-                                  <>
-                                    {
-                                      item.id === 0 ?
-                                        <></> :
-                                        <>
-                                          <div className=' w-[50px] h-[50px] border-2 border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden flex justify-center items-center hover:bg-gray-200 dark:hover:bg-gray-900' key={key}>
-                                            <Button className=' p-1 border-none' onClick={() => handleIconClick(item.url)}>
-                                              <Image src={item.url} alt='status icon' width={48} height={48} className=' object-contain w-full' />
-                                            </Button>
-                                          </div>
-                                        </>
-                                    }
-                                  </>
+                                  item.id !== 0 && (
+                                    <div
+                                      className="w-[50px] h-[50px] border-2 border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden flex justify-center items-center hover:bg-gray-200 dark:hover:bg-gray-900"
+                                      key={item.id} // Use `item.id` as the key
+                                    >
+                                      <Button className="p-1 border-none" onClick={() => handleIconClick(item.url)}>
+                                        <Image src={item.url} alt="status icon" width={48} height={48} className="object-contain w-full" />
+                                      </Button>
+                                    </div>
+                                  )
                                 ))
                               }
                             </div>
@@ -228,7 +235,7 @@ const Page = () => {
                       </div>
                     </div>
                   </main>
-                </>
+                </React.Fragment>
             }
           </div>
         )
@@ -237,4 +244,4 @@ const Page = () => {
   )
 }
 
-export default Page
+export default LeaderBoard
