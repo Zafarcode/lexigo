@@ -156,7 +156,7 @@ export default function WordImage({
 				onClose={() => setShowCongratulations(false)}
 			/>
 
-			<Card className='w-full min-h-[645px] overflow-hidden flex flex-col justify-between p-0 rounded-none shadow-none border-none'>
+			<Card className='w-full min-h-screen overflow-hidden flex flex-col justify-between p-0 rounded-none shadow-none border-none'>
 				<div className='flex flex-row items-center gap-2 w-full px-3 xl:px-0 lg:max-w-5xl mx-auto'>
 					<div className='flex items-center gap-2'>
 						<Link
