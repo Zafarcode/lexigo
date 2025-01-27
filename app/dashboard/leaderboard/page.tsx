@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react'
 import { useProgressStore } from '@/store/use-progress'
 import { dataUsers, dataStatuses } from '@/constants/leaderboards'
 
+
 const LeaderBoard = () => {
 
   const { sections } = useProgressStore()
@@ -52,7 +53,6 @@ const LeaderBoard = () => {
       score: user.score,
       condition: user.condition
     }));
-    // console.log(sortedUsers);
     
 
   return (
