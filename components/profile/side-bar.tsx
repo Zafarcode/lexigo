@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Bell, CreditCard, Settings, User } from 'lucide-react'
+import { Bell, CreditCard, User } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -24,11 +24,6 @@ interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 			href: '/profile/pricing',
 			label: 'Pricing',
 			icon: CreditCard,
-		},
-		{
-			href: '/profile/settings',
-			label: 'Settings',
-			icon: Settings,
 		},
 	]
 
