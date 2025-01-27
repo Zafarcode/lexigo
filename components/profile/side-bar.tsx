@@ -9,9 +9,6 @@ import { Button } from '@/components/ui/button'
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export function Sidebar({ className, ...props }: SidebarProps) {
-	const pathname = usePathname()
-
 	const routes = [
 		{
 			href: '/profile',
@@ -35,6 +32,9 @@ export function Sidebar({ className, ...props }: SidebarProps) {
 		},
 	]
 
+export function Sidebar({ className, ...props }: SidebarProps) {
+	const pathname = usePathname()
+
 	return (
 		<aside
 			className={cn('border-r bg-gray-100/40 pb-12', className)}
@@ -42,7 +42,7 @@ export function Sidebar({ className, ...props }: SidebarProps) {
 		>
 			<div className='px-4 py-6'>
 				<h2 className='mb-4 px-2 text-lg font-semibold tracking-tight'>
-					Dashboard
+					Account
 				</h2>
 				<nav className='space-y-1'>
 					{routes.map(route => (

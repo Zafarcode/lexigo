@@ -3,7 +3,7 @@ import defaultComponents from 'next-docs-ui/mdx/default'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
 	return {
-		...defaultComponents,
+		...(defaultComponents as MDXComponents),
 		...components,
 	}
 }
