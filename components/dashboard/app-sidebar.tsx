@@ -1,6 +1,6 @@
 'use client'
 
-import { Book, BookOpen, GalleryVerticalEnd, PenTool, ShieldCheckIcon, Speech } from 'lucide-react'
+import { Book, BookOpen, GalleryVerticalEnd, PenTool, ShieldCheckIcon, Speech, User2 } from 'lucide-react'
 import * as React from 'react'
 
 import { NavMain } from '@/components/dashboard/nav-main'
@@ -98,6 +98,25 @@ const data = {
 				}
 			]
 		},
+		{
+			title: 'Profile',
+			url: '/dashboard/profile',
+			icon: User2,
+			items: [
+				{
+					title: 'Account Settings',
+					url: '/dashboard/profile/account',
+				},
+				{
+					title: 'Notifications',
+					url: '/dashboard/profile/notifications',
+				},
+				{
+					title: 'Pricing',
+					url: '/dashboard/profile/pricing',
+				}
+			]
+			}
 	],
 }
 
