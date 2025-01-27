@@ -11,7 +11,6 @@ interface Param {
 	slug: string
 }
 
-
 export default function Page({ params }: { params: Param }) {
 	const topic = grammar.getPage([params.slug])
 
@@ -45,25 +44,23 @@ export default function Page({ params }: { params: Param }) {
 							<article className='prose prose-invert'>
 								<topic.data.exports.default />
 							</article>
+
+							<div className='relative w-full mx-auto pt-10'>
+								<div className='relative w-full pb-[56.25%] rounded-lg overflow-hidden'>
+									<iframe
+										className='absolute top-0 left-0 w-full h-full rounded-lg'
+										src={`https://www.youtube.com/embed/${topics?.embed ?? ''}`}
+										title='YouTube video player'
+										allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+									></iframe>
+								</div>
+							</div>
+
+							<FillInTheBlankGame questions={topics?.questions ?? []} />
 						</div>
 					</div>
 				</div>
 			</article>
-
-			<div className='container mx-auto max-w-3xl'>
-				<div className='relative w-full max-w-2xl mx-auto'>
-					<div className='relative w-full pb-[56.25%] rounded-lg overflow-hidden'>
-						<iframe
-							className='absolute top-0 left-0 w-full h-full rounded-lg'
-							src={`https://www.youtube.com/embed/${topics?.embed ?? ''}`}
-							title='YouTube video player'
-							allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-						></iframe>
-					</div>
-				</div>
-
-				<FillInTheBlankGame questions={topics?.questions ?? []} />
-			</div>
 		</>
 	)
 }

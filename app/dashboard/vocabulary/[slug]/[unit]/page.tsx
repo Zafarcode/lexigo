@@ -49,13 +49,10 @@ export default function UnitPage({ params }: UnitPageProps) {
 	const finishQuiz = unit.item.filter(i => i.type === 'finishQuiz')
 	const wordPairs = unit.item.filter(i => i.type === 'wordPair')
 	const fillInBlank = unit.item.filter(i => i.type === 'fillInBlank')
-	
-
 
 	return (
-		<section className='pt-10'>
+		<section className='pt-5'>
 			<div className='container'>
-				
 				{/* Render Flashcard Component */}
 				{flashcards.length > 0 && (
 					<div className='w-full rounded-lg border p-4 lg:p-6'>
@@ -99,43 +96,43 @@ export default function UnitPage({ params }: UnitPageProps) {
 						</div>
 					</div>
 				)}
-
-				{/* Render WordImage Component */}
-				{imageSelections.length > 0 && (
-					<WordImage
-						onViewed={handleViewed}
-						slug={section.slug}
-						quizData={imageSelections} // Pass only image selections
-					/>
-				)}
-
-				{/* Render FinishQuiz Component */}
-				{finishQuiz.length > 0 && (
-					<FinishQuiz
-						onViewed={handleViewed}
-						slug={section.slug}
-						options={finishQuiz} // Pass only translations
-					/>
-				)}
-
-				{/* Render MatchingPairs Component */}
-				{wordPairs.length > 0 && (
-					<MatchingPairs
-						onViewed={handleViewed}
-						slug={section.slug}
-						words={wordPairs} // Pass only word pairs
-					/>
-				)}
-
-				{/* Render FillInBlank Component */}
-				{fillInBlank.length > 0 && (
-					<FillInBlank
-						onViewed={handleViewed}
-						slug={section.slug}
-						questions={fillInBlank} // Pass only fill-in-blank questions
-					/>
-				)}
 			</div>
+
+			{/* Render WordImage Component */}
+			{imageSelections.length > 0 && (
+				<WordImage
+					onViewed={handleViewed}
+					slug={section.slug}
+					quizData={imageSelections} // Pass only image selections
+				/>
+			)}
+
+			{/* Render FinishQuiz Component */}
+			{finishQuiz.length > 0 && (
+				<FinishQuiz
+					onViewed={handleViewed}
+					slug={section.slug}
+					options={finishQuiz} // Pass only translations
+				/>
+			)}
+
+			{/* Render MatchingPairs Component */}
+			{wordPairs.length > 0 && (
+				<MatchingPairs
+					onViewed={handleViewed}
+					slug={section.slug}
+					words={wordPairs} // Pass only word pairs
+				/>
+			)}
+
+			{/* Render FillInBlank Component */}
+			{fillInBlank.length > 0 && (
+				<FillInBlank
+					onViewed={handleViewed}
+					slug={section.slug}
+					questions={fillInBlank} // Pass only fill-in-blank questions
+				/>
+			)}
 		</section>
 	)
 }

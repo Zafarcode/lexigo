@@ -18,6 +18,7 @@ import {
 	SelectValue,
 } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 
 export default function SettingsPage() {
 	return (
@@ -30,13 +31,15 @@ export default function SettingsPage() {
 			</div>
 
 			<Tabs defaultValue='general' className='space-y-4'>
-				<TabsList>
-					<TabsTrigger value='general'>General</TabsTrigger>
-					<TabsTrigger value='appearance'>Appearance</TabsTrigger>
-					<TabsTrigger value='notifications'>Notifications</TabsTrigger>
-					<TabsTrigger value='security'>Security</TabsTrigger>
-				</TabsList>
-
+				<ScrollArea>
+					<TabsList>
+						<TabsTrigger value='general'>General</TabsTrigger>
+						<TabsTrigger value='appearance'>Appearance</TabsTrigger>
+						<TabsTrigger value='notifications'>Notifications</TabsTrigger>
+						<TabsTrigger value='security'>Security</TabsTrigger>
+					</TabsList>
+					<ScrollBar orientation='horizontal' />
+				</ScrollArea>
 				<TabsContent value='general' className='space-y-4'>
 					<Card>
 						<CardHeader>
@@ -49,15 +52,24 @@ export default function SettingsPage() {
 							<div className='grid gap-4 md:grid-cols-2'>
 								<div className='space-y-2'>
 									<Label htmlFor='name'>Display Name</Label>
-									<Input id='name' placeholder='Enter your name' />
+									<Input
+										className='focus-visible:ring-1 focus-visible:ring-offset-1'
+										id='name'
+										placeholder='Enter your name'
+									/>
 								</div>
 								<div className='space-y-2'>
 									<Label htmlFor='username'>Username</Label>
-									<Input id='username' placeholder='@username' />
+									<Input
+										className='focus-visible:ring-1 focus-visible:ring-offset-1'
+										id='username'
+										placeholder='@username'
+									/>
 								</div>
 								<div className='space-y-2'>
 									<Label htmlFor='email'>Email</Label>
 									<Input
+										className='focus-visible:ring-1 focus-visible:ring-offset-1'
 										id='email'
 										type='email'
 										placeholder='Enter your email'
@@ -66,7 +78,10 @@ export default function SettingsPage() {
 								<div className='space-y-2'>
 									<Label htmlFor='language'>Language</Label>
 									<Select>
-										<SelectTrigger id='language'>
+										<SelectTrigger
+											className='focus:ring-1 focus:ring-offset-1'
+											id='language'
+										>
 											<SelectValue placeholder='Select language' />
 										</SelectTrigger>
 										<SelectContent>
