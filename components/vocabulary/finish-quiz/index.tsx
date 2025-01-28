@@ -2,6 +2,8 @@
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
+import CelebrationDialog from '@/components/vocabulary/celebration-dialog'
+import Keyboard from '@/components/vocabulary/finish-quiz/keyboard'
 import { congratulationIconsData } from '@/constants/congratulationIcons'
 import useTTS from '@/hooks/useTTS'
 import { FinishQuizProps } from '@/types'
@@ -9,8 +11,6 @@ import { Heart, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import CelebrationDialog from '../celebration-dialog'
-import Keyboard from './keyboard'
 
 const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 	const [currentIndex, setCurrentIndex] = useState(0)
