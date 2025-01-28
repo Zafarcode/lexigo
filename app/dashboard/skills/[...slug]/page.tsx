@@ -1,6 +1,6 @@
-import ActionPanel from "@/components/dashboard/action-panel";
-import SkillCard from "@/components/dashboard/skills-card";
-import Tasks from "@/components/dashboard/tasks";
+import ActionPanel from "@/components/dashboard/skills/action-panel";
+import SkillCard from "@/components/dashboard/skills/skills-card";
+import Tasks from "@/components/dashboard/skills/tasks";
 
 const page = ({ params }: { params: { slug: string[] } }) => {
   const { slug } = params;
@@ -12,10 +12,17 @@ const page = ({ params }: { params: { slug: string[] } }) => {
     <section className="w-full px-4">
       <div className="grid grid-cols-1 lg:grid-cols-[75%,25%]  gap-4">
         <div>
-          <h1 className="text-xl md:text-3xl font-bold mb-8">
-            Choose your level to practise your{" "}
-            {category && !level ? category.toUpperCase() : level.toUpperCase()}
-          </h1>
+          {task && (
+            <h1 className="text-xl md:text-3xl font-bold mb-8">{task}</h1>
+          )}
+          {!task && (
+            <h1 className="text-xl md:text-3xl font-bold mb-8">
+              Choose your level to practise your{" "}
+              {category && !level
+                ? category.toUpperCase()
+                : level.toUpperCase()}
+            </h1>
+          )}
           {(category || level) && !task ? (
             <SkillCard params={params.slug} />
           ) : (

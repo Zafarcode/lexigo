@@ -41,54 +41,57 @@ export default function ActionPanel({ params }: ActionPanelProps) {
                 open={selectedSkill?.slug === skill.slug}
                 onOpenChange={() => setSelectedSkill(skill)}
               >
-                <CollapsibleTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    className={cn(
-                      "relative w-full justify-start gap-3 p-4 text-left text-base font-medium",
-                      "transition-all duration-300 ease-in-out",
-                      "hover:bg-indigo-500/10 dark:hover:bg-indigo-400/10",
-                      "focus-visible:ring-2 focus-visible:ring-indigo-500/50 dark:focus-visible:ring-indigo-400/50 focus-visible:ring-offset-2",
-                      selectedSkill?.slug === skill.slug && 
-                        "bg-gradient-to-r from-indigo-500/90 to-violet-500/90 dark:from-indigo-400/90 dark:to-violet-400/90 text-white font-semibold shadow-sm"
-                    )}
-                  >
-                    <motion.div
-                      initial={{ rotate: 0 }}
-                      animate={{
-                        rotate: selectedSkill?.slug === skill.slug ? 360 : 0,
-                      }}
-                      transition={{ duration: 0.4 }}
+                <Link href={`/dashboard/skills/${skill.slug}`}>
+                  <CollapsibleTrigger asChild>
+                    <Button
+                      variant="ghost"
                       className={cn(
-                        "p-1.5 rounded-md bg-transparent",
-                        selectedSkill?.slug === skill.slug && "shadow-inner"
+                        "relative w-full justify-start gap-3 p-4 text-left text-base font-medium",
+                        "transition-all duration-300 ease-in-out",
+                        "hover:bg-indigo-500/10 dark:hover:bg-indigo-400/10",
+                        "focus-visible:ring-2 focus-visible:ring-indigo-500/50 dark:focus-visible:ring-indigo-400/50 focus-visible:ring-offset-2",
+                        selectedSkill?.slug === skill.slug &&
+                          "bg-gradient-to-r from-indigo-500/90 to-violet-500/90 dark:from-indigo-400/90 dark:to-violet-400/90 text-white font-semibold shadow-sm"
                       )}
                     >
-                      <skill.icon className="h-5 w-5" />
-                    </motion.div>
-                    <Link
-                      href={`/dashboard/skills/${skill.slug}`}
-                      className="flex-1"
-                    >
-                      {skill.name}
-                    </Link>
-                    <motion.div
-                      animate={{
-                        rotate: selectedSkill?.slug === skill.slug ? 180 : 0,
-                        scale: selectedSkill?.slug === skill.slug ? 1.1 : 1,
-                      }}
-                      transition={{ duration: 0.3 }}
-                      className="ml-auto"
-                    >
-                      <ChevronDown className={cn(
-                        "h-4 w-4 shrink-0",
-                        selectedSkill?.slug === skill.slug 
-                          ? "opacity-100" 
-                          : "opacity-50 group-hover:opacity-100"
-                      )} />
-                    </motion.div>
-                  </Button>
-                </CollapsibleTrigger>
+                      <motion.div
+                        initial={{ rotate: 0 }}
+                        animate={{
+                          rotate: selectedSkill?.slug === skill.slug ? 360 : 0,
+                        }}
+                        transition={{ duration: 0.4 }}
+                        className={cn(
+                          "p-1.5 rounded-md bg-transparent",
+                          selectedSkill?.slug === skill.slug && "shadow-inner"
+                        )}
+                      >
+                        <skill.icon className="h-5 w-5" />
+                      </motion.div>
+                      <h3
+                        className="flex-1"
+                      >
+                        {skill.name}
+                      </h3>
+                      <motion.div
+                        animate={{
+                          rotate: selectedSkill?.slug === skill.slug ? 180 : 0,
+                          scale: selectedSkill?.slug === skill.slug ? 1.1 : 1,
+                        }}
+                        transition={{ duration: 0.3 }}
+                        className="ml-auto"
+                      >
+                        <ChevronDown
+                          className={cn(
+                            "h-4 w-4 shrink-0",
+                            selectedSkill?.slug === skill.slug
+                              ? "opacity-100"
+                              : "opacity-50 group-hover:opacity-100"
+                          )}
+                        />
+                      </motion.div>
+                    </Button>
+                  </CollapsibleTrigger>
+                </Link>
                 <CollapsibleContent>
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
@@ -119,14 +122,17 @@ export default function ActionPanel({ params }: ActionPanelProps) {
                               "hover:text-indigo-600 dark:hover:text-indigo-400",
                               "hover:translate-x-1",
                               "focus-visible:ring-1 focus-visible:ring-indigo-500/50 dark:focus-visible:ring-indigo-400/50",
-                              isActive && "bg-indigo-500/10 dark:bg-indigo-400/10 text-indigo-600 dark:text-indigo-400 font-medium",
-                              hoveredLevel === level && "bg-indigo-500/5 dark:bg-indigo-400/5"
+                              isActive &&
+                                "bg-indigo-500/10 dark:bg-indigo-400/10 text-indigo-600 dark:text-indigo-400 font-medium",
+                              hoveredLevel === level &&
+                                "bg-indigo-500/5 dark:bg-indigo-400/5"
                             )}
                           >
                             <motion.span
                               initial={false}
                               animate={{
-                                scale: isActive || hoveredLevel === level ? 1.02 : 1,
+                                scale:
+                                  isActive || hoveredLevel === level ? 1.02 : 1,
                               }}
                               transition={{ duration: 0.2 }}
                             >
