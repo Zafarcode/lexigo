@@ -134,3 +134,17 @@ export type LevelT = {
   slug: string;
   data: SkillTaskT[];
 };
+
+
+export interface Message {
+  sender: "person1" | "person2";
+  content: string;
+  time: string;
+}
+
+export interface Question {
+  id: number;
+  text: string;
+  options: string[];
+  correctAnswer: number;
+}

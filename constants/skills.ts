@@ -1,4 +1,4 @@
-import { LevelT, skillT } from "@/types";
+import { LevelT, Message, Question, skillT } from "@/types";
 import { Book, MessageSquare, Mic, Pencil, Brain } from "lucide-react";
 
 export const skills: skillT[] = [
@@ -295,23 +295,26 @@ export const infodata = [
   },
 ];
 
-export const dialogue = [
-  {
-    speaker: "Susanne",
-    text: "Hi, Mario. Can you help me prepare some things for the next month?",
-  },
-  { speaker: "Mario", text: "OK, sure. What can I help you with?" },
-  {
-    speaker: "Susanne",
-    text: "I need to visit the customer in Germany. It's important.",
-  },
-  { speaker: "Mario", text: "What can I do to help?" },
-  {
-    speaker: "Susanne",
-    text: "Can you send an email to the customer? Ask them when I can visit them next week. Please do this first. It's a priority and very urgent.",
-  },
-  { speaker: "Mario", text: "Right. I'll do it today." },
-];
+export const dialogue = {
+  title: "TRANSKRIPT",
+  data : [
+    {
+      speaker: "Susanne",
+      text: "Hi, Mario. Can you help me prepare some things for the next month?",
+    },
+    { speaker: "Mario", text: "OK, sure. What can I help you with?" },
+    {
+      speaker: "Susanne",
+      text: "I need to visit the customer in Germany. It's important.",
+    },
+    { speaker: "Mario", text: "What can I do to help?" },
+    {
+      speaker: "Susanne",
+      text: "Can you send an email to the customer? Ask them when I can visit them next week. Please do this first. It's a priority and very urgent.",
+    },
+    { speaker: "Mario", text: "Right. I'll do it today." },
+  ]
+}
 
 export const ListeningTask = {
   title: "Listening A1: A request from your boss - 2",
@@ -323,3 +326,104 @@ export const ListeningTask = {
     { id: "4", content: "Visit the customer" },
   ],
 };
+
+
+
+export const conversation: Message[] = [
+  {
+    sender: "person1",
+    content: "I'm running 10 mins late, sorry!",
+    time: "15:57",
+  },
+  { sender: "person2", content: "No problem!", time: "15:58" },
+  {
+    sender: "person1",
+    content:
+      "Aargh! Traffic is really bad. I'll be more than 10 mins late now, sorry again!!",
+    time: "16:07",
+  },
+  {
+    sender: "person2",
+    content: "It's OK, don't worry. I'm in the café already so it's fine",
+    time: "16:08",
+  },
+  {
+    sender: "person1",
+    content:
+      "This is not my day! I'm here but can't find a place to park. I'm looking for a different car park. Not sure how long I'll be",
+    time: "16:09",
+  },
+  {
+    sender: "person2",
+    content: "OK, LMK when you find a place",
+    time: "16:11",
+  },
+  {
+    sender: "person2",
+    content: "I might get something to eat tho",
+    time: "16:11",
+  },
+  {
+    sender: "person1",
+    content: "Of course! I'll be as quick as I can",
+    time: "16:13",
+  },
+  { sender: "person2", content: "OK!", time: "16:13" },
+  {
+    sender: "person1",
+    content: "Found one! Be there in 10 mins",
+    time: "16:16",
+  },
+  { sender: "person2", content: "Well done! See you soon", time: "16:16" },
+  { sender: "person1", content: "Thx for waiting", time: "16:17" },
+];
+
+
+export const questions: Question[] = [
+  {
+    id: 1,
+    text: "How many times did Person 1 apologize for being late?",
+    options: ["Once", "Twice", "Three times", "They didn't apologize"],
+    correctAnswer: 1,
+  },
+  {
+    id: 2,
+    text: "What was the main reason for Person 1's delay?",
+    options: [
+      "Overslept",
+      "Traffic",
+      "Couldn't find parking",
+      "Car broke down",
+    ],
+    correctAnswer: 2,
+  },
+  {
+    id: 3,
+    text: "How did Person 2 react to the delays?",
+    options: ["Angrily", "Impatiently", "Understanding", "They didn't respond"],
+    correctAnswer: 2,
+  },
+  {
+    id: 4,
+    text: "What did Person 2 say they might do while waiting?",
+    options: [
+      "Go home",
+      "Get something to eat",
+      "Call Person 1",
+      "Find another friend",
+    ],
+    correctAnswer: 1,
+  },
+  {
+    id: 5,
+    text: "How long after the first message did Person 1 finally find parking?",
+    options: ["10 minutes", "19 minutes", "30 minutes", "An hour"],
+    correctAnswer: 1,
+  },
+  {
+    id: 6,
+    text: "What was Person 1's final message?",
+    options: ["Sorry again", "I'm here", "See you soon", "Thx for waiting"],
+    correctAnswer: 3,
+  },
+];

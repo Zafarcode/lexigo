@@ -118,7 +118,7 @@ const DraggableTask: React.FC<DraggableTaskProps> = ({
 
 const correctOrder = ["1", "2", "3", "4"]; // Based on the dialogue
 
-export default function TaskPrioritization() {
+export default function ListeningTasks() {
   const [tasks, setTasks] = React.useState<Task[]>(ListeningTask.initialTasks);
   const [isSubmitted, setIsSubmitted] = React.useState(false);
   const [isCorrect, setIsCorrect] = React.useState<boolean | null>(null);
@@ -152,22 +152,17 @@ export default function TaskPrioritization() {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto w-full pb-12">
         <Accordion type="multiple" className="w-full">
           <AccordionItem value="item-1">
             <AccordionTrigger className="text-lg font-medium hover:text-primary">
-              <span className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                  1
-                </span>
-                TRANSCRIPT
-              </span>
+              <span className="flex items-center gap-2">{dialogue.title}</span>
             </AccordionTrigger>
             <AccordionContent>
               <Card className="mb-8 border-none shadow-none">
                 <CardContent className="space-y-4 pt-4">
                   <div className="max-w-4xl mx-auto space-y-4">
-                    {dialogue.map((line, index) => (
+                    {dialogue.data.map((line, index) => (
                       <motion.div
                         key={index}
                         initial={{ opacity: 0, y: 10 }}
@@ -221,7 +216,7 @@ export default function TaskPrioritization() {
             <AccordionTrigger className="text-lg font-medium hover:text-primary">
               <span className="flex items-center gap-2">
                 <span className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
-                  2
+                  1
                 </span>
                 TASK
               </span>
