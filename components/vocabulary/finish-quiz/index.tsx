@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState, useCallback, useRef, MouseEvent } from 'react'
+import React, { useEffect, useState, useCallback, useRef, MouseEvent } from 'react'
 import { Card } from '@/components/ui/card'
 import { Heart, X, Volume2 } from 'lucide-react'
 import Link from 'next/link'
@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button'
 import { FinishQuiz as FinishQuizType } from '@/types'
 import CelebrationDialog from '../celebration-dialog'
 import useTTS from '@/hooks/useTTS'
+import Image from 'next/image'
+import { congratulationIconsData } from '@/constants/congratulationIcons'
 
 type FinishQuizProps = {
 	options: FinishQuizType[]
@@ -19,7 +21,7 @@ const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 	const [currentIndex, setCurrentIndex] = useState(0)
 	const [lossCount, setLossCount] = useState(5)
 	const [progress, setProgress] = useState(0)
-	const [gameState, setGameState] = useState<'playing' | 'continue' | 'end' | 'finish'>('playing')
+	const [gameState, setGameState] = useState<'playing' | 'continue' | 'lose' | 'win' | 'end' | 'start'>('playing')
 	const [inputSpaces, setInputSpaces] = useState<string[]>([])
 	const [clickedLetters, setClickedLetters] = useState<Record<string, boolean>>({})
 	const [showCongratulations, setShowCongratulations] = useState(false)
@@ -47,7 +49,7 @@ const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 		} else {
 			setProgress(100)
 			setShowCongratulations(true)
-			setGameState('finish')
+			setGameState('win')
 			setTimeout(() => setShowCongratulations(false), 3000)
 		}
 	}, [currentIndex, options, onViewed,])
@@ -57,7 +59,14 @@ const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 		setLossCount(5)
 		setCurrentIndex(0)
 		setProgress(0)
-		setGameState('end')
+		setGameState('lose')
+	}, [])
+
+	const handleStart = useCallback(() => {
+		setLossCount(5)
+		setCurrentIndex(0)
+		setProgress(0)
+		setGameState('playing')
 	}, [])
 
 	const handleLetterClick = useCallback(
@@ -126,22 +135,30 @@ const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 		}
 	}, [])
 
+	function getRandomIcon() {
+		const randomIndex = Math.floor(Math.random() * congratulationIconsData.length);
+		return congratulationIconsData[randomIndex].svgIcon;
+	}
+	
+	const randomIcon = getRandomIcon();
+
 	return (
 		<div className='w-full lg:max-w-5xl mx-auto flex flex-col items-center gap-5 p-3 sm:p-5'>
 			<CelebrationDialog isOpen={showCongratulations} onClose={() => setShowCongratulations(false)} />
-			<div className='w-full flex justify-between items-center gap-2'>
-				<Link href={`/dashboard/vocabulary/${slug}`}>
-					<X className='h-6 w-6 text-gray-200 hover:text-primary' />
-				</Link>
-				<Progress value={progress} className='h-3 bg-pink-100' />
-				<div className='flex items-center text-sm'>
-					<Heart className='h-4 w-4 text-primary mr-1' />
-					<span>{lossCount}</span>
-				</div>
-			</div>
-			<Card className='w-full h-[calc(50vh)] sm:h-[350px] min-[320px]:h-[250px] p-0 md:p-4 text-center rounded-2xl border-none flex flex-col justify-center items-center'>
+
+			<Card className='w-full h-[calc(50vh)] sm:h-[450px] min-[320px]:h-[250px] p-0 md:p-4 text-center rounded-2xl border-none flex flex-col justify-center items-center'>
 				{gameState === 'playing' && (
-					<>
+					<React.Fragment>
+						<div className='w-full flex justify-between items-center gap-2'>
+							<Link href={`/dashboard/vocabulary/${slug}`}>
+								<X className='h-6 w-6 text-gray-200 hover:text-primary' />
+							</Link>
+							<Progress value={progress} className='h-3 bg-pink-100' />
+							<div className='flex items-center text-sm'>
+								<Heart className='h-4 w-4 text-primary mr-1' />
+								<span>{lossCount}</span>
+							</div>
+						</div>
 						<div className=' flex justify-center flex-col items-center'>
 							<p className='mb-4 text-sm sm:text-lg'>
 								<span className='font-bold'>Hint:</span> {currentHint}
@@ -165,7 +182,7 @@ const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 												className={`rounded-md px-2 py-2 text-xs sm:text-sm ${clickedLetters[letter]
 													? currentWord.toUpperCase().includes(letter)
 														? 'bg-green-500 text-white'
-														: 'bg-red-500 text-white'
+														: 'bg-pink-500 text-white'
 													: ''
 													}`}
 											>
@@ -176,11 +193,21 @@ const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 								))}
 							</ul>
 						</div>
-					</>
+					</React.Fragment>
 				)}
 
 				{gameState === 'continue' && (
-					<>
+					<React.Fragment>
+						<div className='w-full flex justify-between items-center gap-2'>
+							<Link href={`/dashboard/vocabulary/${slug}`}>
+								<X className='h-6 w-6 text-gray-200 hover:text-primary' />
+							</Link>
+							<Progress value={progress} className='h-3 bg-pink-100' />
+							<div className='flex items-center text-sm'>
+								<Heart className='h-4 w-4 text-primary mr-1' />
+								<span>{lossCount}</span>
+							</div>
+						</div>
 						<div className=' flex flex-col justify-center items-center'>
 							<div className=' flex flex-col justify-center gap-2 items-center'>
 								<Button
@@ -215,8 +242,8 @@ const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 												disabled={true}
 												className={`rounded-md px-2 py-2 text-xs sm:text-sm ${clickedLetters[letter]
 													? currentWord.toUpperCase().includes(letter)
-														? 'bg-duolingoGreen text-white'
-														: 'bg-red-500 text-white'
+														? 'bg-green-500 text-white'
+														: 'bg-pink-500 text-white'
 													: ''
 													}`}
 											>
@@ -247,11 +274,21 @@ const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 								</Button>
 							</div>
 						</div>
-					</>
+					</React.Fragment>
 				)}
 
-				{gameState === 'end' && (
-					<>
+				{gameState === 'lose' && (
+					<React.Fragment>
+						<div className='w-full flex justify-between items-center gap-2'>
+							<Link href={`/dashboard/vocabulary/${slug}`}>
+								<X className='h-6 w-6 text-gray-200 hover:text-primary' />
+							</Link>
+							<Progress value={progress} className='h-3 bg-pink-100' />
+							<div className='flex items-center text-sm'>
+								<Heart className='h-4 w-4 text-primary mr-1' />
+								<span>{lossCount}</span>
+							</div>
+						</div>
 						<div className=' flex flex-col justify-center items-center'>
 							<p className='mb-4 text-sm sm:text-lg text-center'>
 								<span className='font-bold'>Hint:</span> {currentHint}
@@ -272,8 +309,8 @@ const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 												disabled={true}
 												className={`rounded-md px-2 py-2 text-xs sm:text-sm ${clickedLetters[letter]
 													? currentWord.toUpperCase().includes(letter)
-														? 'bg-duolingoGreen text-white'
-														: 'bg-red-500 text-white'
+														? 'bg-green-500 text-white'
+														: 'bg-pink-500 text-white'
 													: ''
 													}`}
 											>
@@ -289,26 +326,37 @@ const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 								<div className=' flex justify-center items-center gap-5'>
 									<div className=' w-[60px] h-[60px] rounded-full bg-white flex justify-center items-center p-2'>
 										<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48" height="48" viewBox="0 0 48 48">
-											<path fill="#F44336" d="M21.5 4.5H26.501V43.5H21.5z" transform="rotate(45.001 24 24)"></path><path fill="#F44336" d="M21.5 4.5H26.5V43.501H21.5z" transform="rotate(135.008 24 24)"></path>
+											<path fill="#ec4899" d="M21.5 4.5H26.501V43.5H21.5z" transform="rotate(45.001 24 24)"></path><path fill="#ec4899" d="M21.5 4.5H26.5V43.501H21.5z" transform="rotate(135.008 24 24)"></path>
 										</svg>
 									</div>
-									<span className=' text-3xl text-left font-bold text-duolingoRed'>
+									<span className=' text-3xl text-left font-bold text-pink-500'>
 										You have run out of hearts! <br /> Starting over.
 									</span>
 								</div>
 								<Button
 									onClick={() => setGameState('playing')}
-									className='bg-duolingoRed hover:bg-duolingoRed text-white px-4 py-2 border-pink-700'
+									className='bg-pink-500 hover:bg-pink-500 text-white px-4 py-2 border-pink-700'
 								>
 									Restart
 								</Button>
 							</div>
 						</div>
-					</>
+					</React.Fragment>
 				)}
 
-				{gameState === 'finish' && (
-					<>
+				{gameState === 'win' && (
+					<React.Fragment>
+						<div className='w-full flex justify-between items-center gap-2'>
+							<Link href={`/dashboard/vocabulary/${slug}`}>
+								<X className='h-6 w-6 text-gray-200 hover:text-primary' />
+							</Link>
+							<Progress value={progress} className='h-3 bg-pink-100' />
+							<div className='flex items-center text-sm'>
+								<Heart className='h-4 w-4 text-primary mr-1' />
+								<span>{lossCount}</span>
+							</div>
+						</div>
+
 						<div className=' flex flex-col justify-center items-center'>
 							<div className=' flex flex-col justify-center gap-2 items-center'>
 								<Button
@@ -355,25 +403,69 @@ const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 								))}
 							</ul>
 						</div>
-						
+
 						<div className=' w-full h-28 absolute bottom-0 left-0 border-t-2 border-gray-300 flex justify-center items-center'>
 							<div className=' w-[70%] flex justify-between items-center'>
 								<Button
-									onClick={() => setGameState('playing')}
+									onClick={handleStart}
 									className='bg-blue-400 hover:bg-blue-400 text-white px-4 py-2 border-blue-600'
 								>
 									Train some more
 								</Button>
+								<Button
+									onClick={() => setGameState('end')}
+									className='bg-green-500 hover:bg-green-500 text-white px-4 py-2 border-green-600'
+								>
+									Finish
+								</Button>
+							</div>
+						</div>
+					</React.Fragment>
+				)}
+
+				{gameState === 'end' && (
+					// Finish component
+					<React.Fragment>
+						<div className=' flex justify-center items-center gap-5 flex-col'>
+							<div className=' w-full'>
+								<Image src={randomIcon} alt='congratulation' width={200} height={50} className=' object-contain mx-auto' />
+							</div>
+							<div className='  flex justify-center items-center gap-5 flex-col'>
+								<p className=' text-3xl font-semibold text-[#f00050]'>History is complete!</p>
+								<div className=' flex justify-center items-center gap-3'>
+									<div className=' w-[200px] p-1 bg-yellow-500 flex flex-col justify-center items-center gap-3 rounded-xl'>
+										<p className=' text-white font-medium'>Experience points</p>
+										<div className=' flex justify-center items-center gap-1 bg-white w-full h-full rounded-xl py-5'>
+											<div className=' w-[30px] overflow-hidden'>
+												<Image src={'https://d35aaqx5ub95lt.cloudfront.net/images/icons/f5358b2d4087a109790fc809eedc08c5.svg'} alt='pointIcon' width={20} height={20} className=' object-contain' />
+											</div>
+											<p className=' font-semibold text-lg text-yellow-500'>5</p>
+										</div>
+									</div>
+									<div className=' w-[200px] p-1 bg-green-500 flex flex-col justify-center items-center gap-3 rounded-xl'>
+										<p className=' text-white font-medium'>Great</p>
+										<div className=' flex justify-center items-center gap-2 bg-white w-full h-full rounded-xl py-5'>
+											<div className=' w-[30px] overflow-hidden'>
+												<Image src={'https://d35aaqx5ub95lt.cloudfront.net/images/icons/9ace13520a375f5661415ff7d470f243.svg'} alt='pointIcon' width={30} height={30} className=' object-contain' />
+											</div>
+											<p className=' font-semibold text-lg text-green-500'>100 %</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div className=' w-full h-28 absolute bottom-0 left-0 border-t-2 border-gray-300 flex justify-center items-center'>
+							<div className=' w-[70%] flex justify-end items-center'>
 								<Link href={'/dashboard/vocabulary/basic-vocabulary'}>
 									<Button
-										className='bg-duolingoGreen hover:bg-duolingoGreen text-white px-4 py-2 border-green-600'
+										className='bg-green-500 hover:bg-green-500 text-white px-4 py-2 border-green-600'
 									>
 										Continue
 									</Button>
 								</Link>
 							</div>
 						</div>
-					</>
+					</React.Fragment>
 				)}
 			</Card>
 		</div>
