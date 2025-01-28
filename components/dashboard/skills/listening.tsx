@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import ListeningTasks from "./listening-task";
-import { Card, CardContent } from "../ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 
 const Listening = () => {
   const audioRef = React.useRef<HTMLAudioElement>(null);

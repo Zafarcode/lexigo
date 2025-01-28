@@ -427,3 +427,12 @@ export const questions: Question[] = [
     correctAnswer: 3,
   },
 ];
+
+export const readingSentens = [
+  'Come and join our lunchtime yoga class with experienced yoga teacher Divya Bridge!',
+  'When? Every Tuesday at 1.30 p.m.',
+  "Where? Meeting Room 7",
+  "How much? £10 for four 30-minute classes.",
+  "What to bring? Comfortable clothes. Divya will provide the yoga mats.",
+  "How to join? Write to Sam at Sam.Holden@example.com"
+]
