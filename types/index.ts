@@ -148,3 +148,19 @@ export interface Question {
   options: string[];
   correctAnswer: number;
 }
+
+export type FinishQuizProps = {
+  options: FinishQuiz[]
+  onViewed: (itemId: number) => void
+  slug: string
+}
+
+export interface KeyboardProps {
+  clickedLetters: { [key: string]: boolean };
+  currentWord: string;
+  inputSpaces: string[];
+  handleLetterClick: (letter: string) => void;
+  handleNormalSpeech: (event: React.MouseEvent<HTMLButtonElement>, word: string) => void;
+  alwaysDisabled?: boolean;
+  statusSpeech: string;
+}
