@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/accordion";
 import { motion, AnimatePresence } from "framer-motion";
 import { conversation, questions } from "@/constants/skills";
+import WritingCheck from "./writing-test";
 
 export function Writing() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -51,52 +52,43 @@ export function Writing() {
   return (
     <Card className="w-full max-w-full mx-auto border-none">
       <CardContent>
-        <Accordion type="multiple" className="w-full">
-          <AccordionItem value="conversation-quiz">
-            <AccordionTrigger>View Conversation and Quiz</AccordionTrigger>
-            <AccordionContent>
-              <div className="space-y-6">
-                <ScrollArea className="h-[400px] pr-4 border rounded-md p-4">
-                  {conversation.map((message, index) => (
-                    <div
-                      key={index}
-                      className={`flex ${
-                        message.sender === "person1"
-                          ? "justify-end"
-                          : "justify-start"
-                      } mb-4`}
-                    >
-                      <div
-                        className={`flex items-end ${
-                          message.sender === "person1"
-                            ? "flex-row-reverse"
-                            : "flex-row"
-                        }`}
-                      >
-                        <Avatar className="w-8 h-8">
-                          <AvatarFallback>
-                            {message.sender === "person1" ? "P1" : "P2"}
-                          </AvatarFallback>
-                        </Avatar>
-                        <div
-                          className={`mx-2 ${
-                            message.sender === "person1"
-                              ? "bg-primary text-primary-foreground"
-                              : "bg-muted"
-                          } rounded-lg p-3 max-w-[70%]`}
-                        >
-                          <p className="text-sm">{message.content}</p>
-                          <span className="text-xs opacity-50">
-                            {message.time}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </ScrollArea>
+        <div className="space-y-6">
+          <ScrollArea className="h-[500px] pr-4 border rounded-md p-4">
+            {conversation.map((message, index) => (
+              <div
+                key={index}
+                className={`flex ${
+                  message.sender === "person1" ? "justify-end" : "justify-start"
+                } mb-4`}
+              >
+                <div
+                  className={`flex items-end ${
+                    message.sender === "person1"
+                      ? "flex-row-reverse"
+                      : "flex-row"
+                  }`}
+                >
+                  <Avatar className="w-8 h-8">
+                    <AvatarFallback>
+                      {message.sender === "person1" ? "P1" : "P2"}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div
+                    className={`mx-2 ${
+                      message.sender === "person1"
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-muted"
+                    } rounded-lg p-3 max-w-[70%]`}
+                  >
+                    <p className="text-sm">{message.content}</p>
+                    <span className="text-xs opacity-50">{message.time}</span>
+                  </div>
+                </div>
               </div>
-            </AccordionContent>
-          </AccordionItem>
+            ))}
+          </ScrollArea>
+        </div>
+        <Accordion type="multiple" className="w-full">
           <AccordionItem value="writing-quiz">
             <AccordionTrigger>Writing Quiz</AccordionTrigger>
             <AccordionContent>
@@ -201,6 +193,8 @@ export function Writing() {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
+
+        <WritingCheck />
       </CardContent>
     </Card>
   );
