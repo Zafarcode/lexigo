@@ -1,30 +1,25 @@
-
 import ActionPanel from "@/components/dashboard/action-panel";
 import SkillCard from "@/components/dashboard/skills-card";
-import TaskPrioritization from "@/components/dashboard/task";
+import Tasks from "@/components/dashboard/tasks";
 
 const page = ({ params }: { params: { slug: string[] } }) => {
-
   const { slug } = params;
   const [category, level, task] = slug;
 
   console.log(category, level, task);
-  
 
-  return ( 
+  return (
     <section className="w-full px-4">
       <div className="grid grid-cols-1 lg:grid-cols-[75%,25%]  gap-4">
         <div>
           <h1 className="text-xl md:text-3xl font-bold mb-8">
             Choose your level to practise your{" "}
-            {(category && !level)
-              ? category.toUpperCase()
-              : level.toUpperCase()}
+            {category && !level ? category.toUpperCase() : level.toUpperCase()}
           </h1>
-          {((category || level) && !task) ? (
+          {(category || level) && !task ? (
             <SkillCard params={params.slug} />
           ) : (
-            <TaskPrioritization  />
+            <Tasks params={params.slug} />
           )}
         </div>
         <ActionPanel params={params.slug} />
@@ -33,5 +28,4 @@ const page = ({ params }: { params: { slug: string[] } }) => {
   );
 };
 
-
-export default page
+export default page;
