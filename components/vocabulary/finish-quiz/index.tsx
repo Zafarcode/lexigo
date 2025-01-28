@@ -10,7 +10,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import CelebrationDialog from '../celebration-dialog'
-import Keyboard from '@/components/vocabulary/finish-quiz/keyboard'
+import Keyboard from './keyboard'
 
 const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 	const [currentIndex, setCurrentIndex] = useState(0)
