@@ -25,6 +25,7 @@ import {
 	SidebarMenuItem,
 	useSidebar,
 } from '@/components/ui/sidebar'
+import { useRouter } from 'next/navigation'
 
 export function NavUser({
 	user,
@@ -36,6 +37,11 @@ export function NavUser({
 	}
 }) {
 	const { isMobile } = useSidebar()
+	const router = useRouter()
+
+	const handleNavigation = (path: string) => {
+		router.push(path)
+	}
 
 	return (
 		<SidebarMenu>
@@ -69,7 +75,9 @@ export function NavUser({
 							<div className='flex items-center gap-2 px-1 py-1.5 text-left text-sm'>
 								<Avatar className='h-8 w-8 rounded-lg'>
 									<AvatarImage src={user.avatar} alt={user.name} />
-									<AvatarFallback className='rounded-lg'>{user.name.slice(0, 2)}</AvatarFallback>
+									<AvatarFallback className='rounded-lg'>
+										{user.name.slice(0, 2)}
+									</AvatarFallback>
 								</Avatar>
 								<div className='grid flex-1 text-left text-sm leading-tight'>
 									<span className='truncate font-semibold'>{user.name}</span>
@@ -79,28 +87,38 @@ export function NavUser({
 						</DropdownMenuLabel>
 						<DropdownMenuSeparator />
 						<DropdownMenuGroup>
-							<DropdownMenuItem>
+							<DropdownMenuItem
+								onClick={() => handleNavigation('/dashboard/profile/pricing')}
+							>
 								<Sparkles />
 								Upgrade to Pro
 							</DropdownMenuItem>
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator />
 						<DropdownMenuGroup>
-							<DropdownMenuItem>
+							<DropdownMenuItem
+								onClick={() => handleNavigation('/dashboard/profile/account')}
+							>
 								<BadgeCheck />
 								Account
 							</DropdownMenuItem>
-							<DropdownMenuItem>
+							<DropdownMenuItem
+								onClick={() => handleNavigation('/dashboard/profile/pricing')}
+							>
 								<CreditCard />
 								Billing
 							</DropdownMenuItem>
-							<DropdownMenuItem>
+							<DropdownMenuItem
+								onClick={() =>
+									handleNavigation('/dashboard/profile/notifications')
+								}
+							>
 								<Bell />
 								Notifications
 							</DropdownMenuItem>
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem>
+						<DropdownMenuItem onClick={() => handleNavigation('/signout')}>
 							<LogOut />
 							Log out
 						</DropdownMenuItem>

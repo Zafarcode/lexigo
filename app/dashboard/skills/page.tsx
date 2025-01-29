@@ -47,7 +47,7 @@ const Skills = () => {
         <motion.div
           ref={titleRef}
           style={{ y: titleY, opacity: titleOpacity }}
-          className="flex flex-col items-center space-y-4 text-center"
+          className={`${titleY} flex flex-col items-center space-y-4 text-center`}
         >
           <motion.h1
             className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-500 to-primary animate-gradient"

@@ -1,6 +1,6 @@
-import { create } from 'zustand'
-import { persist, createJSONStorage } from 'zustand/middleware'
 import { Section, Unit } from '@/types'
+import { create } from 'zustand'
+import { createJSONStorage, persist } from 'zustand/middleware'
 import { lessons } from '../constants/lessons'
 
 interface ProgressState {
@@ -32,17 +32,23 @@ export const useProgressStore = create<ProgressState>()(
 
 					if (sectionIndex !== -1) {
 						const section = newSections[sectionIndex]
-						const unitIndex = section.units.findIndex((u: { slug: string }) => u.slug === unitSlug)
+						const unitIndex = section.units.findIndex(
+							(u: { slug: string }) => u.slug === unitSlug
+						)
 
 						if (unitIndex !== -1) {
 							const unit = section.units[unitIndex]
-							const itemIndex = unit.item.findIndex((i: { id: number }) => i.id === itemId)
+							const itemIndex = unit.item.findIndex(
+								(i: { id: number }) => i.id === itemId
+							)
 
 							if (itemIndex !== -1) {
 								unit.item[itemIndex].viewed = true
 
 								// Check if all items in the unit have been viewed
-								const allItemsViewed = unit.item.every((i: { viewed: boolean }) => i.viewed)
+								const allItemsViewed = unit.item.every(
+									(i: { viewed: boolean }) => i.viewed
+								)
 								if (allItemsViewed) {
 									unit.isCompleted = true
 
