@@ -1,6 +1,7 @@
 import { AppSidebar } from '@/components/dashboard/app-sidebar'
 import DashboardBreadcrumb from '@/components/dashboard/dashboard-breadcrumb'
 import { Separator } from '@/components/ui/separator'
+import DuolingoClone from '@/components/dashboard/right'
 import {
 	SidebarInset,
 	SidebarProvider,
@@ -26,6 +27,7 @@ export default function DashboardLayout({
 				</header>
 				<div className='flex flex-1 flex-col gap-4 lg:p-4 pt-0'>{children}</div>
 			</SidebarInset>
+			<DuolingoClone />
 		</SidebarProvider>
 	)
 }

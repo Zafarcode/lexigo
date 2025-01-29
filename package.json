@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@fuma-content/next": "^0.0.2",
+    "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^3.6.0",
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
@@ -44,6 +45,7 @@
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "embla-carousel-autoplay": "^8.1.5",
     "embla-carousel-react": "^8.1.5",
     "framer-motion": "^11.3.21",
