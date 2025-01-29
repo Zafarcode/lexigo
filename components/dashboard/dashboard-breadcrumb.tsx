@@ -12,7 +12,9 @@ import { usePathname } from 'next/navigation'
 import React from 'react'
 
 // Helper to generate the breadcrumb paths
-function generateBreadcrumbs(pathname: string): {label: string, to: string}[] {
+function generateBreadcrumbs(
+	pathname: string
+): { label: string; to: string }[] {
 	const pathnames: string[] = pathname.split('/').filter(Boolean) // split and remove empty
 	return pathnames.map((value: string, index: number) => {
 		const to = `/${pathnames.slice(0, index + 1).join('/')}` // Build the path for each part
@@ -23,7 +25,8 @@ function generateBreadcrumbs(pathname: string): {label: string, to: string}[] {
 export default function DashboardBreadcrumb() {
 	const pathname: string = usePathname()
 
-	const breadcrumbs: { label: string, to: string }[] = generateBreadcrumbs(pathname)
+	const breadcrumbs: { label: string; to: string }[] =
+		generateBreadcrumbs(pathname)
 
 	return (
 		<Breadcrumb>
