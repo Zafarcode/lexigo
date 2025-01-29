@@ -11,7 +11,7 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
 type CelebrationProps = {
-	slug: string
+	slug?: string
 	onOpen?: boolean
 }
 
