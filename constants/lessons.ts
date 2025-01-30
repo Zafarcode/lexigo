@@ -3,9 +3,9 @@ import { Section } from '@/types'
 export const lessons: Section[] = [
 	{
 		id: 1,
-		title: 'Basic Vocabulary',
+		title: 'Lesson 1',
 		theme: 'blue',
-		slug: 'basic-vocabulary',
+		slug: 'lesson-1',
 		units: [
 			{
 				id: 1,
