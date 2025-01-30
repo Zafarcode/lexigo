@@ -6,7 +6,6 @@ import Flashcard from '@/components/vocabulary/flash-card'
 import MatchingPairs from '@/components/vocabulary/matching-pairs'
 import WordImage from '@/components/vocabulary/word-image'
 import { useProgressStore } from '@/store/use-progress'
-import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
 interface UnitPageProps {
@@ -51,51 +50,51 @@ export default function UnitPage({ params }: UnitPageProps) {
 	const fillInBlank = unit.item.filter(i => i.type === 'fillInBlank')
 
 	return (
-		<section className='pt-5'>{/* Render Flashcard Component */}
+		<section className='pt-5'>
+				{/* Render Flashcard Component */}
 				{flashcards.length > 0 && (
-			       <div className='container'>
-			        <Flashcard
-			        	onViewed={handleViewed}
-			        	cardData={flashcards} // Pass only flashcards
-			        	slug={slug}/>
-			       </div>
+					<Flashcard
+						onViewed={handleViewed}
+						cardData={flashcards} // Pass only flashcards
+						slug={slug}
+					/>
 				)}
 
-			{/* Render WordImage Component */}
-			{imageSelections.length > 0 && (
-				<WordImage
-					onViewed={handleViewed}
-					slug={section.slug}
-					quizData={imageSelections} // Pass only image selections
-				/>
-			)}
+				{/* Render WordImage Component */}
+				{imageSelections.length > 0 && (
+					<WordImage
+						onViewed={handleViewed}
+						slug={section.slug}
+						quizData={imageSelections} // Pass only image selections
+					/>
+				)}
 
-			{/* Render FinishQuiz Component */}
-			{finishQuiz.length > 0 && (
-				<FinishQuiz
-					onViewed={handleViewed}
-					slug={section.slug}
-					options={finishQuiz} // Pass only translations
-				/>
-			)}
+				{/* Render FinishQuiz Component */}
+				{finishQuiz.length > 0 && (
+					<FinishQuiz
+						onViewed={handleViewed}
+						slug={section.slug}
+						options={finishQuiz} // Pass only translations
+					/>
+				)}
 
-			{/* Render MatchingPairs Component */}
-			{wordPairs.length > 0 && (
-				<MatchingPairs
-					onViewed={handleViewed}
-					slug={section.slug}
-					words={wordPairs} // Pass only word pairs
-				/>
-			)}
+				{/* Render MatchingPairs Component */}
+				{wordPairs.length > 0 && (
+					<MatchingPairs
+						onViewed={handleViewed}
+						slug={section.slug}
+						words={wordPairs} // Pass only word pairs
+					/>
+				)}
 
-			{/* Render FillInBlank Component */}
-			{fillInBlank.length > 0 && (
-				<FillInBlank
-					onViewed={handleViewed}
-					slug={section.slug}
-					questions={fillInBlank} // Pass only fill-in-blank questions
-				/>
-			)}
+				{/* Render FillInBlank Component */}
+				{fillInBlank.length > 0 && (
+					<FillInBlank
+						onViewed={handleViewed}
+						slug={section.slug}
+						questions={fillInBlank} // Pass only fill-in-blank questions
+					/>
+				)}
 		</section>
 	)
 }
