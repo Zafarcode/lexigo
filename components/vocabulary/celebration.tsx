@@ -85,7 +85,7 @@ const Celebration = ({ slug, onOpen }: CelebrationProps) => {
 							transition={{ delay: 0.2 }}
 						>
 							<Card className='p-0 bg-yellow-500 border-4 border-yellow-500 rounded-xl'>
-								<p className=' text-sm md:text-base font-bold text-white mb-1 py-2'>
+								<p className='text-sm md:text-base font-bold text-white mb-1 py-2'>
 									Experience points
 								</p>
 								<motion.div
@@ -105,7 +105,7 @@ const Celebration = ({ slug, onOpen }: CelebrationProps) => {
 							transition={{ delay: 0.3 }}
 						>
 							<Card className='p-0 bg-green-500 border-4 border-green-500 rounded-xl'>
-								<p className=' text-sm md:text-base font-bold text-white mb-1 py-2'>
+								<p className='text-sm md:text-base font-bold text-white mb-1 py-2'>
 									Great
 								</p>
 								<motion.div

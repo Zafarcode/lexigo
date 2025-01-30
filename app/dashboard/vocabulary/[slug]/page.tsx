@@ -35,7 +35,7 @@ export default function VocabularySection({
 	}, {} as Record<number, number>)
 
 	return (
-		<div className='h-full flex justify-center items-center'>
+		<div className='h-full flex justify-center items-center px-4'>
 			<Section
 				section={section}
 				onUnitClick={handleUnitClick}

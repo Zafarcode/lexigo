@@ -106,12 +106,12 @@ export const lessons: Section[] = [
 				type: 'star',
 				isCompleted: false,
 				isLocked: true,
-				item: Array.from({ length: 2 }, (_, j) => ({
+				item: Array.from({ length: 5 }, (_, j) => ({
 					type: 'wordPair',
 					id: j + 1,
 					viewed: false,
-					value: `Advanced Word ${j + 1}`,
-					pair: `Advanced Translation ${j + 1}`,
+					value: `Word ${j + 1}`,
+					pair: `Translation ${j + 1}`,
 				})),
 			},
 			{
