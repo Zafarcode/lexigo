@@ -1,14 +1,17 @@
 'use client'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { cn } from '@/lib/utils'
 import { WordPair } from '@/types'
 import { motion } from 'framer-motion'
-import { Heart, X } from 'lucide-react'
+import { Heart, X, Volume2 } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
+import { congratulationIconsData } from '@/constants/congratulationIcons'
+
 
 type WordPairProps = {
 	words: WordPair[]
@@ -18,6 +21,21 @@ type WordPairProps = {
 
 const shuffleArray = <T,>(array: T[]): T[] => {
 	return [...array].sort(() => Math.random() - 0.5)
+}
+
+// Custom hook for Text-to-Speech (TTS) functionality
+const useTTS = () => {
+	const handleNormalSpeech = (event: React.MouseEvent, text: string) => {
+		event.preventDefault()
+		if ('speechSynthesis' in window) {
+			const utterance = new SpeechSynthesisUtterance(text)
+			utterance.lang = 'en-US'
+			window.speechSynthesis.speak(utterance)
+		} else {
+			alert('Speech synthesis is not supported in this browser.')
+		}
+	}
+	return { handleNormalSpeech }
 }
 
 const MatchingPairs = ({ words, onViewed, slug }: WordPairProps) => {
@@ -33,7 +51,24 @@ const MatchingPairs = ({ words, onViewed, slug }: WordPairProps) => {
 	const [progress, setProgress] = useState(0)
 	const [hearts, setHearts] = useState(5)
 	const [gameOver, setGameOver] = useState(false)
+	const [finish, setFinish] = useState(false)
 	const [visibleWords, setVisibleWords] = useState(4)
+
+	// Refs for audio
+	const successAudioRef = useRef<HTMLAudioElement | null>(null)
+	const loseAudioRef = useRef<HTMLAudioElement | null>(null)
+
+	useEffect(() => {
+		// Initialize audio refs
+		successAudioRef.current = new Audio('/sounds/success.mp3')
+		loseAudioRef.current = new Audio('/sounds/lose.mp3')
+
+		// Cleanup audio refs when component unmounts
+		return () => {
+			successAudioRef.current = null
+			loseAudioRef.current = null
+		}
+	}, [])
 
 	useEffect(() => {
 		setEnglishWords(
@@ -63,11 +98,13 @@ const MatchingPairs = ({ words, onViewed, slug }: WordPairProps) => {
 				setProgress(((matchedPairs.length + 1) / words.length) * 100)
 				onViewed(first.id) // Mark the first word as viewed
 				onViewed(second.id - 100) // Adjust ID for second word
+				successAudioRef.current?.play() // Play success sound
 			} else {
 				setFeedback('Try again!')
 				setHearts(prev => {
 					const updatedHearts = prev - 1
 					if (updatedHearts === 0) setGameOver(true)
+					loseAudioRef.current?.play() // Play lose sound
 					return updatedHearts
 				})
 			}
@@ -96,28 +133,72 @@ const MatchingPairs = ({ words, onViewed, slug }: WordPairProps) => {
 		)
 	}
 
+	const { handleNormalSpeech } = useTTS()
+
+	function getRandomIcon() {
+		const randomIndex = Math.floor(
+			Math.random() * congratulationIconsData.length
+		)
+		return congratulationIconsData[randomIndex].svgIcon
+	}
+
+	const randomIcon = getRandomIcon()
+
+	const handleFinish = () => {
+		setFinish(false);
+	}
+
 	return (
 		<motion.div
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			transition={{ duration: 0.5 }}
-			className='flex items-center justify-center'
+			className=' flex items-center justify-center '
 		>
-			<div className='w-full lg:max-w-5xl p-0 overflow-hidden shadow-none border-none'>
+			<div className='w-full max-w-4xl p-0 overflow-hidden shadow-none border-none'>
 				<CardContent className='p-3 md:p-6'>
 					{gameOver ? (
-						<section className='flex flex-col items-center justify-center min-h-[300px]'>
-							<h1 className='text-3xl md:text-4xl font-bold text-pink-600 mb-6'>
-								Game Over
-							</h1>
-							<Button variant='secondary' onClick={resetGame}>
-								Restart Game
-							</Button>
-						</section>
+						<div className=' w-full h-28 absolute bottom-0 left-0 bg-pink-200 flex justify-center items-center'>
+							<div className=' w-[90%] sm:w-[70%] flex justify-between items-center'>
+								<div className=' flex justify-center items-center gap-3 sm:gap-5'>
+									<div className=' w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-full bg-white flex justify-center items-center p-2'>
+										<svg
+											xmlns='http://www.w3.org/2000/svg'
+											x='0px'
+											y='0px'
+											width='48'
+											height='48'
+											viewBox='0 0 48 48'
+										>
+											<path
+												fill='#ec4899'
+												d='M21.5 4.5H26.501V43.5H21.5z'
+												transform='rotate(45.001 24 24)'
+											></path>
+											<path
+												fill='#ec4899'
+												d='M21.5 4.5H26.5V43.501H21.5z'
+												transform='rotate(135.008 24 24)'
+											></path>
+										</svg>
+									</div>
+									<span className=' text-2xl sm:text-3xl text-left font-bold text-pink-500'>
+										Starting over.
+									</span>
+								</div>
+								<Button
+									variant={'secondary'}
+									onClick={resetGame}
+									className='bg-pink-500 hover:bg-pink-500 text-white px-4 py-2 border-pink-600'
+								>
+									Restart
+								</Button>
+							</div>
+						</div>
 					) : (
 						<>
-							<div className='flex items-center gap-4 mb-6'>
-								<Link href={`/dashboard/vocabulary/${slug}`}>
+							<section className='flex items-center gap-4 mb-6'>
+								<Link href='/dashboard/vocabulary'>
 									<X className='h-6 w-6 text-gray-200 hover:text-primary' />
 								</Link>
 								<Progress value={progress} className='h-3 flex-1 bg-pink-100' />
@@ -125,16 +206,25 @@ const MatchingPairs = ({ words, onViewed, slug }: WordPairProps) => {
 									<Heart className='h-4 w-4 text-primary' />
 									<span className='text-lg'>{hearts}</span>
 								</div>
-							</div>
-							<Badge
-								variant='secondary'
-								className='text-xs mb-6 font-semibold bg-pink-200 text-pink-700'
-							>
-								NEW WORD
-							</Badge>
+							</section>
 							<h1 className='text-2xl md:text-3xl font-bold mb-6 text-start'>
 								Tap the matching pairs
 							</h1>
+							<Button
+								variant='ghost'
+								size='icon'
+								className='h-10 w-10 rounded-lg bg-pink-500 border-b-4 border-pink-600 animate-pulse hover:bg-pink-500'
+								onClick={evt =>
+									handleNormalSpeech(
+										evt,
+										selected.length === 1
+											? selected[0].value
+											: 'Select a word first'
+									)
+								}
+							>
+								<Volume2 className='h-5 w-5 text-sky-100' aria-hidden='true' />
+							</Button>
 							<section className='grid grid-cols-2 md:grid-cols-2 gap-1 mb-2'>
 								<Card className='p-4'>
 									<h3 className='text-lg md:text-xl font-bold mb-4 hidden md:block'>
@@ -199,11 +289,10 @@ const MatchingPairs = ({ words, onViewed, slug }: WordPairProps) => {
 								<div className='min-h-[32px] flex items-center'>
 									{feedback && (
 										<span
-											className={`text-lg font-semibold ${
-												feedback === 'Try again!'
-													? 'text-pink-600'
-													: 'text-green-600'
-											}`}
+											className={`text-lg font-semibold ${feedback === 'Try again!'
+												? 'text-pink-600'
+												: 'text-green-600'
+												}`}
 										>
 											{feedback}
 										</span>
@@ -211,12 +300,38 @@ const MatchingPairs = ({ words, onViewed, slug }: WordPairProps) => {
 								</div>
 								<div className='w-full md:w-auto'>
 									{matchedPairs.length === words.length && (
-										<Button
-											onClick={handleContinue}
-											className='w-full text-lg text-white bg-green-500 hover:bg-green-600 font-semibold transition-colors duration-200 border-b-4'
-										>
-											Continue
-										</Button>
+										<div className=' w-full h-28 absolute bottom-0 left-0 bg-green-200 flex justify-center items-center'>
+											<div className=' w-[90%] sm:w-[70%] flex justify-between items-center'>
+												<div className=' flex justify-center items-center gap-3 sm:gap-5'>
+													<div className=' w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-full bg-white flex justify-center items-center p-2'>
+														<svg
+															xmlns='http://www.w3.org/2000/svg'
+															x='0px'
+															y='0px'
+															width='48'
+															height='48'
+															viewBox='0 0 48 48'
+														>
+															<path
+																fill='rgba(88,204,2,255)'
+																d='M40.6 12.1L17 35.7 7.4 26.1 4.6 29 17 41.3 43.4 14.9z'
+																className=' text-duolingoGreen'
+															></path>
+														</svg>
+													</div>
+													<span className=' text-2xl sm:text-3xl font-bold text-green-500'>
+														Great !
+													</span>
+												</div>
+												<Button
+													variant={'secondary'}
+													onClick={() => setFinish(true)}
+													className='bg-green-500 text-white px-4 py-2'
+												>
+													Finish
+												</Button>
+											</div>
+										</div>
 									)}
 								</div>
 							</div>

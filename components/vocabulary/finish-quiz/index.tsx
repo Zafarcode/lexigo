@@ -10,8 +10,8 @@ import { Heart, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import Keyboard from './keyboard'
 import { cn } from '@/lib/utils'
+import Keyboard from '@/components/vocabulary/finish-quiz/keyboard'
 
 const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 	const [currentIndex, setCurrentIndex] = useState(0)
