@@ -20,7 +20,7 @@ const useTTS = (lang: 'en-US' | 'en-GB' = 'en-US') => {
 
 	const handleNormalSpeech = useCallback(
 		(evt: MouseEvent<HTMLButtonElement>, text: string) => {
-			handleSpeech(text, 1, evt) // Normal rate
+			handleSpeech(text, 0.8, evt) // Normal rate
 		},
 		[handleSpeech]
 	)
