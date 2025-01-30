@@ -3,7 +3,6 @@
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
-import CelebrationDialog from '@/components/vocabulary/celebration-dialog'
 import { congratulationIconsData } from '@/constants/congratulationIcons'
 import useTTS from '@/hooks/useTTS'
 import { FinishQuizProps } from '@/types'
@@ -148,10 +147,6 @@ const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 
 	return (
 		<div className='w-full lg:max-w-5xl mx-auto flex flex-col items-center gap-5 p-3 sm:p-5'>
-			<CelebrationDialog
-				isOpen={showCongratulations}
-				onClose={() => setShowCongratulations(false)}
-			/>
 			{/* Progress */}
 			{['playing', 'continue', 'win', 'lose'].includes(gameState) && (
 				<div className='w-full flex justify-between items-center gap-2'>

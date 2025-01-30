@@ -8,7 +8,6 @@ import { motion } from 'framer-motion'
 import { Heart, X } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
-import CelebrationDialog from '../celebration-dialog'
 
 
 type FillInBlankProps = {
@@ -78,7 +77,6 @@ export default function Fillinblank({ questions, onViewed, slug }: FillInBlankPr
 			transition={{ duration: 0.5 }}
 			className='flex items-center justify-center px-4 sm:px-6'
 		>
-			<CelebrationDialog isOpen={showCongratulations} onClose={() => setShowCongratulations(false)} />
 			<div className='w-full max-w-5xl'>
 				<CardContent className='p-6'>
 					<div className='flex items-center gap-2 mb-6'>
