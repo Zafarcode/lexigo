@@ -220,7 +220,7 @@ export default function WordImage({
 												<Button
 													variant='outline'
 													className={cn(
-														'w-full h-auto aspect-square p-4 flex flex-col border-2 hover:bg-pink-50 dark:bg-black/40 items-center justify-center gap-4 transition-all duration-200 rounded-lg',
+														'w-full h-auto aspect-square p-4 flex flex-col border-2 hover:bg-pink-50 dark:bg-black/40 items-center justify-center gap-2 transition-all duration-200 rounded-lg',
 														{
 															'border-pink-500 border-b-4 text-pink-500':
 																selected === option.id && !result?.isCorrect,
@@ -236,7 +236,7 @@ export default function WordImage({
 													aria-label={`Select ${option.label}`}
 													aria-pressed={selected === option.id}
 												>
-													<div className='relative w-full aspect-square top-4'>
+													<div className='relative w-full aspect-square'>
 														<Image
 															src={option.image}
 															alt={option.label}

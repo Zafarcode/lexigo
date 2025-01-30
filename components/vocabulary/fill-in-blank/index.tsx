@@ -2,15 +2,16 @@
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardFooter } from '@/components/ui/card'
+import { Card, CardFooter } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { cn } from '@/lib/utils'
 import { FillInBlank } from '@/types'
 import { motion } from 'framer-motion'
 import { CheckCheck, Heart, X } from 'lucide-react'
 import Link from 'next/link'
-import { useState } from 'react'
 import Celebration from '../celebration'
+import { useState } from 'react'
+
 
 type FillInBlankProps = {
 	questions: FillInBlank[]
