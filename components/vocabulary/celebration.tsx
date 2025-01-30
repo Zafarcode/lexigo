@@ -105,7 +105,9 @@ const Celebration = ({ slug, onOpen }: CelebrationProps) => {
 							transition={{ delay: 0.3 }}
 						>
 							<Card className='p-0 bg-green-500 border-4 border-green-500 rounded-xl'>
-								<p className=' text-sm md:text-base font-bold text-white mb-1 py-2'>Great</p>
+								<p className=' text-sm md:text-base font-bold text-white mb-1 py-2'>
+									Great
+								</p>
 								<motion.div
 									initial={{ scale: 0 }}
 									animate={{ scale: 1 }}

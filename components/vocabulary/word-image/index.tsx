@@ -182,14 +182,14 @@ export default function WordImage({
 						</div>
 					</div>
 
-					<CardContent className='p-3 md:p-6 mb-24'>
+					<CardContent className='p-3 md:p-6 mb-36'>
 						<motion.div
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
 							transition={{ duration: 0.5 }}
 							className='space-y-6'
 						>
-							<div className='max-w-2xl mx-auto space-y-4 pt-10'>
+							<div className='max-w-2xl mx-auto space-y-4 md:pt-10'>
 								<Badge
 									variant='secondary'
 									className='text-xs font-semibold bg-pink-200 text-pink-700'
@@ -220,7 +220,7 @@ export default function WordImage({
 												<Button
 													variant='outline'
 													className={cn(
-														'w-full h-auto aspect-square p-4 flex flex-col border-2 hover:bg-pink-50 dark:bg-black/40 items-center justify-center gap-2 transition-all duration-200 rounded-lg',
+														'w-full h-auto aspect-square p-4 flex flex-col border-2 hover:bg-pink-50 dark:bg-black/40 items-center justify-center gap-4 transition-all duration-200 rounded-lg',
 														{
 															'border-pink-500 border-b-4 text-pink-500':
 																selected === option.id && !result?.isCorrect,
@@ -236,7 +236,7 @@ export default function WordImage({
 													aria-label={`Select ${option.label}`}
 													aria-pressed={selected === option.id}
 												>
-													<div className='relative w-full aspect-square'>
+													<div className='relative w-full aspect-square top-4'>
 														<Image
 															src={option.image}
 															alt={option.label}

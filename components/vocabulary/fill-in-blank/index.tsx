@@ -10,6 +10,9 @@ import { useEffect, useRef, useState } from 'react'
 import { congratulationIconsData } from '@/constants/congratulationIcons'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+
+
 
 type FillInBlankProps = {
 	questions: FillInBlank[]
@@ -136,6 +139,15 @@ export default function Fillinblank({
 			<div className='min-w-full p-0 m-0 flex justify-betwen  flex-col'>
 				<CardContent className='w-full flex justify-center items-center flex-col'>
 					<div className='flex items-center w-full'>
+		<motion.div
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			transition={{ duration: 0.5 }}
+			className='flex items-center justify-center px-4 sm:px-6'
+		>
+			<div className='w-full max-w-5xl'>
+				<CardContent className='p-6'>
+					<div className='flex items-center gap-2 mb-6'>
 						<Link href={`/dashboard/vocabulary/${slug}`}>
 							<X className='h-6 w-6 text-gray-200 hover:text-primary' />
 						</Link>
