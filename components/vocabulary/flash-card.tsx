@@ -31,6 +31,7 @@ const Flashcard = ({
 	const [currentIndex, setCurrentIndex] = useState(0)
 	const [progress, setProgress] = useState(0)
 
+	const [showConfetti, setShowConfetti] = useState(false)
 	const [showCongratulations, setShowCongratulations] = useState(false)
 	const soundRef = useRef<HTMLAudioElement | null>(null)
 
@@ -56,6 +57,19 @@ const Flashcard = ({
 		setProgress((viewedCount / total) * 100)
 	}, [currentCard, onViewed, cardData, total])
 
+
+	useEffect(() => {
+		if (progress === 100 && !showConfetti) {
+			setShowConfetti(true)
+
+			if (!soundRef.current) {
+				soundRef.current = new Audio('/sounds/congratulations.mp3')
+				soundRef.current.volume = 1.0
+			}
+
+			soundRef.current.play()
+		}
+	}, [progress, showConfetti])
 
 	// Flip card
 	const handleFlip = useCallback(() => {
@@ -118,6 +132,27 @@ const Flashcard = ({
 	}, [currentIndex, handleBack, handleFlip, handleNext])
 
 	return (
+		<div className='flex flex-col items-center justify-center space-y-4'>
+			{showConfetti && <Confetti />}
+
+			<div
+				className='flip-card w-full h-[328px] max-w-[816px] sm:h-[428px]'
+				onClick={handleFlip}
+			>
+				{/* Flashcard */}
+				<motion.div
+					className='flip-card-inner w-[100%] h-[100%] cursor-pointer'
+					initial={false}
+					animate={{ rotateX: isFlipped ? 180 : 360 }}
+					transition={{
+						duration: 0.1,
+						type: 'tween',
+						animationDirection: 'normal',
+					}}
+					onAnimationComplete={() => setIsAnimating(false)}
+				>
+					<div className='flip-card-front w-[100%] h-[100%] bg-zinc-800 rounded-lg p-4 flex justify-center items-center'>
+						<div className='absolute top-4 right-4 flex gap-4'>
 		<>
 			{showCongratulations ? (
 				<Celebration onOpen={showCongratulations} slug={slug} />
