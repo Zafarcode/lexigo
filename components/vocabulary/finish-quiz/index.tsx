@@ -1,9 +1,8 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
-import CelebrationDialog from '@/components/vocabulary/celebration-dialog'
 import { congratulationIconsData } from '@/constants/congratulationIcons'
 import useTTS from '@/hooks/useTTS'
 import { FinishQuizProps } from '@/types'
@@ -11,7 +10,8 @@ import { Heart, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import Keyboard from './Keyboard'
+import Keyboard from './keyboard'
+import { cn } from '@/lib/utils'
 
 const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 	const [currentIndex, setCurrentIndex] = useState(0)
@@ -148,10 +148,6 @@ const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 
 	return (
 		<div className='w-full lg:max-w-5xl mx-auto flex flex-col items-center gap-5 p-3 sm:p-5'>
-			<CelebrationDialog
-				isOpen={showCongratulations}
-				onClose={() => setShowCongratulations(false)}
-			/>
 			{/* Progress */}
 			{['playing', 'continue', 'win', 'lose'].includes(gameState) && (
 				<div className='w-full flex justify-between items-center gap-2'>
@@ -281,7 +277,7 @@ const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 								<Button
 									variant={'secondary'}
 									onClick={() => setGameState('playing')}
-									className='bg-pink-500 text-white px-4 py-2 border-pink-600'
+									className='bg-pink-500 hover:bg-pink-500 text-white px-4 py-2 border-pink-600'
 								>
 									Restart
 								</Button>
@@ -383,13 +379,10 @@ const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 						</div>
 						<div className=' w-full h-28 absolute -bottom-10 left-0 border-t-2 border-gray-300 flex justify-center items-center'>
 							<div className=' w-[70%] flex justify-end items-center'>
-								<Link href={'/dashboard/vocabulary/basic-vocabulary'}>
-									<Button
-										variant={'secondary'}
-										className='bg-green-500 text-white px-4 py-2'
-									>
-										Continue
-									</Button>
+								<Link href={`/dashboard/vocabulary/${slug}`}
+									className={cn(buttonVariants({ variant: 'secondary' }))}
+								>
+									Continue
 								</Link>
 							</div>
 						</div>

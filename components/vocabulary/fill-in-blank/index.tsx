@@ -4,10 +4,9 @@ import { Button } from '@/components/ui/button'
 import { CardContent } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { FillInBlank } from '@/types'
-import { Heart, X } from 'lucide-react'
+import { Heart, Import, X } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import CelebrationDialog from '../celebration-dialog'
 import { congratulationIconsData } from '@/constants/congratulationIcons'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -18,8 +17,13 @@ type FillInBlankProps = {
 	slug: string
 }
 
-export default function Fillinblank({ questions, onViewed, slug }: FillInBlankProps) {
+export default function Fillinblank({
+	questions,
+	onViewed,
+	slug,
+}: FillInBlankProps) {
 	const router = useRouter()
+
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
 	const [selectedOption, setSelectedOption] = useState<string | null>(null)
 	const [status, setStatus] = useState<'correct' | 'incorrect' | null>(null)
@@ -43,6 +47,7 @@ export default function Fillinblank({ questions, onViewed, slug }: FillInBlankPr
 		loseAudioRef.current = new Audio('/sounds/lose.mp3')
 		optionClickAudioRef.current = new Audio('/sounds/click.mp3')
 		buttonClickAudioRef.current = new Audio('/sounds/button.mp3')
+
 		return () => {
 			successAudioRef.current = null
 			loseAudioRef.current = null
@@ -58,9 +63,11 @@ export default function Fillinblank({ questions, onViewed, slug }: FillInBlankPr
 
 	const handleCheckAnswer = () => {
 		buttonClickAudioRef.current?.play()
+
 		if (selectedOption) {
 			const isCorrect = selectedOption === currentQuestion.correctAnswer
 			setStatus(isCorrect ? 'correct' : 'incorrect')
+
 			if (isCorrect) {
 				successAudioRef.current?.play()
 				setCorrectAnswersCount(prev => prev + 1)
@@ -77,9 +84,11 @@ export default function Fillinblank({ questions, onViewed, slug }: FillInBlankPr
 
 	const handleNextQuestion = () => {
 		buttonClickAudioRef.current?.play()
+
 		setSelectedOption(null)
 		onViewed(currentQuestion.id)
 		setStatus(null)
+
 		if (currentQuestionIndex < questions.length - 1) {
 			setCurrentQuestionIndex(prev => {
 				const nextIndex = prev + 1
@@ -94,6 +103,7 @@ export default function Fillinblank({ questions, onViewed, slug }: FillInBlankPr
 
 	const handleStart = () => {
 		buttonClickAudioRef.current?.play()
+
 		setCurrentQuestionIndex(0)
 		setScore(5)
 		setSelectedOption(null)
@@ -111,7 +121,9 @@ export default function Fillinblank({ questions, onViewed, slug }: FillInBlankPr
 	}
 
 	function getRandomIcon() {
-		const randomIndex = Math.floor(Math.random() * congratulationIconsData.length)
+		const randomIndex = Math.floor(
+			Math.random() * congratulationIconsData.length
+		)
 		return congratulationIconsData[randomIndex].svgIcon
 	}
 
@@ -119,10 +131,7 @@ export default function Fillinblank({ questions, onViewed, slug }: FillInBlankPr
 
 	return (
 		<div className='min-w-full p-0 m-0 flex'>
-			<CelebrationDialog
-				isOpen={showCongratulations}
-				onClose={() => setShowCongratulations(false)}
-			/>
+			
 
 			<div className='min-w-full p-0 m-0 flex justify-betwen  flex-col'>
 				<CardContent className='w-full flex justify-center items-center flex-col'>
@@ -299,4 +308,4 @@ export default function Fillinblank({ questions, onViewed, slug }: FillInBlankPr
 			</div>
 		</div>
 	)
-} 
+}
