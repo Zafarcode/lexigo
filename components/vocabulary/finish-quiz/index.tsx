@@ -241,7 +241,7 @@ const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 								<Button
 									variant={'secondary'}
 									onClick={() => setGameState('playing')}
-									className='bg-pink-500 text-white px-4 py-2 border-pink-600'
+									className='bg-pink-500 hover:bg-pink-500 text-white px-4 py-2 border-pink-600'
 								>
 									Restart
 								</Button>
