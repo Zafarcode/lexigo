@@ -51,16 +51,15 @@ export default function UnitPage({ params }: UnitPageProps) {
 	const fillInBlank = unit.item.filter(i => i.type === 'fillInBlank')
 
 	return (
-		<section className='pt-5'>
-			<div className='container'>
-				{/* Render Flashcard Component */}
+		<section className='pt-5'>{/* Render Flashcard Component */}
 				{flashcards.length > 0 && (
-							<Flashcard
-								onViewed={handleViewed}
-								cardData={flashcards} // Pass only flashcards
-								slug={slug}/>
+			       <div className='container'>
+			        <Flashcard
+			        	onViewed={handleViewed}
+			        	cardData={flashcards} // Pass only flashcards
+			        	slug={slug}/>
+			       </div>
 				)}
-			</div>
 
 			{/* Render WordImage Component */}
 			{imageSelections.length > 0 && (
