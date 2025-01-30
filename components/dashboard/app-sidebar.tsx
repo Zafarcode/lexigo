@@ -7,7 +7,6 @@ import {
 	PenTool,
 	ShieldCheckIcon,
 	Speech,
-	User2,
 } from 'lucide-react'
 import * as React from 'react'
 
@@ -42,24 +41,11 @@ const data = {
 			title: 'Grammar',
 			url: '/dashboard/grammar',
 			icon: Book,
-			isActive: true,
-			items: [
-				{
-					title: 'Grammar Lessons',
-					url: '/dashboard/grammar',
-				},
-			],
 		},
 		{
 			title: 'Vocabulary',
 			url: '/dashboard/vocabulary',
 			icon: BookOpen,
-			items: [
-				{
-					title: 'Vocabulary Lessons',
-					url: '/dashboard/vocabulary',
-				},
-			],
 		},
 		{
 			title: 'Skills',
@@ -88,42 +74,11 @@ const data = {
 			title: 'Sounds',
 			url: '/dashboard/characters',
 			icon: Speech,
-			items: [
-				{
-					title: 'Characters',
-					url: '/dashboard/characters',
-				},
-			],
 		},
 		{
 			title: 'Leaderboard',
 			url: '/dashboard/leaderboard',
 			icon: ShieldCheckIcon,
-			items: [
-				{
-					title: 'Leaderboards',
-					url: '/dashboard/leaderboard',
-				},
-			],
-		},
-		{
-			title: 'Profile',
-			url: '/dashboard/profile',
-			icon: User2,
-			items: [
-				{
-					title: 'Account Settings',
-					url: '/dashboard/profile/account',
-				},
-				{
-					title: 'Notifications',
-					url: '/dashboard/profile/notifications',
-				},
-				{
-					title: 'Pricing',
-					url: '/dashboard/profile/pricing',
-				},
-			],
 		},
 	],
 }
