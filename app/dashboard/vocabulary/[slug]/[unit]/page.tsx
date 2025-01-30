@@ -55,46 +55,10 @@ export default function UnitPage({ params }: UnitPageProps) {
 			<div className='container'>
 				{/* Render Flashcard Component */}
 				{flashcards.length > 0 && (
-					<div className='w-full rounded-lg border p-4 lg:p-6'>
-						<div className='mb-12 space-y-5'>
-							<div className='space-y-1.5'>
-								<Link
-									href={`/dashboard/vocabulary/${section.slug}`}
-									className='flex items-center gap-2 text-lg font-semibold text-neutral-400 hover:text-primary custom-transition'
-									aria-label={`Back to ${section.title}`}
-								>
-									<ArrowLeft /> Back
-								</Link>
-								<h1 className='text-2xl sm:text-4xl font-bold'>{unit.title}</h1>
-							</div>
-
 							<Flashcard
 								onViewed={handleViewed}
 								cardData={flashcards} // Pass only flashcards
-							/>
-
-							<section className='space-y-5'>
-								<h2 className='text-xl font-bold'>
-									Terms in this set ({unit.item.length})
-								</h2>
-								<ul className='space-y-2'>
-									{unit.item.map((item, index) => (
-										<li
-											key={index}
-											className='grid sm:grid-cols-2 justify-between items-center gap-4 rounded-lg border p-4 lg:p-6'
-										>
-											{item.type === 'flashcard' && (
-												<>
-													<div className='text-2xl'>{item.front_side}</div>
-													<div className='text-lg'>{item.back_side}</div>
-												</>
-											)}
-										</li>
-									))}
-								</ul>
-							</section>
-						</div>
-					</div>
+								slug={slug}/>
 				)}
 			</div>
 
