@@ -220,7 +220,7 @@ export default function WordImage({
 												<Button
 													variant='outline'
 													className={cn(
-														'w-full h-auto aspect-square p-4 flex flex-col border-2 hover:bg-pink-50 dark:bg-black/40 items-center justify-center gap-2 transition-all duration-200 rounded-lg',
+														'w-full h-auto aspect-square p-4 flex flex-col border-2 hover:bg-pink-50 dark:bg-black/40 items-center justify-center gap-4 transition-all duration-200 rounded-lg',
 														{
 															'border-pink-500 border-b-4 text-pink-500':
 																selected === option.id && !result?.isCorrect,
@@ -236,7 +236,7 @@ export default function WordImage({
 													aria-label={`Select ${option.label}`}
 													aria-pressed={selected === option.id}
 												>
-													<div className='relative w-full aspect-square'>
+													<div className='relative w-full aspect-square top-4'>
 														<Image
 															src={option.image}
 															alt={option.label}
@@ -260,7 +260,7 @@ export default function WordImage({
 					<CardFooter
 						className={`absolute bottom-0 left-0 right-0 p-0 pb-3 px-3 xl:px-0 md:pb-0 md:h-24 border-t ${
 							result?.isCorrect ? 'bg-green-500/20' : 'bg-primary/20'
-						} ${isChecked ? '' : ''}`}
+						} ${isChecked ? '' : 'bg-transparent'}`}
 					>
 						<div
 							className={`w-full lg:max-w-5xl mx-auto flex flex-col md:flex-row items-center ${

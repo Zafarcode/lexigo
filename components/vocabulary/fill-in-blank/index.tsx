@@ -135,9 +135,9 @@ export default function FillInBlankQuiz({
 				</div>
 
 				<CardFooter
-					className={`absolute bottom-0 left-0 right-0 py-3 px-3 xl:px-0 md:pb-0 md:h-24 border-t ${
+					className={`absolute bottom-0 left-0 right-0 py-3 md:py-0 px-3 xl:px-0 md:pb-0 md:h-24 border-t ${
 						isCorrect ? 'bg-green-500/20' : 'bg-primary/20'
-					}`}
+					} ${isChecked ? '' : 'bg-transparent'}`}
 				>
 					<div
 						className={`w-full max-w-5xl mx-auto flex flex-col md:flex-row items-center ${
