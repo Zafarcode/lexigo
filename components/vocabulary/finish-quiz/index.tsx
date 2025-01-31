@@ -1,17 +1,17 @@
 'use client'
 
-import { Button, buttonVariants } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Card, CardFooter } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
-import { congratulationIconsData } from '@/constants/congratulationIcons'
 import useTTS from '@/hooks/useTTS'
 import { FinishQuizProps } from '@/types'
-import { Heart, X } from 'lucide-react'
-import Image from 'next/image'
+import { CheckCheck, Heart, X } from 'lucide-react'
 import Link from 'next/link'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 import Keyboard from './keyboard'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import Celebration from '../celebration'
 
 const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 	const [currentIndex, setCurrentIndex] = useState(0)
@@ -137,27 +137,38 @@ const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 		}
 	}, [])
 
-	function getRandomIcon() {
-		const randomIndex = Math.floor(
-			Math.random() * congratulationIconsData.length
-		)
-		return congratulationIconsData[randomIndex].svgIcon
-	}
-
-	const randomIcon = getRandomIcon()
-
 	return (
-		<div className='w-full lg:max-w-5xl mx-auto flex flex-col items-center gap-5 p-3 sm:p-5'>
+		<>
+		{gameState === 'end' ? (
+			<Celebration onOpen={showCongratulations} slug={slug} />
+		) : (
+			<div className='w-full lg:max-w-5xl mx-auto flex flex-col items-center'>
 			{/* Progress */}
 			{['playing', 'continue', 'win', 'lose'].includes(gameState) && (
-				<div className='w-full flex justify-between items-center gap-2'>
-					<Link href={`/dashboard/vocabulary/${slug}`}>
-						<X className='h-6 w-6 text-gray-200 hover:text-primary' />
-					</Link>
-					<Progress value={progress} className='h-3 bg-pink-100' />
-					<div className='flex items-center text-sm'>
-						<Heart className='h-4 w-4 text-primary mr-1' />
-						<span>{lossCount}</span>
+				<div className='flex flex-row items-center gap-2 w-full px-3 xl:px-0 lg:max-w-5xl mx-auto'>
+					<div className='flex items-center gap-2'>
+						<Link
+							href={`/dashboard/vocabulary/${slug}`}
+							aria-label='Go back to vocabulary page'
+						>
+							<X className='h-6 w-6 text-gray-200 hover:text-primary hover:text-gray-400 transition-all' />
+						</Link>
+					</div>
+
+					<Progress
+						value={progress}
+						className={cn('h-3 bg-pink-100', {
+							'bg-pink-200': progress > 0,
+						})}
+						aria-label={`Quiz progress: ${progress}%`}
+					/>
+
+					<div className='flex items-center justify-end space-x-1'>
+						<Heart
+							className='h-4 w-4 fill-primary text-primary'
+							aria-hidden='true'
+						/>
+						{lossCount > 0 && <span className='text-primary'>{lossCount}</span>}
 					</div>
 				</div>
 			)}
@@ -191,38 +202,39 @@ const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 							alwaysDisabled={true}
 							statusSpeech=''
 						/>
-						<div className=' w-full h-28 absolute bottom-0 left-0 bg-green-200 flex justify-center items-center'>
-							<div className=' w-[90%] sm:w-[70%] flex justify-between items-center'>
-								<div className=' flex justify-center items-center gap-3 sm:gap-5'>
-									<div className=' w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-full bg-white flex justify-center items-center p-2'>
-										<svg
-											xmlns='http://www.w3.org/2000/svg'
-											x='0px'
-											y='0px'
-											width='48'
-											height='48'
-											viewBox='0 0 48 48'
-										>
-											<path
-												fill='rgba(88,204,2,255)'
-												d='M40.6 12.1L17 35.7 7.4 26.1 4.6 29 17 41.3 43.4 14.9z'
-												className=' text-duolingoGreen'
-											></path>
-										</svg>
-									</div>
-									<span className=' text-2xl sm:text-3xl font-bold text-green-500'>
+						<CardFooter
+							className='absolute bottom-0 left-0 right-0 p-0 pb-3 px-3 xl:px-0 md:pb-0 md:h-24 border-t
+										bg-green-500/20'
+						>
+							<div
+								className='w-full lg:max-w-5xl mx-auto flex flex-col md:flex-row items-center
+											justify-between
+										'
+							>
+								<Alert className='w-full flex items-center border-none bg-transparent'>
+									<AlertTitle
+										className='mb-0 p-2 flex items-center justify-center rounded-full
+													bg-green-600
+													'
+									>
+										<CheckCheck className='h-10 w-10 text-white' />
+									</AlertTitle>
+									<AlertDescription
+										className='text-lg font-bold ml-1 text-green-600
+													'
+									>
 										Great !
-									</span>
-								</div>
+									</AlertDescription>
+								</Alert>
 								<Button
 									variant={'secondary'}
+									className='w-full md:max-w-28 text-lg text-white font-semibold transition-colors duration-200'
 									onClick={() => setGameState('playing')}
-									className='bg-green-500 text-white px-4 py-2'
 								>
 									Continue
 								</Button>
 							</div>
-						</div>
+						</CardFooter>
 					</React.Fragment>
 				)}
 
@@ -246,43 +258,39 @@ const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 								statusSpeech=''
 							/>
 						</div>
-						<div className=' w-full h-28 absolute bottom-0 left-0 bg-pink-200 flex justify-center items-center'>
-							<div className=' w-[90%] sm:w-[70%] flex justify-between items-center'>
-								<div className=' flex justify-center items-center gap-3 sm:gap-5'>
-									<div className=' w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-full bg-white flex justify-center items-center p-2'>
-										<svg
-											xmlns='http://www.w3.org/2000/svg'
-											x='0px'
-											y='0px'
-											width='48'
-											height='48'
-											viewBox='0 0 48 48'
-										>
-											<path
-												fill='#ec4899'
-												d='M21.5 4.5H26.501V43.5H21.5z'
-												transform='rotate(45.001 24 24)'
-											></path>
-											<path
-												fill='#ec4899'
-												d='M21.5 4.5H26.5V43.501H21.5z'
-												transform='rotate(135.008 24 24)'
-											></path>
-										</svg>
-									</div>
-									<span className=' text-2xl sm:text-3xl text-left font-bold text-pink-500'>
-										Starting over.
-									</span>
-								</div>
+						<CardFooter
+							className='absolute bottom-0 left-0 right-0 p-0 pb-3 px-3 xl:px-0 md:pb-0 md:h-24 border-t
+										bg-primary/20'
+						>
+							<div
+								className='w-full lg:max-w-5xl mx-auto flex flex-col md:flex-row items-center
+											justify-between
+										'
+							>
+								<Alert className='w-full flex items-center border-none bg-transparent'>
+									<AlertTitle
+										className='mb-0 p-2 flex items-center justify-center rounded-full
+													bg-pink-600
+													'
+									>
+										<CheckCheck className='h-10 w-10 text-white' />
+									</AlertTitle>
+									<AlertDescription
+										className='text-lg font-bold ml-1 text-pink-600
+													'
+									>
+										You lose!
+									</AlertDescription>
+								</Alert>
 								<Button
-									variant={'secondary'}
+									variant={'primary'}
+									className='w-full md:max-w-28 text-lg text-white font-semibold transition-colors duration-200'
 									onClick={() => setGameState('playing')}
-									className='bg-pink-500 hover:bg-pink-500 text-white px-4 py-2 border-pink-600'
 								>
 									Restart
 								</Button>
 							</div>
-						</div>
+						</CardFooter>
 					</React.Fragment>
 				)}
 
@@ -317,79 +325,10 @@ const FinishQuiz = ({ options, onViewed, slug }: FinishQuizProps) => {
 						</div>
 					</React.Fragment>
 				)}
-
-				{gameState === 'end' && (
-					// Finish component
-					<React.Fragment>
-						<div className=' flex justify-center items-center gap-5 flex-col'>
-							<div className=' w-full'>
-								<Image
-									src={randomIcon}
-									alt='congratulation'
-									width={200}
-									height={50}
-									className=' w-[150px] sm:w-full object-contain mx-auto'
-								/>
-							</div>
-							<div className='  flex justify-center items-center gap-5 flex-col'>
-								<p className=' text-2xl sm:text-3xl font-semibold text-primary'>
-									History is complete!
-								</p>
-								<div className=' flex justify-center items-center gap-3 flex-col sm:flex-row'>
-									<div className=' w-[180px] sm:w-[200px] p-1 bg-yellow-500 flex flex-col justify-center items-center gap-3 rounded-xl'>
-										<p className=' text-white font-medium'>Experience points</p>
-										<div className=' flex justify-center items-center gap-1 bg-white w-full h-full rounded-xl py-5'>
-											<div className=' w-[30px] overflow-hidden'>
-												<Image
-													src={
-														'https://d35aaqx5ub95lt.cloudfront.net/images/icons/f5358b2d4087a109790fc809eedc08c5.svg'
-													}
-													alt='pointIcon'
-													width={20}
-													height={20}
-													className=' object-contain'
-												/>
-											</div>
-											<p className=' font-semibold text-lg text-yellow-500'>
-												5
-											</p>
-										</div>
-									</div>
-									<div className='  w-[180px] sm:w-[200px] p-1 bg-green-500 flex flex-col justify-center items-center gap-3 rounded-xl'>
-										<p className=' text-white font-medium'>Great</p>
-										<div className=' flex justify-center items-center gap-2 bg-white w-full h-full rounded-xl py-5'>
-											<div className=' w-[30px] overflow-hidden'>
-												<Image
-													src={
-														'https://d35aaqx5ub95lt.cloudfront.net/images/icons/9ace13520a375f5661415ff7d470f243.svg'
-													}
-													alt='pointIcon'
-													width={30}
-													height={30}
-													className=' object-contain'
-												/>
-											</div>
-											<p className=' font-semibold text-lg text-green-500'>
-												100 %
-											</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div className=' w-full h-28 absolute -bottom-10 left-0 border-t-2 border-gray-300 flex justify-center items-center'>
-							<div className=' w-[70%] flex justify-end items-center'>
-								<Link href={`/dashboard/vocabulary/${slug}`}
-									className={cn(buttonVariants({ variant: 'secondary' }))}
-								>
-									Continue
-								</Link>
-							</div>
-						</div>
-					</React.Fragment>
-				)}
 			</Card>
 		</div>
+		)}
+		</>
 	)
 }
 
