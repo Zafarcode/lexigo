@@ -69,7 +69,7 @@ export default function FAQPage() {
 			</h2>
 			<p className='text-center mb-6 text-gray-700 dark:text-gray-300'>
 				Mana bizning tez-tez beriladigan savollarimiz. Agar sizda boshqa
-				savollar bo'lsa, qo'llab-quvvatlash jamoamizga murojaat qilishdan
+				savollar bo`lsa, qo`llab-quvvatlash jamoamizga murojaat qilishdan
 				tortinmang.
 			</p>
 			<Accordion
@@ -93,7 +93,7 @@ export default function FAQPage() {
 			</h3>
 			<h3>
 				<Link className='underline text-primary font-bold' href='/auth/login'>
-					Hozir qo'shiling
+					Hozir qo`shiling
 				</Link>{' '}
 				va <span className='text-primary font-bold'>LexiGo</span> bilan
 				sarguzashtingizni boshlang.

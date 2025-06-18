@@ -149,7 +149,7 @@ const ContactsForm = () => {
 
 					<div className='flex flex-col items-center p-2 w-full mt-8 border-t border-gray-200 text-center'>
 						<p className='leading-normal my-5'>
-							Toshkent shahar, Mirobod Tumani, Temir yo'lchilar ko'chasi 
+							Toshkent shahar, Mirobod Tumani, Temir yo`lchilar ko`chasi
 						</p>
 
 						<Socials />
