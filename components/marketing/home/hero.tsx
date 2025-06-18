@@ -1,4 +1,5 @@
 'use client'
+
 import { buttonVariants } from '@/components/ui/button'
 import {
 	LampIcon,
@@ -20,15 +21,16 @@ const Hero = () => {
 					{/* hero content */}
 					<div className='flex flex-col gap-5 w-full lg:w-[700px] min-h-[450px]'>
 						<h1 className='text-2xl lg:text-[40px] lg:leading-[48px] font-bold'>
-							O`z Tilingiz salohiyatini{' '}
+							O‘z Tilingiz salohiyatini{' '}
 							<span className='text-primary'>LexiGo:</span> bilan oching:{' '}
 							<span className='text-primary'>Ingliz tilini </span>
-							O`rganish <span className='text-primary'>sarguzashtga</span>{' '}
+							O‘rganish <span className='text-primary'>sarguzashtga</span>{' '}
 							aylangan joy!
 						</h1>
 						<p className='leading-[180%] text-base text-gray-500'>
-							Ingliz tilini **LexiGo** bilan o`rganing: Bilimingizni oshirishga
-							yordam beradigan eng so`nggi onlayn o`quv tizimi va materiallari.
+							Ingliz tilini <strong>LexiGo</strong> bilan o‘rganing:
+							Bilimingizni oshirishga yordam beradigan eng so‘nggi onlayn o‘quv
+							tizimi va materiallari.
 						</p>
 						<div className='flex flex-col gap-4 md:flex-row lg:gap-7 mb-5 lg:mb-10'>
 							<Link
@@ -49,7 +51,7 @@ const Hero = () => {
 							<li className='flex items-center gap-[10px]'>
 								<PortfelIcon />
 								<span className='sr-only'>Portfel belgisi</span>
-								<p className='text-sm lg:text-base'>Kasbga yo`naltirilgan</p>
+								<p className='text-sm lg:text-base'>Kasbga yo‘naltirilgan</p>
 							</li>
 							<li className='flex items-center gap-[10px]'>
 								<LampIcon />
@@ -61,7 +63,7 @@ const Hero = () => {
 
 					{/* Hero image */}
 					<div className='relative mx-auto w-[280px] h-[280px] lg:w-[495px] lg:h-[495px] bg-primary rounded-full'>
-						<span className='absolute -top-2 -left-2 lg:-top-4  inset-0 lg:-left-4 w-[280px] h-[280px] lg:w-[495px] lg:h-[495px] border border-primary rounded-full'></span>
+						<span className='absolute -top-2 -left-2 lg:-top-4 inset-0 lg:-left-4 w-[280px] h-[280px] lg:w-[495px] lg:h-[495px] border border-primary rounded-full'></span>
 
 						<div className='relative flex justify-center mx-auto w-[280px] h-[280px] lg:w-[495px] lg:h-[495px] bg-primary rounded-full overflow-hidden'>
 							<Image
@@ -80,10 +82,9 @@ const Hero = () => {
 								<ProgressIcon className='w-[50px] h-[50px] md:w-[81px] md:h-[81px]' />
 								<span className='sr-only'>Taraqqiyot belgisi</span>
 							</div>
-
 							<h3 className='text-lg lg:text-3xl font-bold text-center'>10K</h3>
 							<p className='text-sm text-gray-400 text-center whitespace-nowrap'>
-								Inglizcha so'zlar
+								Inglizcha so‘zlar
 							</p>
 						</div>
 
@@ -105,7 +106,7 @@ const Hero = () => {
 						<div className='absolute top-[210px] left-[65%] lg:top-[375px] lg:left-[75%] flex flex-col lg:flex-row items-center gap-1 lg:gap-6 p-2 md:p-5 rounded-[18px] border border-primary bg-white dark:bg-black'>
 							<div>
 								<TutorIcon className='w-[30px] h-[30px] md:w-[50px] md:h-[50px]' />
-								<span className='sr-only'>O'qituvchi belgisi</span>
+								<span className='sr-only'>O‘qituvchi belgisi</span>
 							</div>
 							<div className='text-center lg:text-start'>
 								<p className='text-sm text-gray-400 whitespace-nowrap'>

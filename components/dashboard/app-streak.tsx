@@ -44,9 +44,11 @@ const AppStreak = () => {
 							<p className='text-sm font-semibold mb-2 '>My Course</p>
 							<ul className='space-y-2'>
 								<li className='flex gap-2 items-center px-3 py-1 rounded-lg cursor-pointer hover:bg-blue-200 hover:text-white transition-all duration-300'>
-									<img
+									<Image
 										src='https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg'
 										alt='English'
+										width={50}
+										height={50}
 										className='w-8 h-8'
 									/>
 									<span className='font-bold text-xl text-blue-600'>
