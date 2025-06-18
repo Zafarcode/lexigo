@@ -11,7 +11,6 @@ import {
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
-import HeroCarousel from './hero-carousel'
 
 const Hero = () => {
 	return (
@@ -21,14 +20,15 @@ const Hero = () => {
 					{/* hero content */}
 					<div className='flex flex-col gap-5 w-full lg:w-[700px] min-h-[450px]'>
 						<h1 className='text-2xl lg:text-[40px] lg:leading-[48px] font-bold'>
-							Unlock Your <span className='text-primary'>Language</span>{' '}
-							Potential with <span className='text-primary'>WordWonders:</span>{' '}
-							Where English <span className='text-primary'>Learning</span>{' '}
-							Becomes an Adventure!
+							O'z Tilingiz salohiyatini{' '}
+							<span className='text-primary'>LexiGo:</span> bilan oching:{' '}
+							<span className='text-primary'>Ingliz tilini </span>
+							O'rganish <span className='text-primary'>sarguzashtga</span>{' '}
+							aylangan joy!
 						</h1>
 						<p className='leading-[180%] text-base text-gray-500'>
-							Learn English with WordWonders: The latest online learning system
-							and materials that help your knowledge grow.
+							Ingliz tilini **LexiGo** bilan o'rganing: Bilimingizni oshirishga
+							yordam beradigan eng so'nggi onlayn o'quv tizimi va materiallari.
 						</p>
 						<div className='flex flex-col gap-4 md:flex-row lg:gap-7 mb-5 lg:mb-10'>
 							<Link
@@ -37,32 +37,24 @@ const Hero = () => {
 								)}
 								href='/dashboard/vocabulary'
 							>
-								Get Started
-							</Link>
-							<Link
-								className={cn(
-									buttonVariants({ variant: 'danger', size: 'lg' })
-								)}
-								href='/auth/login'
-							>
-								Get free trial
+								Boshlash
 							</Link>
 						</div>
 						<ul className='flex sm:gap-5 lg:gap-10 items-center'>
 							<li className='flex items-center gap-3'>
 								<SpeechIcon />
-								<span className='sr-only'>Speech Icon</span>
-								<p className='text-sm lg:text-base'>Public Speaking</p>
+								<span className='sr-only'>Nutq belgisi</span>
+								<p className='text-sm lg:text-base'>Ommaviy nutq</p>
 							</li>
 							<li className='flex items-center gap-[10px]'>
 								<PortfelIcon />
-								<span className='sr-only'>Portfel Icon</span>
-								<p className='text-sm lg:text-base'>Career Oriented</p>
+								<span className='sr-only'>Portfel belgisi</span>
+								<p className='text-sm lg:text-base'>Kasbga yo'naltirilgan</p>
 							</li>
 							<li className='flex items-center gap-[10px]'>
 								<LampIcon />
-								<span className='sr-only'>Lamp Icon</span>
-								<p className='text-sm lg:text-base'>Creative Thinking</p>
+								<span className='sr-only'>Chiroq belgisi</span>
+								<p className='text-sm lg:text-base'>Ijodiy fikrlash</p>
 							</li>
 						</ul>
 					</div>
@@ -73,11 +65,11 @@ const Hero = () => {
 
 						<div className='relative flex justify-center mx-auto w-[280px] h-[280px] lg:w-[495px] lg:h-[495px] bg-primary rounded-full overflow-hidden'>
 							<Image
-								className='absolute top-1 lg:top-auto lg:bottom-0 object-cover'
+								className='absolute w-full h-full object-left top-1 lg:top-auto lg:bottom-0 object-cover'
 								src='/assets/images/hero-image.png'
 								width={366}
 								height={432}
-								alt='Hero image'
+								alt='Qahramon rasmi'
 								priority
 							/>
 						</div>
@@ -86,12 +78,12 @@ const Hero = () => {
 						<div className='absolute -top-5 left-[70%]  md:left-[80%] md:w-[140px] md:h-[185px] p-2  md:p-5 rounded-[18px] border border-primary bg-white dark:bg-black'>
 							<div className='flex justify-center mb-1 lg:mb-3'>
 								<ProgressIcon className='w-[50px] h-[50px] md:w-[81px] md:h-[81px]' />
-								<span className='sr-only'>Progress icon</span>
+								<span className='sr-only'>Taraqqiyot belgisi</span>
 							</div>
 
-							<h3 className='text-lg lg:text-3xl font-bold text-center'>20K</h3>
+							<h3 className='text-lg lg:text-3xl font-bold text-center'>10K</h3>
 							<p className='text-sm text-gray-400 text-center whitespace-nowrap'>
-								English Words
+								Inglizcha so'zlar
 							</p>
 						</div>
 
@@ -99,12 +91,12 @@ const Hero = () => {
 						<div className='absolute -left-8 lg:-left-20 top-7 lg:top-36 flex flex-col lg:flex-row items-center gap-1 lg:gap-6 p-2 md:p-5 rounded-[18px] border border-primary bg-white dark:bg-black'>
 							<div>
 								<LaptopIcon className='w-[30px] h-[30px] md:w-[50px] md:h-[50px]' />
-								<span className='sr-only'>Laptop Icon</span>
+								<span className='sr-only'>Noutbuk belgisi</span>
 							</div>
 							<div className='text-center lg:text-start'>
-								<h3 className='text-lg lg:text-3xl font-bold'>40+</h3>
+								<h3 className='text-lg lg:text-3xl font-bold'>20+</h3>
 								<p className='text-sm text-gray-400 whitespace-nowrap'>
-									Grammar Topics
+									Grammatika mavzulari
 								</p>
 							</div>
 						</div>
@@ -113,27 +105,19 @@ const Hero = () => {
 						<div className='absolute top-[210px] left-[65%] lg:top-[375px] lg:left-[75%] flex flex-col lg:flex-row items-center gap-1 lg:gap-6 p-2 md:p-5 rounded-[18px] border border-primary bg-white dark:bg-black'>
 							<div>
 								<TutorIcon className='w-[30px] h-[30px] md:w-[50px] md:h-[50px]' />
-								<span className='sr-only'>Tutor Icon</span>
+								<span className='sr-only'>O'qituvchi belgisi</span>
 							</div>
 							<div className='text-center lg:text-start'>
 								<p className='text-sm text-gray-400 whitespace-nowrap'>
-									IELTS Topics
+									IELTS mavzulari
 								</p>
-								<h3 className='text-lg lg:text-3xl font-bold'>240+</h3>
+								<h3 className='text-lg lg:text-3xl font-bold'>150+</h3>
 							</div>
 						</div>
 					</div>
 				</div>
 
 				{/* Collaboration */}
-
-				<div className='flex flex-col lg:flex-row gap-1 lg:gap-20  lg:items-center'>
-					<div>
-						<h3 className='text-3xl lg:text-5xl font-bold text-primary'>7+</h3>
-						<p className='text-lg lg:text-2xl'>Collaborations</p>
-					</div>
-					<HeroCarousel />
-				</div>
 			</div>
 		</section>
 	)

@@ -1,7 +1,7 @@
 import { AppSidebar } from '@/components/dashboard/app-sidebar'
 import DashboardBreadcrumb from '@/components/dashboard/dashboard-breadcrumb'
 import { Separator } from '@/components/ui/separator'
-import DuolingoClone from '@/components/dashboard/right'
+import AppStreak from '@/components/dashboard/app-streak'
 import {
 	SidebarInset,
 	SidebarProvider,
@@ -17,6 +17,7 @@ export default function DashboardLayout({
 	return (
 		<SidebarProvider>
 			<AppSidebar />
+
 			<SidebarInset>
 				<header className='flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12'>
 					<div className='flex items-center gap-2 px-4'>
@@ -25,9 +26,10 @@ export default function DashboardLayout({
 						<DashboardBreadcrumb />
 					</div>
 				</header>
+
 				<div className='flex flex-1 flex-col gap-4 pt-0'>{children}</div>
+				<AppStreak />
 			</SidebarInset>
-			<DuolingoClone />
 		</SidebarProvider>
 	)
 }

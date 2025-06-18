@@ -1,16 +1,20 @@
 'use client'
+
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
-import { cn } from '@/lib/utils'
 import { WordPair } from '@/types'
 import { motion } from 'framer-motion'
-import { Heart, X } from 'lucide-react'
+import { CheckCheck, Heart, X } from 'lucide-react'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
+import Celebration from '../celebration'
+import { cn } from '@/lib/utils'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { useIsMobile } from '@/hooks/use-mobile'
 
-type WordPairProps = {
+type MatchingPairsProps = {
 	words: WordPair[]
 	onViewed: (itemId: number) => void
 	slug: string
@@ -20,29 +24,37 @@ const shuffleArray = <T,>(array: T[]): T[] => {
 	return [...array].sort(() => Math.random() - 0.5)
 }
 
-const MatchingPairs = ({ words, onViewed, slug }: WordPairProps) => {
+const MatchingPairs = ({ words, onViewed, slug }: MatchingPairsProps) => {
+	const isMobile = useIsMobile()
 	const [selected, setSelected] = useState<{ id: number; value: string }[]>([])
 	const [matchedPairs, setMatchedPairs] = useState<string[][]>([])
-	const [feedback, setFeedback] = useState('')
+	const [progress, setProgress] = useState(0)
+	const [showCongratulations, setShowCongratulations] = useState(false)
+	const [hearts, setHearts] = useState(5)
+	const [wordIndex, setWordIndex] = useState(0)
+
+	const wordsPerRound = isMobile ? 4 : 5
+
+	const getCurrentWords = React.useCallback(() => {
+		return words.slice(wordIndex, wordIndex + wordsPerRound)
+	}, [wordIndex, wordsPerRound, words])
+
 	const [englishWords, setEnglishWords] = useState<
 		{ id: number; value: string }[]
 	>([])
 	const [uzbekWords, setUzbekWords] = useState<{ id: number; value: string }[]>(
 		[]
 	)
-	const [progress, setProgress] = useState(0)
-	const [hearts, setHearts] = useState(5)
-	const [gameOver, setGameOver] = useState(false)
-	const [visibleWords, setVisibleWords] = useState(4)
 
 	useEffect(() => {
+		const currentWords = getCurrentWords()
 		setEnglishWords(
-			shuffleArray(words.map(w => ({ id: w.id, value: w.value })))
+			shuffleArray(currentWords.map(w => ({ id: w.id, value: w.value })))
 		)
 		setUzbekWords(
-			shuffleArray(words.map(w => ({ id: w.id + 100, value: w.pair })))
+			shuffleArray(currentWords.map(w => ({ id: w.id + 100, value: w.pair })))
 		)
-	}, [words])
+	}, [getCurrentWords, wordIndex])
 
 	const handleSelect = (id: number, value: string) => {
 		if (selected.some(s => s.id === id)) return
@@ -59,172 +71,123 @@ const MatchingPairs = ({ words, onViewed, slug }: WordPairProps) => {
 
 			if (isMatch) {
 				setMatchedPairs(prev => [...prev, [first.value, second.value]])
-				setFeedback('Excellent!')
 				setProgress(((matchedPairs.length + 1) / words.length) * 100)
-				onViewed(first.id) // Mark the first word as viewed
-				onViewed(second.id - 100) // Adjust ID for second word
+				onViewed(first.id)
+				onViewed(second.id)
 			} else {
-				setFeedback('Try again!')
-				setHearts(prev => {
-					const updatedHearts = prev - 1
-					if (updatedHearts === 0) setGameOver(true)
-					return updatedHearts
-				})
+				setHearts(prev => prev - 1)
 			}
-			setTimeout(() => setFeedback(''), 1000)
 			setSelected([])
 		}
 	}
 
 	const handleContinue = () => {
-		setVisibleWords(prev => prev + 4)
-	}
-
-	const resetGame = () => {
-		setSelected([])
-		setMatchedPairs([])
-		setFeedback('')
-		setProgress(0)
-		setHearts(5)
-		setGameOver(false)
-		setVisibleWords(4)
-		setEnglishWords(
-			shuffleArray(words.map(w => ({ id: w.id, value: w.value })))
-		)
-		setUzbekWords(
-			shuffleArray(words.map(w => ({ id: w.id + 100, value: w.pair })))
-		)
+		if (matchedPairs.length >= wordIndex + wordsPerRound) {
+			setWordIndex(prev => prev + wordsPerRound)
+		}
+		if (matchedPairs.length === words.length) {
+			setShowCongratulations(true)
+		}
 	}
 
 	return (
-		<motion.div
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			transition={{ duration: 0.5 }}
-			className='flex items-center justify-center'
-		>
-			<div className='w-full lg:max-w-5xl p-0 overflow-hidden shadow-none border-none'>
-				<CardContent className='p-3 md:p-6'>
-					{gameOver ? (
-						<section className='flex flex-col items-center justify-center min-h-[300px]'>
-							<h1 className='text-3xl md:text-4xl font-bold text-pink-600 mb-6'>
-								Game Over
-							</h1>
-							<Button variant='secondary' onClick={resetGame}>
-								Restart Game
-							</Button>
-						</section>
-					) : (
-						<>
-							<div className='flex items-center gap-4 mb-6'>
-								<Link href={`/dashboard/vocabulary/${slug}`}>
-									<X className='h-6 w-6 text-gray-200 hover:text-primary' />
+		<>
+			{showCongratulations ? (
+				<Celebration onOpen={showCongratulations} slug={slug} />
+			) : (
+				<motion.div
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={{ duration: 0.5 }}
+				>
+					<Card className='w-full lg:max-w-5xl mx-auto p-0 overflow-hidden shadow-none border-none'>
+						<div className='flex flex-row items-center gap-2 w-full px-3 xl:px-0 lg:max-w-5xl mx-auto'>
+							<div className='flex items-center gap-2'>
+								<Link
+									href={`/dashboard/vocabulary/${slug}`}
+									aria-label='Go back to vocabulary page'
+								>
+									<X className='h-6 w-6 text-gray-200 hover:text-primary hover:text-gray-400 transition-all' />
 								</Link>
-								<Progress value={progress} className='h-3 flex-1 bg-pink-100' />
-								<div className='flex items-center space-x-1'>
-									<Heart className='h-4 w-4 text-primary' />
-									<span className='text-lg'>{hearts}</span>
-								</div>
 							</div>
-							<Badge
-								variant='secondary'
-								className='text-xs mb-6 font-semibold bg-pink-200 text-pink-700'
-							>
-								NEW WORD
-							</Badge>
-							<h1 className='text-2xl md:text-3xl font-bold mb-6 text-start'>
+
+							<Progress
+								value={progress}
+								className={cn('h-3 bg-pink-100', {
+									'bg-pink-200': progress > 0,
+								})}
+								aria-label={`Quiz progress: ${progress}%`}
+							/>
+
+							<div className='flex items-center justify-end space-x-1'>
+								<Heart
+									className='h-4 w-4 fill-primary text-primary'
+									aria-hidden='true'
+								/>
+								{hearts > 0 && <span className='text-primary'>{hearts}</span>}
+							</div>
+						</div>
+						<CardContent className='p-3 md:p-6 max-w-2xl mx-auto md:pt-10 mb-20'>
+							<h1 className='text-2xl md:text-3xl font-bold mb-6 text-start text-gray-800 dark:text-white'>
 								Tap the matching pairs
 							</h1>
-							<section className='grid grid-cols-2 md:grid-cols-2 gap-1 mb-2'>
-								<Card className='p-4'>
-									<h3 className='text-lg md:text-xl font-bold mb-4 hidden md:block'>
-										English
-									</h3>
-									<div className='grid grid-cols-1 gap-2'>
-										{englishWords
-											.slice(0, visibleWords)
-											.map(({ id, value }) => (
+							<section className='grid grid-cols-2 gap-1 mb-2'>
+								{[englishWords, uzbekWords].map((wordList, idx) => (
+									<Card key={idx} className='p-0 border-none'>
+										<div className='grid grid-cols-1 gap-2'>
+											{wordList.map(({ id, value }) => (
 												<Button
 													key={id}
-													variant='outline'
+													variant={
+														selected.some(s => s.id === id)
+															? 'secondary'
+															: 'primary'
+													}
 													onClick={() => handleSelect(id, value)}
 													disabled={matchedPairs.flat().includes(value)}
-													className={cn(
-														'border rounded-md text-sm md:text-lg',
-														{
-															'border-pink-500 text-pink-500':
-																selected.some(s => s.id === id) && !feedback,
-															'border-gray-200 text-gray-700':
-																!selected.some(s => s.id === id) && !feedback,
-															'border-green-500 text-green-500':
-																selected.some(s => s.id === id) &&
-																feedback === 'Excellent!',
-														}
-													)}
 												>
 													{value}
 												</Button>
 											))}
-									</div>
-								</Card>
-								<Card className='p-4'>
-									<h3 className='text-lg md:text-xl font-bold mb-4 hidden sm:block'>
-										Uzbek
-									</h3>
-									<div className='grid grid-cols-1 gap-2'>
-										{uzbekWords.slice(0, visibleWords).map(({ id, value }) => (
-											<Button
-												key={id}
-												variant='outline'
-												onClick={() => handleSelect(id, value)}
-												disabled={matchedPairs.flat().includes(value)}
-												className={cn('border rounded-md text-sm md:text-lg', {
-													'border-pink-500 text-pink-500':
-														selected.some(s => s.id === id) && !feedback,
-													'border-gray-200 text-gray-700':
-														!selected.some(s => s.id === id) && !feedback,
-													'border-green-500 text-green-500':
-														selected.some(s => s.id === id) &&
-														feedback === 'Excellent!',
-												})}
-											>
-												{value}
-											</Button>
-										))}
-									</div>
-								</Card>
+										</div>
+									</Card>
+								))}
 							</section>
+						</CardContent>
+						{matchedPairs.length >= wordIndex + wordsPerRound && (
+							<CardFooter
+								className={`flex items-center  bg-green-500/20 absolute bottom-0 left-0 right-0  p-0 pb-3 px-3 xl:px-0 md:pb-0 md:h-24 border-t`}
+							>
+								<div
+									className='w-full lg:max-w-5xl mx-auto flex flex-col md:flex-row items-center
+							justify-end
+							'
+								>
+									<Alert className='w-full flex items-center border-none bg-transparent'>
+										<AlertTitle
+											className='mb-0 p-2 flex items-center justify-center rounded-full
+												bg-green-600
+											'
+										>
+												<CheckCheck className='h-10 w-10 text-white' />
+										</AlertTitle>
+										<AlertDescription
+											className='text-lg font-bold ml-1 text-green-600'
+										>
+											Amazing! You&apos;ve matched all pairs
+										</AlertDescription>
+									</Alert>
 
-							<div className='md:h-20 pt-0 flex flex-col md:flex-row items-center justify-between gap-4'>
-								<div className='min-h-[32px] flex items-center'>
-									{feedback && (
-										<span
-											className={`text-lg font-semibold ${
-												feedback === 'Try again!'
-													? 'text-pink-600'
-													: 'text-green-600'
-											}`}
-										>
-											{feedback}
-										</span>
-									)}
+									<Button className='w-full md:w-auto' variant='secondary' onClick={handleContinue}>
+										Continue
+									</Button>
 								</div>
-								<div className='w-full md:w-auto'>
-									{matchedPairs.length === words.length && (
-										<Button
-											onClick={handleContinue}
-											className='w-full text-lg text-white bg-green-500 hover:bg-green-600 font-semibold transition-colors duration-200 border-b-4'
-										>
-											Continue
-										</Button>
-									)}
-								</div>
-							</div>
-						</>
-					)}
-				</CardContent>
-			</div>
-		</motion.div>
+							</CardFooter>
+						)}
+					</Card>
+				</motion.div>
+			)}
+		</>
 	)
 }
 

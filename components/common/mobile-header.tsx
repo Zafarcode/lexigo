@@ -24,10 +24,10 @@ const MobileHeader = () => {
 			</SheetTrigger>
 			<SheetContent className='flex flex-col justify-between'>
 				<SheetHeader>
-					<SheetTitle className='text-primary'>WordWonders</SheetTitle>
+					<SheetTitle className='text-primary'>LexiGo</SheetTitle>
 					<SheetDescription>
-						Unlock Your Language Potential with WordWonders: Where English
-						Learning Becomes an Adventure!
+						Unlock Your Language Potential with LexiGo: Where English Learning
+						Becomes an Adventure!
 					</SheetDescription>
 				</SheetHeader>
 
@@ -47,7 +47,6 @@ const MobileHeader = () => {
 
 				<SheetFooter className='w-full flex flex-row sm:justify-between justify-between items-center'>
 					<ModeToggle />
-
 					<Socials />
 				</SheetFooter>
 			</SheetContent>

@@ -1,5 +1,4 @@
 import LoginForm from '@/components/auth/login-form'
-import { LogoIcon } from '@/components/utils/icons'
 import Link from 'next/link'
 
 const LoginComponent = () => {
@@ -7,10 +6,6 @@ const LoginComponent = () => {
 		<section className='min-h-[calc(100vh-164px)] flex flex-col justify-center'>
 			<div className='container'>
 				<div className='w-full max-w-[500px] h-full flex flex-col items-center text-center mx-auto'>
-					<Link href='/'>
-						<LogoIcon />
-					</Link>
-
 					<h1 className='text-3xl lg:text-5xl font-bold py-5'>
 						Kodni kiriting
 					</h1>
@@ -19,9 +14,9 @@ const LoginComponent = () => {
 						<Link
 							className='underline text-black dark:text-gray-300'
 							// target='blank'
-							href='tg://resolve?domain=wordwondersbot'
+							href='tg://resolve?domain=LexiGobot'
 						>
-							@wordwondersbot
+							@LexiGobot
 						</Link>{' '}
 						telegram botiga kiring va 1 daqiqalik kodingizni oling.
 					</p>

@@ -1,4 +1,3 @@
-import { LogoIcon } from '@/components/utils/icons'
 import Link from 'next/link'
 
 const SiteFooter = () => {
@@ -8,13 +7,12 @@ const SiteFooter = () => {
 				<div className='flex flex-col lg:flex-row justify-between items-start gap-5'>
 					<div className='flex flex-col space-y-8 w-full max-w-[360px]'>
 						<Link href='/'>
-							<LogoIcon width={100} height={50} />
-							<span className='sr-only'>WordWonders icon</span>
+							<span className='sr-only'>LexiGo icon</span>
 						</Link>
 
 						<p className='text-sm text-muted-foreground'>
 							Unlock Your Language Potential with{' '}
-							<span className='text-primary'>WordWonders</span>: Where English
+							<span className='text-primary'>LexiGo</span>: Where English
 							Learning Becomes an Adventure!
 						</p>
 					</div>
@@ -49,6 +47,7 @@ const SiteFooter = () => {
 								</li>
 							</ul>
 						</div>
+
 						<div className='flex flex-col space-y-4'>
 							<h3 className='text-lg lg:text-xl font-semibold'>Company</h3>
 							<ul className='flex flex-col space-y-3'>
@@ -78,22 +77,14 @@ const SiteFooter = () => {
 								</li>
 							</ul>
 						</div>
+
 						<div className='flex flex-col space-y-4'>
 							<h3 className='text-lg lg:text-xl font-semibold'>Social</h3>
 							<ul className='flex flex-col space-y-3'>
 								<li>
 									<Link
 										className='hover:text-primary hover:underline'
-										href='https://x.com/wordwonders_uz'
-										target='blank'
-									>
-										X
-									</Link>
-								</li>
-								<li>
-									<Link
-										className='hover:text-primary hover:underline'
-										href='https://www.instagram.com/wordwonders.uz/'
+										href='https://www.instagram.com/lexigo.uz?igsh=MWhhcXhtYTY5bHVkbg=='
 										target='blank'
 									>
 										Instagram
@@ -102,7 +93,7 @@ const SiteFooter = () => {
 								<li>
 									<Link
 										className='hover:text-primary hover:underline'
-										href='https://t.me/wordwonders_uz'
+										href='https://t.me/LexiGo_uz'
 										target='blank'
 									>
 										Telegram
@@ -111,7 +102,7 @@ const SiteFooter = () => {
 								<li>
 									<Link
 										className='hover:text-primary hover:underline'
-										href='https://www.youtube.com/@wordwonders_uz'
+										href='https://youtube.com/@lexigo_uz?si=qySMHwZvYEU2foSx'
 										target='blank'
 									>
 										YouTube
@@ -119,6 +110,7 @@ const SiteFooter = () => {
 								</li>
 							</ul>
 						</div>
+
 						<div className='flex flex-col space-y-4'>
 							<h3 className='text-lg lg:text-xl font-semibold'>Legal</h3>
 							<ul className='flex flex-col space-y-3'>
@@ -166,9 +158,9 @@ const SiteFooter = () => {
 						&copy; {new Date().getFullYear()}{' '}
 						<Link
 							className='font-semibold hover:text-primary hover:underline'
-							href='https://wordwonders.uz'
+							href='https://lexigo.uz'
 						>
-							WordWonders.
+							LexiGo.
 						</Link>{' '}
 						All rights reserved.
 					</p>
@@ -179,7 +171,7 @@ const SiteFooter = () => {
 							className='font-semibold hover:text-primary hover:underline'
 							href='https://shahnur.software'
 						>
-							ShahNur Software
+							Dilshodbek Hasanov
 						</Link>
 					</p>
 				</div>

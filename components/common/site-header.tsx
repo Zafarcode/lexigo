@@ -2,7 +2,6 @@
 import MobileHeader from '@/components/common/mobile-header'
 import { icons, navList, skillList } from '@/components/common/site-header.mock'
 import { ModeToggle } from '@/components/theme/mode-toggle'
-import { buttonVariants } from '@/components/ui/button'
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -10,8 +9,9 @@ import {
 	NavigationMenuList,
 	NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu'
-import { LogoIcon } from '@/components/utils/icons'
 import { cn } from '@/lib/utils'
+import { useTheme } from 'next-themes'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
@@ -19,14 +19,19 @@ import React from 'react'
 const SiteHeader = () => {
 	const pathname = usePathname()
 	const [active, setActive] = React.useState('reading')
+	const { theme } = useTheme()
+
+	const logoSrc =
+		theme === 'dark'
+			? '/assets/icons/logolight.png'
+			: '/assets/icons/logodark.png'
 
 	return (
 		<header className='py-5 shadow-sm dark:border-b fixed top-0 left-0 right-0 dark:bg-black bg-white z-10'>
 			<div className='container'>
 				<div className='flex items-center justify-between'>
 					<Link href='/'>
-						<LogoIcon width={100} height={50} />
-						<span className='sr-only'>WordWonders icon</span>
+						<Image src={logoSrc} alt='Logo' width={100} height={100} />
 					</Link>
 
 					<div className='flex items-center gap-14'>
@@ -79,17 +84,6 @@ const SiteHeader = () => {
 						</NavigationMenu>
 
 						<div className='flex items-center gap-3'>
-							<Link
-								className={cn(
-									buttonVariants({
-										variant: 'primary',
-									})
-								)}
-								href='/auth/login'
-							>
-								Kirish
-							</Link>
-
 							<span className='hidden lg:block'>
 								<ModeToggle />
 							</span>

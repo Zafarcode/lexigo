@@ -1,59 +1,59 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
-const benefirts = [
+const benefits = [
 	{
 		id: '01',
-		title: 'Interactive Learning Experience',
+		title: 'Interaktiv o‘rganish tajribasi',
 		description:
-			'WordWonders offers a dynamic and interactive platform that makes learning English engaging and enjoyable. Interactive lessons and fun activities keep learners motivated and interested.',
+			'LexiGo dinamik va interaktiv platformani taklif etadi, bu esa ingliz tilini o‘rganishni qiziqarli va maroqli qiladi. Interaktiv darslar va qiziqarli mashg‘ulotlar o‘quvchilarning motivatsiyasini oshiradi.',
 	},
 	{
 		id: '02',
-		title: 'Comprehensive Learning Materials',
+		title: 'Keng qamrovli o‘quv materiallari',
 		description:
-			'The platform provides the latest online learning systems and materials, ensuring that learners have access to up-to-date and relevant content to aid their language acquisition.',
+			'Platformada eng so‘nggi onlayn o‘quv tizimlari va materiallari mavjud bo‘lib, bu o‘quvchilarga til o‘rganishda dolzarb va foydali kontentdan foydalanish imkonini beradi.',
 	},
 	{
 		id: '03',
-		title: 'Tailored for All Levels',
+		title: 'Barcha darajalar uchun mos',
 		description:
-			'Whether you are a beginner or an advanced learner, WordWonders has tailored content to meet your specific needs and help you progress at your own pace.',
+			'Boshlovchi bo‘lasizmi yoki ilg‘or darajadami, LexiGo har bir foydalanuvchiga moslashtirilgan kontentni taklif etadi va sizni o‘zingizga qulay sur’atda rivojlantiradi.',
 	},
 	{
 		id: '04',
-		title: 'Practical Exercises',
+		title: 'Amaliy mashqlar',
 		description:
-			'WordWonders includes practical exercises that allow learners to apply what they have learned in real-world scenarios, enhancing their language proficiency and confidence.',
+			'LexiGo o‘rgangan bilimlaringizni real hayotda qo‘llashga yordam beradigan amaliy mashqlarni o‘z ichiga oladi, bu esa til ko‘nikmalaringiz va ishonchingizni oshiradi.',
 	},
 	{
 		id: '05',
-		title: 'Innovative Teaching Methods',
+		title: 'Innovatsion o‘qitish metodlari',
 		description:
-			'The platform utilizes innovative teaching methods that combine traditional learning techniques with modern technology, making the process of mastering English both effective and entertaining.',
+			'Platforma an’anaviy o‘quv texnikalarini zamonaviy texnologiyalar bilan uyg‘unlashtirib, ingliz tilini o‘rganish jarayonini samarali va qiziqarli qiladi.',
 	},
 	{
 		id: '06',
-		title: 'Empowerment Through Language',
+		title: 'Til orqali kuch va imkoniyat',
 		description:
-			'WordWonders aims to empower individuals by helping them achieve fluency in English, opening up new opportunities in both their personal and professional lives.',
+			'LexiGo odamlarni ingliz tilida ravon gapirishga o‘rgatib, shaxsiy va professional hayotlarida yangi imkoniyatlar eshigini ochadi.',
 	},
 	{
 		id: '07',
-		title: 'Immersive Learning Environment',
+		title: 'Sho‘ng‘ishli o‘rganish muhit',
 		description:
-			'Learners at WordWonders immerse themselves in a world of discovery and growth, which not only aids in language learning but also broadens their cultural understanding.',
+			'LexiGo foydalanuvchilari kashfiyot va rivojlanish dunyosiga sho‘ng‘ib, nafaqat til o‘rganadilar, balki madaniy tushunchalarini ham kengaytiradilar.',
 	},
 	{
 		id: '08',
-		title: 'Supportive Community',
+		title: 'Qo‘llab-quvvatlovchi hamjamiyat',
 		description:
-			'Joining WordWonders means becoming part of a supportive community that is dedicated to helping you succeed in your language-learning journey.',
+			'LexiGo hamjamiyatiga qo‘shilish orqali siz til o‘rganish yo‘lingizda muvaffaqiyatga erishishga yordam beradigan qo‘llab-quvvatlash jamoasining bir qismiga aylanasiz.',
 	},
 	{
 		id: '09',
-		title: 'Unlimited Potential',
+		title: 'Cheksiz imkoniyatlar',
 		description:
-			'With WordWonders, your potential to learn and master English is limitless. The platform is designed to help you unlock your language potential and achieve your goals.',
+			'LexiGo bilan ingliz tilini o‘rganish va uni mukammal bilish imkoniyatlaringiz cheksizdir. Platforma sizning til salohiyatingizni ochish va maqsadlaringizga erishishingizga yordam beradi.',
 	},
 ]
 
@@ -62,11 +62,11 @@ const Benefits = () => {
 		<section className='mb-10'>
 			<div className='container'>
 				<h2 className='text-2xl lg:text-5xl font-bold text-center'>
-					Our Benefits
+					Bizning afzalliklarimiz
 				</h2>
 
 				<ol className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-10 mt-10'>
-					{benefirts.map(({ id, title, description }) => (
+					{benefits.map(({ id, title, description }) => (
 						<li key={id}>
 							<Card className='hover:shadow-lg h-full group'>
 								<CardHeader>

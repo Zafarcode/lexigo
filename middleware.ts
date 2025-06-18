@@ -5,7 +5,5 @@ export const config = {
 	// +: one or more
 	// ?: zero or one
 
-	matcher: ['/dashboard/:path*', '/profile/:path*'],
-
-
+	matcher: [/*'/dashboard/:path*', '/profile/:path*'*/],
 }

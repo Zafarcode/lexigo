@@ -19,56 +19,56 @@ export const courses: {
 		id: 1,
 		title: 'Vocabulary',
 		description:
-			'Expand your vocabulary with our extensive collection of words and phrases. Our vocabulary lessons are designed to help you understand and remember new words, enriching your language skills.',
+			'Leksika bo‘limimiz bilan so‘z va iboralaringiz boyligini oshiring. Darslarimiz yangi so‘zlarni tushunish va yodlab qolishingizga yordam beradi, til ko‘nikmalaringizni boyitadi.',
 		icon: 'vocabulary',
 	},
 	{
 		id: 2,
 		title: 'Vocabulary Game',
 		description:
-			"Make learning fun with our interactive vocabulary games. These games are designed to reinforce your word knowledge in an entertaining and engaging way, ensuring that you retain what you've learned.",
+			'Interaktiv o‘yinlarimiz bilan o‘rganishni qiziqarli qiling. Bu o‘yinlar so‘z bilimlaringizni mustahkamlashga yordam beradi va o‘rganganlaringizni eslab qolishingizni ta’minlaydi.',
 		icon: 'game',
 	},
 	{
 		id: 3,
 		title: 'Grammar',
 		description:
-			'Master the rules of English with our detailed grammar lessons. Our clear and concise explanations, combined with practical examples, help you grasp even the most complex grammatical concepts.',
+			'Ingliz tilining qoidalarini batafsil tushuntiradigan grammatika darslarimiz bilan mukammallikka erishing. Aniq tushuntirishlar va amaliy misollar eng murakkab tushunchalarni ham tushunishingizga yordam beradi.',
 		icon: 'grammar',
 	},
 	{
 		id: 4,
 		title: 'Reading',
 		description:
-			'Enhance your reading skills with a variety of texts tailored to different proficiency levels. Our reading exercises improve your comprehension, speed, and overall ability to understand written English.',
+			'Turmush darajangizga mos matnlar bilan o‘qish ko‘nikmalaringizni rivojlantiring. Mashqlarimiz tushunish, tezlik va inglizcha matnlarni umumiy tushunish qobiliyatingizni oshiradi.',
 		icon: 'reading',
 	},
 	{
 		id: 5,
 		title: 'Listening',
 		description:
-			'Develop your listening skills through our diverse range of audio materials. From everyday conversations to advanced lectures, our listening exercises help you understand spoken English in various contexts.',
+			'Turli audio materiallar orqali tinglash ko‘nikmalaringizni rivojlantiring. Oddiy suhbatlardan tortib murakkab ma’ruzalarigacha bo‘lgan mashqlar turli kontekstlarda ingliz tilini tushunishga yordam beradi.',
 		icon: 'listening',
 	},
 	{
 		id: 6,
 		title: 'Speaking',
 		description:
-			'Improve your speaking abilities with our practical speaking exercises. Whether practicing pronunciation, fluency, or conversational skills, our tools are designed to help you communicate confidently in English.',
+			'Praktik mashqlar bilan so‘zlashish mahoratingizni oshiring. Talaffuz, ravonlik yoki suhbat ko‘nikmalarini mashq qilish orqali ingliz tilida ishonch bilan muloqot qilishingizga yordam beramiz.',
 		icon: 'speaking',
 	},
 	{
 		id: 7,
 		title: 'Writing',
 		description:
-			'Refine your writing skills with our comprehensive writing lessons. From basic sentence structure to advanced essay writing, we provide the guidance and practice you need to become a proficient writer in English.',
+			'Yozish ko‘nikmalaringizni chuqurlashtiring. Oddiy gap tuzishdan tortib murakkab insho yozishgacha bo‘lgan darslarimiz sizga ingliz tilida mohir yozuvchi bo‘lishingiz uchun yo‘l ko‘rsatadi.',
 		icon: 'writing',
 	},
 	{
 		id: 8,
 		title: 'Online Tests',
 		description:
-			'Evaluate your progress with our online tests available after each topic. These tests are designed to assess your understanding and retention of the material, providing you with immediate feedback and personalized recommendations for further improvement.',
+			'Har bir mavzudan keyingi onlayn testlar bilan rivojlanishingizni baholang. Bu testlar tushunishingiz va eslab qolish qobiliyatingizni baholab, darhol fikr-mulohaza va shaxsiy takliflar beradi.',
 		icon: 'test',
 	},
 ]

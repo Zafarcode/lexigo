@@ -6,39 +6,58 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from '@/components/ui/accordion'
+import Link from 'next/link'
 
 const faqs = [
 	{
-		question: 'Kurslar bepulmi?',
-		answer: "Ba'zi kurslar bepul, ba'zilari esa pullik.",
+		question: 'LexiGo nima?',
+		answer:
+			"LexiGo ingliz tilini qiziqarli, samarali va oson o'rganish uchun mo'ljallangan innovatsion onlayn platformadir. Biz interaktiv darslar, o'yinlar va amaliy mashqlarni birlashtirib, o'quvchilarga til salohiyatini ochishga yordam beramiz.",
 	},
 	{
-		question: "Paymedan boshqa to'lov qilish imkoni bormi?",
-		answer: "Ha, turli xil to'lov usullari mavjud.",
+		question: 'LexiGo kimlar uchun?',
+		answer:
+			"Platformamiz barcha o'quvchilarga, yangi boshlovchilardan tortib, ilg'or talabalargacha mo'ljallangan bo'lib, turli darajadagi bilimdonlikka moslashtirilgan resurslarni taklif etadi.",
 	},
 	{
-		question: "Kurslar noldan boshlab o'rgatiladimi?",
-		answer: "Ha, kurslar boshlang'ich darajadan boshlab tushuntiriladi.",
+		question: 'LexiGo qanday xususiyatlarni taklif etadi?',
+		answer:
+			"Biz Lug'at Yaratuvchisi, Grammatika Mahorati darslari, Interaktiv o'yinlar, O'qish va Tinglash amaliyotlari, Gapirish va Yozish vositalari hamda taraqqiyotni kuzatish uchun Onlayn testlarni taqdim etamiz.",
 	},
 	{
-		question: 'Kurs sotib olgach undan qachongacha foydalanamiz?',
-		answer: 'Kurslar umrbod kirish imkoniyatiga ega.',
+		question: 'LexiGo boshqa platformalardan nimasi bilan farq qiladi?',
+		answer:
+			"Biz o'yinlar, interaktiv mashg'ulotlar va barcha til ko'nikmalarini bir joyda qamrab oluvchi tuzilmali darslar orqali o'rganishni sarguzashtga aylantirishga e'tibor qaratamiz.",
 	},
 	{
-		question: "To'lov butun kurs uchun qancha?",
-		answer: 'Kurs narxi kursga bog‘liq holda farqlanadi.',
+		question: 'LexiGo dan foydalanish bepulmi?',
+		answer:
+			"LexiGo bepul va premium rejalarni taklif etadi. Bepul foydalanuvchilar asosiy darslarga ega bo'ladilar, premium a'zolar esa ilg'or xususiyatlar, shaxsiy o'rganish yo'nalishlari va reklamasiz tajribadan bahramand bo'lishadi.",
 	},
 	{
-		question: 'Kurslarda o‘qish uchun kompyuter kerakmi?',
-		answer: 'Ha, amaliyot uchun kompyuter tavsiya etiladi.',
+		question: "LexiGo til o'rganish uchun qanchalik samarali?",
+		answer:
+			"Platformamiz lug'at uchun intervalgacha takrorlash va kontekstual grammatika mashqlari kabi ilmiy asoslangan usullardan foydalanadi. Foydalanuvchilar bir necha hafta davomida muntazam mashq qilish orqali ingliz tilida o'zlariga bo'lgan ishonchlari ortganini xabar qilishadi.",
 	},
 	{
-		question: 'Express kurslarning davomi ham bo‘ladimi?',
-		answer: 'Ha, yangi bo‘limlar qo‘shib boriladi.',
+		question: 'Taraqqiyotimni kuzata olamanmi?',
+		answer:
+			"Ha! Onlayn testlar bilimingizni baholaydi va bizning boshqaruv paneli sizning o'rganish statistikalaringizni, kuchli tomonlaringizni va yaxshilash kerak bo'lgan sohalarni ko'rsatadi.",
 	},
 	{
-		question: 'Yangi darslar qachon qo‘shiladi?',
-		answer: 'Har oy yangi darslar yuklanadi.',
+		question: 'Maxsus jihozlar kerakmi?',
+		answer:
+			"Yo'q — LexiGo internetga ulangan har qanday qurilmada (kompyuter, planshet yoki smartfon) ishlaydi, bu sizga istalgan vaqtda, istalgan joyda o'rganish imkonini beradi.",
+	},
+	{
+		question: "LexiGo da o'rganishni qanday boshlayman?",
+		answer:
+			"Shunchaki bepul hisob yarating, qisqa joylashtirish testidan o'ting va tizimimiz maqsadlaringizga asoslanib shaxsiy o'rganish yo'nalishini tavsiya qiladi.",
+	},
+	{
+		question: 'LexiGo qanday yordam taklif qiladi?',
+		answer:
+			"Biz 24/7 elektron pochta orqali yordam, o'quvchilar hamjamiyati forumi va tajribangizni maksimal darajada oshirishga yordam beradigan batafsil qo'llanmalar/o'quv materiallarini taqdim etamiz.",
 	},
 ]
 
@@ -46,10 +65,12 @@ export default function FAQPage() {
 	return (
 		<div className='max-w-2xl mx-auto py-10'>
 			<h2 className='text-2xl font-bold text-center mb-4 text-gray-900 dark:text-white'>
-				Ko&apos;p Beriladigan Savollar!!
+				Frequently Asked Questions
 			</h2>
 			<p className='text-center mb-6 text-gray-700 dark:text-gray-300'>
-				Yana sizni qiziqtirgan savollar bo&apos;lsa, biz bilan bog&apos;laning.
+				Mana bizning tez-tez beriladigan savollarimiz. Agar sizda boshqa
+				savollar bo'lsa, qo'llab-quvvatlash jamoamizga murojaat qilishdan
+				tortinmang.
 			</p>
 			<Accordion
 				type='single'
@@ -67,6 +88,16 @@ export default function FAQPage() {
 					</AccordionItem>
 				))}
 			</Accordion>
+			<h3 className='mt-4 mb-1'>
+				Til salohiyatingizni <span className='text-primary'>bugun</span>!
+			</h3>
+			<h3>
+				<Link className='underline text-primary font-bold' href='/auth/login'>
+					Hozir qo'shiling
+				</Link>{' '}
+				va <span className='text-primary font-bold'>LexiGo</span> bilan
+				sarguzashtingizni boshlang.
+			</h3>
 		</div>
 	)
 }

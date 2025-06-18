@@ -1,14 +1,14 @@
 'use client'
 
+import { Card } from '@/components/ui/card'
+import { cn } from '@/lib/utils'
+import { motion } from 'framer-motion'
+import { Target, Zap } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import Confetti from 'react-confetti'
 import { buttonVariants } from '../ui/button'
-import { motion } from 'framer-motion'
-import { Target, Zap } from 'lucide-react'
-import { Card } from '@/components/ui/card'
-import Image from 'next/image'
-import Link from 'next/link'
-import { cn } from '@/lib/utils'
 
 type CelebrationProps = {
 	slug?: string
@@ -85,7 +85,7 @@ const Celebration = ({ slug, onOpen }: CelebrationProps) => {
 							transition={{ delay: 0.2 }}
 						>
 							<Card className='p-0 bg-yellow-500 border-4 border-yellow-500 rounded-xl'>
-								<p className=' text-sm md:text-base font-bold text-white mb-1 py-2'>
+								<p className='text-sm md:text-base font-bold text-white mb-1 py-2'>
 									Experience points
 								</p>
 								<motion.div
@@ -105,7 +105,9 @@ const Celebration = ({ slug, onOpen }: CelebrationProps) => {
 							transition={{ delay: 0.3 }}
 						>
 							<Card className='p-0 bg-green-500 border-4 border-green-500 rounded-xl'>
-								<p className=' text-sm md:text-base font-bold text-white mb-1 py-2'>Great</p>
+								<p className='text-sm md:text-base font-bold text-white mb-1 py-2'>
+									Great
+								</p>
 								<motion.div
 									initial={{ scale: 0 }}
 									animate={{ scale: 1 }}
@@ -130,7 +132,7 @@ const Celebration = ({ slug, onOpen }: CelebrationProps) => {
 					<hr className='w-full' />
 					<div className='max-w-5xl mx-auto flex items-center justify-end pt-[26px] pr-4 xl:pr-0'>
 						<Link
-							href={`/dashboard/vocabulary/${slug}`}
+							href={`/dashboard/vocabulary/learn`}
 							className={cn(buttonVariants({ variant: 'secondary' }))}
 						>
 							Continue

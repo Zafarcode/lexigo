@@ -6,25 +6,25 @@ export function createMetadata(override: Metadata): Metadata {
 		openGraph: {
 			title:
 				override.title ??
-				'WordWonders - Unlock Your Language Potential with WordWonders: Where English Learning Becomes an Adventure.',
+				'LexiGo - Ingliz tilini o‘rganish LexiGo bilan sarguzashtga aylanadi.',
 			description:
 				override.description ??
-				'WordWonders - Unlock Your Language Potential with WordWonders: Where English Learning Becomes an Adventure.',
-			url: 'https://wordwonders.uz',
-			images: 'https://wordwonders.uz/og.png',
-			siteName: 'WordWonders',
+				'LexiGo - Ingliz tilini o‘rganish LexiGo bilan sarguzashtga aylanadi.',
+			url: 'https://lexigo.uz',
+			images: 'https://lexigo.uz/og.png',
+			siteName: 'LexiGo',
 			...override.openGraph,
 		},
 		twitter: {
 			card: 'summary_large_image',
-			creator: '@miracleprogrammer',
+			creator: '@dilshodbek_kxasanov',
 			title:
 				override.title ??
-				'WordWonders - Unlock Your Language Potential with WordWonders: Where English Learning Becomes an Adventure.',
+				'LexiGo - Ingliz tilini o‘rganish LexiGo bilan sarguzashtga aylanadi.',
 			description:
 				override.description ??
-				'WordWonders - Unlock Your Language Potential with WordWonders: Where English Learning Becomes an Adventure.',
-			images: 'https://wordwonders.uz/og.png',
+				'LexiGo - Ingliz tilini o‘rganish LexiGo bilan sarguzashtga aylanadi.',
+			images: 'https://lexigo.uz/og.png',
 			...override.twitter,
 		},
 	}

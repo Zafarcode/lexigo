@@ -1,9 +1,9 @@
 'use client'
 
-import { useEffect } from 'react'
 import { Section } from '@/components/vocabulary/section'
 import { useProgressStore } from '@/store/use-progress'
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export default function VocabularySection({
 	params,
@@ -35,7 +35,7 @@ export default function VocabularySection({
 	}, {} as Record<number, number>)
 
 	return (
-		<div className='h-full flex justify-center items-center'>
+		<div className='h-full flex justify-center items-center px-4'>
 			<Section
 				section={section}
 				onUnitClick={handleUnitClick}

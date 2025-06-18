@@ -4,10 +4,8 @@ import {
 	Book,
 	BookOpen,
 	GalleryVerticalEnd,
-	PenTool,
 	ShieldCheckIcon,
 	Speech,
-	User2,
 } from 'lucide-react'
 import * as React from 'react'
 
@@ -26,13 +24,13 @@ import { ModeToggle } from '../theme/mode-toggle'
 // This is sample data.
 const data = {
 	user: {
-		name: 'Shakhbozbek Usmonov',
-		email: 'shakhbozbek.usmonov@gmail.com',
+		name: 'Dilshodbek Hasanov',
+		email: 'dilshodbek.khasanov@gmail.com',
 		avatar: '/avatars/shadcn.jpg',
 	},
 	teams: [
 		{
-			name: 'Shakhbozbek Usmonov',
+			name: 'Dilshodbek Hasanov',
 			logo: GalleryVerticalEnd,
 			plan: 'Pro',
 		},
@@ -42,88 +40,21 @@ const data = {
 			title: 'Grammar',
 			url: '/dashboard/grammar',
 			icon: Book,
-			isActive: true,
-			items: [
-				{
-					title: 'Grammar Lessons',
-					url: '/dashboard/grammar',
-				},
-			],
 		},
 		{
 			title: 'Vocabulary',
 			url: '/dashboard/vocabulary',
 			icon: BookOpen,
-			items: [
-				{
-					title: 'Vocabulary Lessons',
-					url: '/dashboard/vocabulary',
-				},
-			],
-		},
-		{
-			title: 'Skills',
-			url: '/dashboard/skills',
-			icon: PenTool,
-			items: [
-				{
-					title: 'Speaking',
-					url: '/dashboard/skills/speaking',
-				},
-				{
-					title: 'Writing',
-					url: '/dashboard/skills/writing',
-				},
-				{
-					title: 'Reading',
-					url: '/dashboard/skills/reading',
-				},
-				{
-					title: 'Listening',
-					url: '/dashboard/skills/listening',
-				},
-			],
 		},
 		{
 			title: 'Sounds',
 			url: '/dashboard/characters',
 			icon: Speech,
-			items: [
-				{
-					title: 'Characters',
-					url: '/dashboard/characters',
-				},
-			],
 		},
 		{
 			title: 'Leaderboard',
 			url: '/dashboard/leaderboard',
 			icon: ShieldCheckIcon,
-			items: [
-				{
-					title: 'Leaderboards',
-					url: '/dashboard/leaderboard',
-				},
-			],
-		},
-		{
-			title: 'Profile',
-			url: '/dashboard/profile',
-			icon: User2,
-			items: [
-				{
-					title: 'Account Settings',
-					url: '/dashboard/profile/account',
-				},
-				{
-					title: 'Notifications',
-					url: '/dashboard/profile/notifications',
-				},
-				{
-					title: 'Pricing',
-					url: '/dashboard/profile/pricing',
-				},
-			],
 		},
 	],
 }

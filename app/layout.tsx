@@ -14,13 +14,12 @@ const rubik = Rubik({
 
 export const metadata = createMetadata({
 	title: {
-		template:
-			'%s | WordWonders - Unlock Your Language Potential with WordWonders',
+		template: '%s | LexiGo - Unlock Your Language Potential with LexiGo',
 		default:
-			'WordWonders - Unlock Your Language Potential with WordWonders: Where English Learning Becomes an Adventure.',
+			'LexiGo - Unlock Your Language Potential with LexiGo: Where English Learning Becomes an Adventure.',
 	},
 	description:
-		'WordWonders - Unlock Your Language Potential with WordWonders: Where English Learning Becomes an Adventure.',
+		'LexiGo - Unlock Your Language Potential with LexiGo: Where English Learning Becomes an Adventure.',
 	metadataBase: baseURL,
 })
 

@@ -1,10 +1,8 @@
 'use client'
 
 import FillInBlank from '@/components/vocabulary/fill-in-blank'
-import FinishQuiz from '@/components/vocabulary/finish-quiz'
 import Flashcard from '@/components/vocabulary/flash-card'
 import MatchingPairs from '@/components/vocabulary/matching-pairs'
-import WordImage from '@/components/vocabulary/word-image'
 import { useProgressStore } from '@/store/use-progress'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
@@ -45,13 +43,13 @@ export default function UnitPage({ params }: UnitPageProps) {
 	}
 
 	const flashcards = unit.item.filter(i => i.type === 'flashcard')
-	const imageSelections = unit.item.filter(i => i.type === 'imageSelection')
-	const finishQuiz = unit.item.filter(i => i.type === 'finishQuiz')
+	// const imageSelections = unit.item.filter(i => i.type === 'imageSelection')
+	// const finishQuiz = unit.item.filter(i => i.type === 'finishQuiz')
 	const wordPairs = unit.item.filter(i => i.type === 'wordPair')
 	const fillInBlank = unit.item.filter(i => i.type === 'fillInBlank')
 
 	return (
-		<section className='pt-5'>
+		<section className='pt-10'>
 			<div className='container'>
 				{/* Render Flashcard Component */}
 				{flashcards.length > 0 && (
@@ -96,43 +94,23 @@ export default function UnitPage({ params }: UnitPageProps) {
 						</div>
 					</div>
 				)}
+
+				{/* Render MatchingPairs Component */}
+				{wordPairs.length > 0 && (
+					<MatchingPairs
+						onViewed={handleViewed}
+						words={wordPairs} // Pass only word pairs
+					/>
+				)}
+
+				{/* Render FillInBlank Component */}
+				{fillInBlank.length > 0 && (
+					<FillInBlank
+						onViewed={handleViewed}
+						questions={fillInBlank} // Pass only fill-in-blank questions
+					/>
+				)}
 			</div>
-
-			{/* Render WordImage Component */}
-			{imageSelections.length > 0 && (
-				<WordImage
-					onViewed={handleViewed}
-					slug={section.slug}
-					quizData={imageSelections} // Pass only image selections
-				/>
-			)}
-
-			{/* Render FinishQuiz Component */}
-			{finishQuiz.length > 0 && (
-				<FinishQuiz
-					onViewed={handleViewed}
-					slug={section.slug}
-					options={finishQuiz} // Pass only translations
-				/>
-			)}
-
-			{/* Render MatchingPairs Component */}
-			{wordPairs.length > 0 && (
-				<MatchingPairs
-					onViewed={handleViewed}
-					slug={section.slug}
-					words={wordPairs} // Pass only word pairs
-				/>
-			)}
-
-			{/* Render FillInBlank Component */}
-			{fillInBlank.length > 0 && (
-				<FillInBlank
-					onViewed={handleViewed}
-					slug={section.slug}
-					questions={fillInBlank} // Pass only fill-in-blank questions
-				/>
-			)}
 		</section>
 	)
 }

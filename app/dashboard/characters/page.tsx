@@ -1,10 +1,8 @@
 'use client'
 
-import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { pronunciations, consonantPronunciations } from '@/constants/sounds'
-
-
+import { consonantPronunciations, pronunciations } from '@/constants/sounds'
+import { useState } from 'react'
 
 export default function Characters() {
 	const [activeSound, setActiveSound] = useState<string | null>(null)
@@ -34,11 +32,6 @@ export default function Characters() {
 		// 100ms keyin bosilgan simbolni tozalash
 		setTimeout(() => setClickedSymbol(null), 100)
 	}
-
-
-	
-
-	
 
 	return (
 		<main className='min-h-screen mx-auto p-4 flex flex-rows items-center'>
@@ -73,11 +66,11 @@ export default function Characters() {
 							<Button
 								key={index}
 								className={`
-									bg-white dark:bg-gray-950 dark:text-gray-100 dark:border-gray-800 py-8 sm:py-10 font-bold 
-									border-2 border-b-4 border-gray-200 hover:bg-gray-50 text-gray-600 
-									rounded-2xl shadow-sm transition duration-200 
-									${clickedSymbol === p.symbol ? 'translate-y-1' : ''}
-								`}
+                  bg-white dark:bg-gray-950 dark:text-gray-100 dark:border-gray-800 py-8 sm:py-10 font-bold 
+                  border-2 border-b-4 border-gray-200 hover:bg-gray-50 text-gray-600 
+                  rounded-2xl shadow-sm transition duration-200 
+                  ${clickedSymbol === p.symbol ? 'translate-y-1' : ''}
+                `}
 								onClick={() => handleButtonClick(p.symbol, p.example)}
 							>
 								<div className='flex flex-col items-center justify-center py-4'>
@@ -105,11 +98,11 @@ export default function Characters() {
 							<Button
 								key={index}
 								className={`
-									bg-white dark:bg-gray-950 dark:text-gray-100 dark:border-gray-800 py-8 sm:py-10 font-bold 
-									border-2 border-b-4 border-gray-200 hover:bg-gray-50 text-gray-600 
-									rounded-2xl shadow-sm transition duration-200 
-									${clickedSymbol === p.symbol ? 'translate-y-1' : ''}
-								`}
+                  bg-white dark:bg-gray-950 dark:text-gray-100 dark:border-gray-800 py-8 sm:py-10 font-bold 
+                  border-2 border-b-4 border-gray-200 hover:bg-gray-50 text-gray-600 
+                  rounded-2xl shadow-sm transition duration-200 
+                  ${clickedSymbol === p.symbol ? 'translate-y-1' : ''}
+                `}
 								onClick={() => handleButtonClick(p.symbol, p.example)}
 							>
 								<div className='flex flex-col items-center justify-center py-4'>

@@ -14,13 +14,13 @@ export type FillInBlank = {
   viewed: boolean;
 };
 
-export type FinishQuiz = {
-  id: number;
-  type: "finishQuiz";
-  en: string;
-  uz: string;
-  viewed: boolean;
-};
+// export type FinishQuiz = {
+//   id: number;
+//   type: "finishQuiz";
+//   en: string;
+//   uz: string;
+//   viewed: boolean;
+// };
 
 export type WordPair = {
   type: "wordPair";
@@ -30,19 +30,19 @@ export type WordPair = {
   viewed: boolean;
 };
 
-export type ImageSelection = {
-  type: "imageSelection";
-  id: number;
-  word: string;
-  question: string;
-  options: {
-    id: string;
-    image: string;
-    label: string;
-  }[];
-  correct: string;
-  viewed: boolean;
-};
+// export type ImageSelection = {
+//   type: "imageSelection";
+//   id: number;
+//   word: string;
+//   question: string;
+//   options: {
+//     id: string;
+//     image: string;
+//     label: string;
+//   }[];
+//   correct: string;
+//   viewed: boolean;
+// };
 
 export type Flashcards = {
   type: "flashcard";
@@ -58,9 +58,7 @@ export type Flashcards = {
 
 export type Item =
   | FillInBlank
-  | FinishQuiz
   | WordPair
-  | ImageSelection
   | Flashcards;
 
 export interface Unit {
@@ -147,12 +145,6 @@ export interface Question {
   text: string;
   options: string[];
   correctAnswer: number;
-}
-
-export type FinishQuizProps = {
-  options: FinishQuiz[]
-  onViewed: (itemId: number) => void
-  slug: string
 }
 
 export interface KeyboardProps {

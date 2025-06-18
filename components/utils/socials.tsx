@@ -12,18 +12,7 @@ const Socials = () => {
 			<li>
 				<Link
 					className='hover:text-primary hover:underline'
-					href='https://x.com/wordwonders_uz'
-					target='blank'
-					rel='noreferrer'
-				>
-					<XIcon width={30} height={30} />
-					<span className='sr-only'>Twitter icon</span>
-				</Link>
-			</li>
-			<li>
-				<Link
-					className='hover:text-primary hover:underline'
-					href='https://www.instagram.com/wordwonders.uz/'
+					href='https://www.instagram.com/lexigo.uz?igsh=MWhhcXhtYTY5bHVkbg=='
 					target='blank'
 					rel='noreferrer'
 				>
@@ -34,7 +23,7 @@ const Socials = () => {
 			<li>
 				<Link
 					className='hover:text-primary hover:underline'
-					href='https://t.me/wordwonders_uz'
+					href='https://t.me/LexiGo_uz'
 					target='blank'
 					rel='noreferrer'
 				>
@@ -45,7 +34,7 @@ const Socials = () => {
 			<li>
 				<Link
 					className='hover:text-primary hover:underline'
-					href='https://www.youtube.com/@wordwonders'
+					href='https://youtube.com/@lexigo_uz?si=qySMHwZvYEU2foSx'
 					target='blank'
 					rel='noreferrer'
 				>

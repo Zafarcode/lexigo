@@ -3,160 +3,160 @@
 @tailwind utilities;
 
 @layer base {
-	:root {
-		--background: 0 0% 100%;
-		--foreground: 240 10% 3.9%;
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 240 10% 3.9%;
 
-		--card: 0 0% 100%;
-		--card-foreground: 240 10% 3.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 240 10% 3.9%;
 
-		--popover: 0 0% 100%;
-		--popover-foreground: 240 10% 3.9%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 240 10% 3.9%;
 
-		--primary: 340 100% 47%; /* Updated primary color */
-		--primary-foreground: 0 0% 98%;
+        --primary: 240 100% 47%; /* Ko'k rang */
+        --primary-foreground: 0 0% 98%;
 
-		--secondary: 240 4.8% 95.9%;
-		--secondary-foreground: 240 5.9% 10%;
+        --secondary: 220 100% 95%; /* Och ko'k rang */
+        --secondary-foreground: 220 10% 10%; /* To'qroq ko'k rang */
 
-		--muted: 240 4.8% 95.9%;
-		--muted-foreground: 240 3.8% 46.1%;
+        --muted: 240 4.8% 95.9%;
+        --muted-foreground: 240 3.8% 46.1%;
 
-		--accent: 240 4.8% 95.9%;
-		--accent-foreground: 240 5.9% 10%;
+        --accent: 240 4.8% 95.9%;
+        --accent-foreground: 240 5.9% 10%;
 
-		--destructive: 0 84.2% 60.2%;
-		--destructive-foreground: 0 0% 98%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
 
-		--border: 240 5.9% 90%;
-		--input: 240 5.9% 90%;
-		--ring: 240 10% 3.9%;
+        --border: 240 5.9% 90%;
+        --input: 240 5.9% 90%;
+        --ring: 240 10% 3.9%;
 
-		--radius: 0.5rem;
+        --radius: 0.5rem;
 
-		--sidebar-background: 0 0% 98%;
+        --sidebar-background: 0 0% 98%;
 
-		--sidebar-foreground: 240 5.3% 26.1%;
+        --sidebar-foreground: 240 5.3% 26.1%;
 
-		--sidebar-primary: 240 5.9% 10%;
+        --sidebar-primary: 240 5.9% 10%;
 
-		--sidebar-primary-foreground: 0 0% 98%;
+        --sidebar-primary-foreground: 0 0% 98%;
 
-		--sidebar-accent: 240 4.8% 95.9%;
+        --sidebar-accent: 240 4.8% 95.9%;
 
-		--sidebar-accent-foreground: 240 5.9% 10%;
+        --sidebar-accent-foreground: 240 5.9% 10%;
 
-		--sidebar-border: 220 13% 91%;
+        --sidebar-border: 220 13% 91%;
 
-		--sidebar-ring: 217.2 91.2% 59.8%;
-	}
+        --sidebar-ring: 217.2 91.2% 59.8%;
+    }
 
-	.dark {
-		--background: 240 10% 3.9%;
-		--foreground: 0 0% 98%;
+    .dark {
+        --background: 240 10% 3.9%;
+        --foreground: 0 0% 98%;
 
-		--card: 240 10% 3.9%;
-		--card-foreground: 0 0% 98%;
+        --card: 240 10% 3.9%;
+        --card-foreground: 0 0% 98%;
 
-		--popover: 240 10% 3.9%;
-		--popover-foreground: 0 0% 98%;
+        --popover: 240 10% 3.9%;
+        --popover-foreground: 0 0% 98%;
 
-		--primary: 340 100% 47%; /* Updated primary color */
-		--primary-foreground: 0 0% 98%;
+        --primary: 240 100% 47%; /* Ko'k rang */
+        --primary-foreground: 0 0% 98%;
 
-		--secondary: 240 3.7% 15.9%;
-		--secondary-foreground: 0 0% 98%;
+        --secondary: 240 3.7% 15.9%;
+        --secondary-foreground: 0 0% 98%;
 
-		--muted: 240 3.7% 15.9%;
-		--muted-foreground: 240 5% 64.9%;
+        --muted: 240 3.7% 15.9%;
+        --muted-foreground: 240 5% 64.9%;
 
-		--accent: 240 3.7% 15.9%;
-		--accent-foreground: 0 0% 98%;
+        --accent: 240 3.7% 15.9%;
+        --accent-foreground: 0 0% 98%;
 
-		--destructive: 0 62.8% 30.6%;
-		--destructive-foreground: 0 0% 98%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 0 0% 98%;
 
-		--border: 240 3.7% 15.9%;
-		--input: 240 3.7% 15.9%;
-		--ring: 240 4.9% 83.9%;
-		--sidebar-background: 240 5.9% 10%;
-		--sidebar-foreground: 240 4.8% 95.9%;
-		--sidebar-primary: 224.3 76.3% 48%;
-		--sidebar-primary-foreground: 0 0% 100%;
-		--sidebar-accent: 240 3.7% 15.9%;
-		--sidebar-accent-foreground: 240 4.8% 95.9%;
-		--sidebar-border: 240 3.7% 15.9%;
-		--sidebar-ring: 217.2 91.2% 59.8%;
-	}
+        --border: 240 3.7% 15.9%;
+        --input: 240 3.7% 15.9%;
+        --ring: 240 4.9% 83.9%;
+        --sidebar-background: 240 5.9% 10%;
+        --sidebar-foreground: 240 4.8% 95.9%;
+        --sidebar-primary: 224.3 76.3% 48%;
+        --sidebar-primary-foreground: 0 0% 100%;
+        --sidebar-accent: 240 3.7% 15.9%;
+        --sidebar-accent-foreground: 240 4.8% 95.9%;
+        --sidebar-border: 240 3.7% 15.9%;
+        --sidebar-ring: 217.2 91.2% 59.8%;
+    }
 }
 
 @layer base {
-	* {
-		@apply border-border;
-		user-select: none;
-	}
-	body {
-		@apply bg-background text-foreground;
-	}
+    * {
+        @apply border-border;
+        user-select: none;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
 
-	.custom-transition {
-		@apply transition-all duration-300 ease-in-out;
-	}
+    .custom-transition {
+        @apply transition-all duration-300 ease-in-out;
+    }
 }
 
 /* Flashcard Animation Start */
 .flip-card {
-	perspective: 1000px;
+    perspective: 1000px;
 }
 
 .flip-card-inner {
-	transition: transform 0.1s;
-	transform-style: preserve-3d;
+    transition: transform 0.1s;
+    transform-style: preserve-3d;
 }
 
 .flip-card-front,
 .flip-card-back {
-	position: absolute;
-	backface-visibility: hidden;
+    position: absolute;
+    backface-visibility: hidden;
 }
 
 .flip-card-back {
-	transform: rotateX(180deg);
+    transform: rotateX(180deg);
 }
 /* Flashcard Animation End */
 
 .bg-pattern {
-	background-image: url('/assets/images/bg-diamond-pattern-white.svg');
-	background-size: 14px;
-	opacity: 6%;
+    background-image: url('/assets/images/bg-diamond-pattern-white.svg');
+    background-size: 14px;
+    opacity: 6%;
 }
 
 .bg-diamond-pattern {
-	background-image: url('/assets/images/bg-diamond-pattern-white-02.svg');
-	background-size: 14px;
-	-webkit-mask-image: linear-gradient(
-		to bottom,
-		transparent,
-		transparent,
-		rgba(255, 255, 255, 0.04)
-	);
-	mask-image: linear-gradient(
-		to bottom,
-		transparent,
-		transparent,
-		rgba(255, 255, 255, 0.04)
-	);
+    background-image: url('/assets/images/bg-diamond-pattern-white-02.svg');
+    background-size: 14px;
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent,
+        transparent,
+        rgba(255, 255, 255, 0.04)
+    );
+    mask-image: linear-gradient(
+        to bottom,
+        transparent,
+        transparent,
+        rgba(255, 255, 255, 0.04)
+    );
 }
 
 html,
 body {
-	overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 main {
-	flex-grow: 1;
+    flex-grow: 1;
 }
 
 .grammar-card h3 {
-	font-size: 18px;
+    font-size: 18px;
 }

@@ -6,7 +6,7 @@ const Testimonials = () => {
 		<section className='py-20'>
 			<div className='container'>
 				<h2 className='text-2xl lg:text-[40px] lg:leading-[48px] font-bold mb-10 text-center'>
-					Testimonials
+					Fikr-mulohazalar
 				</h2>
 
 				<div className='flex flex-wrap -m-4'>
@@ -14,26 +14,24 @@ const Testimonials = () => {
 						<div className='h-full p-8 rounded border flex flex-col justify-between'>
 							<div>
 								<QuoteIcon />
-								<span className='sr-only'>Quote icon</span>
+								<span className='sr-only'>Iqtibos belgisi</span>
 								<p className='leading-relaxed mb-6'>
-									WordWonders has completely transformed the way I learn
-									English. The interactive lessons and fun activities make
-									studying enjoyable, and I&apos;ve seen significant improvement
-									in my vocabulary and grammar skills. I highly recommend
-									WordWonders to anyone looking to master English!
+									LexiGo ingliz tilini o‘rganish uslubimni butunlay o‘zgartirdi.
+									Interaktiv darslar va qiziqarli mashg‘ulotlar tufayli o‘qish
+									juda maroqli bo‘lib qoldi, so‘z boyligim va grammatikam
+									sezilarli darajada yaxshilandi. Ingliz tilini o‘rganmoqchi
+									bo‘lganlarga LexiGo’ni chin dildan tavsiya qilaman!
 								</p>
 							</div>
 							<div className='flex items-center'>
 								<Avatar>
 									<AvatarImage src='' />
-									<AvatarFallback>KH</AvatarFallback>
+									<AvatarFallback>JG</AvatarFallback>
 								</Avatar>
 
 								<div className='ml-3'>
-									<p className='text-sm font-medium'>Khusniddin Qodirkulov</p>
-									<p className='text-sm text-gray-500'>
-										CEO of Newcastle School
-									</p>
+									<p className='text-sm font-medium'>Javlon G‘ulyamov</p>
+									<p className='text-sm text-gray-500'>Software Engineer</p>
 								</div>
 							</div>
 						</div>
@@ -42,27 +40,25 @@ const Testimonials = () => {
 						<div className='h-full p-8 rounded border flex flex-col justify-between'>
 							<div>
 								<QuoteIcon />
-								<span className='sr-only'>Quote icon</span>
+								<span className='sr-only'>Iqtibos belgisi</span>
 								<p className='leading-relaxed mb-6'>
-									The comprehensive learning materials and practical exercises
-									at WordWonders have helped me immensely in my English learning
-									journey. The online tests after each topic are particularly
-									useful for tracking my progress and identifying areas for
-									improvement. WordWonders truly makes learning English an
-									exciting adventure.
+									LexiGo’dagi keng qamrovli o‘quv materiallari va amaliy
+									mashqlar ingliz tilini o‘rganishimda juda ko‘p yordam berdi.
+									Har bir mavzudan keyingi onlayn testlar o‘z ustimdan ishlashim
+									va qaysi jihatlarni yaxshilashim kerakligini aniqlash uchun
+									juda foydali. LexiGo bilan ingliz tilini o‘rganish haqiqiy
+									sarguzashtga aylanadi.
 								</p>
 							</div>
 							<div className='flex items-center'>
 								<Avatar>
 									<AvatarImage src='/assets/images/avatar.jpg' />
-									<AvatarFallback>SH</AvatarFallback>
+									<AvatarFallback>DH</AvatarFallback>
 								</Avatar>
 
 								<div className='ml-3'>
-									<p className='text-sm font-medium'>Shakhbozbek Usmonov</p>
-									<p className='text-sm text-gray-500'>
-										CEO of ShahNur Software
-									</p>
+									<p className='text-sm font-medium'>Dilshodbek Hasanov</p>
+									<p className='text-sm text-gray-500'>Software Engineer</p>
 								</div>
 							</div>
 						</div>
