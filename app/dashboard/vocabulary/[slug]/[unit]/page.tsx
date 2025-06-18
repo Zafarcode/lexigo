@@ -14,6 +14,23 @@ interface UnitPageProps {
 	}
 }
 
+type FillInBlank = {
+	type: 'fillInBlank'
+	id: number
+	question: string
+	correctAnswer: string
+	options: string[]
+	viewed: boolean
+}
+
+type WordPair = {
+	type: 'wordPair'
+	id: number
+	viewed: boolean
+	value: string
+	pair: string
+}
+
 export default function UnitPage({ params }: UnitPageProps) {
 	const { slug, unit: unitSlug } = params
 	const { sections, updateItemStatus } = useProgressStore()
@@ -42,11 +59,25 @@ export default function UnitPage({ params }: UnitPageProps) {
 		updateItemStatus(slug, unitSlug, itemId)
 	}
 
-	const flashcards = unit.item.filter(i => i.type === 'flashcard')
-	// const imageSelections = unit.item.filter(i => i.type === 'imageSelection')
-	// const finishQuiz = unit.item.filter(i => i.type === 'finishQuiz')
-	const wordPairs = unit.item.filter(i => i.type === 'wordPair')
-	const fillInBlank = unit.item.filter(i => i.type === 'fillInBlank')
+	const flashcards = unit.item.filter(i => i.type === 'flashcard') as {
+		id: number
+		front_side: string
+		back_side: string
+		viewed: boolean
+	}[]
+	const wordPairs: WordPair[] = unit.item
+		.filter(i => i.type === 'wordPair')
+		.map(i => ({
+			id: i.id,
+			type: 'wordPair',
+			viewed: i.viewed,
+			value: i.value,
+			pair: i.pair,
+		}))
+
+	const fillInBlank: FillInBlank[] = unit.item
+		.filter(i => i.type === 'fillInBlank')
+		.map(i => i as FillInBlank)
 
 	return (
 		<section className='pt-10'>
@@ -67,8 +98,9 @@ export default function UnitPage({ params }: UnitPageProps) {
 							</div>
 
 							<Flashcard
+								cardData={flashcards}
 								onViewed={handleViewed}
-								cardData={flashcards} // Pass only flashcards
+								slug={slug}
 							/>
 
 							<section className='space-y-5'>
@@ -99,7 +131,8 @@ export default function UnitPage({ params }: UnitPageProps) {
 				{wordPairs.length > 0 && (
 					<MatchingPairs
 						onViewed={handleViewed}
-						words={wordPairs} // Pass only word pairs
+						words={wordPairs}
+						slug={slug}
 					/>
 				)}
 
@@ -107,7 +140,8 @@ export default function UnitPage({ params }: UnitPageProps) {
 				{fillInBlank.length > 0 && (
 					<FillInBlank
 						onViewed={handleViewed}
-						questions={fillInBlank} // Pass only fill-in-blank questions
+						questions={fillInBlank}
+						slug={slug} // shu yerda slug ni uzating
 					/>
 				)}
 			</div>
